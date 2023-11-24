@@ -3,7 +3,7 @@ import "./Header.css"
 
 export default function Header() {
     return (
-        <section className=" h-wrapper">
+        <section className=" h-wrapper mx-3">
             <div className="paddings innerWidth h-container flexCenter">
 
                 <img src="./logo.png" alt="logo" width={100} />

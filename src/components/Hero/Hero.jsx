@@ -6,7 +6,7 @@ import CountUp from "react-countup";
 
 export default function Hero() {
   return (
-    <section className="hero-Wrapper">
+    <section className="hero-Wrapper container">
       <div className="paddings innerWidth flexCenter hero-container">
 
         <div className=" flexColStart hero-left">
