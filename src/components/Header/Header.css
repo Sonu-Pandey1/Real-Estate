@@ -1,0 +1,14 @@
+
+
+.h-wrapper{
+    background-color: var(--black);
+    color: white;
+}
+
+.h-container{
+    justify-content: space-between;
+}
+
+.h-menu{
+    gap: 2rem;
+}
