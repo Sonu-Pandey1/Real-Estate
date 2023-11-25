@@ -66,3 +66,26 @@
     color: white;
     scale: 0.8;
 }
+
+@media (max-width: 1024px){
+    .c-container{
+        flex-direction: column;
+    }
+    .c-right{
+        /* justify-content: center; */
+        
+    }
+    .contactModes{
+        width: 100%;
+        flex-direction: column;
+    }
+    .row{
+        /* flex-direction: column;  */
+        width: 100%;
+        /* background-color: red; */
+    }
+    .mode{
+        width: 100%;
+    }
+
+}

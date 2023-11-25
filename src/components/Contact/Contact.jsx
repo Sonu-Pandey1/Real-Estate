@@ -83,7 +83,7 @@ export default function Contact() {
 
                 </div>
                 {/* c-rightside */}
-                <div className="c-right">
+                <div className="flexCenter c-right">
                     <div className="image-container">
                         <img src="contact.jpg" alt="img" />
                     </div>

@@ -12,3 +12,17 @@
     margin-top: 1.5rem;
     font-weight: 500;
 }
+
+@media (max-width:768px){
+    .f-container{
+        justify-content: center;
+        /* background-color: red; */
+    }
+
+    .f-container>div{
+        align-items: center !important;
+        text-align:center;
+        /* background-color: red; */
+    }
+
+}
