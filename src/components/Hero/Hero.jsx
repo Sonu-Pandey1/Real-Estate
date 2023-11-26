@@ -13,7 +13,7 @@ export default function Hero() {
         <div className=" flexColStart hero-left">
           <div className="hero-title">
             <div className="orange-circle" />
-            <motion.h1 initial={{ y: "2rem", opacity: "0" }} animate={{ y: 0, opacity: "1" }} transition={{ duration: "2", type: "spring" }}
+            <motion.h1 initial={{ y: "2rem", opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: "2", type: "spring" }}
             >Discover <br />
               Most Suitable <br />
               Property</motion.h1>

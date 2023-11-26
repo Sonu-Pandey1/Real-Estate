@@ -7,7 +7,7 @@ import {
     AccordionItemButton,
     AccordionItemHeading,
     AccordionItemPanel,
-    AccordionItemState
+    // AccordionItemState
 } from "react-accessible-accordion"
 import "react-accessible-accordion/dist/fancy-example.css";
 import { MdOutlineArrowDropDown } from "react-icons/md/";
@@ -45,10 +45,10 @@ export default function Value() {
                                         <AccordionItemHeading>
                                             <AccordionItemButton className="accordionButton flexCenter">
 
-                                                <AccordionItemState>
+                                                {/* <AccordionItemState>
                                                     {( expanded ) => expanded ? setClassName("expanded") : setClassName("collapsed")}
 
-                                                </AccordionItemState>
+                                                </AccordionItemState> */}
 
                                                 <div className="flexCenter icon">{item.icon}</div>
                                                 <span className="primaryText">{item.heading}</span>

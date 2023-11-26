@@ -18,12 +18,12 @@ export default function Footer() {
                 {/* right side */}
                 <div className="flexColStart f-right">
                     <span className="primaryText">Information</span>
-                    <span className="secondaryText">145 new yark , usa</span>
+                    <span className="secondaryText">145 new , usa</span>
                     <div className="flexCenter f-menu">
-                    <sapn>Property</sapn>
-                    <sapn>Services</sapn>
-                    <sapn>Product</sapn>
-                    <sapn>About Us</sapn>
+                    <span>Property</span>
+                    <span>Services</span>
+                    <span>Product</span>
+                    <span>About Us</span>
 
                     </div>
                 </div>
