@@ -1,6 +1,6 @@
 
 // import React from 'react'
-import "../Companies/companies.css"
+import "../Companies/companies.css";
 
 export default function Compaines() {
   return (
