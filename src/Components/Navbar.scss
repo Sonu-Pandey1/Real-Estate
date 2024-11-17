@@ -1,0 +1,48 @@
+/* Ensure the mega dropdown appears full-width */
+.mega-dropdown {
+    // position: relative;
+    
+}
+
+.mega-dropdown:hover .mega-dropdown-content {
+    display: block;
+    // background-color: brown;
+    // border-radius: 20px;
+}
+
+.mega-dropdown-content {
+    display: none;
+    position: absolute;
+    // top: 100%;
+    // top: 46px;
+    left: 0;
+    width: 100vw; /* Full width of the viewport */
+    background-color: #f8f9fa;
+    padding: 20px;
+    z-index: 1000;
+}
+
+.mega-dropdown-content .row {
+    display: flex;
+    justify-content: space-between;
+}
+
+.mega-dropdown-content .col-md-3 {
+    padding: 10px;
+}
+
+.mega-dropdown-content h5 {
+    margin-bottom: 15px;
+}
+
+.mega-dropdown-content a {
+    display: block;
+    margin: 5px 0;
+}
+
+/* Style for Navbar when on smaller screens (mobile) */
+@media (max-width: 991px) {
+    .mega-dropdown-content {
+        width: auto; /* Reset width on smaller screens */
+    }
+}
