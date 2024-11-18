@@ -1,29 +1,81 @@
-.hero-section {
-    font-family: Arial, sans-serif;
-    background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
-    background-position:  top;
-    background-repeat: no-repeat;
-    background-size: contain;
-    height: 100vh;
-  }
-  
-  .hero-bg {
-    // background: linear-gradient(135deg, #00bcd4, #4caf50);
-  }
-  
-  .search-bar-container {
-    // background-color: #2d3436;
-  }
-  
-  .input-group .form-control {
-    border-top-left-radius: 30px;
-    border-bottom-left-radius: 30px;
-  }
-  
-  .input-group .btn {
-    border-top-right-radius: 30px;
-    border-bottom-right-radius: 30px;
-  }
-  
+@import '../scss/variables';
 
- 
+.hero-section {
+  font-family: Arial, sans-serif;
+  background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
+  // background: url("https://c.housingcdn.com/demand/s/client/common/assets/HomeBg.d42b5d41.svg");
+  background-position: top;
+  background-repeat: no-repeat;
+  background-size: cover;
+  height: 75vh;
+  overflow: hidden;
+  width: 100%;
+  .title{
+    padding-left:15px ;
+    padding-top: 95px;
+    width: 60%;
+  }
+}
+.form-control{
+  padding-left: 230px;
+}
+
+.hero-bg {
+  // background: linear-gradient(135deg, #00bcd4, #4caf50);
+}
+
+.search-bar-container {
+  // background-color: #2d3436;
+}
+
+.input-group .form-control {
+  border-top-left-radius: 30px;
+  border-bottom-left-radius: 30px;
+}
+
+.input-group .btn {
+  border-top-right-radius: 30px;
+  border-bottom-right-radius: 30px;
+}
+
+.downPara{
+  position: relative;
+  display: flex;
+  justify-content: center;
+  .paraRounded{
+    position: absolute;
+    // bottom: 0px;
+    top: 85px;
+    border-top-right-radius: 20px;
+    border-top-left-radius: 20px;
+    // background-color: #705550;
+    background-color: rgba(255, 255, 255, 0.16);
+    .star1{
+      opacity: 0.7;
+      width: 15px;
+    }
+    .star2{
+      opacity: 0.5;
+      width: 10px;
+    }
+    .star3{
+      opacity: 0.5;
+      width: 10px;
+    }
+    p{
+      font-size: 14px;
+      color: $lightwhite !important;
+        // background-color: rgb(191, 149, 145);
+        backdrop-filter: blur(22px);
+    }
+  }
+}
+
+.navlinks{
+  color: $white;
+  
+}
+
+
+
+

@@ -1,0 +1,28 @@
+
+@import '../scss/variables';
+
+.sliderContainer {
+    padding: 0px 75px;
+    .localIcon{
+        color: rgba(204, 190, 190, 0.829);;
+    }
+    .sliderTitle{
+       
+        // background-color: rgba(255, 255, 255, 0.16);
+        // backdrop-filter: blur(22px);
+        color: rgba(204, 190, 190, 0.829);
+
+    }
+  .slider {
+    div {
+      p {
+        font-size: 14px;
+        // background-color: rgb(191, 149, 145);
+        background-color: rgba(255, 255, 255, 0.16);
+        backdrop-filter: blur(52px);
+        color: white;
+        
+      }
+    }
+  }
+}

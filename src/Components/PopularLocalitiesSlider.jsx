@@ -1,7 +1,9 @@
-
+import "../Components/PopularLocalitiesSlider.scss"
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { GrOptimize } from "react-icons/gr";
+// import { IoIosTrendingUp } from "react-icons/io";
 
 function PopularLocalitiesSlider() {
     var settings = {
@@ -39,39 +41,39 @@ function PopularLocalitiesSlider() {
         ]
     };
     return (
-        <div className=" bg-transparent container px-5">
+        <div className="sliderContainer container">
             <div className="row align-items-center gap-5">
                 <div className="col-3  mt-3 text-end">
-                    <p className=" bg-light text-dark badge">Popular Localities</p>
+                    <GrOptimize className="localIcon fs-6"/><p className="p-2 badge sliderTitle">Popular Localities</p>
                 </div>
                 <div className="col-7 ">
                     <div className="slider-container">
 
-                        <Slider {...settings} className="ps-5 ">
+                        <Slider {...settings} className="ps-5 slider">
 
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 84 &gt;</p>
+                                <p className="m-0 rounded-2 py-1 ">Sector 84 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 48 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 48 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 34 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 34 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 24 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 24 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 29 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 29 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 18 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 18 &gt;</p>
+                            </div>
+                            <div className=" text-center w-75 ">
+                                <p className="m-0 rounded-2 py-1 ">Sector 14 &gt;</p>
                             </div>
                             <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1 ">Sector 14 &gt;</p>
-                            </div>
-                            <div className=" text-center w-75">
-                                <p className="m-0 rounded-2 bg-light py-1">Sector 2 &gt;</p>
+                                <p className="m-0 rounded-2 py-1">Sector 2 &gt;</p>
                             </div>
                         </Slider>
                     </div>
