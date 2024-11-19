@@ -121,7 +121,7 @@ function Navbar() {
                     </div>
 
                     <div className="postPropertyWrapper">
-                        <button className="btn px-3 py-1 bg-white ">
+                        <button className="btn px-1 py-1 ">
                         <NavLink className="navlink text-dark fw-medium" to={"/post-property"}>Post Property </NavLink>
                         <span className="postPropertyBadge">FREE</span>
                         </button>

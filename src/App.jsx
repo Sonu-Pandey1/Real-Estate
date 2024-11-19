@@ -17,6 +17,7 @@ function App() {
           <Route path="/dealers-builders" element={<h1>For Dealers / Builders</h1>} />
           <Route path="/insights" element={<h1>Insights</h1>} />
           <Route path="/post-property" element={<h1>Post Property</h1>} />
+          
         </Route>
       </Routes>
 

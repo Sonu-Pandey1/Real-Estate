@@ -18,6 +18,9 @@
   .navlink {
     color: $lightwhite;
     text-decoration: none;
+
+  padding: 0rem 0.5rem;
+  transition: color 0.3s ease-in-out; 
   }
 
   .navbar-toggler{
@@ -53,6 +56,10 @@
   
 
   .postPropertyWrapper {
+    button{
+      background-color:white   ;
+      // background-color: $lightwhite;
+    }
     // border-radius: 20px !important;
     .postPropertyBadge {
       background-color: #219653;
@@ -119,3 +126,4 @@
     width: auto; /* Reset width on smaller screens */
   }
 }
+
