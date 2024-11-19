@@ -12,13 +12,19 @@ function Navbar() {
                     <div className="d-none d-md-block ">
                         <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-row gap-4 ">
                             <li className="nav-item">
+                                <div className="navlinkWrapper">
                                 <NavLink className="navlink" to={"/"}>Home</NavLink>
+                                </div>
+                                
                             </li>
                         
                             <li className="nav-item mega-dropdown">
+                                <div className="navlinkWrapper">
                                 <NavLink className="navlink" to={"/for-buyers"}>For Buyers</NavLink>
-                                
-                                <div className="mega-dropdown-content">
+                                </div>
+
+                                {/* //todo --> Mega Menu Uncomment If Needed */}
+                                {/* <div className="mega-dropdown-content">
                                     <div className="row">
                                         <div className="col">
                                             <h5>Category 1</h5>
@@ -35,14 +41,39 @@ function Navbar() {
                                             <a href="#">Item 1</a>
                                             <a href="#">Item 2</a>
                                         </div>
-                                        
                                     </div>
-                                </div>
+                                </div> */}
+
                             </li>
                             <li className="nav-item mega-dropdown">
-                                <NavLink className="navlink" to={"/for-tenants"}>For Tenants</NavLink>
+                            <div className="navlinkWrapper">
+                            <NavLink className="navlink" to={"/for-tenants"}>For Tenants</NavLink>
+                            </div>
 
-                                <div className="mega-dropdown-content">
+                                {/* //todo --> Mega Menu Uncomment If Needed */}
+                                {/* <div className="mega-dropdown-content">
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <h5>Category 1</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <h5>Category 2</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>     
+                                    </div>
+                                </div> */}
+
+                            </li>
+                            <li className="nav-item mega-dropdown">
+                            <div className="navlinkWrapper">
+                            <NavLink className="navlink" to={"/for-owners"}>For Owners</NavLink>
+                            </div>
+
+                                 {/* //todo --> Mega Menu Uncomment If Needed */}
+                                {/* <div className="mega-dropdown-content">
                                     <div className="row">
                                         <div className="col-md-3">
                                             <h5>Category 1</h5>
@@ -54,75 +85,60 @@ function Navbar() {
                                             <a href="#">Item 1</a>
                                             <a href="#">Item 2</a>
                                         </div>
-                                       
                                     </div>
-                                </div>
+                                </div> */}
+
                             </li>
                             <li className="nav-item mega-dropdown">
-                                <NavLink className="navlink" to={"/for-owners"}>For Owners</NavLink>
-
-                                
-                                <div className="mega-dropdown-content">
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <h5>Category 1</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <h5>Category 2</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="nav-item mega-dropdown">
-                                <NavLink className="navlink" to={"/for-builders"}>For Dealers / Builders</NavLink>
-
-                                <div className="mega-dropdown-content">
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <h5>Category 1</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <h5>Category 2</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                        
-                                    </div>
-                                </div>
-                            </li>
-                            <li className="nav-item mega-dropdown">
-                                <NavLink className="navlink" to={"/for-insights"}>Insights <span className="insightsBadge">New</span></NavLink>
-
-                                <div className="mega-dropdown-content">
-                                    <div className="row">
-                                        <div className="col-md-3">
-                                            <h5>Category 1</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                        <div className="col-md-3">
-                                            <h5>Category 2</h5>
-                                            <a href="#">Item 1</a>
-                                            <a href="#">Item 2</a>
-                                        </div>
-                                       
-                                    </div>
-                                </div>
-                            </li>
+                            <div className="navlinkWrapper">
+                            <NavLink className="navlink" to={"/for-dealers-builders"}>For Dealers / Builders</NavLink>
+                            </div>
                             
+                                 {/* //todo --> Mega Menu Uncomment If Needed */}
+                                {/* <div className="mega-dropdown-content">
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <h5>Category 1</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <h5>Category 2</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>            
+                                    </div>
+                                </div> */}
+
+                            </li>
+                            <li className="nav-item mega-dropdown">
+                            <div className="navlinkWrapper">
+                            <NavLink className="navlink" to={"/insights"}>Insights <span className="insightsBadge">New</span></NavLink>
+                            </div>
+                                
+                                 {/* //todo --> Mega Menu Uncomment If Needed */}
+                                {/* <div className="mega-dropdown-content">
+                                    <div className="row">
+                                        <div className="col-md-3">
+                                            <h5>Category 1</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>
+                                        <div className="col-md-3">
+                                            <h5>Category 2</h5>
+                                            <a href="#">Item 1</a>
+                                            <a href="#">Item 2</a>
+                                        </div>
+                                    </div>
+                                </div> */}
+
+                            </li>
                         </ul>
                     </div>
 
                     <div className="postPropertyWrapper">
-                        <button className="btn px-1 py-1 ">
-                        <NavLink className="navlink text-dark fw-medium" to={"/post-property"}>Post Property </NavLink>
+                        <button className="btn btn-light px-1 py-1 ">
+                        <a className="postProperty text-dark fw-medium" to={"/post-property"}>Post Property </a>
                         <span className="postPropertyBadge">FREE</span>
                         </button>
 
@@ -159,10 +175,7 @@ function Navbar() {
                                     </ul>
                                 </li>
                             </ul>
-                            {/* <form className="d-flex mt-3" role="search">
-                                <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-                                <button className="btn btn-outline-success" type="submit">Search</button>
-                            </form> */}
+                     
                         </div>
                     </div>
                 </div>
@@ -172,114 +185,3 @@ function Navbar() {
 }
 
 export default Navbar;
-
-
-
-
-
-// @import "../scss//variables";
-
-
-// .navbar {
-//   background-color: #6b5eae;
-//   backdrop-filter: blur(20px);
-//   padding: 10px 40px;
-//   background-image: linear-gradient(
-//     rgba(0, 0, 0, 0.45),
-//     rgba(0, 0, 0, 0.25),
-//     transparent
-//   );
-
-//   .navlink {
-//     color: $lightwhite;
-//     text-decoration: none;
-//   }
-
-//   .mega-dropdown{
-//     // position: relative;
-//     .insightsBadge{
-//         position: absolute;
-//         top: 18px;
-//         // left: 10px;
-//         background-color: #eba612;
-//           padding: 5px 5px 5px 5px;
-//           font-size: 10px;
-//           font-weight: 700;
-//           line-height: 6px;
-//           border-radius: 3px;
-//           color: $white;
-//           display: inline-block;
-//         //   position: relative;
-//           margin-left: 2px;
-//           margin-right: 1px;
-//       }
-//   }
-  
-
-//   .postPropertyWrapper {
-//     // border-radius: 20px !important;
-//     .postPropertyBadge {
-//       background-color: #219653;
-//       padding: 5px 5px 5px 5px;
-//       font-size: 9px;
-//       font-weight: 700;
-//       line-height: 6px;
-//       border-radius: 3px;
-//       color: #fff;
-//       display: inline-block;
-//     //   position: relative;
-//       margin-left: 2px;
-//       margin-right: 1px;
-//     //   margin-bottom: 1px;
-//     //   overflow: hidden;
-//     }
-//   }
-// }
-
-// /* Ensure the mega dropdown appears full-width */
-// .mega-dropdown {
-//   // position: relative;
-// }
-
-// .mega-dropdown:hover .mega-dropdown-content {
-//   display: block;
-//   // background-color: brown;
-//   // border-radius: 20px;
-// }
-
-// .mega-dropdown-content {
-//   display: none;
-//   position: absolute;
-//   // top: 100%;
-//   // top: 46px;
-//   left: 0;
-//   width: 100vw; /* Full width of the viewport */
-//   background-color: #f8f9fa;
-//   padding: 20px;
-//   z-index: 1000;
-// }
-
-// .mega-dropdown-content .row {
-//   display: flex;
-//   justify-content: space-between;
-// }
-
-// .mega-dropdown-content .col-md-3 {
-//   padding: 10px;
-// }
-
-// .mega-dropdown-content h5 {
-//   margin-bottom: 15px;
-// }
-
-// .mega-dropdown-content a {
-//   display: block;
-//   margin: 5px 0;
-// }
-
-// /* Style for Navbar when on smaller screens (mobile) */
-// @media (max-width: 991px) {
-//   .mega-dropdown-content {
-//     width: auto; /* Reset width on smaller screens */
-//   }
-// }

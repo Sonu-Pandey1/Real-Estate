@@ -11,10 +11,10 @@ function App() {
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
-          <Route path="/buyers" element={<h1>For Buyers</h1>} />
-          <Route path="/tenants" element={<h1>For Tenants</h1>} />
-          <Route path="/owners" element={<h1>For Owners</h1>} />
-          <Route path="/dealers-builders" element={<h1>For Dealers / Builders</h1>} />
+          <Route path="/for-buyers" element={<h1>For Buyers </h1>} />
+          <Route path="/for-tenants" element={<h1>For Tenants</h1>} />
+          <Route path="/for-owners" element={<h1>For Owners</h1>} />
+          <Route path="/for-dealers-builders" element={<h1>For Dealers / Builders</h1>} />
           <Route path="/insights" element={<h1>Insights</h1>} />
           <Route path="/post-property" element={<h1>Post Property</h1>} />
           

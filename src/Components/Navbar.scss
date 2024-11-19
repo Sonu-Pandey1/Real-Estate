@@ -1,66 +1,82 @@
-
-
-
-
 @import "../scss//variables";
-
 
 .navbar {
   background-color: #6b5eae;
-  // backdrop-filter: blur(20px);
   padding: 10px 40px;
   background-image: linear-gradient(
     rgba(0, 0, 0, 0.45),
     rgba(0, 0, 0, 0.25),
     transparent
   );
+  .navlinkWrapper {
+    position: relative;
+  }
 
   .navlink {
     color: $lightwhite;
     text-decoration: none;
-
-  padding: 0rem 0.5rem;
-  transition: color 0.3s ease-in-out; 
+    padding: 0rem 0.5rem;
+    transition: color 0.3s ease-in-out;
+  }
+  .navlink:hover {
+    color: rgb(209, 172, 50);
+  }
+  .navlink.active {
+    color: rgb(247, 218, 91);
   }
 
-  .navbar-toggler{
+  .navlink::after {
+    content: "";
+    position: absolute;
+    top: 40px;
+    bottom: 0;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background-color: rgb(199, 159, 49);
+    transform: scaleX(0);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .navlink:hover::after {
+    transform: scaleX(1);
+    width: 100%;
+  }
+
+  .navbar-toggler {
     background-color: transparent;
     border: none;
     outline: none;
     color: transparent;
-    span{
+    span {
       background-color: transparent;
       color: white !important;
     }
   }
 
-  .mega-dropdown{
-    // // position: relative;
-    .insightsBadge{
-        position: absolute;
-        top: 18px;
-        // left: 10px;
-        background-color: #eba612;
-          padding: 5px 5px 5px 5px;
-          font-size: 10px;
-          font-weight: 700;
-          line-height: 6px;
-          border-radius: 3px;
-          color: $white;
-          display: inline-block;
-        //   position: relative;
-          margin-left: 2px;
-          margin-right: 1px;
-      }
+  .mega-dropdown {
+    .insightsBadge {
+      position: absolute;
+      top: 0;
+      background-color: #eba612;
+      padding: 5px 5px 5px 5px;
+      font-size: 10px;
+      font-weight: 700;
+      line-height: 6px;
+      border-radius: 3px;
+      color: $white;
+      display: inline-block;
+      margin-left: 2px;
+      margin-right: 1px;
+    }
   }
-  
 
   .postPropertyWrapper {
-    button{
-      background-color:white   ;
-      // background-color: $lightwhite;
+    .postProperty {
+      text-decoration: none;
+      padding: 0rem 0.5rem;
     }
-    // border-radius: 20px !important;
+
     .postPropertyBadge {
       background-color: #219653;
       padding: 5px 5px 5px 5px;
@@ -70,33 +86,21 @@
       border-radius: 3px;
       color: #fff;
       display: inline-block;
-    //   position: relative;
       margin-left: 2px;
       margin-right: 1px;
-    //   margin-bottom: 1px;
-    //   overflow: hidden;
     }
   }
 }
 
-// /* Ensure the mega dropdown appears full-width */
-.mega-dropdown {
-  // position: relative;
-}
-
 .mega-dropdown:hover .mega-dropdown-content {
   display: block;
-  // background-color: brown;
-  // border-radius: 20px;
 }
 
 .mega-dropdown-content {
   display: none;
   position: absolute;
-  // top: 100%;
-  // top: 46px;
   left: 0;
-  width: 100vw; /* Full width of the viewport */
+  width: 100vw;
   background-color: #f8f9fa;
   padding: 20px;
   z-index: 1000;
@@ -120,10 +124,8 @@
   margin: 5px 0;
 }
 
-/* Style for Navbar when on smaller screens (mobile) */
 @media (max-width: 991px) {
   .mega-dropdown-content {
-    width: auto; /* Reset width on smaller screens */
+    width: auto;
   }
 }
-
