@@ -399,15 +399,17 @@ function Navbar() {
                       className="accordion-collapse collapse"
                       data-bs-parent="#accordionFlushExample"
                     >
-                      <div className="accordion-body">
-                      <div className="bodyWrapper d-flex flex-wrap gap-3">
+                      <div className="accordion-body p-0 py-2">
+                        <div className="bodyWrapper d-flex flex-wrap gap-3">
                           <NavLink className="accordion-nav" to={"/"}>
                             <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
                               <img
                                 src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
                                 alt="home"
                               />
-                              <div className="Qlinks text-center">Pay on Credit </div>
+                              <div className="Qlinks text-center">
+                                Pay on Credit{" "}
+                              </div>
                             </div>
                           </NavLink>
 
@@ -441,7 +443,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
                                 alt="news-icon"
                               />
-                              <div className="Qlinks text-center">Housing Protect</div>
+                              <div className="Qlinks text-center">
+                                Housing Protect
+                              </div>
                             </div>
                           </NavLink>
 
@@ -451,7 +455,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
                                 alt="research"
                               />
-                              <div className="Qlinks text-center">Rent Receipts</div>
+                              <div className="Qlinks text-center">
+                                Rent Receipts
+                              </div>
                             </div>
                           </NavLink>
                         </div>
@@ -464,7 +470,7 @@ function Navbar() {
                         className="accordion-button px-0 collapsed border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo"
+                        data-bs-target="#flush-collapseThree"
                         aria-expanded="false"
                         aria-controls="flush-collapseTwo"
                       >
@@ -476,19 +482,21 @@ function Navbar() {
                       </button>
                     </h2>
                     <div
-                      id="flush-collapseTwo"
+                      id="flush-collapseThree"
                       className="accordion-collapse collapse"
                       data-bs-parent="#accordionFlushExample"
                     >
-                      <div className="accordion-body">
-                      <div className="bodyWrapper d-flex flex-wrap gap-3">
+                      <div className="accordion-body p-0 py-2">
+                        <div className="bodyWrapper d-flex flex-wrap gap-3">
                           <NavLink className="accordion-nav" to={"/"}>
                             <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
                               <img
                                 src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
                                 alt="home"
                               />
-                              <div className="Qlinks text-center">Buy Properties</div>
+                              <div className="Qlinks text-center">
+                                Buy Properties
+                              </div>
                             </div>
                           </NavLink>
 
@@ -522,7 +530,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
                                 alt="news-icon"
                               />
-                              <div className="Qlinks text-center">Apply For Home Loan</div>
+                              <div className="Qlinks text-center">
+                                Apply For Home Loan
+                              </div>
                             </div>
                           </NavLink>
 
@@ -532,7 +542,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
                                 alt="research"
                               />
-                              <div className="Qlinks text-center">EMI Calculator</div>
+                              <div className="Qlinks text-center">
+                                EMI Calculator
+                              </div>
                             </div>
                           </NavLink>
 
@@ -558,7 +570,7 @@ function Navbar() {
                         className="accordion-button px-0 collapsed border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseTwo"
+                        data-bs-target="#flush-collapseFour"
                         aria-expanded="false"
                         aria-controls="flush-collapseTwo"
                       >
@@ -570,19 +582,21 @@ function Navbar() {
                       </button>
                     </h2>
                     <div
-                      id="flush-collapseTwo"
+                      id="flush-collapseFour"
                       className="accordion-collapse collapse"
                       data-bs-parent="#accordionFlushExample"
                     >
-                      <div className="accordion-body">
-                      <div className="bodyWrapper d-flex flex-wrap gap-3">
+                      <div className="accordion-body p-0 py-2">
+                        <div className="bodyWrapper d-flex flex-wrap gap-3">
                           <NavLink className="accordion-nav" to={"/"}>
                             <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
                               <img
                                 src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
                                 alt="home"
                               />
-                              <div className="Qlinks text-center">All Cities</div>
+                              <div className="Qlinks text-center">
+                                All Cities
+                              </div>
                             </div>
                           </NavLink>
 
@@ -616,7 +630,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
                                 alt="news-icon"
                               />
-                              <div className="Qlinks text-center">Collections</div>
+                              <div className="Qlinks text-center">
+                                Collections
+                              </div>
                             </div>
                           </NavLink>
 
@@ -626,7 +642,9 @@ function Navbar() {
                                 src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
                                 alt="research"
                               />
-                              <div className="Qlinks text-center">Rent in Top Socities</div>
+                              <div className="Qlinks text-center">
+                                Rent in Top Socities
+                              </div>
                             </div>
                           </NavLink>
                         </div>
@@ -639,7 +657,7 @@ function Navbar() {
                         className="accordion-button px-0 collapsed border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseThree"
+                        data-bs-target="#flush-collapseFive"
                         aria-expanded="false"
                         aria-controls="flush-collapseThree"
                       >
@@ -651,13 +669,12 @@ function Navbar() {
                       </button>
                     </h2>
                     <div
-                      id="flush-collapseThree"
+                      id="flush-collapseFive"
                       className="accordion-collapse collapse"
                       data-bs-parent="#accordionFlushExample"
                     >
-                      <div className="accordion-body">
-                      <div className="bodyWrapper d-flex flex-wrap gap-3">
-                          
+                      <div className="accordion-body p-0 py-2">
+                        <div className="bodyWrapper d-flex flex-wrap gap-3">
                           <NavLink className="accordion-nav" to={"/"}>
                             <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded ">
                               <img
