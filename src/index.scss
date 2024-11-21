@@ -2,4 +2,29 @@
     margin: 0px;
     padding: 0px;
     box-sizing: border-box;
+
+    
+::-webkit-scrollbar {
+    width: 7px; /* Width of the scrollbar */
+  }
+  
+  ::-webkit-scrollbar-track {
+    background: #ffffff; /* Track color */
+    border-radius: 5px; /* Optional: Rounded corners */
+  }
+  
+  ::-webkit-scrollbar-thumb {
+    background: #afb6c2; /* Scrollbar color */
+    border-radius: 5px; /* Optional: Rounded corners */
+  }
+  
+  ::-webkit-scrollbar-thumb:hover {
+    background: #7c77a5; /* Darker color when hovering over the scrollbar */
+  }
+
+  html {
+    scrollbar-width: thin; /* "auto" or "thin" */
+    scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+  }
 }
+
