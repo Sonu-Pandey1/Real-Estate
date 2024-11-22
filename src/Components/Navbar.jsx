@@ -2,8 +2,19 @@ import { NavLink } from "react-router-dom";
 import "../Components/Navbar.scss";
 import { RiMenu2Line } from "react-icons/ri";
 import { PiUserCircleCheckDuotone } from "react-icons/pi";
+import { useEffect, useState } from "react";
 
 function Navbar() {
+  const [collapsed,setCollapsed] = useState(true);
+
+  useEffect(()=>{
+    const handleNavClosed = ()=>{
+      setCollapsed(false);
+  
+    }
+    handleNavClosed()
+  })
+
   return (
     <>
       <nav className="navbar">
@@ -159,7 +170,8 @@ function Navbar() {
           </div>
 
           <button
-            className="navbar-toggler"
+            className="navbar-toggler bg-info"
+            onClick={setCollapsed(()=>{false})} 
             type="button"
             data-bs-toggle="offcanvas"
             data-bs-target="#offcanvasNavbar"
