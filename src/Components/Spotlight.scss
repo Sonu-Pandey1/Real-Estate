@@ -1,0 +1,52 @@
+
+
+//! spotlight Section-------------------------------
+
+.spotlightSectionWrapper {
+    background-color: rgb(236, 226, 226);
+    .spotLight-section {
+      background-color: white;
+      .spotlightSlider-Wrapper {
+        .slider-container {
+          .slider {
+            background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
+          }
+  
+          .sliderWrapper {
+            // border-radius: 20px ;
+            .col-9 {
+              // height: 100%;
+              height: 25rem !important;
+              // width: 100%;
+              img {
+                width: 100%;
+                height: 100%;
+              }
+            }
+          }
+          .spotlightCard {
+            .row-bottom {
+              p {
+                font-size: 15px;
+                opacity: 0.6;
+                font-weight: 500;
+              }
+            }
+          }
+          .slick-arrow {
+            display: none !important;
+          }
+          // width: 100%;
+          height: 100%;
+          img {
+            width: 50%;
+            height: 100% !important;
+            background-size: cover !important;
+            background-position: center;
+            border-radius: 20px;
+          }
+        }
+      }
+    }
+  }
+  
