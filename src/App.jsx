@@ -11,6 +11,10 @@ import Insights from "./Pages/insights/Insights.jsx"
 import ListProperty from "./Pages/for-postProperty/ListProperty.jsx"
 import LoginRegister from "./Pages/for-login-register/LoginRegister"
 import HeroC from "./Components/HeroC.jsx";
+import Rent from "./Pages/rent/Rent.jsx";
+import Pg from "./Pages/pgCoLiving/Pg.jsx"
+import Plots from "./Pages/plots/Plots.jsx"
+import Commercial from "./Pages/commercial/Commercial.jsx"
 
 
 function App() {
@@ -36,6 +40,11 @@ function App() {
           <Route path="/for-dealers-builders" element={<DealersBuilders/>} />
           <Route path="/insights" element={<Insights/>} />
           <Route path="/list-property" element={<ListProperty/>} />
+          {/* <Route path="/" element={<ListProperty/>} /> */}
+          <Route path="/rent" element={<Rent/>} />
+          <Route path="/commercial" element={<Commercial/>} />
+          <Route path="/pg-coliving" element={<Pg/>} />
+          <Route path="/plots" element={<Plots/>} />
           <Route path="/login-register" element={<LoginRegister/>}/>
         </Route>
       </Routes>

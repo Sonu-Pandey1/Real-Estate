@@ -1,0 +1,24 @@
+.basicCardWrapper{
+    .card{
+        width: 18rem;
+
+        .card-img-top{
+            width: 100%;
+            height: 10rem !important;
+            object-fit: cover;
+        }
+
+        .card-body{
+        
+            p:nth-child(2) {
+               font-size: small;
+               font-weight: 500;
+            }
+            p:nth-child(3) {
+                font-size: small;
+                
+                
+            }
+        }
+    }
+}
