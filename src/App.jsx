@@ -10,11 +10,23 @@ import DealersBuilders from "./Pages/for-dealers-builders/DealersBuilders"
 import Insights from "./Pages/insights/Insights.jsx"
 import ListProperty from "./Pages/for-postProperty/ListProperty.jsx"
 import LoginRegister from "./Pages/for-login-register/LoginRegister"
+import HeroC from "./Components/HeroC.jsx";
+
 
 function App() {
   return (
     <>
       <Navbar />
+      {/* <HeroC/> */}
+       {/* Hero Section changes dynamically */}
+       <Routes>
+        <Route path="/" element={<HeroC  />} />
+        <Route path="/rent" element={<HeroC />} />
+        <Route path="/commercial" element={<HeroC />} />
+        <Route path="/pg-coliving" element={<HeroC/>} />
+        <Route path="/plots" element={<HeroC />} />
+      </Routes>
+
       <Routes>
         <Route path="/">
           <Route index element={<Home />} />
@@ -34,3 +46,4 @@ function App() {
 }
 
 export default App;
+
