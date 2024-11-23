@@ -23,7 +23,7 @@ function App() {
           <Route path="/for-owners" element={<Owners/>} />
           <Route path="/for-dealers-builders" element={<DealersBuilders/>} />
           <Route path="/insights" element={<Insights/>} />
-          <Route path="/post-property" element={<ListProperty/>} />
+          <Route path="/list-property" element={<ListProperty/>} />
           <Route path="/login-register" element={<LoginRegister/>}/>
         </Route>
       </Routes>

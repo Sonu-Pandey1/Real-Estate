@@ -8,6 +8,7 @@ import Spotlight from "../Components/Spotlight";
 
 function Home() {
   
+  
 
   return (
     <>
