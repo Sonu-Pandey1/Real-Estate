@@ -3,10 +3,58 @@ import PopularLocalitiesSlider from "../Components/PopularLocalitiesSlider";
 import { NavLink, useLocation } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { GrOptimize } from "react-icons/gr";
 
 export default function HeroC() {
+  var settings = {
+    dots: false,
+    infinite: true,
+    speed: 600,
+    autoplay: true,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1024,
+        settings: {
+          slidesToShow: 4,
+          slidesToScroll: 1,
+          infinite: true,
+          dots: true,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+          initialSlide: 2,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  const popularLocalities = [
+    "Sector 84",
+    "Sector 48",
+    "Sector 34",
+    "Sector 24",
+    "Sector 29",
+    "Sector 18",
+    "Sector 14",
+    "Sector 2",
+  ];
+
   const location = useLocation();
-  console.log(location.pathname);
+  // console.log(location.pathname);
 
   const heroConfig = {
     "/": {
@@ -23,17 +71,20 @@ export default function HeroC() {
       placeholder: "Search for city, budget, or size",
     },
     "/pg-coliving": {
-      background: "url('https://c.housingcdn.com/demand/s/client/common/assets/pgCover.d07e5816.jpg')",
+      background:
+        "url('https://c.housingcdn.com/demand/s/client/common/assets/pgCover.d07e5816.jpg')",
       title: "PG/Co-Living in Noida",
       placeholder: "search for pg,co-leaving spaces",
     },
     "/commercial": {
-      background: "url('https://c.housingcdn.com/demand/s/client/common/assets/commercialCover.c5df3aef.jpg')",
+      background:
+        "url('https://c.housingcdn.com/demand/s/client/common/assets/commercialCover.c5df3aef.jpg')",
       title: "Commercial Real Estate in Noida ",
       placeholder: "Search for offices or retail spaces",
     },
     "/plots": {
-      background: "url('https://c.housingcdn.com/demand/s/client/common/assets/plotsCover.effff013.jpg')",
+      background:
+        "url('https://c.housingcdn.com/demand/s/client/common/assets/plotsCover.effff013.jpg')",
       title: "Plots for sale in Noida",
       placeholder: "Search for plots, spaces",
     },
@@ -55,25 +106,31 @@ export default function HeroC() {
       >
         {/* Background and Heading */}
         <div className="title mx-auto  text-white ">
-          <p className="">
-            {currentConfig.title}
-          </p>
-          {/* <h1></h1> */}
-          {/* <img src="data:image/png;base64,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" alt="icon" /> */}
+          <p className="">{currentConfig.title}</p>
         </div>
 
         <form>
           <div className="formContainer mx-auto">
-            {/* Tabs */} 
+            {/* Tabs */}
             <div className="tabsWrapper">
-           <nav className=" d-flex">
-            <NavLink className="navlink" to={"/"}>Buy</NavLink>
-            <NavLink className="navlink" to={"/rent"}>Rent</NavLink>
-            <NavLink className="navlink" to={"/commercial"}>Commercial</NavLink>
-            <NavLink className="navlink" to={"/pg-coliving"}>Pg / Co-living</NavLink>
-            <NavLink className="navlink" to={"/plots"}>Plots</NavLink>
-           </nav>
-          </div>
+              <nav className=" d-flex">
+                <NavLink className="navlink" to={"/"}>
+                  Buy
+                </NavLink>
+                <NavLink className="navlink" to={"/rent"}>
+                  Rent
+                </NavLink>
+                <NavLink className="navlink" to={"/commercial"}>
+                  Commercial
+                </NavLink>
+                <NavLink className="navlink" to={"/pg-coliving"}>
+                  Pg / Co-living
+                </NavLink>
+                <NavLink className="navlink" to={"/plots"}>
+                  Plots
+                </NavLink>
+              </nav>
+            </div>
             {/* {/* search bar */}
             <div className="mx-auto tbasSearchForm">
               <div className="mb-3 position-relative">
@@ -149,9 +206,24 @@ export default function HeroC() {
         </form>
 
         {/* Popular Localities Slider */}
-        <div>
-          <PopularLocalitiesSlider />
+        <div className="row align-items-center ">
+          <div className="col-4   mt-3 text-end">
+            <GrOptimize className="localIcon fs-6" />
+            <p className="p-2 pe-4 badge sliderTitle">Popular Localities</p>
+          </div>
+          <div className="col-7 w-50 pe-4">
+            <div className=" PopularLocalitiesSliderWrapper mx-5">
+              <PopularLocalitiesSlider settings={settings} className="">
+                {popularLocalities.map((locality, index) => (
+                  <div key={index} className="text-center w-75">
+                    <p className="m-0 rounded-2 py-1">{locality} &gt;</p>
+                  </div>
+                ))}
+              </PopularLocalitiesSlider>
+            </div>
+          </div>
         </div>
+
         <div className="downPara  h-100 ">
           {/* <h1>ram</h1> */}
           <div className=" paraRounded d-flex px-2">
