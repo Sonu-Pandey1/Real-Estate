@@ -3,6 +3,7 @@ import BasicCard from "../../Components/BasicCard";
 import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import IntermedidateCard from "../../Components/IntermedidateCard";
 import MediumCard from "../../Components/MediumCard";
+import { NavLink } from "react-router-dom";
 
 export default function Rent() {
   var settings = {
@@ -76,7 +77,6 @@ export default function Rent() {
       },
     ],
   };
-
   const RentData = [
     {
       image:
@@ -86,6 +86,12 @@ export default function Rent() {
       location: "Amarpali Silicon City, Sector 76, Noida",
       size: "750 sq.ft",
       price: "₹8,000",
+
+      name: "Sonu Pandey",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
     },
     {
       image:
@@ -95,6 +101,12 @@ export default function Rent() {
       location: "Palm Springs, Sector 54, Gurgaon",
       size: "1,200 sq.ft",
       price: "₹12,000",
+
+      name: "khushboo Pandey",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
     },
     {
       image:
@@ -104,15 +116,28 @@ export default function Rent() {
       location: "DLF Cyber City, Sector 24, Gurgaon",
       size: "500 sq.ft",
       price: "₹10,000",
+
+      name: "khushi",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
     },
     {
       image:
         "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+
       title: "3 BHK Villa",
       description: "Luxury Villa",
       location: "Sushant Lok, Sector 43, Gurgaon",
       size: "2,500 sq.ft",
       price: "₹45,000",
+
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
     },
     {
       image:
@@ -122,6 +147,12 @@ export default function Rent() {
       location: "Noida Extension, Sector 16, Noida",
       size: "1,000 sq.ft",
       price: "₹15,000",
+
+      name: "Pandey",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
     },
     {
       image:
@@ -166,12 +197,125 @@ export default function Rent() {
       price: "₹1,00,000",
     },
   ];
+  const expertDealersData = [
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "",
+    },
+  ];
+
+  const expertDealersProData = [
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "Sonu Pandey",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "8",
+      pro: "PRO",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "Sonu",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "9",
+      pro: "PRO",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "pandey",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "80",
+      pro: "PRO",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "khsushi",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "90",
+      pro: "PRO",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "rhman",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
+      name: "nothing",
+      address: ["sector-62", "sector-34", "noida", "delhi"],
+      experience: "5 Years",
+      properties: "89",
+      pro: "PRO",
+    },
+  ];
 
   return (
     <>
       <div className="rentContainer">
         <div className="container">
-          <div className="row">
+          <div className="row pb-4">
             <div className="col">
               <h2>
                 <span className="opacity-75 fs-3">Recently </span> Added
@@ -181,7 +325,6 @@ export default function Rent() {
                 src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                 alt="line"
               />
-              {/* <img src="data:image/png;base64,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" alt="icon" /> */}
             </div>
           </div>
           <div className="row">
@@ -219,33 +362,36 @@ export default function Rent() {
             <div className="row">
               <div className="col p-0  ">
                 {/* <div className="IntermedidateCardContainer"> */}
-      
-                   
-                   <PopularLocalitiesSlider settings={settings2}>
-                   {RentData.map((rentData, index) => (
-                  <div key={index} className="">
-                    <IntermedidateCard
-                      title={rentData.title}
-                      image={rentData.image}
-                      description={rentData.description}
-                    
-                    />
-                  </div>
-                ))}
 
-                   </PopularLocalitiesSlider>
+                <PopularLocalitiesSlider settings={settings2}>
+                  {RentData.map((rentData, index) => (
+                    <div key={index} className="">
+                      <NavLink to={"/featuredCollection"}>
+                        <IntermedidateCard
+                          title={rentData.title}
+                          image={rentData.image}
+                          description={rentData.description}
+                        />
+                      </NavLink>
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
+
                 {/* </div> */}
               </div>
             </div>
           </section>
 
-          <section className="recommendedSellers mt-5">
-            <div className="row">
+          <section className="recommendedSellers mt-3">
+            <div className="row pb-4">
               <div className="col">
                 <h2>
                   <span className="opacity-75 fs-3">Recommended</span> Sellers
                 </h2>
-                <p className="m-0">Sellers with complete knowledge about locality and verified listings</p>
+                <p className="m-0">
+                  Sellers with complete knowledge about locality and verified
+                  listings
+                </p>
                 <img
                   src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                   alt="line"
@@ -255,26 +401,67 @@ export default function Rent() {
             <div className="row">
               <div className="col p-0  ">
                 {/* <div className="IntermedidateCardContainer"> */}
-      
-                   
-                   <PopularLocalitiesSlider settings={settings2}>
-                   {RentData.map((rentData, index) => (
-                  <div key={index} className="">
-                    <MediumCard
-                      title={rentData.title}
-                      image={rentData.image}
-                      description={rentData.description}
-                    
-                    />
-                  </div>
-                ))}
 
-                   </PopularLocalitiesSlider>
+                <PopularLocalitiesSlider settings={settings2}>
+                  {expertDealersProData.map((rentData, index) => (
+                    <div key={index} className="">
+                      <NavLink className={"navlink"} to={"/agents"}>
+                        <MediumCard
+                          image={rentData.image}
+                          name={rentData.name}
+                          address={[rentData.address]}
+                          experience={rentData.experience}
+                          properties={rentData.properties}
+                          pro={rentData.pro}
+                        />
+                      </NavLink>
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
+
+                <PopularLocalitiesSlider settings={settings2}>
+                  {expertDealersData.map((rentData, index) => (
+                    <div key={index} className="">
+                      <NavLink className={"navlink"} to={"/agents"}>
+                        <MediumCard
+                          image={rentData.image}
+                          name={rentData.name}
+                          address={[rentData.address]}
+                          experience={rentData.experience}
+                          properties={rentData.properties}
+                          pro={rentData.pro}
+                        />
+                      </NavLink>
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
                 {/* </div> */}
               </div>
             </div>
           </section>
 
+          <section className="NewsArticles mt-3">
+            <div className="row">
+              <div className="col pb-4">
+                <h2>
+                  <span className="opacity-75 fs-3">News &</span> Articles 
+                </h2>
+                <p className="m-0">
+                Know what`s happening in Real Estate.
+                </p>
+                <img
+                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                  alt="line"
+                />
+              </div>
+            </div>
+
+            <div className="row">
+              <div className="col">
+                
+              </div>
+            </div>
+          </section>
         </div>
       </div>
     </>

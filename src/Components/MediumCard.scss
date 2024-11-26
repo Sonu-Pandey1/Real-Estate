@@ -4,7 +4,8 @@
     transition: transform 0.3s;
   
     &:hover {
-    //   transform: scale(1.02); 
+      transform: scale(1.02); 
+      cursor: pointer;
     }
   
     .profileImageWrapper {
@@ -39,6 +40,18 @@
         }
         :nth-child(2){
             background-color: #FA714A;
+            font-size: 0.6rem;
+        }
+    }
+
+    .info2{
+        :nth-child(1){
+            // background-color: #ffa07a;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+        :nth-child(2){
+            background-color: #e6af19c5;
             font-size: 0.6rem;
         }
     }

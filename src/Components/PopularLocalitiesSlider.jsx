@@ -7,7 +7,7 @@ function PopularLocalitiesSlider({ children,settings }) {
 
 
   return (
-    <div className="sliderContainer container">
+    <div className="sliderContainer container pt-0  ">
       <div className="row align-items-center gap-5">
         <div className="col ">
           <div className="slider-container">
