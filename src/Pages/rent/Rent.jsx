@@ -4,6 +4,8 @@ import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import IntermedidateCard from "../../Components/IntermedidateCard";
 import MediumCard from "../../Components/MediumCard";
 import { NavLink } from "react-router-dom";
+import BlogCard from "../../Components/BlogCard";
+import RegisterToPost from "../../Components/registerToPost";
 
 export default function Rent() {
   var settings = {
@@ -311,40 +313,108 @@ export default function Rent() {
     },
   ];
 
+  const blogData = [
+    {
+      image:
+        "https://housing.com/news/wp-content/uploads/2024/07/Top-areas-in-Noida-Extension-for-investment-f.jpg",
+      title: "Top areas in Noida Extension for investment",
+      description:
+        "With new infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential.",
+      writerName: " Sonu Pandey",
+      publishTime: "Aug 2024",
+    },
+    {
+      image:
+        "https://housing.com/news/wp-content/uploads/2018/04/Buying-in-a-project-on-a-leasehold-plot-f.jpg",
+      title: "Buying a project on a leasehold plot: What you should know?",
+      description:
+        "A property  infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential where you lease the land from a landlord for a specific period is called leasehold property.",
+      writerName: "Khushboo",
+      publishTime: "Sep 2024",
+    },
+    {
+      image:
+        "https://assets-news.housing.com/news/wp-content/uploads/2020/02/29105827/Jewar-Airport-No-significant-gains-for-the-property-market-FB-1200x700-compressed.jpg",
+      title:
+        "Everything you want to know about Noida International Airport at Jewar",
+      description:
+        "The Noida  infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential International Airport at Jewar is slated to be operational by April 2025",
+      writerName: "Riyhan",
+      publishTime: "Oct 2024",
+    },
+    {
+      image:
+        "https://housing.com/news/wp-content/uploads/2024/05/Noida-metro-aqua-line-extension-F.jpg",
+      title: "Noida Metro receives approval for Aqua Line Extension",
+      description:
+        "Under this infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential extension project, 11 new metro stations will be added to the Aqua Line.",
+      writerName: "Sonu Pandey",
+      publishTime: "Nov 2024",
+    },
+    {
+      image:
+        "https://assets-news.housing.com/news/wp-content/uploads/2020/07/22174727/Everything-home-buyers-need-to-know-about-the-repo-rate-and-how-it-affects-them-FB-1200x700-compressed.jpg",
+      title: "Top areas in Noida Extension for investment",
+      description:
+        "With new infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential.",
+      writerName: "Sonu Pandey",
+      publishTime: "Aug 2024",
+    },
+    {
+      image:
+        "https://housing.com/news/wp-content/uploads/2024/02/Mahindra-Lifespaces-launches-plotted-development-project-in-Chennai-f.jpg",
+      title: "Top areas in Noida Extension for investment",
+      description:
+        "With new infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential.",
+      writerName: "Sonu Pandey",
+      publishTime: "Aug 2024",
+    },
+    {
+      image:
+        "https://housing.com/news/wp-content/uploads/2024/05/Godrej-Properties-achieves-over-Rs-2000-cr-through-launch-of-Godrej-Jardinia-in-Noida-f.jpg",
+      title: "Top areas in Noida Extension for investment",
+      description:
+        " infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential With new infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential.",
+      writerName: "Sonu Pandey",
+      publishTime: "Aug 2024",
+    },
+  ];
   return (
     <>
       <div className="rentContainer">
         <div className="container">
-          <div className="row pb-4">
-            <div className="col">
-              <h2>
-                <span className="opacity-75 fs-3">Recently </span> Added
-              </h2>
-              <p className="m-0">Based on preferences of users like you</p>
-              <img
-                src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                alt="line"
-              />
+          <section className="recentlyAdded">
+            <div className=" row pb-4">
+              <div className="col">
+                <h2>
+                  <span className="opacity-75 fs-3">Recently </span> Added
+                </h2>
+                <p className="m-0">Based on preferences of users like you</p>
+                <img
+                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                  alt="line"
+                />
+              </div>
             </div>
-          </div>
-          <div className="row">
-            <div className="col bg-danger p-0 ">
-              <PopularLocalitiesSlider settings={settings}>
-                {RentData.map((rentData, index) => (
-                  <div key={index} className="">
-                    <BasicCard
-                      title={rentData.title}
-                      image={rentData.image}
-                      description={rentData.description}
-                      location={rentData.location}
-                      size={rentData.size}
-                      price={rentData.price}
-                    />
-                  </div>
-                ))}
-              </PopularLocalitiesSlider>
+            <div className="row">
+              <div className="col bg-danger p-0 ">
+                <PopularLocalitiesSlider settings={settings}>
+                  {RentData.map((rentData, index) => (
+                    <div key={index} className="">
+                      <BasicCard
+                        title={rentData.title}
+                        image={rentData.image}
+                        description={rentData.description}
+                        location={rentData.location}
+                        size={rentData.size}
+                        price={rentData.price}
+                      />
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
+              </div>
             </div>
-          </div>
+          </section>
 
           <section className="featuredCollections mt-5">
             <div className="row">
@@ -382,60 +452,62 @@ export default function Rent() {
             </div>
           </section>
 
-          <section className="recommendedSellers mt-3">
-            <div className="row pb-4">
-              <div className="col">
-                <h2>
-                  <span className="opacity-75 fs-3">Recommended</span> Sellers
-                </h2>
-                <p className="m-0">
-                  Sellers with complete knowledge about locality and verified
-                  listings
-                </p>
-                <img
-                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                  alt="line"
-                />
+          <section className="recommendedSellers   mt-3">
+            <div className="container">
+              <div className="row pb-4">
+                <div className="col">
+                  <h2>
+                    <span className="opacity-75 fs-3">Recommended</span> Sellers
+                  </h2>
+                  <p className="m-0">
+                    Sellers with complete knowledge about locality and verified
+                    listings
+                  </p>
+                  <img
+                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                    alt="line"
+                  />
+                </div>
               </div>
-            </div>
-            <div className="row">
-              <div className="col p-0  ">
-                {/* <div className="IntermedidateCardContainer"> */}
+              <div className="row">
+                <div className="col p-0 ">
+                  {/* <div className="IntermedidateCardContainer"> */}
 
-                <PopularLocalitiesSlider settings={settings2}>
-                  {expertDealersProData.map((rentData, index) => (
-                    <div key={index} className="">
-                      <NavLink className={"navlink"} to={"/agents"}>
-                        <MediumCard
-                          image={rentData.image}
-                          name={rentData.name}
-                          address={[rentData.address]}
-                          experience={rentData.experience}
-                          properties={rentData.properties}
-                          pro={rentData.pro}
-                        />
-                      </NavLink>
-                    </div>
-                  ))}
-                </PopularLocalitiesSlider>
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {expertDealersProData.map((rentData, index) => (
+                      <div key={index} className="mediumCardWrapper">
+                        <NavLink className={"navlink"} to={"/agents"}>
+                          <MediumCard
+                            image={rentData.image}
+                            name={rentData.name}
+                            address={[rentData.address]}
+                            experience={rentData.experience}
+                            properties={rentData.properties}
+                            pro={rentData.pro}
+                          />
+                        </NavLink>
+                      </div>
+                    ))}
+                  </PopularLocalitiesSlider>
 
-                <PopularLocalitiesSlider settings={settings2}>
-                  {expertDealersData.map((rentData, index) => (
-                    <div key={index} className="">
-                      <NavLink className={"navlink"} to={"/agents"}>
-                        <MediumCard
-                          image={rentData.image}
-                          name={rentData.name}
-                          address={[rentData.address]}
-                          experience={rentData.experience}
-                          properties={rentData.properties}
-                          pro={rentData.pro}
-                        />
-                      </NavLink>
-                    </div>
-                  ))}
-                </PopularLocalitiesSlider>
-                {/* </div> */}
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {expertDealersData.map((rentData, index) => (
+                      <div key={index} className="">
+                        <NavLink className={"navlink"} to={"/agents"}>
+                          <MediumCard
+                            image={rentData.image}
+                            name={rentData.name}
+                            address={[rentData.address]}
+                            experience={rentData.experience}
+                            properties={rentData.properties}
+                            pro={rentData.pro}
+                          />
+                        </NavLink>
+                      </div>
+                    ))}
+                  </PopularLocalitiesSlider>
+                  {/* </div> */}
+                </div>
               </div>
             </div>
           </section>
@@ -444,11 +516,9 @@ export default function Rent() {
             <div className="row">
               <div className="col pb-4">
                 <h2>
-                  <span className="opacity-75 fs-3">News &</span> Articles 
+                  <span className="opacity-75 fs-3">News &</span> Articles
                 </h2>
-                <p className="m-0">
-                Know what`s happening in Real Estate.
-                </p>
+                <p className="m-0">Know what`s happening in Real Estate.</p>
                 <img
                   src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                   alt="line"
@@ -457,10 +527,28 @@ export default function Rent() {
             </div>
 
             <div className="row">
-              <div className="col">
-                
+              <div className="col mb-3">
+                <PopularLocalitiesSlider settings={settings2}>
+                  {blogData.map((blogData, index) => (
+                    <div key={index} className="">
+                      <NavLink className={"navlink"} to={"/news-articles"}>
+                        <BlogCard
+                          image={blogData.image}
+                          title={blogData.title}
+                          description={[blogData.description]}
+                          writerName={blogData.writerName}
+                          publishTime={blogData.publishTime}
+                        />
+                      </NavLink>
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
               </div>
             </div>
+          </section>
+
+          <section className="rentbottom">
+            <RegisterToPost />
           </section>
         </div>
       </div>

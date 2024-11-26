@@ -1,14 +1,25 @@
-.rentContainer{
-    background-color: rgb(236, 226, 226);
-    
-    .container{
-        padding-top: 5vh;
-        background-color: white;
+.rentContainer {
+  background-color: #ffffff;
 
-        .navlink{
-            color: black ;
-            text-decoration: none;
+  .container {
+    padding-top: 5vh;
+    background-color: white;
 
-        }
+    .recommendedSellers {
+      .container {
+        background-color: rgb(255, 245, 228);
+        border-radius: 10px;
+      }
+
+      .mediumCardWrapper {
+        background-color: rgb(255, 245, 228);
+        border-radius: 10px;
+      }
     }
+
+    .navlink {
+      color: black;
+      text-decoration: none;
+    }
+  }
 }
