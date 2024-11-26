@@ -15,6 +15,7 @@ import Rent from "./Pages/rent/Rent.jsx";
 import Pg from "./Pages/pgCoLiving/Pg.jsx"
 import Plots from "./Pages/plots/Plots.jsx"
 import Commercial from "./Pages/commercial/Commercial.jsx"
+import Footer from "./Components/Footer.jsx";
 
 
 function App() {
@@ -48,6 +49,7 @@ function App() {
           <Route path="/login-register" element={<LoginRegister/>}/>
         </Route>
       </Routes>
+      <Footer/>
 
       <PWABadge />
     </>
