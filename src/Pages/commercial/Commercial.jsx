@@ -4,6 +4,7 @@ import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import "./Commercial.scss";
 import MediumCard from "../../Components/MediumCard";
 import BlogCard from "../../Components/BlogCard";
+import Flash from "../../Components/Flash";
 
 export default function Commercial() {
   var settings = {
@@ -77,63 +78,6 @@ export default function Commercial() {
       },
     ],
   };
-
-  const expertDealersData = [
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "",
-    },
-  ];
 
   const expertDealersProData = [
     {
@@ -356,8 +300,9 @@ export default function Commercial() {
                 </div>
               </div>
             </div>
+            
           </section>
-
+          
           <section>
             <div className="container">
               <div className="row">
