@@ -5,7 +5,7 @@ import IntermedidateCard from "../../Components/IntermedidateCard";
 import MediumCard from "../../Components/MediumCard";
 import { NavLink } from "react-router-dom";
 import BlogCard from "../../Components/BlogCard";
-import RegisterToPost from "../../Components/registerToPost";
+import RegisterToPost from "../../Components/RegisterToPost";
 
 export default function Rent() {
   var settings = {

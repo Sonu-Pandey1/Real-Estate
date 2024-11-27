@@ -1,6 +1,6 @@
 import "./RegisterToPost.scss"
 
-export default function registerToPost() {
+export default function RegisterToPost() {
   return (
     <>
         <div className="registerToPostContainer ">
