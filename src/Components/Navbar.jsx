@@ -97,7 +97,7 @@ function Navbar() {
             </ul>
           </div>
 
-          <div className="postPropertyWrapper">
+          <div className="postPropertyWrapper d-none d-sm-block">
             <button
               className="btn btn-light px-1 py-1 "
               onClick={handleNavigate}
@@ -866,3 +866,4 @@ function Navbar() {
 }
 
 export default Navbar;
+

@@ -4,7 +4,7 @@ import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import "./Commercial.scss";
 import MediumCard from "../../Components/MediumCard";
 import BlogCard from "../../Components/BlogCard";
-import Flash from "../../Components/Flash";
+
 
 export default function Commercial() {
   var settings = {
