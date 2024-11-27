@@ -21,7 +21,7 @@ export default function HeroC() {
           slidesToShow: 4,
           slidesToScroll: 1,
           infinite: true,
-          dots: true,
+          // dots: true,
         },
       },
       {
@@ -105,15 +105,15 @@ export default function HeroC() {
         }}
       >
         {/* Background and Heading */}
-        <div className="title mx-auto  text-white ">
+        <div className="title mx-auto  text-white w-100">
           <p className="">{currentConfig.title}</p>
         </div>
 
-        <form>
+        <form className="w-100">
           <div className="formContainer mx-auto">
             {/* Tabs */}
-            <div className="tabsWrapper">
-              <nav className=" d-flex">
+            <div className="tabsWrapper bg-danger">
+              <nav className=" d-flex w-100">
                 <NavLink className="navlink" to={"/"}>
                   Buy
                 </NavLink>
@@ -123,7 +123,7 @@ export default function HeroC() {
                 <NavLink className="navlink" to={"/commercial"}>
                   Commercial
                 </NavLink>
-                <NavLink className="navlink" to={"/pg-coliving"}>
+                <NavLink className="navlink d-none d-sm-block" to={"/pg-coliving"}>
                   Pg / Co-living
                 </NavLink>
                 <NavLink className="navlink" to={"/plots"}>
@@ -136,35 +136,7 @@ export default function HeroC() {
               <div className="mb-3 position-relative">
                 {/* Search Icon */}
                 <div className=" searchIcon position-absolute top-50 start-0 translate-middle-y ps-3 d-flex">
-                  {/* <div className="">
-              <div className="dropdown">
-                <button
-                  className="btn  dropdown-toggle"
-                  type="button"
-                  data-bs-toggle="dropdown"
-                  aria-expanded="false"
-                >
-                  Dropdown button
-                </button>
-                <ul className="dropdown-menu dropdown-menu-dark">
-                  <li>
-                    <a className="dropdown-item active" href="#">
-                      Delhi
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Noida
-                    </a>
-                  </li>
-                  <li>
-                    <a className="dropdown-item" href="#">
-                      Gurugram
-                    </a>
-                  </li>
-                </ul>
-              </div>
-            </div> */}
+                  
                   <svg
                     className="bi bi-search text-muted "
                     width="20"
@@ -206,7 +178,7 @@ export default function HeroC() {
         </form>
 
         {/* Popular Localities Slider */}
-        <div className="row align-items-center ">
+        {/* <div className="row align-items-center ">
           <div className="col-4   mt-3 text-end">
             <GrOptimize className="localIcon fs-6" />
             <p className="p-2 pe-4 badge sliderTitle">Popular Localities</p>
@@ -222,7 +194,29 @@ export default function HeroC() {
               </PopularLocalitiesSlider>
             </div>
           </div>
-        </div>
+        </div> */}
+
+        <div className="row align-items-center">
+  {/* Left section with icon and title */}
+  <div className="col-12 text-center col-md-4 col-lg-4 mt-3 ">
+    <GrOptimize className="localIcon fs-6" />
+    <p className="p-2 pe-4 badge sliderTitle">Popular Localities</p>
+  </div>
+  
+  {/* Right section with slider */}
+  <div className="col-12 col-md-7 col-lg-6 pe-4 text-center ">
+    <div className="PopularLocalitiesSliderWrapper mx-5">
+      <PopularLocalitiesSlider settings={settings}>
+        {popularLocalities.map((locality, index) => (
+          <div key={index} className="text-center w-75">
+            <p className="m-0 rounded-2 py-1">{locality} &gt;</p>
+          </div>
+        ))}
+      </PopularLocalitiesSlider>
+    </div>
+  </div>
+</div>
+
 
         <div className="downPara  h-100 ">
           {/* <h1>ram</h1> */}
