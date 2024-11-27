@@ -112,7 +112,7 @@ export default function HeroC() {
         <form className="w-100">
           <div className="formContainer mx-auto">
             {/* Tabs */}
-            <div className="tabsWrapper bg-danger">
+            <div className="tabsWrapper ">
               <nav className=" d-flex w-100">
                 <NavLink className="navlink" to={"/"}>
                   Buy
@@ -196,15 +196,15 @@ export default function HeroC() {
           </div>
         </div> */}
 
-        <div className="row align-items-center">
+        <div className="row align-items-center  justify-content-center text-center mx-auto">
   {/* Left section with icon and title */}
-  <div className="col-12 text-center col-md-4 col-lg-4 mt-3 ">
+  <div className="col-12 text-center col-md-4 col-lg-2 mt-3 ">
     <GrOptimize className="localIcon fs-6" />
-    <p className="p-2 pe-4 badge sliderTitle">Popular Localities</p>
+    <p className="p-2 pe-4 badge sliderTitle ">Popular Localities</p>
   </div>
   
   {/* Right section with slider */}
-  <div className="col-12 col-md-7 col-lg-6 pe-4 text-center ">
+  <div className="col-12 col-md-7 col-lg-6 pe-4 text-center">
     <div className="PopularLocalitiesSliderWrapper mx-5">
       <PopularLocalitiesSlider settings={settings}>
         {popularLocalities.map((locality, index) => (
