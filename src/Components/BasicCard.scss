@@ -9,6 +9,7 @@
       overflow: hidden; 
       border-radius: 0.5rem; 
       position: relative; 
+      border-bottom: 2px solid orange;
 
       .card-img-top {
         height: 100%;
@@ -16,6 +17,7 @@
         object-fit: cover;
         transition: transform 0.6s ease; 
         transform: scale(1); 
+        
       }
 
       &:hover {
@@ -34,5 +36,21 @@
         font-size: small;
       }
     }
+  }
+}
+
+
+.basicCardForCommercial{
+  .card{
+    width:22rem;
+    .row{
+      .col-7{
+        .sm{
+          // background-color: red;
+          font-size: 12px;
+        }
+      }
+    }
+  
   }
 }

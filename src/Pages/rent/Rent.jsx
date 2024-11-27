@@ -199,6 +199,7 @@ export default function Rent() {
       price: "₹1,00,000",
     },
   ];
+  
   const expertDealersData = [
     {
       image:
@@ -383,86 +384,14 @@ export default function Rent() {
     <>
       <div className="rentContainer">
         <div className="container">
-          <section className="recentlyAdded">
-            <div className=" row pb-4">
-              <div className="col">
-                <h2>
-                  <span className="opacity-75 fs-3">Recently </span> Added
-                </h2>
-                <p className="m-0">Based on preferences of users like you</p>
-                <img
-                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                  alt="line"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col bg-danger p-0 ">
-                <PopularLocalitiesSlider settings={settings}>
-                  {RentData.map((rentData, index) => (
-                    <div key={index} className="">
-                      <BasicCard
-                        title={rentData.title}
-                        image={rentData.image}
-                        description={rentData.description}
-                        location={rentData.location}
-                        size={rentData.size}
-                        price={rentData.price}
-                      />
-                    </div>
-                  ))}
-                </PopularLocalitiesSlider>
-              </div>
-            </div>
-          </section>
-
-          <section className="featuredCollections mt-5">
-            <div className="row">
-              <div className="col">
-                <h2>
-                  <span className="opacity-75 fs-3">Featured</span> Collections
-                </h2>
-                <p className="m-0">Handpicked projects for you</p>
-                <img
-                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                  alt="line"
-                />
-              </div>
-            </div>
-            <div className="row">
-              <div className="col p-0  ">
-                {/* <div className="IntermedidateCardContainer"> */}
-
-                <PopularLocalitiesSlider settings={settings2}>
-                  {RentData.map((rentData, index) => (
-                    <div key={index} className="">
-                      <NavLink to={"/featuredCollection"}>
-                        <IntermedidateCard
-                          title={rentData.title}
-                          image={rentData.image}
-                          description={rentData.description}
-                        />
-                      </NavLink>
-                    </div>
-                  ))}
-                </PopularLocalitiesSlider>
-
-                {/* </div> */}
-              </div>
-            </div>
-          </section>
-
-          <section className="recommendedSellers   mt-3">
-            <div className="container">
-              <div className="row pb-4">
+          <main>
+            <section className="recentlyAdded">
+              <div className=" row pb-4">
                 <div className="col">
                   <h2>
-                    <span className="opacity-75 fs-3">Recommended</span> Sellers
+                    <span className="opacity-75 fs-3">Recently </span> Added
                   </h2>
-                  <p className="m-0">
-                    Sellers with complete knowledge about locality and verified
-                    listings
-                  </p>
+                  <p className="m-0">Based on preferences of users like you</p>
                   <img
                     src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                     alt="line"
@@ -470,82 +399,160 @@ export default function Rent() {
                 </div>
               </div>
               <div className="row">
-                <div className="col p-0 ">
+                <div className="col bg-danger p-0 ">
+                  <PopularLocalitiesSlider settings={settings}>
+                    {RentData.map((rentData, index) => (
+                      <div key={index} className="">
+                        <BasicCard
+                          title={rentData.title}
+                          image={rentData.image}
+                          description={rentData.description}
+                          location={rentData.location}
+                          size={rentData.size}
+                          price={rentData.price}
+                        />
+                      </div>
+                    ))}
+                  </PopularLocalitiesSlider>
+                </div>
+              </div>
+            </section>
+
+            <section className="featuredCollections mt-5">
+              <div className="row">
+                <div className="col">
+                  <h2>
+                    <span className="opacity-75 fs-3">Featured</span>{" "}
+                    Collections
+                  </h2>
+                  <p className="m-0">Handpicked projects for you</p>
+                  <img
+                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                    alt="line"
+                  />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col p-0  ">
                   {/* <div className="IntermedidateCardContainer"> */}
 
                   <PopularLocalitiesSlider settings={settings2}>
-                    {expertDealersProData.map((rentData, index) => (
-                      <div key={index} className="mediumCardWrapper">
-                        <NavLink className={"navlink"} to={"/agents"}>
-                          <MediumCard
+                    {RentData.map((rentData, index) => (
+                      <div key={index} className="">
+                        <NavLink to={"/featuredCollection"}>
+                          <IntermedidateCard
+                            title={rentData.title}
                             image={rentData.image}
-                            name={rentData.name}
-                            address={[rentData.address]}
-                            experience={rentData.experience}
-                            properties={rentData.properties}
-                            pro={rentData.pro}
+                            description={rentData.description}
                           />
                         </NavLink>
                       </div>
                     ))}
                   </PopularLocalitiesSlider>
 
-                  <PopularLocalitiesSlider settings={settings2}>
-                    {expertDealersData.map((rentData, index) => (
-                      <div key={index} className="">
-                        <NavLink className={"navlink"} to={"/agents"}>
-                          <MediumCard
-                            image={rentData.image}
-                            name={rentData.name}
-                            address={[rentData.address]}
-                            experience={rentData.experience}
-                            properties={rentData.properties}
-                            pro={rentData.pro}
-                          />
-                        </NavLink>
-                      </div>
-                    ))}
-                  </PopularLocalitiesSlider>
                   {/* </div> */}
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
 
-          <section className="NewsArticles mt-3">
-            <div className="row">
-              <div className="col pb-4">
-                <h2>
-                  <span className="opacity-75 fs-3">News &</span> Articles
-                </h2>
-                <p className="m-0">Know what`s happening in Real Estate.</p>
-                <img
-                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                  alt="line"
-                />
-              </div>
-            </div>
+            <section className="recommendedSellers   mt-3">
+              <div className="container">
+                <div className="row pb-4">
+                  <div className="col">
+                    <h2>
+                      <span className="opacity-75 fs-3">Recommended</span>{" "}
+                      Sellers
+                    </h2>
+                    <p className="m-0">
+                      Sellers with complete knowledge about locality and
+                      verified listings
+                    </p>
+                    <img
+                      src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                      alt="line"
+                    />
+                  </div>
+                </div>
+                <div className="row">
+                  <div className="col p-0 ">
+                    {/* <div className="IntermedidateCardContainer"> */}
 
-            <div className="row">
-              <div className="col mb-3">
-                <PopularLocalitiesSlider settings={settings2}>
-                  {blogData.map((blogData, index) => (
-                    <div key={index} className="">
-                      <NavLink className={"navlink"} to={"/news-articles"}>
-                        <BlogCard
-                          image={blogData.image}
-                          title={blogData.title}
-                          description={[blogData.description]}
-                          writerName={blogData.writerName}
-                          publishTime={blogData.publishTime}
-                        />
-                      </NavLink>
-                    </div>
-                  ))}
-                </PopularLocalitiesSlider>
+                    <PopularLocalitiesSlider settings={settings2}>
+                      {expertDealersProData.map((rentData, index) => (
+                        <div key={index} className="mediumCardWrapper">
+                          <NavLink className={"navlink"} to={"/agents"}>
+                            <MediumCard
+                              image={rentData.image}
+                              name={rentData.name}
+                              address={[rentData.address]}
+                              experience={rentData.experience}
+                              properties={rentData.properties}
+                              pro={rentData.pro}
+                            />
+                          </NavLink>
+                        </div>
+                      ))}
+                    </PopularLocalitiesSlider>
+
+                    <PopularLocalitiesSlider settings={settings2}>
+                      {expertDealersData.map((rentData, index) => (
+                        <div key={index} className="">
+                          <NavLink className={"navlink"} to={"/agents"}>
+                            <MediumCard
+                              image={rentData.image}
+                              name={rentData.name}
+                              address={[rentData.address]}
+                              experience={rentData.experience}
+                              properties={rentData.properties}
+                              pro={rentData.pro}
+                            />
+                          </NavLink>
+                        </div>
+                      ))}
+                    </PopularLocalitiesSlider>
+                    {/* </div> */}
+                  </div>
+                </div>
               </div>
-            </div>
-          </section>
+            </section>
+          </main>
+
+          <article>
+            <section className="NewsArticles mt-3">
+              <div className="row">
+                <div className="col pb-4">
+                  <h2>
+                    <span className="opacity-75 fs-3">News &</span> Articles
+                  </h2>
+                  <p className="m-0">Know what`s happening in Real Estate.</p>
+                  <img
+                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                    alt="line"
+                  />
+                </div>
+              </div>
+
+              <div className="row">
+                <div className="col mb-3">
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {blogData.map((blogData, index) => (
+                      <div key={index} className="">
+                        <NavLink className={"navlink"} to={"/news-articles"}>
+                          <BlogCard
+                            image={blogData.image}
+                            title={blogData.title}
+                            description={[blogData.description]}
+                            writerName={blogData.writerName}
+                            publishTime={blogData.publishTime}
+                          />
+                        </NavLink>
+                      </div>
+                    ))}
+                  </PopularLocalitiesSlider>
+                </div>
+              </div>
+            </section>
+          </article>
 
           <section className="rentbottom">
             <RegisterToPost />
