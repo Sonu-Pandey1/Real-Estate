@@ -4,7 +4,7 @@ import { RiShieldStarFill } from "react-icons/ri";
 
 export default function MediumCard({ name, image, address, experience,properties,pro }) {
   return (
-    <div className="mediumCardWrapper p-2  ">
+    <div className="mediumCardWrapper ">
       <div className="expertCard mb-3 rounded-3 p-2 d-flex align-items-center gap-3">
         {/* Profile Image */}
         <div className="profileImageWrapper">

@@ -1,20 +1,10 @@
-
-// @import '../scss/variables';
-
 .sliderContainer {
-    // padding: 0px 50px; 
-    // padding-right: -60px;
-    // margin-right: 30px;
-    .localIcon{
-        color: rgba(204, 190, 190, 0.829);;
-    }
-    .sliderTitle{
-       
-        // background-color: rgba(255, 255, 255, 0.16);
-        // backdrop-filter: blur(22px);
-        color: rgba(204, 190, 190, 0.829);
-
-    }
+  .localIcon {
+    color: rgba(204, 190, 190, 0.829);
+  }
+  .sliderTitle {
+    color: rgba(204, 190, 190, 0.829);
+  }
   .slider {
     div {
       p {
@@ -23,8 +13,23 @@
         background-color: rgba(255, 255, 255, 0.16);
         backdrop-filter: blur(52px);
         color: white;
-        
       }
+    }
+  }
+
+  .slick-arrow {
+    // General styles for arrows
+    &.slick-next::before,
+    &.slick-prev::before {
+      color: rgba(46, 41, 41, 0.438);
+      font-size: 25px;
+    }
+  }
+
+  // Hide arrows on small screens
+  @media (max-width: 600px) {
+    .slick-arrow {
+      display: none !important;
     }
   }
 }

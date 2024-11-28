@@ -7,7 +7,7 @@ export default function BlogCard({image, title, publishTime, description, writer
   return (
     <>
       <div className="blogCardContainer">
-        <div className="card" >
+        <div className="card w-100" >
           <div className="imgWrapper">
           <img src={image} className="card-img-top" alt="logo" />
           </div>

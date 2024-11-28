@@ -8,7 +8,7 @@ import BlogCard from "../../Components/BlogCard";
 import RegisterToPost from "../../Components/RegisterToPost";
 
 export default function Rent() {
-  var settings = {
+  const settings = {
     dots: false,
     infinite: true,
     speed: 600,
@@ -18,20 +18,32 @@ export default function Rent() {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-          dots: true,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: 1,
         },
       },
       {
@@ -43,8 +55,8 @@ export default function Rent() {
       },
     ],
   };
-
-  var settings2 = {
+  
+  const settings2 = {
     dots: false,
     infinite: true,
     speed: 600,
@@ -54,20 +66,32 @@ export default function Rent() {
     initialSlide: 0,
     responsive: [
       {
-        breakpoint: 1024,
+        breakpoint: 1200,
         settings: {
-          slidesToShow: 4,
+          slidesToShow: 3,
           slidesToScroll: 1,
-          infinite: true,
-          dots: true,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
         },
       },
       {
         breakpoint: 600,
         settings: {
-          slidesToShow: 3,
+          slidesToShow: 2,
           slidesToScroll: 1,
-          initialSlide: 2,
+          initialSlide: 1,
         },
       },
       {
@@ -79,6 +103,10 @@ export default function Rent() {
       },
     ],
   };
+  
+
+ 
+
   const RentData = [
     {
       image:
@@ -199,7 +227,7 @@ export default function Rent() {
       price: "₹1,00,000",
     },
   ];
-  
+
   const expertDealersData = [
     {
       image:
@@ -380,29 +408,34 @@ export default function Rent() {
       publishTime: "Aug 2024",
     },
   ];
+
   return (
     <>
       <div className="rentContainer">
         <div className="container">
           <main>
             <section className="recentlyAdded">
-              <div className=" row pb-4">
+              <div className="row pb-4">
                 <div className="col">
                   <h2>
                     <span className="opacity-75 fs-3">Recently </span> Added
                   </h2>
                   <p className="m-0">Based on preferences of users like you</p>
                   <img
+                    className="imgg"
                     src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                     alt="line"
                   />
                 </div>
               </div>
               <div className="row">
-                <div className="col bg-danger p-0 ">
+                <div className="col p-0">
                   <PopularLocalitiesSlider settings={settings}>
                     {RentData.map((rentData, index) => (
-                      <div key={index} className="">
+                      <div
+                        key={index}
+                        className="" // Added padding for spacing
+                      >
                         <BasicCard
                           title={rentData.title}
                           image={rentData.image}
@@ -427,6 +460,7 @@ export default function Rent() {
                   </h2>
                   <p className="m-0">Handpicked projects for you</p>
                   <img
+                    className="imgg"
                     src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                     alt="line"
                   />
@@ -434,8 +468,6 @@ export default function Rent() {
               </div>
               <div className="row">
                 <div className="col p-0  ">
-                  {/* <div className="IntermedidateCardContainer"> */}
-
                   <PopularLocalitiesSlider settings={settings2}>
                     {RentData.map((rentData, index) => (
                       <div key={index} className="">
@@ -449,8 +481,6 @@ export default function Rent() {
                       </div>
                     ))}
                   </PopularLocalitiesSlider>
-
-                  {/* </div> */}
                 </div>
               </div>
             </section>
@@ -458,7 +488,7 @@ export default function Rent() {
             <section className="recommendedSellers   mt-3">
               <div className="container">
                 <div className="row pb-4">
-                  <div className="col">
+                  <div className="col p-0">
                     <h2>
                       <span className="opacity-75 fs-3">Recommended</span>{" "}
                       Sellers
@@ -468,6 +498,7 @@ export default function Rent() {
                       verified listings
                     </p>
                     <img
+                      className="imgg"
                       src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
                       alt="line"
                     />
@@ -510,7 +541,7 @@ export default function Rent() {
                         </div>
                       ))}
                     </PopularLocalitiesSlider>
-                    {/* </div> */}
+                    {/* {/* </div> */}
                   </div>
                 </div>
               </div>
@@ -525,10 +556,13 @@ export default function Rent() {
                     <span className="opacity-75 fs-3">News &</span> Articles
                   </h2>
                   <p className="m-0">Know what`s happening in Real Estate.</p>
-                  <img
-                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                    alt="line"
-                  />
+                  <div className="imgWrapper">
+                    <img
+                      className="imgg"
+                      src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                      alt="line"
+                    />
+                  </div>
                 </div>
               </div>
 
