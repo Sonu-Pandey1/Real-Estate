@@ -1,0 +1,93 @@
+.pgContainer{
+    .container{
+        .row{
+            .col{
+                position: relative;
+                .imgWrapper{
+                    img{
+                        width: 100%;
+                        height: 100%;
+                    }
+                }
+                .contentWrapper{
+                    position: absolute;
+                    text-align: justify;
+                    top: 0;
+                    h2{
+                        font-weight: 400;
+                    }
+                }
+                .imagesWrapper{
+                    width: 100%;
+                    div{
+                        img{
+                            width: 50%;
+                        }      
+                    }
+                }
+            }
+        }
+    }
+}
+
+.pgCounter{
+background-color: black;
+color: white;
+}
+
+.pgsOptions{
+                   
+    .imgWrapper{
+        position: relative;
+        // background-color: red;
+        // width: 5rem !important;
+        width: 100%;
+        img{
+            width: 80%;
+        }
+        div{
+            // left: 30%;
+            bottom: 0px;
+            padding: 10px;
+            position: absolute;
+            background-image: linear-gradient(to bottom, rgba(0, 0, 0, 0) 30%, rgba(0, 0, 0, 0.9) 100%);
+            width: 100%;
+           
+        }
+
+    }
+
+}
+
+@media (max-width:768px) {
+    .pgContainer{
+        .container{
+            .row{
+                .col{
+                    position: relative;
+                    .imgWrapper{
+                        img{
+                            width: 100%;
+                            height: 100%;
+                        }
+                    }
+                    .contentWrapper{
+                        position: static;
+                        // background-color: red;
+
+                        top: 0;
+                    }
+                    .imagesWrapper{
+                        width: 100%;
+                        div{
+                            img{
+                                width: 50%;
+                            }      
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+}
