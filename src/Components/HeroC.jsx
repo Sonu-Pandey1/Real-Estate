@@ -126,6 +126,9 @@ export default function HeroC() {
                 <NavLink className="navlink d-none d-sm-block" to={"/pg-coliving"}>
                   Pg / Co-living
                 </NavLink>
+                <NavLink className="navlink d-sm-none" to={"/pg"}>
+                  Pg
+                </NavLink>
                 <NavLink className="navlink" to={"/plots"}>
                   Plots
                 </NavLink>

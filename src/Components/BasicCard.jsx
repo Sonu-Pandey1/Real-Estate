@@ -17,10 +17,10 @@ export default function BasicCard({
   return (
     <>
       {owner ? (
-        <div className="basicCardForCommercial">
+        <div className="basicCardForCommercial m-2">
           <NavLink
             to={"/commercialPropertys"}
-            className="card border w-100 text-decoration-none flex-row "
+            className="card border-1 w-100 text-decoration-none flex-row "
           >
             <div className="row g-0"> {/* Added g-0 for spacing */}
               <div className="col-12 col-sm-5 pe-0 ">
@@ -51,10 +51,10 @@ export default function BasicCard({
         <div className="basicCardWrapper ">
           <NavLink
             to="/contact"
-            className="card border-0 w-100 p-3 text-decoration-none"
+            className="card border-0 w-100 p-3  text-decoration-none"
           >
-            <div className="row g-0"> {/* Added g-0 for consistent spacing */}
-              <div className="col-12 px-0">
+            <div className="row g-0 "> {/* Added g-0 for consistent spacing */}
+              <div className="col-12 px-0 ">
                 <div className="imgWrapper">
                   <img
                     className="card-img-top rounded-4 w-100"
