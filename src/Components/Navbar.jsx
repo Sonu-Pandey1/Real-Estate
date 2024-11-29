@@ -4,8 +4,6 @@ import { RiMenu2Line } from "react-icons/ri";
 import { PiUserCircleCheckDuotone } from "react-icons/pi";
 import { useEffect, useState } from "react";
 
-// import { useEffect, useState } from "react";
-
 function Navbar() {
   const navigate = useNavigate();
 
@@ -37,14 +35,14 @@ function Navbar() {
   return (
     <>
       <nav className={`navbar fixed-top ${isSticky ? "sticky-topp" : ""} px-2 px-md-5`}>
-        <div className="container-fluid mx-2  ">
+        <div className="container-fluid mx-2 align-items-center ">
           <img
             className="img img-fluid"
             src="https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"
             alt="logo"
           />
-          <div className="d-none d-md-block ">
-            <ul className="navbar-nav me-auto mb-2 mb-lg-0 flex-row gap-4 ">
+          <div className="d-none d-md-block ms-auto pe-5 align-items-center">
+            <ul className="navbar-nav me-auto mb-lg-0 flex-row gap-4 align-items-center ">
               <li className="nav-item">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/"}>
@@ -53,25 +51,25 @@ function Navbar() {
                 </div>
               </li>
 
-              <li className="nav-item mega-dropdown">
+              {/* <li className="nav-item mega-dropdown">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/for-buyers"}>
                     For Buyers
                   </NavLink>
                 </div>
 
-                {/* //todo --> Mega Menu Uncomment If Needed get in to github this file prev commits */}
-              </li>
+                //todo --> Mega Menu Uncomment If Needed get in to github this file prev commits
+              </li> */}
 
-              <li className="nav-item mega-dropdown">
+              {/* <li className="nav-item mega-dropdown">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/for-tenants"}>
                     For Tenants
                   </NavLink>
                 </div>
-              </li>
+              </li> */}
 
-              <li className="nav-item mega-dropdown">
+              <li className="nav-item mega-dropdown d-lg-block d-none">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/for-owners"}>
                     For Owners
@@ -79,7 +77,7 @@ function Navbar() {
                 </div>
               </li>
 
-              <li className="nav-item mega-dropdown">
+              <li className="nav-item mega-dropdown d-lg-block d-none">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/for-dealers-builders"}>
                     For Dealers / Builders
@@ -90,14 +88,14 @@ function Navbar() {
               <li className="nav-item mega-dropdown">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/insights"}>
-                    Insights <span className="insightsBadge">New</span>
+                    News
+                     {/* <span className="insightsBadge">New</span> */}
                   </NavLink>
                 </div>
               </li>
-            </ul>
-          </div>
 
-          <div className="postPropertyWrapper d-none d-sm-block">
+              <li>
+              <div className="postPropertyWrapper d-none d-sm-block">
             <button
               className="btn btn-light px-1 py-1 "
               onClick={handleNavigate}
@@ -111,6 +109,11 @@ function Navbar() {
               <span className="postPropertyBadge">FREE</span>
             </button>
           </div>
+              </li>
+            </ul>
+          </div>
+
+          
 
           <button
             className={`navbar-toggler `}
