@@ -3,16 +3,12 @@
 .hero-section {
   font-family: Arial, sans-serif;
   background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
-  // ? Second bg------
-  // background: url("https://c.housingcdn.com/demand/s/client/common/assets/HomeBg.d42b5d41.svg");
-  background-position: top;
-  background-repeat: no-repeat;
   background-size: cover;
   background-position: center;
-  // height: 90.5vh;
   height: 75vh;
   overflow: hidden;
   width: 100%;
+  // border-radius: 50px;
   .title {
     // padding-left: 15px;
     padding-top: 140px;
@@ -27,6 +23,8 @@
     font-size: 2rem;
     font-weight: bold;
   }
+
+  
 
   //? Enable Styles For Tabs ---
   .formContainer {

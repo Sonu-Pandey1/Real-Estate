@@ -58,8 +58,8 @@ export default function HeroC() {
 
   const heroConfig = {
     "/": {
-      background:
-        "url('https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg')",
+      // background:
+      //   "url('https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg')",
       title: "Properties to buy in Noida",
       placeholder: "Search for locality, project, or builder",
     },
@@ -89,9 +89,6 @@ export default function HeroC() {
       placeholder: "Search for plots, spaces",
     },
   };
-  // https://c.housingcdn.com/demand/s/client/common/assets/plotsCover.effff013.jpg
-
-  // Match current path or fallback to "/"
   const currentConfig = heroConfig[location.pathname] || heroConfig["/"];
 
   return (
@@ -100,8 +97,6 @@ export default function HeroC() {
         className="hero-section  "
         style={{
           backgroundImage: currentConfig.background,
-          backgroundSize: "cover",
-          backgroundPosition: "center",
         }}
       >
         {/* Background and Heading */}
