@@ -493,7 +493,7 @@ export default function Rent() {
                       <span className="opacity-75 fs-3">Recommended</span>{" "}
                       Sellers
                     </h2>
-                    <p className="m-0">
+                    <p className="m-0 text-muted">
                       Sellers with complete knowledge about locality and
                       verified listings
                     </p>
