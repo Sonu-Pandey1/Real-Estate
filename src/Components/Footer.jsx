@@ -11,7 +11,7 @@ const Footer = () => {
       <div className=" container-fluid">
         <div className="row">
           {/* Branding and Awards */}
-          <div className="col-lg-3 col-md-5 col-sm-5 mb-4 px-5">
+          <div className="col-lg-3 col-md-6 col-sm-5 mb-4 px-5">
             <h5 className="mb-5">
               {" "}
               <img
@@ -44,7 +44,7 @@ const Footer = () => {
           </div>
 
           {/* Company Links */}
-          <div className="col-lg-2 col-md-4 col-sm-4 mb-4 ps-5 ">
+          <div className="col-lg-2 col-md-3 col-sm-4 mb-4 ps-5 ">
             <h6 className="text-uppercase mb-3">Company</h6>
             <ul className="list-unstyled list">
               <li>Careers</li>
@@ -58,14 +58,14 @@ const Footer = () => {
           </div>
 
           {/* Partner Sites */}
-          <div className="col-lg-2 col-md-4 col-sm-3 mb-4 ps-5">
+          <div className="col-lg-2 col-md-3 col-sm-3 mb-4 ps-5">
             <h6 className="text-uppercase mb-3">Partner Sites</h6>
             <ul className="list-unstyled list">
               <li>Proptiger</li>
               <li>Makaan</li>
               <li>realtor.com</li>
               <li>99.co</li>
-              <li>collinsdictionary.com</li>
+              {/* <li>collinsdictionary.com</li> */}
             </ul>
           </div>
 
