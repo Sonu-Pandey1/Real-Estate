@@ -13,6 +13,7 @@ export default function BasicCard({
   owner,
   area,
   address,
+  company
 }) {
   return (
     <>
@@ -57,7 +58,7 @@ export default function BasicCard({
               <div className="col-12 px-0 ">
                 <div className="imgWrapper">
                   <img
-                    className="card-img-top rounded-4 w-100"
+                    className={`card-img-top ${company?"":"rounded-4"} w-100`}
                     src={image}
                     alt="Card image cap"
                   />
@@ -65,10 +66,11 @@ export default function BasicCard({
               </div>
               <div className="col-12">
                 <div className="p-2">
-                  <h6 className="card-title fw-bold text-dark">{title}</h6>
+                  <h6 className="card-title fw-bold text-dark m-0">{title}</h6>
+                  <p className="opacity-75 text-dark m-0 mb-2">{company}</p>
                   <p className="m-0 text-dark d-flex justify-content-between">
                     <span>{description}</span>
-                    <span className="text-muted">{size}</span>
+                    <span className="">{size}</span>
                   </p>
                   <p className="text-truncate opacity-75 text-dark">
                     {location}

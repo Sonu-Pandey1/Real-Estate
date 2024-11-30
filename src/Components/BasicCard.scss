@@ -30,7 +30,7 @@
     .card-body {
       p:nth-child(2) {
         font-size: small;
-        font-weight: 500;
+        font-weight: 500 !important;
       }
       p:nth-child(3) {
         font-size: small;

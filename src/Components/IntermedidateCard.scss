@@ -26,10 +26,20 @@
       bottom: 0;
       left: 0%;
       p {
-        font-size: 14px;
-        color: white !important;
+        font-size: 13px;
+        // color: white !important;
         backdrop-filter: blur(0px) !important;
       }
     }
   }
+}
+
+.reduceHeight{
+  // background-color: red;
+  height: 20px;
+ 
+}
+.changeBgC{
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.9)) !important;
+
 }
