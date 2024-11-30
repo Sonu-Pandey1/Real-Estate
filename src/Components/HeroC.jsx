@@ -131,7 +131,7 @@ export default function HeroC() {
             </div>
             {/* {/* search bar */}
             <div className="mx-auto tbasSearchForm">
-              <div className="mb-3 position-relative">
+              <div className="mb-1 mb-md-3 position-relative">
                 {/* Search Icon */}
                 <div className=" searchIcon position-absolute top-50 start-0 translate-middle-y ps-3 d-flex">
                   
@@ -196,7 +196,7 @@ export default function HeroC() {
 
         <div className="row align-items-center  justify-content-center text-center mx-auto">
   {/* Left section with icon and title */}
-  <div className="col-12 text-center col-md-4 col-lg-2 mt-3 ">
+  <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-sm-0 mt-md-3 ">
     <GrOptimize className="localIcon fs-6" />
     <p className="p-2 pe-4 badge sliderTitle ">Popular Localities</p>
   </div>
@@ -216,9 +216,9 @@ export default function HeroC() {
 </div>
 
 
-        <div className="downPara  h-100 ">
+        <div className="downPara  h-100  ">
           {/* <h1>ram</h1> */}
-          <div className=" paraRounded d-flex px-2">
+          <div className=" paraRounded d-flex px-2 ">
             <div className="starsWrapper">
               <img
                 className="star1 "
@@ -232,7 +232,7 @@ export default function HeroC() {
               alt="star2"
             />
 
-            <p className="m-0 py-2 px-3 ">
+            <p className="m-0 py-2 px-3  ">
               Are you a Property Owner?{" "}
               <NavLink className={"navlinks"} to={"/"}>
                 Sell / Rent for FREE
@@ -249,3 +249,5 @@ export default function HeroC() {
     </div>
   );
 }
+
+

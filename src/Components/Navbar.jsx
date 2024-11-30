@@ -34,7 +34,7 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`navbar fixed-top ${isSticky ? "sticky-topp" : ""} px-2 px-md-5`}>
+      <nav className={`navbar fixed-top w-100  ${isSticky ? "sticky-topp" : ""} px-2 px-md-5`}>
         <div className="container-fluid mx-2 align-items-center ">
           <img
             className="img img-fluid"
