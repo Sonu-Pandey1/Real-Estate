@@ -176,8 +176,8 @@ export default function Pg() {
                   Benefits of our <span className=" fw-medium">PG/Co-Living</span>
                 </h2>
                 
-                <div className=" imagesWrapper d-flex justify-content-between text-center pt-5">
-                  <div className="">
+                <div className=" imagesWrapper d-flex justify-content-between flex-wrap flex-sm-nowrap text-center pt-5">
+                  <div className=" text-center mx-auto">
                     <img
                       src="https://c.housingcdn.com/demand/s/client/common/assets/stressFreeSearch.803f8c7e.png"
                       alt="icon"
@@ -187,7 +187,7 @@ export default function Pg() {
                       Real property photos and Transparent pricing
                     </p>
                   </div>
-                  <div>
+                  <div className="mx-auto">
                     <img
                       src="	https://c.housingcdn.com/demand/s/client/common/assets/findYourMatch.8b4c0fa5.png"
                       alt="icon"
@@ -208,7 +208,7 @@ export default function Pg() {
                       Info on meal type and offerings to know what’s cooking
                     </p>
                   </div>
-                  <div>
+                  <div className="mx-auto">
                     <img
                       src="https://c.housingcdn.com/demand/s/client/common/assets/yourLife.d015d745.png"
                       alt="icon"

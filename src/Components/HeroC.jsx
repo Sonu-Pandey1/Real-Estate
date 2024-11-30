@@ -118,7 +118,10 @@ export default function HeroC() {
                 <NavLink className="navlink" to={"/commercial"}>
                   Commercial
                 </NavLink>
-                <NavLink className="navlink d-none d-sm-block" to={"/pg-coliving"}>
+                <NavLink
+                  className="navlink d-none d-sm-block"
+                  to={"/pg-coliving"}
+                >
                   Pg / Co-living
                 </NavLink>
                 <NavLink className="navlink d-sm-none" to={"/pg"}>
@@ -134,7 +137,6 @@ export default function HeroC() {
               <div className="mb-1 mb-md-3 position-relative">
                 {/* Search Icon */}
                 <div className=" searchIcon position-absolute top-50 start-0 translate-middle-y ps-3 d-flex">
-                  
                   <svg
                     className="bi bi-search text-muted "
                     width="20"
@@ -175,15 +177,17 @@ export default function HeroC() {
           </div>
         </form>
 
-        {/* Popular Localities Slider */}
-        {/* <div className="row align-items-center ">
-          <div className="col-4   mt-3 text-end">
+        <div className="row align-items-center  justify-content-center text-center mx-auto">
+          {/* Left section with icon and title */}
+          <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-sm-0 mt-md-3 ">
             <GrOptimize className="localIcon fs-6" />
-            <p className="p-2 pe-4 badge sliderTitle">Popular Localities</p>
+            <p className="p-2 pe-4 badge sliderTitle ">Popular Localities</p>
           </div>
-          <div className="col-7 w-50 pe-4">
-            <div className=" PopularLocalitiesSliderWrapper mx-5">
-              <PopularLocalitiesSlider settings={settings} className="">
+
+          {/* Right section with slider */}
+          <div className="col-12 col-md-7 col-lg-6 pe-4 text-center">
+            <div className="PopularLocalitiesSliderWrapper mx-5">
+              <PopularLocalitiesSlider settings={settings}>
                 {popularLocalities.map((locality, index) => (
                   <div key={index} className="text-center w-75">
                     <p className="m-0 rounded-2 py-1">{locality} &gt;</p>
@@ -192,29 +196,7 @@ export default function HeroC() {
               </PopularLocalitiesSlider>
             </div>
           </div>
-        </div> */}
-
-        <div className="row align-items-center  justify-content-center text-center mx-auto">
-  {/* Left section with icon and title */}
-  <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-sm-0 mt-md-3 ">
-    <GrOptimize className="localIcon fs-6" />
-    <p className="p-2 pe-4 badge sliderTitle ">Popular Localities</p>
-  </div>
-  
-  {/* Right section with slider */}
-  <div className="col-12 col-md-7 col-lg-6 pe-4 text-center">
-    <div className="PopularLocalitiesSliderWrapper mx-5">
-      <PopularLocalitiesSlider settings={settings}>
-        {popularLocalities.map((locality, index) => (
-          <div key={index} className="text-center w-75">
-            <p className="m-0 rounded-2 py-1">{locality} &gt;</p>
-          </div>
-        ))}
-      </PopularLocalitiesSlider>
-    </div>
-  </div>
-</div>
-
+        </div>
 
         <div className="downPara  h-100  ">
           {/* <h1>ram</h1> */}
@@ -249,5 +231,3 @@ export default function HeroC() {
     </div>
   );
 }
-
-
