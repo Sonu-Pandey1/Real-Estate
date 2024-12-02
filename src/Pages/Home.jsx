@@ -6,6 +6,7 @@ import BlogCard from "../Components/BlogCard";
 import MediumCard from "../Components/MediumCard";
 import IntermedidateCard from "../Components/IntermedidateCard";
 import BasicCard from "../Components/BasicCard";
+import DevelopersCard from "../Components/DevelopersCard";
 
 function Home() {
   const blogData = [
@@ -95,6 +96,54 @@ function Home() {
         breakpoint: 1000,
         settings: {
           slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  var settings5 = {
+    dots: false,
+    infinite: true,
+    speed: 600,
+    // autoplay: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 2,
           slidesToScroll: 1,
         },
       },
@@ -647,6 +696,61 @@ function Home() {
     },
   ];
 
+  const DevelopersProjectsData = [
+    {
+      image:
+        "https://housing-images.n7net.in/4f2250e8/b0801f0e089c7b572e75758f9f126eae/v0/medium/eros_sampoornam_3-noida_extension-greater+noida-ajay_enterprises_pvt_ltd.jpeg",
+      logo: "https://housing-images.n7net.in/0b8ad14c/fb26d0d390f8954bf2485c299976f3bb/v0/medium.png",
+      title: "Ajay Enterprise Pvt Ltd",
+      description:
+        "EROS Group, a Company which needs no introduction “The Recognized Real Estate Giant in India” with special strength in and around Delhi, exuberate quality and excellence with over 80 years of expertise and experience. It has created some of the most pioneering episodes of Real Estate Promotion and Town Planning for a period of over 80 impressive years.",
+      establised: "1947",
+      projects: "3",
+      name: "Eros Sampoornam 3",
+      location: "Noida Extension, Grater Noida",
+      price: "69.72 L - 1.8 Cr",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/4f2250e8/c925ab04f02f54312c67fe3ec4b889e3/v0/medium/ats_picturesque_reprieves_phase_2-sector_152-noida-ats_infrastructure_limited.jpeg",
+      logo: "https://housing-images.n7net.in/4f2250e8/c925ab04f02f54312c67fe3ec4b889e3/v0/medium/ats_picturesque_reprieves_phase_2-sector_152-noida-ats_infrastructure_limited.jpeg",
+      title: "Elite Group",
+      description:
+        "ELITE GROUP is one of the leading real estate developers in the land of NCR.Elite Group was born in July 2010 with Flagship Company as HR Oracle Developers Pvt. Ltd. which was a SPV between HR Buildcon Pvt Ltd. and Oracle Real Tech Pvt Ltd.Both these companies have been in real estate sector from quite last 35 years. Redefining urban living in NCR through innovative and sustainable construction. With a commitment to quality, community, and the environment, we create exceptional housing that elevates lifestyles and enriches neighborhoods, such as Noida & Greater Noida.Fueled by architectural excellence and modern understanding, we design spaces that foster well-being and connectivity. Embracing technology and safety, we exceed expectations, leaving symbols of progress.Transparency, local collaboration, and co-consciousness define our ecological efforts. We inspire industry-wide sustainable practices, envisioning vibrant, harmonious communities. Our foundation lies on integrity, professionalism, relentless excellence. We craft living spaces that embody dreams and promise a brighter tomorrow.",
+      establised: "2000",
+      projects: "3",
+      name: "Golfgreen Elite Golf Green",
+      location: "Sector79, Grater Noida",
+      price: "1.68 Cr - 3.76 Cr",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/4f2250e8/d254fd1b0f28b8d9c00eb56762a3952c/v0/medium/palm_olympia_ph_2-noida_extension-greater+noida-sam_india.jpeg",
+      logo: "https://housing-images.n7net.in/0b8ad14c/7ddb2daf178ee72645aaeea83bc19527/v1/medium.jpg",
+      title: "Sam India",
+      description:
+        "A name that beautifully blends the most integral ways of life. Green and Active. An artful blend of modern architecture where nature serenades with urban delight. Amidst hurried footsteps, there exists a quite refuge, hidden like a precious gem waiting to be unraveled. The gentle rustle of the leaves, the hum of the city life muted by the calmness of a rooftop garden, The stillness of the blue lagoon in a concrete labyrinth, these are the whispers of serenity in urban chaos.",
+      establised: "1947",
+      projects: "3",
+      name: "Palm Olympia Ph 2",
+      location: "Noida Extension, Grater Noida",
+      price: "1.8 Cr - 1.99 Cr",
+    },
+    {
+      image:
+        "https://housing-images.n7net.in/4f2250e8/b0801f0e089c7b572e75758f9f126eae/v0/medium/eros_sampoornam_3-noida_extension-greater+noida-ajay_enterprises_pvt_ltd.jpeg",
+      logo: "https://housing-images.n7net.in/0b8ad14c/fb26d0d390f8954bf2485c299976f3bb/v0/medium.png",
+      title: "Top areas in Noida Extension for investment",
+      description:
+        "With new infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential infrastructure projects and the upcoming Jewar airport in the region, the real estate market in Noida Extension sees significant growth potential.",
+      establised: "1947",
+      projects: "3",
+      name: "Eros Sampoornam 3",
+      location: "Noida Extension, Grater Noida",
+      price: "69.72 L - 1.8 Cr",
+    },
+  ];
+
   return (
     <>
       {/* Hero Section */}
@@ -692,10 +796,47 @@ function Home() {
           </div>
         </div>
       </section>
-      
-{/* featured Developers */}
-      <section>
 
+      {/* featured Developers */}
+      <section className="py-5">
+        <div className="container">
+          <div className="row">
+            <div>
+              <h2>
+                <span className="opacity-75 fs-3">Featured </span>Developers
+              </h2>
+              <p className="text-muted m-0">Prominent developers in Noida</p>
+              <img
+                className="imgg"
+                src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                alt="line"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col">
+              <PopularLocalitiesSlider settings={settings5}>
+                {DevelopersProjectsData.map((DevelopersProjectsData, index) => (
+                  <div key={index} className="">
+                    <NavLink to={"/developerProjects"} className="text-decoration-none">
+                      <DevelopersCard
+                        title={DevelopersProjectsData.title}
+                        image={DevelopersProjectsData.image}
+                        projects={DevelopersProjectsData.projects}
+                        name={DevelopersProjectsData.name}
+                        location={DevelopersProjectsData.location}
+                        price={DevelopersProjectsData.price}
+                        description={DevelopersProjectsData.description}
+                        establised={DevelopersProjectsData.establised}
+                        logo={DevelopersProjectsData.logo}
+                      />
+                    </NavLink>
+                  </div>
+                ))}
+              </PopularLocalitiesSlider>
+            </div>
+          </div>
+        </div>
       </section>
 
       <section className="recentlyAdded container">
