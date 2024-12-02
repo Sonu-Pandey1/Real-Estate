@@ -1,37 +1,34 @@
 .slider-container {
-    
-
-    .sliderWrapper {
-      // border-radius: 20px ;
-      .col-9 {
-        // height: 100%;
-        height: 25rem !important;
-        // width: 100%;
-        img {
-          width: 100%;
-          height: 100%;
-        }
+  .sliderWrapper {
+    .col-lg-9 {
+      text-align: center;
+      height: 25rem !important;
+      // width: 100%;
+      img {
+        // padding-top: 30px;
+        width: 97% !important;
+        height: 100% !important;
+        object-fit: cover;
       }
     }
-    .spotlightCard {
-      .row-bottom {
-        p {
-          font-size: 15px;
-          opacity: 0.6;
-          font-weight: 500;
-        }
+  }
+  .spotlightCard {
+    .row-bottom {
+      p {
+        font-size: 15px;
+        opacity: 0.6;
+        font-weight: 500;
       }
     }
-    .slick-arrow {
-      display: none !important;
-    }
-    // width: 100%;
-    height: 100%;
+  }
+  height: 100%;
+  .col-3 {
     img {
-      width: 50%;
+      width: 100%;
       height: 100% !important;
       background-size: cover !important;
       background-position: center;
       border-radius: 20px;
     }
   }
+}

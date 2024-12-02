@@ -1,29 +1,23 @@
-.commercialPropertyContainer{
-    main{
-        .container{
-            .row{
-                .recentlyAddedForSale{
-                    background-color:#FFF5E4 ;
-                    border-radius: 20px;
-                }
-            }
+.commercialPropertyContainer {
+  main {
+    .container {
+      .row {
+        .recentlyAddedForSale {
+          background-color: #fff5e4;
+          border-radius: 20px;
         }
-
-        .recentlyAddedForRent{
-            background-color:#EBF8F1 ;
-                    border-radius: 20px;
-        }
-
-        .housingExpert{
-            // background-color: ;
-            border-radius: 20px;
-            background-color: #fbac7e00;
-background-image: linear-gradient(62deg, #8cd6ec4d 0%, #f7cf6873 100%);
-
-
-        }
+      }
     }
-   
+
+    .recentlyAddedForRent {
+      background-color: #ebf8f1;
+      border-radius: 20px;
+    }
+
+    .housingExpert {
+      border-radius: 20px;
+      background-color: #fbac7e00;
+      background-image: linear-gradient(62deg, #8cd6ec4d 0%, #f7cf6873 100%);
+    }
+  }
 }
-
-

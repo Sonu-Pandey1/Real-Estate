@@ -1,8 +1,5 @@
 .rentContainer {
   background-color: #ffffff;
-  .imgg{
-    // border: 10px solid red !important;
-  }
 
   .container {
     padding-top: 5vh;
@@ -27,8 +24,8 @@
   }
 }
 
-@media (max-width:600px){
-  .imgg{
+@media (max-width: 600px) {
+  .imgg {
     width: 80%;
   }
 }

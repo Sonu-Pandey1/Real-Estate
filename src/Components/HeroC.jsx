@@ -179,7 +179,7 @@ export default function HeroC() {
 
         <div className="row align-items-center  justify-content-center text-center mx-auto">
           {/* Left section with icon and title */}
-          <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-sm-0 mt-md-3 ">
+          <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-md-4 ">
             <GrOptimize className="localIcon fs-6" />
             <p className="p-2 pe-4 badge sliderTitle ">Popular Localities</p>
           </div>
@@ -198,7 +198,7 @@ export default function HeroC() {
           </div>
         </div>
 
-        <div className="downPara  h-100  ">
+        <div className="downPara  h-100">
           {/* <h1>ram</h1> */}
           <div className=" paraRounded d-flex px-2 ">
             <div className="starsWrapper">

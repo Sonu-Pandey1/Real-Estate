@@ -3,21 +3,21 @@ import { LiaRupeeSignSolid } from "react-icons/lia";
 import { TbLocationCheck } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 
-export default function SpotlightCard() {
+export default function SpotlightCard({title,image,description,location,price}) {
   return (
     <>
-      <div className="sliderWrapper  d-flex row ps-4">
+      <div className="sliderWrapper  d-flex row ps-4 pe-sm-1   pe-3">
         <div className="spotlightCard col-lg-3 col-md-4 col-sm-12 rounded-5">
           <div className="row row-top pt-5 ps-0">
-            <div className="col">
+            <div className="col-3 p-0 ms-3">
               <img
-                className="rounded-4"
-                src="https://housing-images.n7net.in/0b8ad14c/730076b4a956aff45e9f7cc265ff74f8/v0/medium.png"
+                className="rounded-4 img-fluid"
+                src={image}
                 alt="Ashiyana Villas Logo"
               />
             </div>
-            <div className="col text-center pt-2">
-              <h6 className="m-0">Ashiyana Villas</h6>
+            <div className="col-8 text-center pt-2">
+              <h6 className="m-0">{title}</h6>
               <NavLink to="/">View Projects</NavLink>
             </div>
           </div>
@@ -25,15 +25,15 @@ export default function SpotlightCard() {
             <div className="col py-2 d-flex">
               <TbLocationCheck className="me-3 mt-3 fs-5" />
               <div>
-                <h5 className="m-0">Ashiyana Villas</h5>
-                <p>Noida Extension, Grater Noida</p>
+                <h5 className="m-0">{title}</h5>
+                <p>{location}</p>
               </div>
             </div>
             <div className="col py-2 d-flex">
               <LiaRupeeSignSolid className="fs-4 me-2" />
               <div>
-                <h5 className="m-0">1.39 Cr - 1.67 Cr</h5>
-                <p>4 BHK Villas</p>
+                <h5 className="m-0">{price}</h5>
+                <p>{description}</p>
               </div>
             </div>
             <div className="col py-4">
@@ -44,11 +44,12 @@ export default function SpotlightCard() {
           </div>
         </div>
 
-        <div className="col-lg-9 col-md-8 col-sm-12 pe-0 py-2">
+        <div className="col-lg-9 col-md-8 col-sm-12 p-0 m-0  pt-3 pb-md-0 pb-2">
           <img
-            src="https://housing-images.n7net.in/4f2250e8/3f3714060e11307b6a70f4d7c1a30de0/v0/fs/ashiyana_villas-noida_extension-greater+noida-dagar_builders_%26_developers.jpeg"
+            // width={"10%"}
+            src={image}
             alt="Ashiyana Villas"
-            className="rounded-4 w-100 h-100"
+            className="rounded-4 p-0"
           />
         </div>
       </div>

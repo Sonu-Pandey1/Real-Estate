@@ -1,19 +1,10 @@
 
 
-//! spotlight Section-------------------------------
-
 .spotlightSectionWrapper {
-    // background-color: rgb(236, 226, 226);
-    .slider {
-      background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
-    }
-    .spotLight-section {
-      background-color: white;
-      .spotlightSlider-Wrapper {
-        
-      }
-    }
+  .slider {
+    background-image: linear-gradient(120deg, #f6d365 0%, #fda085 100%);
   }
-  
-
-  
+  .spotLight-section {
+    background-color: white;
+  }
+}
