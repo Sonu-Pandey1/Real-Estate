@@ -94,21 +94,21 @@ export default function HeroC() {
   return (
     <div>
       <div
-        className="hero-section  "
+        className="hero-section "
         style={{
           backgroundImage: currentConfig.background,
         }}
       >
         {/* Background and Heading */}
-        <div className="title mx-auto  text-white w-100">
-          <p className="">{currentConfig.title}</p>
+        <div className="title mx-auto text-white w-100">
+          <p className="px-2 px-sm-0 ">{currentConfig.title}</p>
         </div>
 
-        <form className="w-100">
-          <div className="formContainer mx-auto">
+        <form className="px-4">
+          <div className="formContainer mx-auto mx-5">
             {/* Tabs */}
-            <div className="tabsWrapper ">
-              <nav className=" d-flex w-100">
+            <div className="tabsWrapper  overflow-hidden ">
+              <nav className=" d-flex ">
                 <NavLink className="navlink" to={"/"}>
                   Buy
                 </NavLink>
@@ -160,14 +160,14 @@ export default function HeroC() {
                 <input
                   type="search"
                   id="default-search"
-                  className="form-control  py-3 rounded-5"
+                  className="form-control py-3 py-sm-3 rounded-5"
                   placeholder={currentConfig.placeholder}
                   required
                 />
                 {/* Search Button */}
                 <button
                   type="submit"
-                  className="btn btn-outline-primary position-absolute end-0 top-50 translate-middle-y me-3 rounded-5 "
+                  className="btn btn-outline-primary position-absolute end-0 top-50 translate-middle-y me-3 py-1 py-md-2 rounded-5 "
                 >
                   Search
                   {/* <i className="bi bi-binoculars"></i> */}

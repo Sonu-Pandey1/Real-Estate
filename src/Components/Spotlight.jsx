@@ -86,7 +86,7 @@ export default function Spotlight() {
                 {SpotlightData.map((SpotlightData, index) => (
                   <div
                     key={index}
-                    className="" // Added padding for spacing
+                    className="bg-danger w-100 h-100" // Added padding for spacing
                   >
                     <SpotlightCard
                       title={SpotlightData.title}

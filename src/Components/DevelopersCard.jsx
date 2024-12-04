@@ -8,7 +8,7 @@ export default function DevelopersCard({title,image,projects,name,location,price
 
   return (
     <>
-      <div className="developersCardContainer">
+      <div className="developersCardContainer ">
         <div className="container">
           <div className="slider-container">
 
@@ -17,16 +17,16 @@ export default function DevelopersCard({title,image,projects,name,location,price
               <div className="card ">
                 <div className="card-body ">
                   <div className="row px-2 pb-4">
-                    <div className="col-4 p-0  logo">
+                    <div className="col-12 col-sm-4  p-0  logo ">
                       <div className="imgWrapper ">
                         <img
                           src={logo}
                           alt="logo"
-                          className=" img-fluid img-thumbnail"
+                          className=" object-fit-contain object-fit-sm-fill"
                         />
                       </div>
                     </div>
-                    <div className="col-8 title text-truncate ">
+                    <div className="col-12 col-sm-8 pt-4 pt-sm-0 text-truncate ">
                       <h6 className=" text-truncate text-black">{title}</h6>
                       <div className="cWrapper d-flex justify-content-between">
                         <div>
@@ -67,6 +67,4 @@ export default function DevelopersCard({title,image,projects,name,location,price
   );
 }
 
-// swipeToSlide: true,
-// focusOnSelect: true,
-// rtl: true
+

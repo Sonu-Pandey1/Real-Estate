@@ -13,6 +13,8 @@ export default function Pg() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,

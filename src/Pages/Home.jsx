@@ -132,11 +132,14 @@ function Home() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
+rtl: true,
     responsive: [
       {
         breakpoint: 1200,
         settings: {
-          slidesToShow: 2,
+          slidesToShow: 3,
           slidesToScroll: 1,
         },
       },
@@ -180,6 +183,8 @@ function Home() {
     slidesToShow: 2,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -228,6 +233,60 @@ function Home() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
+rtl: true,
+    responsive: [
+      {
+        breakpoint: 1200,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 1000,
+        settings: {
+          slidesToShow: 3,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 800,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+        },
+      },
+      {
+        breakpoint: 600,
+        settings: {
+          slidesToShow: 2,
+          slidesToScroll: 1,
+          initialSlide: 1,
+        },
+      },
+      {
+        breakpoint: 480,
+        settings: {
+          slidesToShow: 1,
+          slidesToScroll: 1,
+        },
+      },
+    ],
+  };
+
+  var settings6 = {
+    dots: false,
+    infinite: true,
+    speed: 600,
+    autoplay: true,
+    slidesToShow: 3,
+    slidesToScroll: 1,
+    initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
+rtl: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -276,6 +335,8 @@ function Home() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -756,8 +817,8 @@ function Home() {
       {/* Hero Section */}
 
       {/* Spotlight Section */}
-      <section>
-        <Spotlight />
+      <section className="">
+        <Spotlight  />
       </section>
 
       <section className="featuredCollections container mt-5">
@@ -798,7 +859,7 @@ function Home() {
       </section>
 
       {/* featured Developers */}
-      <section className="py-5">
+      <section className="py-5 featuredDevelopersSection">
         <div className="container">
           <div className="row">
             <div>
@@ -819,7 +880,7 @@ function Home() {
                 {DevelopersProjectsData.map((DevelopersProjectsData, index) => (
                   <div key={index} className="">
                     <NavLink to={"/developerProjects"} className="text-decoration-none">
-                      <DevelopersCard
+                      <DevelopersCard className=""
                         title={DevelopersProjectsData.title}
                         image={DevelopersProjectsData.image}
                         projects={DevelopersProjectsData.projects}
@@ -1020,7 +1081,7 @@ function Home() {
             </div>
             <div className="row">
               <div className="col mb-3">
-                <PopularLocalitiesSlider settings={settings2}>
+                <PopularLocalitiesSlider settings={settings6}>
                   {blogData.map((blogData, index) => (
                     <div key={index} className="">
                       <NavLink

@@ -16,6 +16,8 @@ export default function Rent() {
     slidesToShow: 4,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -64,6 +66,8 @@ export default function Rent() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,

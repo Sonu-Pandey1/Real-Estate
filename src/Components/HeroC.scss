@@ -1,5 +1,7 @@
 @import "../scss/variables";
 
+
+
 .hero-section {
   font-family: Arial, sans-serif;
   background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
@@ -10,6 +12,7 @@
   height: 550px;
   overflow: hidden;
   width: 100%;
+ 
   .title {
     padding-top: 195px;
     padding-bottom: 0px;
@@ -109,39 +112,69 @@
 }
 
 @media (max-width: 510px) {
-  .title {
-    padding-bottom: 0px;
-    width: 60%;
-    text-align: center;
-    background-image: linear-gradient(90deg, #ffe25f, #feb47b);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-    font-size: 2rem !important;
-    font-weight: bold;
+  .hero-section{
+    height: 400px;
+    .title {
+      background-color: red !important;
+      padding-top: 120px;
+      padding-bottom: 0px;
+      width: 60%;
+      text-align: center;
+      background-image: linear-gradient(90deg, #ffe25f, #feb47b);
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      font-size: 1.8rem !important;
+      font-weight: bold;
+    }
+    .downPara {
+      margin-top: 22px;
+  
+      p {
+        font-size: 12px !important;
+      }
+    }
+    .tbasSearchForm{
+      input{
+        padding: 1px auto;
+        height: 40px;
+
+      }
+    }
+    .tabsWrapper {
+      .navlink {
+        padding: 10px !important;
+        // background-color: red !important;
+      }
+    }
   }
 }
 @media (max-width: 400px) {
+ .hero-section{
+
   .title {
+     padding-top: 120px;
     font-size: 1.5rem !important;
+    background-color: red !important;
   }
   .downPara {
-    margin-top: 75px;
+    margin-top: 28px;
 
     p {
       font-size: 12px !important;
     }
   }
+ }
 }
 
 @media (max-width: 340px) {
   .title {
-    padding-top: 200px !important;
+    padding-top: 120px !important;
 
     font-size: 1.3rem !important;
   }
   .downPara {
-    margin-top: 78px !important;
+    margin-top: 28px !important;
     p {
       font-size: 11px !important;
     }

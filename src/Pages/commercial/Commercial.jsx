@@ -15,6 +15,8 @@ export default function Commercial() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
    responsive: [
       {
         breakpoint: 1200,
@@ -63,6 +65,9 @@ export default function Commercial() {
     slidesToShow: 3,
     slidesToScroll: 1,
     initialSlide: 0,
+    swipeToSlide: true,
+focusOnSelect: true,
+rtl: true,
     responsive: [
       {
         breakpoint: 1200,

@@ -20,7 +20,7 @@ export default function IntermedidateCard({ image, title, description,company,si
 
           <span className="d-flex justify-content-between reduceHeight">
           <p className=" bg-transparent m-0">{size}</p>
-          <p className=" bg-transparent fw-bold fs-6">{price}</p>
+          <p className=" bg-transparent fw-bold fs-6 ">{price}</p>
           </span>
           <p className=" bg-transparent opacity-75  ">{location}</p>
           
