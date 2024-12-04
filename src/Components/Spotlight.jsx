@@ -41,7 +41,7 @@ export default function Spotlight() {
     {
       image:"https://housing-images.n7net.in/4f2250e8/902d562f58b6eddebb3833818b9a75cd/v0/medium/escon_panache_villas_phase_2-surajpur-greater+noida-escon_infra_realtors_pvt_ltd.jpeg",
       title: "Bhutani Flats",
-      location: "Amarpali Silicon City, Sector 76, Noida",
+      location: "Amarpali City, Sector 76, Noida",
       price: "1.19 Cr - 2.67 Cr",
       description: "4 BHK Vilas",
     },
@@ -86,7 +86,7 @@ export default function Spotlight() {
                 {SpotlightData.map((SpotlightData, index) => (
                   <div
                     key={index}
-                    className="bg-danger w-100 h-100" // Added padding for spacing
+                    className="" 
                   >
                     <SpotlightCard
                       title={SpotlightData.title}

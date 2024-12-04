@@ -177,7 +177,7 @@ export default function HeroC() {
           </div>
         </form>
 
-        <div className="row align-items-center  justify-content-center text-center mx-auto">
+        <div className=" pps row align-items-center  justify-content-center text-center mx-auto ">
           {/* Left section with icon and title */}
           <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-md-4 ">
             <GrOptimize className="localIcon fs-6" />
