@@ -7,11 +7,23 @@
   background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
   background-size: cover;
   // object-fit:cover;
+  background-image: black;
   background-position: center right;
   // height: 90vh;
   height: 550px;
   overflow: hidden;
   width: 100%;
+  position: relative;
+  &::before {
+    content: "";
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0); // Adjust the opacity and color for the overlay effect
+    z-index: 1;
+  }
  
   .title {
     padding-top: 195px;
@@ -115,9 +127,33 @@
   color: $white;
 }
 
+@media (max-width:1000px) {
+  .hero-section{
+    p{
+      span{
+        color: rgb(255, 255, 255);
+        // font-weight: 600;
+        text-shadow: 1.5px -1.5px 5px rgba(0, 0, 0, 0.9);
+      }
+    }
+    &::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.1) !important; 
+      z-index: 1;
+    }
+  }
+  
+}
+
 @media (max-width: 510px) {
   .hero-section{
     height: 400px;
+    
     .pps{
       display: none;
     }
@@ -182,13 +218,14 @@
 
 @media (max-width: 340px) {
   .title {
-    padding-top: 150px !important;
+    padding-top: 190px !important;
     
 
     font-size: 1.3rem !important;
   }
   .downPara {
-    margin-top: 28px !important;
+    margin-top: 3.3rem;
+
     p {
       font-size: 11px !important;
     }

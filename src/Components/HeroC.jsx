@@ -101,7 +101,7 @@ export default function HeroC() {
       >
         {/* Background and Heading */}
         <div className="title mx-auto text-white w-100">
-          <p className="px-2 px-sm-0 ">{currentConfig.title}</p>
+          <p className="px-2 px-sm-0  "><span className="">{currentConfig.title}</span></p>
         </div>
 
         <form className="px-4">

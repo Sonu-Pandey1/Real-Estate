@@ -817,7 +817,7 @@ focusOnSelect: true,
       {/* Hero Section */}
 
       {/* Spotlight Section */}
-      <section className="">
+      <section className="mt-4 mt-sm-0">
         <Spotlight  />
       </section>
 
