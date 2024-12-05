@@ -166,7 +166,7 @@ function Navbar() {
                 >
                   <NavLink
                     className={"ps-3 text-decoration-none  fw-semibold "}
-                    to={"/login-register"}
+                    onClick={() => setIsPopupOpen(true)}
                   >
                     Login / Register
                   </NavLink>

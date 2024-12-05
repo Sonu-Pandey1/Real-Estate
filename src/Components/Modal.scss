@@ -1,0 +1,10 @@
+.modalContainer{
+    .form-control{
+        padding: 5px 12px;
+        &:focus{
+            outline: 0px;
+        }
+    
+    }
+}
+
