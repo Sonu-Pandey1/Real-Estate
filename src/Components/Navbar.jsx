@@ -3,8 +3,15 @@ import "../Components/Navbar.scss";
 import { RiMenu2Line } from "react-icons/ri";
 import { PiUserCircleCheckDuotone } from "react-icons/pi";
 import { useEffect, useState } from "react";
+import Modal from "./Modal";
 
 function Navbar() {
+
+  
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+  
+
+
   const navigate = useNavigate();
 
   const handleNavigate = () => {
@@ -34,7 +41,11 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`navbar fixed-top w-100  ${isSticky ? "sticky-topp" : ""} px-2 px-md-5`}>
+      <nav
+        className={`navbar fixed-top w-100  ${
+          isSticky ? "sticky-topp" : ""
+        } px-2 px-md-5`}
+      >
         <div className="container-fluid mx-2 align-items-center ">
           <img
             className="img img-fluid"
@@ -89,31 +100,42 @@ function Navbar() {
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/insights"}>
                     News
-                     {/* <span className="insightsBadge">New</span> */}
+                    {/* <span className="insightsBadge">New</span> */}
                   </NavLink>
                 </div>
               </li>
 
               <li>
-              <div className="postPropertyWrapper d-none d-sm-block">
-            <button
-              className="btn btn-light px-1 py-1 "
-              onClick={handleNavigate}
-            >
-              <a
-                className="postProperty text-dark fw-medium"
-                to={"/post-property"}
-              >
-                Post Property{" "}
-              </a>
-              <span className="postPropertyBadge">FREE</span>
-            </button>
-          </div>
+                <div className="postPropertyWrapper d-none d-sm-block">
+                  <button
+                    className="btn btn-light px-1 py-1 "
+                    onClick={handleNavigate}
+                  >
+                    <a
+                      className="postProperty text-dark fw-medium"
+                      to={"/post-property"}
+                    >
+                      Post Property{" "}
+                    </a>
+                    <span className="postPropertyBadge">FREE</span>
+                  </button>
+                </div>
               </li>
+              <li>
+                <button
+                  onClick={() => setIsPopupOpen(true)}
+                  className="btn btn-primary"
+                >
+                  Login/Signup
+                </button>
+              </li>
+              {/* <li className="nav-item">
+                <div className="">
+                  <button onClick={()=>setIsPopupOpen(!isPopupOpen)} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Login/Signup</button>
+                </div>
+              </li> */}
             </ul>
           </div>
-
-          
 
           <button
             className={`navbar-toggler `}
@@ -862,11 +884,15 @@ function Navbar() {
               </ul>
             </div>
           </div>
+
         </div>
+
+
+        <Modal isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
+
       </nav>
     </>
   );
 }
 
 export default Navbar;
-
