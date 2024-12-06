@@ -4,8 +4,27 @@ import { NavLink, useLocation } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import { GrOptimize } from "react-icons/gr";
+import { useState } from "react";
 
 export default function HeroC() {
+
+  const [selectedCity, setSelectedCity] = useState("");
+  const [localitySuggestions, setLocalitySuggestions] = useState([]);
+  const [localities] = useState({
+    Noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
+    Delhi: ["Connaught Place", "Chandni Chowk", "Saket", "Dwarka"],
+    Gurgaon: ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
+  });
+
+  const cities = Object.keys(localities);
+
+  const handleCityChange = (event) => {
+    const city = event.target.value;
+    setSelectedCity(city);
+    setLocalitySuggestions(localities[city] || []);
+  };
+
+
   var settings = {
     dots: false,
     infinite: true,
@@ -133,47 +152,52 @@ export default function HeroC() {
               </nav>
             </div>
             {/* {/* search bar */}
-            <div className="mx-auto tbasSearchForm">
-              <div className="mb-1 mb-md-3 position-relative">
-                {/* Search Icon */}
-                <div className=" searchIcon position-absolute top-50 start-0 translate-middle-y ps-3 d-flex">
-                  <svg
-                    className="bi bi-search text-muted "
-                    width="20"
-                    height="40"
-                    fill="white"
-                    xmlns="http://www.w3.org/2000/svg"
-                    viewBox="0 0 20 20"
-                  >
-                    <path
-                      className="bi-search-icon"
-                      fillRule="evenodd"
-                      d="M19 19l-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                      stroke="currentColor"
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                    />
-                  </svg>
-                </div>
-                {/* Search Input */}
-                <input
-                  type="search"
-                  id="default-search"
-                  className="form-control py-3 py-sm-3 rounded-5"
-                  placeholder={currentConfig.placeholder}
-                  required
-                />
-                {/* Search Button */}
-                <button
-                  type="submit"
-                  className="btn btn-outline-primary position-absolute end-0 top-50 translate-middle-y me-3 py-1 py-md-2 rounded-5 "
-                >
-                  Search
-                  {/* <i className="bi bi-binoculars"></i> */}
-                </button>
-              </div>
-            </div>
+           
+            <form className="property-search-form mx-auto ">
+  <div className="form-container d-flex justify-content-center align-items-center rounded-pill shadow-lg p-0 p-sm-2">
+    {/* City Dropdown */}
+    <div className="form-group city-dropdown   ">
+      <select
+        className="form-select rounded-start-pill p-0 px-3"
+        onChange={handleCityChange}
+        defaultValue=""
+      >
+        <option value="" disabled>
+          Mumbai
+        </option>
+        {cities.map((city, index) => (
+          <option value={city} key={index}>
+            {city}
+          </option>
+        ))}
+      </select>
+    </div>
+
+    {/* Locality Autocomplete */}
+    <div className="form-group locality-search flex-grow-1 w-100  ">
+      <input
+        type="text"
+        className="form-control rounded-0 "
+        placeholder="Search for locality, landmark, project, or builder"
+        list="localitySuggestions"
+      />
+      <datalist id="localitySuggestions">
+        {localitySuggestions.map((locality, index) => (
+          <option value={locality} key={index} />
+        ))}
+      </datalist>
+    </div>
+
+    {/* Search Button */}
+    <div className="form-group search-button  ">
+      <button type="submit" className="btn  w-100 rounded-pill p-0  ">
+        <p className="m-0 d-none d-sm-block">Search</p>
+        <img className=" h-100 w-auto rounded-5 d-block d-sm-none" src="https://cdn-icons-gif.flaticon.com/17489/17489774.gif" alt="search" />
+      </button>
+    </div>
+  </div>
+</form>
+
           </div>
         </form>
 
