@@ -324,3 +324,80 @@
   
 }
 
+// .tabsWrapper {
+//   .nav {
+//     position: relative;
+
+//     .navlink {
+//       position: relative; 
+//       display: inline-block; 
+//       transition: all 0.3s ease-in-out;
+
+//       &::before {
+//         content: ""; 
+//         position: absolute;
+//         z-index: -1;
+//         bottom: 0%; 
+//         left: 0%; 
+//         width: 0; 
+//         height: 3px; 
+//         background-color: rgb(199, 49, 49); 
+//         transform: translateY(-50%); 
+//         transition: width 4.3s ease-in-out;
+//       }
+
+      
+//       &.active::before {
+//         width: 100%; 
+//       }
+//     }
+
+//     .navlink:hover {
+//       color: rgba(18, 111, 233, 0.548);
+//     }
+
+//     .navlink.active {
+//       color: rgb(255, 255, 255); 
+//     }
+//   }
+// }
+
+.tabsWrapper {
+  .nav {
+    position: relative;
+
+    .navlink {
+      position: relative;
+      display: inline-block; 
+      transition: all 0.3s ease-in-out;
+
+      &::before {
+        content: ""; 
+        position: absolute;
+        bottom: 0; 
+        left: 50%;
+        width: 0; 
+        height: 3px; 
+        background-color: #413488; 
+        transform: translateX(-50%);
+        transition: width 0.6s ease-in-out;
+      }
+
+      &.active::before {
+        width: 100%;
+        left: 50%; 
+        transform: translateX(-50%); 
+      }
+
+      &:hover {
+        color: rgba(0, 102, 255, 0.548);
+
+      }
+
+      &.active {
+        color: rgb(255, 255, 255); 
+      }
+    }
+  }
+}
+
