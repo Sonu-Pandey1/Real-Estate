@@ -14,7 +14,7 @@
 }
 
 .navbar {
-  transition: all 0.2s ease-in-out !important;
+  transition: all 1.2s ease-in-out !important;
   background-color: transparent;
   padding-top: 10px;
   padding-bottom: 10px;
@@ -24,6 +24,7 @@
     transparent
   );
   background-color: rgb(0, 0, 0, 0.2);
+  background-color: blue;
   // backdrop-filter: blur(1px); //todo--- creating issues in sidebar
 
   .navlinkWrapper {

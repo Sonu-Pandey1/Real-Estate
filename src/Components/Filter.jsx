@@ -1,6 +1,6 @@
 import "./Filter.scss";
 
-export default function Filter() {
+export default function Filter({city,type,locality}) {
   return (
     <div className="filterContainer ">
       <div className="d-flex justify-content-between">
@@ -17,6 +17,7 @@ export default function Filter() {
             type="text"
             id="city"
             name="city"
+            // value={city}
             placeholder="City Location"
           />
         </div>
@@ -24,7 +25,9 @@ export default function Filter() {
       <div className="bottom">
         <div className="item">
           <label htmlFor="type">Type</label>
-          <select name="type" id="type">
+          <select name="type" id="type" 
+          // value={type}
+          >
             <option value="">Any</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
