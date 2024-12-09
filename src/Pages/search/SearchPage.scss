@@ -92,17 +92,35 @@
 //     }
 //   }
 
+
 .searchPageContainer {
-  padding-top: 60px;
-  height: 100%;
+  padding-top: 60px; 
+  // background-color: red;
+
   .container-fluid {
+
     .row {
+      .sticky-filter{
+        position: sticky;
+        top: 9.9vh;
+        z-index: 100;
+
+      }
       .listContainer {
-        
+        height: 100%;
+        // padding-bottom: 10px;
+        background-color: palevioletred;
+        overflow-y: auto; 
+    
+       
       }
 
       .mapContainer {
+        position: sticky !important;
+        top: 10vh;  
       }
     }
   }
 }
+
+
