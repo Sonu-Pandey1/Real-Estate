@@ -1,14 +1,4 @@
-// import "./SingalPage.scss"
 
-// export default function SingalPage() {
-//   return (
-//     <>
-//         <div className="SingalPageContainer">
-//             <h1>Singal Page</h1>
-//         </div>
-//     </>
-//   )
-// }
 
 import { useParams } from "react-router-dom";
 import "./SingalPage.scss";
