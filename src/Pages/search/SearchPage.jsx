@@ -1,6 +1,5 @@
 
-import { NavLink, useLocation, useNavigate } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useLocation,  } from "react-router-dom";
 
 
 
@@ -13,7 +12,6 @@ import ListingCard from "../../Components/ListingCard.jsx";
 export default function SearchPage() {
 
   const location = useLocation();
-  const navigate = useNavigate();
 
   // Extract query parameters
   const queryParams = new URLSearchParams(location.search);

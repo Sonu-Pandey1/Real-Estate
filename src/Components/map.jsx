@@ -1,6 +1,6 @@
-import "./map.scss"
+import "./Map.scss"
 import "leaflet/dist/leaflet.css";
-import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import { MapContainer, TileLayer } from 'react-leaflet'
 import Pin from "./Pin";
 
 export default function map({items}) {
