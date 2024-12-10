@@ -5,7 +5,8 @@ import { useLocation,  } from "react-router-dom";
 
 import "./SearchPage.scss";
 import Filter from "../../Components/Filter.jsx";
-import Map from "../../Components/Map.jsx";
+// import Map from "../../Components/Map.jsx";
+import Map from "../../Components/Map"
 import { propertyData } from "../../../lib/propertyData.js";
 import ListingCard from "../../Components/ListingCard.jsx";
 
@@ -43,6 +44,7 @@ export default function SearchPage() {
             <div className="col-12 col-md-4">
               <div className="mapContainer">
                 <Map items={data} />
+                
               </div>
             </div>
           </div>
