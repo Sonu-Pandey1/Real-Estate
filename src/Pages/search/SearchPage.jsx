@@ -5,8 +5,8 @@ import { useLocation,  } from "react-router-dom";
 
 import "./SearchPage.scss";
 import Filter from "../../Components/Filter.jsx";
-// import Map from "../../Components/Map.jsx";
-import Map from "../../Components/Map"
+import Map from "./Map.jsx";
+// import Map from "../../Components/Map"
 import { propertyData } from "../../../lib/propertyData.js";
 import ListingCard from "../../Components/ListingCard.jsx";
 

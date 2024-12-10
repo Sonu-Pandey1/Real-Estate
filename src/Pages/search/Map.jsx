@@ -1,9 +1,9 @@
-import "./map.scss"
+ import "./map.scss"
 import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from 'react-leaflet'
-import Pin from "./Pin";
+import Pin from "../../Components/Pin";
 
- function Map({items}) {
+export default function Map({items}) {
   return (
     // <div>
     <MapContainer center={[52.4797, -1.90269]} zoom={6} scrollWheelZoom={false} className="map ">
@@ -20,7 +20,7 @@ import Pin from "./Pin";
   )
 }
 
-export default Map;
+
 
 
 
