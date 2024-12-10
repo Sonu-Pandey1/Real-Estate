@@ -1,5 +1,5 @@
 
-import { useLocation,  } from "react-router-dom";
+import { NavLink, useLocation,  } from "react-router-dom";
 
 
 
@@ -7,7 +7,7 @@ import "./SearchPage.scss";
 import Filter from "../../Components/Filter.jsx";
 import Map from "./Map.jsx";
 // import Map from "../../Components/Map"
-import { propertyData } from "../../../lib/propertyData.js";
+import { PropertyData } from "../../../lib/propertyData.js";
 import ListingCard from "../../Components/ListingCard.jsx";
 
 export default function SearchPage() {
@@ -20,7 +20,7 @@ export default function SearchPage() {
   const city = queryParams.get("city") || "All Cities";
   const locality = queryParams.get("locality") || "";
 
-  const data = propertyData;
+  const data = PropertyData;
 
   return (
     <>
@@ -36,7 +36,9 @@ export default function SearchPage() {
               <div className="listContainer h-100">
                 {data.map((item) => (
                  
-                  <ListingCard  key={item.id} item={item} />
+                  <NavLink to={`/search/${item.id}`} key={item.id}>
+  <ListingCard item={item} />
+</NavLink>
                   
                 ))}
               </div>

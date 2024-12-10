@@ -6,7 +6,7 @@ import Pin from "../../Components/Pin";
 export default function Map({items}) {
   return (
     // <div>
-    <MapContainer center={[52.4797, -1.90269]} zoom={6} scrollWheelZoom={false} className="map ">
+    <MapContainer center={[28.4797,77.20259]} zoom={10} scrollWheelZoom={false} className="map ">
 
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
