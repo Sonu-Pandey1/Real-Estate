@@ -1,5 +1,5 @@
 
-import { useLocation, useNavigate } from "react-router-dom";
+import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
 
 
@@ -36,7 +36,9 @@ export default function SearchPage() {
               </div>
               <div className="listContainer h-100">
                 {data.map((item) => (
-                  <ListingCard key={item.id} item={item} />
+                 
+                  <ListingCard  key={item.id} item={item} />
+                  
                 ))}
               </div>
             </div>
@@ -54,3 +56,9 @@ export default function SearchPage() {
     </>
   );
 }
+
+
+
+ {/* <NavLink to={`${item.id}`} key={item.id} >
+                  <ListingCard item={item} />
+                  </NavLink> */}

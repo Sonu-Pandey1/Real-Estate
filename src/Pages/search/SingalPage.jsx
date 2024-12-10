@@ -15,6 +15,7 @@ import "./SingalPage.scss";
 
 export default function SingalPage() {
   const { id } = useParams();
+  console.log(id)
 
   // Simulate property details data
   const propertyDetails = {

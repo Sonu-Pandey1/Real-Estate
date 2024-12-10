@@ -3,10 +3,12 @@ import "./ListingCard.scss";
 import { IoLocationOutline } from "react-icons/io5";
 import { FaBed, FaBath, FaRulerCombined, FaCar, FaSwimmingPool } from "react-icons/fa";
 import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { NavLink } from "react-router-dom";
 
 export default function PropertyCard({item}) {
   return (
-    <div className="listingCardContainer">
+    <NavLink to={`${item.id}`} className={" text-decoration-none"} >
+      <div className="listingCardContainer">
       <div className="card custom-card">
         <div className="card-img-container">
           <img
@@ -14,6 +16,7 @@ export default function PropertyCard({item}) {
             className="card-img-top"
             alt="Property"
           />
+          {/* to={`${item.id}`} */}
         </div>
         <div className="card-body">
           <h5 className="card-title">{item.title}</h5>
@@ -26,17 +29,6 @@ export default function PropertyCard({item}) {
             <div className="d-flex justify-content-between gap-4">
               <div className="detail">
                 <FaBed className="icon" />
-                {/* id": 19,
-      "title": "3 BHK Apartment in Greater Noida",
-      "price": "₹70 Lacs",
-      "area": "1,200 sqft",
-      "location":"noida 62",
-      "badrooms":"3",
-      "bathroom":"2",
-      "city": "Greater Noida",
-      "locality": "Tech Zone",
-      "": "https://via.placeholder.com/300",
-      "description */}
                 <span>{item.badrooms}</span>
               </div>
               <div className="detail">
@@ -76,5 +68,6 @@ export default function PropertyCard({item}) {
         </div>
       </div>
     </div>
+    </NavLink>
   );
 }
