@@ -1,7 +1,7 @@
 
 /* eslint-disable react/prop-types */
 import { useState } from "react";
-import "./slider.scss";
+import "./Slider.scss";
 
 function Slider({ images, onImageClick }) {
   const [imageIndex, setImageIndex] = useState(null);

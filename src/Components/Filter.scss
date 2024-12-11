@@ -4,25 +4,20 @@
   border-radius: 8px;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
   display: flex;
-  justify-content: center; // Center the filter container
+  // justify-content: center;
 
-  
-  // Hide scrollbar for webkit browsers when not needed
   ::-webkit-scrollbar {
     height: 10px; 
     display: none;
   }
-
- 
-
 }
 
 .filterOptions {
   display: flex;
-  overflow-x: auto; // Allow horizontal scrolling when the filters overflow
+  overflow-x: auto; 
   gap: 15px;
   align-items: center;
-  justify-content: flex-start; // Align the items to the left
+  justify-content: flex-start; 
 
   
 
@@ -30,7 +25,7 @@
     display: flex;
     flex-direction: column;
     width: 150px !important;
-    flex-shrink: 0; // Prevent filters from shrinking
+    flex-shrink: 0; 
 
     label {
       font-size: 12px;
@@ -58,7 +53,7 @@
     display: flex;
     align-items: center;
     gap: 8px;
-    flex-shrink: 0; // Prevent the button from shrinking
+    flex-shrink: 0; 
 
     .icon {
       font-size: 16px;
@@ -70,19 +65,15 @@
   }
 }
 
-// Media Queries for responsiveness
 @media (max-width: 768px) {
   .filterOptions {
-    justify-content: flex-start; // Align items to the left on smaller screens
+    justify-content: flex-start; 
     gap: 10px;
   }
 
-  .filterGroup {
-    // min-width: 120px; // Reduce width on smaller screens
-  }
 
   .filterSave {
-    min-width: 100px; // Ensure the search button doesn't get too small
+    min-width: 100px;
   }
 }
 
@@ -96,14 +87,12 @@
       label {
         font-size: 12px;
         color: #666;
-        // margin-bottom: 5px;
       }
-  
     }
   }
 
   .filterSave {
-    font-size: 14px; // Slightly reduce the button font size
+    font-size: 14px;
   }
 }
 
