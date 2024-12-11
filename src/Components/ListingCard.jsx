@@ -19,7 +19,7 @@ export default function PropertyCard({item}) {
           {/* to={`${item.id}`} */}
         </div>
         <div className="card-body">
-          <h5 className="card-title">{item.title}</h5>
+          <h5 className="card-title ">{item.title}</h5>
           <p className="card-location">
             <IoLocationOutline className="icon" />
             {item.location}
