@@ -73,6 +73,7 @@ function SinglePage() {
             <div className="size">
               <img src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png" alt="" />
               <span>{propertyData.area} sqft</span>
+              
             </div>
             <div className="size">
               <img src="https://cdn-icons-png.flaticon.com/128/864/864595.png" alt="" />
