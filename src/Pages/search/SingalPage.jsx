@@ -6,126 +6,139 @@ import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 
 function SinglePage() {
-  const { id } = useParams(); 
-  const parsedId = parseInt(id, 10); 
-  // console.log("Parsed ID from params:", parsedId);
-
-  const propertyData = PropertyData.find((item) => item.id === parsedId); 
+  const { id } = useParams();
+  const parsedId = parseInt(id, 10);
+  const propertyData = PropertyData.find((item) => item.id === parsedId);
   if (!propertyData) {
     return <div className="pt-5 mt-5 h-100">Property not found!</div>;
   }
-  let smallMap = true
+  let smallMap = true;
 
   return (
-    
-   <div className="singlePageContainer pt-5">
-     <div className="singlePage pt-4 container pb-4">
-      <div className="details">
-        <div className="wrapper">
-          <Slider images={propertyData.images} />
-          <div className="info">
-            <div className="top">
-              <div className="post">
-                <h1>{propertyData.title}</h1>
-                <div className="address">
-                <IoLocationOutline/>
-                  <span>{propertyData.address}</span>
+    <div className="singlePageContainer pt-5 ">
+      <div className="singlePage pt-4 container pb-4 ">
+        <div className="details ">
+          <div className="wrapper ">
+            <Slider images={propertyData.images} />
+            <div className="info ">
+              <div className="top">
+                <div className="post">
+                  <h1>{propertyData.title}</h1>
+                  <div className="address">
+                    <IoLocationOutline />
+                    <span>{propertyData.address}</span>
+                  </div>
+                  <div className="price">$ {propertyData.price}</div>
                 </div>
-                <div className="price">$ {propertyData.price}</div>
+                <div className="user">
+                  <img src={propertyData.ownerImg} alt="" />
+                  <span>{propertyData.ownerName}</span>
+                </div>
               </div>
-              <div className="user">
-                <img src={propertyData.ownerImg} alt="" />
-                <span>{propertyData.ownerName}</span>
-              </div>
+              <div className="bottom">{propertyData.description}</div>
             </div>
-            <div className="bottom ">{propertyData.description}</div>
           </div>
         </div>
-      </div>
-      <div className="features">
-        <div className="wrapper">
-          <p className="title">General</p>
-          <div className="listVertical">
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/11670/11670393.png" alt="" />
-              <div className="featureText">
-                <span>Utilities</span>
-                <p>Renter is responsible</p>
+        <div className="features">
+          <div className="wrapper">
+            <p className="title ">General</p>
+            <div className="listVertical">
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/11670/11670393.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>Utilities</span>
+                  <p>Renter is responsible</p>
+                </div>
+              </div>
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/16757/16757980.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>Pet Policy</span>
+                  <p>Pets Allowed</p>
+                </div>
+              </div>
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>Property Fees</span>
+                  <p>Must have 3x the rent in total household income</p>
+                </div>
               </div>
             </div>
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/16757/16757980.png" alt="" />
-              <div className="featureText">
-                <span>Pet Policy</span>
-                <p>Pets Allowed</p>
+            <p className="title">Sizes</p>
+            <div className="sizes">
+              <div className="size">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png"
+                  alt=""
+                />
+                <span>{propertyData.area} sqft</span>
+              </div>
+              <div className="size">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/864/864595.png"
+                  alt=""
+                />
+                <span>{propertyData.bedrooms} bedroom</span>
+              </div>
+              <div className="size">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/259/259973.png"
+                  alt=""
+                />
+                <span>{propertyData.bathrooms} bathroom</span>
               </div>
             </div>
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png" alt="" />
-              <div className="featureText">
-                <span>Property Fees</span>
-                <p>Must have 3x the rent in total household income</p>
+            <p className="title mt-3">Nearby Places</p>
+            <div className="listHorizontal">
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/158/158234.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>School</span>
+                  <p>{propertyData.school} away</p>
+                </div>
               </div>
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>Bus Stop</span>
+                  <p>{propertyData.bus} away</p>
+                </div>
+              </div>
+              <div className="feature">
+                <img
+                  src="https://cdn-icons-png.flaticon.com/128/562/562678.png"
+                  alt=""
+                />
+                <div className="featureText">
+                  <span>Restaurant</span>
+                  <p>{propertyData.restaurant} away</p>
+                </div>
+              </div>
+            </div>
+            <p className="title mt-3 pb-3">Location</p>
+            <div className="mapContainer">
+              <Map className="map" items={[propertyData]} smallMap={smallMap} />
             </div>
           </div>
-          <p className="title">Sizes</p>
-          <div className="sizes">
-            <div className="size">
-              <img src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png" alt="" />
-              <span>{propertyData.area} sqft</span>
-              
-            </div>
-            <div className="size">
-              <img src="https://cdn-icons-png.flaticon.com/128/864/864595.png" alt="" />
-              <span>{propertyData.bedrooms} bedroom</span>
-            </div>
-            <div className="size">
-              <img src="https://cdn-icons-png.flaticon.com/128/259/259973.png" alt="" />
-              <span>{propertyData.bathrooms} bathroom</span>
-            </div>
-          </div>
-          <p className="title mt-3">Nearby Places</p>
-          <div className="listHorizontal">
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/158/158234.png" alt="" />
-              <div className="featureText">
-                <span>School</span>
-                <p>{propertyData.school} away</p>
-              </div>
-            </div>
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png" alt="" />
-              <div className="featureText">
-                <span>Bus Stop</span>
-                <p>{propertyData.bus} away</p>
-              </div>
-            </div>
-            <div className="feature">
-              <img src="https://cdn-icons-png.flaticon.com/128/562/562678.png" alt="" />
-              <div className="featureText">
-                <span>Restaurant</span>
-                <p>{propertyData.restaurant} away</p>
-              </div>
-            </div>
-          </div>
-          <p className="title mt-3 pb-3">Location</p>
-          <div className="mapContainer">
-            <Map className="map" items={[propertyData]} smallMap={smallMap} />
-          </div>
-          {/* <div className="buttons">
-            <button>
-              <img src="/chat.png" alt="" />
-              Send a Message
-            </button>
-            <button>
-              <img src="/save.png" alt="" />
-              Save the Place
-            </button>
-          </div> */}
         </div>
       </div>
     </div>
-   </div>
   );
 }
 

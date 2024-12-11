@@ -32,6 +32,7 @@ function Slider({ images, onImageClick }) {
               &times;
             </div>
           </div>
+
         )}
         <div className="bigImage">
           <img
