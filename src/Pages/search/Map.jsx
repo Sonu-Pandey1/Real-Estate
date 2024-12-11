@@ -3,10 +3,17 @@ import "leaflet/dist/leaflet.css";
 import { MapContainer, TileLayer } from 'react-leaflet'
 import Pin from "../../Components/Pin";
 
-export default function Map({items}) {
+export default function Map({items,smallMap}) {
+
+  const coordinates = items.map((item) => ({
+    lat: item.lat,
+    long: item.long,
+  }));
+  
+  
   return (
     // <div>
-    <MapContainer center={[28.4797,77.20259]} zoom={10} scrollWheelZoom={false} className="map ">
+    <MapContainer center={[coordinates[0]?.lat || 0, coordinates[0]?.long || 0]} zoom={10} scrollWheelZoom={false} className={`map ${smallMap?"h-100":""} `}>
 
     <TileLayer
       attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'

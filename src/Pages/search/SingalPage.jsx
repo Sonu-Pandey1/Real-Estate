@@ -8,16 +8,18 @@ import { IoLocationOutline } from "react-icons/io5";
 function SinglePage() {
   const { id } = useParams(); 
   const parsedId = parseInt(id, 10); 
-  console.log("Parsed ID from params:", parsedId);
+  // console.log("Parsed ID from params:", parsedId);
 
   const propertyData = PropertyData.find((item) => item.id === parsedId); 
-console.log(propertyData)
   if (!propertyData) {
     return <div className="pt-5 mt-5 h-100">Property not found!</div>;
   }
+  let smallMap = true
+
   return (
+    
    <div className="singlePageContainer pt-5">
-     <div className="singlePage pt-4 container">
+     <div className="singlePage pt-4 container pb-4">
       <div className="details">
         <div className="wrapper">
           <Slider images={propertyData.images} />
@@ -36,7 +38,7 @@ console.log(propertyData)
                 <span>{propertyData.ownerName}</span>
               </div>
             </div>
-            <div className="bottom">{propertyData.description}</div>
+            <div className="bottom ">{propertyData.description}</div>
           </div>
         </div>
       </div>
@@ -107,9 +109,9 @@ console.log(propertyData)
           </div>
           <p className="title mt-3 pb-3">Location</p>
           <div className="mapContainer">
-            <Map items={[propertyData]} />
+            <Map className="map" items={[propertyData]} smallMap={smallMap} />
           </div>
-          <div className="buttons">
+          {/* <div className="buttons">
             <button>
               <img src="/chat.png" alt="" />
               Send a Message
@@ -118,7 +120,7 @@ console.log(propertyData)
               <img src="/save.png" alt="" />
               Save the Place
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>
