@@ -96,7 +96,7 @@
       height: auto;
 
       .fullSlider {
-        flex-direction: column;
+        // flex-direction: column;
         justify-content: center;
 
         .imgContainer {
@@ -104,11 +104,11 @@
         }
 
         .arrow img {
-          width: 24px; // Reduce arrow size
+          width: 20px; // Reduce arrow size
         }
 
         .close {
-          font-size: 30px; // Adjust close button size
+          font-size: 25px; // Adjust close button size
         }
       }
 
