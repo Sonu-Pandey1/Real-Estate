@@ -72,15 +72,15 @@ function SinglePage() {
           <div className="sizes">
             <div className="size">
               <img src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png" alt="" />
-              <span>80 sqft</span>
+              <span>{propertyData.area} sqft</span>
             </div>
             <div className="size">
               <img src="https://cdn-icons-png.flaticon.com/128/864/864595.png" alt="" />
-              <span>2 beds</span>
+              <span>{propertyData.bedrooms} bedroom</span>
             </div>
             <div className="size">
               <img src="https://cdn-icons-png.flaticon.com/128/259/259973.png" alt="" />
-              <span>1 bathroom</span>
+              <span>{propertyData.bathrooms} bathroom</span>
             </div>
           </div>
           <p className="title mt-3">Nearby Places</p>
@@ -89,21 +89,21 @@ function SinglePage() {
               <img src="https://cdn-icons-png.flaticon.com/128/158/158234.png" alt="" />
               <div className="featureText">
                 <span>School</span>
-                <p>250m away</p>
+                <p>{propertyData.school} away</p>
               </div>
             </div>
             <div className="feature">
               <img src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png" alt="" />
               <div className="featureText">
                 <span>Bus Stop</span>
-                <p>100m away</p>
+                <p>{propertyData.bus} away</p>
               </div>
             </div>
             <div className="feature">
               <img src="https://cdn-icons-png.flaticon.com/128/562/562678.png" alt="" />
               <div className="featureText">
                 <span>Restaurant</span>
-                <p>200m away</p>
+                <p>{propertyData.restaurant} away</p>
               </div>
             </div>
           </div>

@@ -14,7 +14,6 @@ function Slider({ images, onImageClick }) {
     }
   };
 
-  // todo img border and  slider responsive and pass every id. cords so that map show onlt that particular property and also single page main toda bhut data statice hai dynamic krna hai like school,etc. also take care of responsiveness
   return (
     <div className="singlePageSlider">
       <div className="slider">

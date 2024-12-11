@@ -29,11 +29,11 @@ export default function PropertyCard({item}) {
             <div className="d-flex justify-content-between gap-4">
               <div className="detail">
                 <FaBed className="icon" />
-                <span>{item.badrooms}</span>
+                <span>{item.bedrooms}</span>
               </div>
               <div className="detail">
                 <FaBath className="icon" />
-                <span>{item.bathroom}</span>
+                <span>{item.bathrooms}</span>
               </div>
               <div className="detail">
                 <FaRulerCombined className="icon" />
