@@ -1,0 +1,143 @@
+
+  
+  .profilePage {
+    display: flex;
+    flex-wrap: wrap; 
+    gap: 20px;
+    height: 100%;
+    padding: 60px 0px;
+    // background-color: red;
+  
+    .details {
+      flex: 3;
+      overflow-y: auto; // Adds scrollable content for long lists
+      padding-bottom: 50px;
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  
+      .wrapper {
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        gap: 30px;
+  
+        .title {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+  
+          h1 {
+            font-weight: 400;
+            font-size: 1.5rem;
+          }
+  
+          button {
+            padding: 10px 20px;
+            background-color: #fece51;
+            color: #fff;
+            font-weight: bold;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+  
+            &:hover {
+              background-color: #e5b048;
+            }
+          }
+        }
+  
+        .info {
+          display: flex;
+          flex-direction: column;
+          gap: 15px;
+  
+          span {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 1rem;
+            color: #555;
+  
+            b {
+              font-weight: bold;
+            }
+          }
+  
+          img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            object-fit: cover;
+          }
+        }
+      }
+    }
+  
+    .chatContainer {
+      flex: 2;
+      height: 100%;
+      background-color: #f8e9e5;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      height: 90vh;
+  
+      .wrapper {
+        padding: 20px;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+      }
+    }
+  
+    @media (max-width: 1024px) {
+      .details {
+        flex: 2;
+        padding: 15px;
+      }
+  
+      .chatContainer {
+        flex: 1.5;
+        padding: 15px;
+      }
+    }
+  
+    @media (max-width: 768px) {
+      flex-direction: column;
+  
+      .details,
+      .chatContainer {
+        flex: 1;
+        width: 100%;
+      }
+    }
+  
+    @media (max-width: 480px) {
+      .details {
+        .wrapper {
+          padding: 10px;
+  
+          .title h1 {
+            font-size: 1.2rem;
+          }
+  
+          .info {
+            span {
+              font-size: 0.9rem;
+            }
+  
+            img {
+              width: 40px;
+              height: 40px;
+            }
+          }
+        }
+      }
+  
+      .chatContainer .wrapper {
+        padding: 10px;
+      }
+    }
+  }
+  
