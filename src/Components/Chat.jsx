@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./chat.scss";
+import "./Chat.scss";
 
 function Chat() {
   const [chat, setChat] = useState(false);

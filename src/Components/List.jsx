@@ -1,4 +1,4 @@
-import './list.scss'
+import './List.scss'
 import ListingCard from "./ListingCard"
 import {PropertyData} from "../../lib/propertyData.js"
 
