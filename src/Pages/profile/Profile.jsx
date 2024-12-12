@@ -1,6 +1,6 @@
 import Chat from "../../Components/Chat";
 import List from "../../Components/List";
-import "./profile.scss";
+import "./Profile.scss";
 
 function Profile() {
   return (
