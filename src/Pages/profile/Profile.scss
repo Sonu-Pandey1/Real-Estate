@@ -92,15 +92,13 @@
     }
   
     @media (max-width: 1024px) {
-      .details {
-        flex: 2;
-        padding: 15px;
-      }
+        flex-direction: column;
   
-      .chatContainer {
-        flex: 1.5;
-        padding: 15px;
-      }
+        .details,
+        .chatContainer {
+          flex: 1;
+          width: 100%;
+        }
     }
   
     @media (max-width: 768px) {

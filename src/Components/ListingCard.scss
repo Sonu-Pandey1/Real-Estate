@@ -20,8 +20,8 @@
       }
   
       .card-img-container {
-        width: 300px; /* Fixed width for the image container */
-        height: auto; /* Fixed height */
+        width: 300px; 
+        height: auto;
         overflow: hidden;
   
         img {
@@ -169,12 +169,20 @@
     }
   }
 
+  @media (max-width:1200px) {
+    .card-img-container {
+      width: 230px !important; 
+      height: auto;
+      overflow: hidden;
+    }    
+  }
+
   @media (max-width:500px) {
     .custom-card {
       display: flex;
       flex-direction: column !important;
       width: 100% !important;
-
+      
       .card-img-container {
         width: 100% !important;
         height: 220px !important;

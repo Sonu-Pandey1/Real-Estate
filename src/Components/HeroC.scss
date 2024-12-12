@@ -217,7 +217,8 @@
  }
 }
 
-@media (max-width: 340px) {
+.hero-section{
+  @media (max-width: 340px) {
   .title {
     padding-top: 190px !important;
     
@@ -231,6 +232,7 @@
       font-size: 11px !important;
     }
   }
+}
 }
 
 

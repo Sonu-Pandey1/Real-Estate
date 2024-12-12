@@ -37,6 +37,7 @@ function Profile() {
           <List />
         </div>
       </div>
+      
       <div className="chatContainer">
         <div className="wrapper">
           <Chat />
