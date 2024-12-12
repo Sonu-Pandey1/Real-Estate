@@ -3,8 +3,9 @@
 import { useState } from "react";
 import "./Slider.scss";
 
-function Slider({ images, onImageClick }) {
+function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
+  console.log(images)
 
   const changeSlide = (direction) => {
     if (direction === "left") {
@@ -34,9 +35,9 @@ function Slider({ images, onImageClick }) {
           </div>
 
         )}
-        <div className="bigImage">
+        <div className="bigImage ">
           <img
-            src={images[0]}
+            src={images}
             alt="Main Preview"
             onClick={() => setImageIndex(0)}
           />

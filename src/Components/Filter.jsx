@@ -58,9 +58,9 @@ export default function Filter({ city,type,locality }) {
         {/* <button type="button" className="filterSave">
           <FaRegSave className="icon" /> Save Search
         </button> */}
-        <button type="button" className="filterSave mt-2">
+        {/* <button type="button" className="filterSave mt-2">
           <FaSearch className="icon" /> Search
-        </button>
+        </button> */}
         {/* <button type="submit" className="Searchbutton ">
           <img
             className=" "
