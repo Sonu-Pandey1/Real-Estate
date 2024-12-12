@@ -34,9 +34,9 @@
   
           button {
             padding: 10px 20px;
-            background-color: #fece51;
-            color: #fff;
-            font-weight: bold;
+            background-color: #fecd51;
+            color: #000000;
+            // font-weight: bold;
             border: none;
             border-radius: 5px;
             cursor: pointer;
@@ -58,10 +58,10 @@
             align-items: center;
             gap: 15px;
             font-size: 1rem;
-            color: #555;
+            // color: #555;
   
             b {
-              font-weight: bold;
+              font-weight: 600;
             }
           }
   

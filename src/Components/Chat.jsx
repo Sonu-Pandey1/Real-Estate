@@ -58,7 +58,7 @@ function Chat() {
         
       </div>
       {chat && (
-        <div className="chatBox">
+        <div className="chatBox  rounded-4">
           <div className="top">
             <div className="user">
               <img
