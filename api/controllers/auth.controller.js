@@ -50,7 +50,7 @@ export const login = async (req, res) => {
 
     // generat cookie token and send to user
     const age = 1000 * 60 * 60 * 24 * 7;
-    
+
     const Token = jwt.sign({
         id:user.id,
     },process.env.JWT_SECRET_KEY,{expiresIn:age})
@@ -71,5 +71,5 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   console.log("logout");
-  res.send("logout");
+  res.clearCookie("token").status(200).json({message:"Logout Successfully"})
 };

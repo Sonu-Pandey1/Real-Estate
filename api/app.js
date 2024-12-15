@@ -6,6 +6,11 @@ import authRoute from "./routers/auth.route.js";
 
 const app = express();
 let PORT = 3000;
+
+app.get("/",(req,res)=>{
+    console.log("home")
+    res.send("welcome to home ")
+})
  
 app.use(express.json());
 app.use(cookieParser());
