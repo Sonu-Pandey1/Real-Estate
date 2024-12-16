@@ -22,6 +22,7 @@ import SearchPage from "./Pages/search/SearchPage.jsx";
 import SingalPage from "./Pages/search/SingalPage.jsx";
 import { Route, Routes } from "react-router-dom";
 import Profile from "./Pages/profile/Profile.jsx";
+import ProfileUpdatePage from "./Pages/profile/ProfileUpdatePage.jsx";
 
 function App() {
   return (
@@ -54,6 +55,7 @@ function App() {
         <Route path="/search/:id" element={<SingalPage />} />
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/profile/:id" element={<SingalPage/>}/>
+        <Route path="/profile/update" element={<ProfileUpdatePage/>}/>
 
         {/* Rent, Commercial, PG, and Plots */}
         <Route path="/rent" element={<Rent />} />
