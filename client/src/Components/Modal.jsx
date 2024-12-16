@@ -1,8 +1,9 @@
 /* eslint-disable react/prop-types */
-import { useState } from "react";
+import { useContext, useState } from "react";
 import "./Modal.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { AuthContext } from "../Context/AuthContext";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   const [activeTab, setActiveTab] = useState("login");
@@ -12,6 +13,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   // const [formData,setFormData] =
 
   const navigate = useNavigate();
+    const {updateUser} = useContext(AuthContext)
 
   const handleProfileImageChange = (event) => {
     const file = event.target.files[0];
@@ -80,7 +82,8 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         }
       );
       console.log(response.data)
-      localStorage.setItem("user",JSON.stringify(response.data));
+      // localStorage.setItem("user",JSON.stringify(response.data));
+      updateUser(response.data);
       navigate("/")
     } catch (error) {
       console.log(error);

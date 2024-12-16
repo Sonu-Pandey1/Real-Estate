@@ -2,11 +2,12 @@ import { NavLink, useNavigate } from "react-router-dom";
 import "../Components/Navbar.scss";
 import { RiMenu2Line } from "react-icons/ri";
 import { PiUserCircleCheckDuotone } from "react-icons/pi";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
+import { AuthContext } from "../Context/AuthContext";
 
 function Navbar() {
-
+   const {currentUser} = useContext(AuthContext);
   
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   
@@ -122,12 +123,22 @@ function Navbar() {
                 </div>
               </li>
               <li>
-                <button
+                {
+                  currentUser? <div className="user">
+                  <img src={currentUser.avatar || "https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"} alt="userImg" />
+                    <span>{currentUser.username}</span>
+                    <NavLink to={"/profile"} className={"profile"}>
+                      <div className="notification">3</div>
+                      <span>Profile</span>
+                    </NavLink>
+                  </div>:
+                  <button
                   onClick={() => setIsPopupOpen(true)}
                   className="btn btn-primary"
                 >
                   Login/Signup
                 </button>
+                }
               </li>
               {/* <li className="nav-item">
                 <div className="">

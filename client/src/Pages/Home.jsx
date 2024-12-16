@@ -7,8 +7,13 @@ import MediumCard from "../Components/MediumCard";
 import IntermedidateCard from "../Components/IntermedidateCard";
 import BasicCard from "../Components/BasicCard";
 import DevelopersCard from "../Components/DevelopersCard";
+import { useContext } from "react";
+import { AuthContext } from "../Context/AuthContext";
 
 function Home() {
+
+  const {currentUser} = useContext(AuthContext)
+  console.log(currentUser)
   const blogData = [
     {
       image:

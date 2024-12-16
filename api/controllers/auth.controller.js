@@ -53,7 +53,7 @@ export const login = async (req, res) => {
 
     const Token = jwt.sign({
         id:user.id,
-        isAdmin:true
+        // isAdmin:true
     },process.env.JWT_SECRET_KEY,{expiresIn:age})
 
     // setting cookie---

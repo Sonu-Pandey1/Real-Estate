@@ -110,6 +110,7 @@
     }
   }
 
+
   .offcanvas {
     .offcanvas-header {
       background-color: rgba(173, 216, 230, 0.3);
@@ -257,3 +258,49 @@ ul {
 }
 
 
+
+.user{
+  display: flex;
+  align-items: center;
+  font-weight: bold;
+
+  img{
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-right: 10px;
+  }
+
+  // span{
+  //   @include sm{
+  //     display: none;
+  //   }
+  // }
+
+  .profile{
+    padding: 6px 14px;
+    background-color: #fece51;
+    cursor: pointer;
+    border: none;
+    position: relative;
+    text-decoration: none;
+    margin-left: 10px;
+    border-radius: 4px;
+    
+    .notification{
+      position: absolute;
+      top: -8px;
+      right: -8px;
+      background-color: red;
+      color: white;
+      border-radius: 50%;
+      width: 20px;
+      height: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+  }
+}
