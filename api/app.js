@@ -4,6 +4,7 @@ import postRoute from "./routers/post.route.js";
 import authRoute from "./routers/auth.route.js";
 // import testRoute from "./routers/test.route.js";
 import testRoute from "./routers/test.route.js"
+import userRoute from "./routers/user.route.js"
 import cors from "cors"
 // const express = require("express")
 
@@ -25,8 +26,10 @@ app.use(express.json());
 app.use(cookieParser());
 
 app.use("/api/auth",authRoute);
+app.use("/api/users",userRoute);
 app.use("/api/posts",postRoute);
 app.use("/api/test",testRoute)
+
 
 app.listen(PORT,(req,res)=>{
     console.log(`app is running on port ${PORT}`)

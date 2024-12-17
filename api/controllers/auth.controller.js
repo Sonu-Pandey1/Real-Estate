@@ -51,20 +51,22 @@ export const login = async (req, res) => {
     // generat cookie token and send to user
     const age = 1000 * 60 * 60 * 24 * 7;
 
-    const Token = jwt.sign({
-        id:user.id,
-        // isAdmin:true
-    },process.env.JWT_SECRET_KEY,{expiresIn:age})
+    const Token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
+      expiresIn: age,
+    });
 
     // setting cookie---
-    const {password:userPassword ,...userInfo} = user;
-    
-    res.cookie("token",Token,{
-        httpOnly:true,
-        // secure:ture 
-        maxAge:age,
-    }).status(200).json(userInfo)
-    
+    const { password: userPassword, ...userInfo } = user;
+
+    res
+      .cookie("token", Token, {
+        httpOnly: true,
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: age,
+      })
+      .status(200)
+      .json(userInfo);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });
@@ -73,5 +75,12 @@ export const login = async (req, res) => {
 
 export const logout = (req, res) => {
   console.log("logout");
-  res.clearCookie("token").status(200).json({message:"Logout Successfully"})
+
+  res.clearCookie("token", {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production",
+    sameSite: "strict",
+  });
+
+  res.status(200).json({ message: "Logout Successfully" });
 };
