@@ -4,11 +4,12 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 // import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import axios from "axios";
+import UploadWidget from "../../Components/UploadWidget";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState([]);
+  const [avatar, setAvatar] = useState(currentUser.avatar);
 
   const navigate = useNavigate();
 
@@ -23,7 +24,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        avatar:avatar[0]
+        avatar
       },
       {
         withCredentials: true, // Include cookies in the request
@@ -69,17 +70,17 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "/noavatar.jpg"} alt="" className="avatar" />
-        {/* <UploadWidget
+        <img src={avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif" } alt="" className="avatar" />
+        <UploadWidget
           uwConfig={{
-            cloudName: "lamadev",
-            uploadPreset: "estate",
+            cloudName: "dkig0nxxf", //chnage name
+            uploadPreset: "estate", // chnage preset
             multiple: false,
             maxImageFileSize: 2000000,
             folder: "avatars",
           }}
-          setState={setAvatar}
-        /> */}
+          setAvatar={setAvatar}
+        />
       </div>
     </div>
   );

@@ -125,7 +125,7 @@ function Navbar() {
               <li>
                 {
                   currentUser? <div className="user">
-                  <img src={currentUser.avatar || "https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"} alt="userImg" />
+                  <img src={currentUser.avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"} alt="userImg" />
                     <span>{currentUser.username}</span>
                     <NavLink to={"/profile"} className={"profile"}>
                       <div className="notification">3</div>
