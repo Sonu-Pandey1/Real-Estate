@@ -9,7 +9,7 @@ import UploadWidget from "../../Components/UploadWidget";
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
-  const [avatar, setAvatar] = useState(currentUser.avatar);
+  const [avatar, setAvatar] = useState([]);
 
   const navigate = useNavigate();
 
@@ -24,7 +24,7 @@ function ProfileUpdatePage() {
         username,
         email,
         password,
-        avatar
+        avatar:avatar[0]
       },
       {
         withCredentials: true, // Include cookies in the request
@@ -70,7 +70,7 @@ function ProfileUpdatePage() {
         </form>
       </div>
       <div className="sideContainer">
-        <img src={avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif" } alt="" className="avatar" />
+        <img src={avatar[0] || currentUser.avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif" } alt="avatar" className="avatar" />
         <UploadWidget
           uwConfig={{
             cloudName: "dkig0nxxf", //chnage name
@@ -79,7 +79,7 @@ function ProfileUpdatePage() {
             maxImageFileSize: 2000000,
             folder: "avatars",
           }}
-          setAvatar={setAvatar}
+          setState={setAvatar}
         />
       </div>
     </div>
