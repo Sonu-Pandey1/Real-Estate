@@ -47,7 +47,7 @@ export const Post  = async (req,res)=>{
 export const addPost  = async (req,res)=>{
     const body = req.body
     const tokenUserId = req.userId;
-    console.log(tokenUserId) //not getting 
+    // console.log(tokenUserId) //not getting 
     try {
         // console.log("it working ")
         const newPost = await prisma.post.create({
