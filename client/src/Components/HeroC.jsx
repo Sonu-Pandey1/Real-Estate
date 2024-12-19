@@ -293,7 +293,7 @@ import { useState } from "react";
 
 export default function HeroC() {
   const [propertyType, setPropertyType] = useState("buy");
-  const [selectedCity, setSelectedCity] = useState("Noida");
+  const [selectedCity, setSelectedCity] = useState("noida");
   const [localitySuggestions, setLocalitySuggestions] = useState([]);
   const [selectedLocality, setSelectedLocality] = useState("");
   const navigate = useNavigate();
@@ -318,7 +318,7 @@ export default function HeroC() {
     const params = new URLSearchParams({
       type: propertyType,
       city: selectedCity,
-      locality: selectedLocality,
+      locality: selectedLocality, // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page 
     }).toString();
 
     navigate(`/search?${params}`);

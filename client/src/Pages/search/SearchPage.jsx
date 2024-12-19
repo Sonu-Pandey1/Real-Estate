@@ -1,19 +1,62 @@
-import { NavLink, useLocation } from "react-router-dom";
+import { NavLink, useLocation} from "react-router-dom";
 import "./SearchPage.scss";
 import Filter from "../../Components/Filter.jsx";
 import Map from "./Map.jsx";
-import { PropertyData } from "../../../lib/propertyData.js";
 import ListingCard from "../../Components/ListingCard.jsx";
+import { useEffect, useState } from "react";
 
 export default function SearchPage() {
-  const location = useLocation();
+  const {search} = useLocation();
+  const URL = search.split("?")[1];
+  console.log(URL)
+  // const type = queryParams.get("type") || "buy";
+  // const city = queryParams.get("city") || "All Cities";
+  // const locality = queryParams.get("locality") || "";
+  const [propertyData,setPropertyData] = useState();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  
 
-  const queryParams = new URLSearchParams(location.search);
-  const type = queryParams.get("type") || "buy";
-  const city = queryParams.get("city") || "All Cities";
-  const locality = queryParams.get("locality") || "";
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/posts?`+URL);
+        const res =await response.json();
+        setPropertyData(res)
+        console.log(propertyData)
+        if (!response.ok) {
+          throw new Error("Failed to fetch property data.");
+        }
+       
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  const data = PropertyData;
+    fetchData();
+  }, [search]);
+
+  if (loading) {
+    return (
+      <div className="loading-container bg-danger">
+        <div className="loader">
+          <div className="spinner"></div> 
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  if (!propertyData) {
+    return <div className="error-message mt-5 pt-5">Property not found!</div>;
+  }
+
 
   return (
     <>
@@ -21,12 +64,12 @@ export default function SearchPage() {
         <div className="container-fluid">
           <div className="filterHeader pt-2">
             <h1>
-              Search Results for <b>{city}</b>
+              Search Results for <b>{propertyData.city}</b>
             </h1>
           </div>
           <div className="sticky-filterr ">
             <div>
-              <Filter type={type} city={city} locality={locality} />
+              <Filter type={propertyData.type} city={propertyData.city} locality={propertyData.locality} />
             </div>
           </div>
           <div className="row">
@@ -35,7 +78,7 @@ export default function SearchPage() {
                 <Filter type={type} city={city} locality={locality} />
               </div> */}
               <div className="listContainer h-100">
-                {data.map((item) => (
+                {propertyData.map((item) => (
                   <NavLink
                     className={" text-decoration-none"}
                     to={`/search/${item.id}`}
@@ -48,7 +91,7 @@ export default function SearchPage() {
             </div>
             <div className="col-12 col-md-4 ">
               <div className="mapContainer mt-3  pt-sm-0">
-                <Map items={data} />
+                <Map items={propertyData} />
               </div>
             </div>
           </div>

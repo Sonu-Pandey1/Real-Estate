@@ -50,14 +50,13 @@ function NewPostPage() {
           withCredentials: true, // Include cookies in the request
         }
       );
-      navigate("/profile/"+res.data.id);
+      navigate("/profile/" + res.data.id);
     } catch (err) {
       console.log(err);
       setError(error);
     }
   };
 
-  
   return (
     <div className="newPostPage">
       <div className="formContainer">

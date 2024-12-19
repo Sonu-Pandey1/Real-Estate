@@ -17,29 +17,29 @@ export default function PropertyCard({ item }) {
       <div className="listingCardContainer">
         <div className="card custom-card">
           <div className="card-img-container">
-            <img src={item.image} className="card-img-top" alt="Property" />
+            <img src={item.images[0]} className="card-img-top" alt="Property" />
             {/* to={`${item.id}`} */}
           </div>
           <div className="card-body">
             <h5 className="card-title ">{item.title}</h5>
             <p className="card-location">
               <IoLocationOutline className="icon" />
-              {item.location}
+              {item.address}
             </p>
             <p className="card-price">{item.price}</p>
             <div className="card-details">
               <div className="d-flex justify-content-between gap-4">
                 <div className="detail">
                   <FaBed className="icon" />
-                  <span>{item.bedrooms}</span>
+                  <span>{item.bedroom}</span>
                 </div>
                 <div className="detail">
                   <FaBath className="icon" />
-                  <span>{item.bathrooms}</span>
+                  <span>{item.bathroom}</span>
                 </div>
                 <div className="detail">
                   <FaRulerCombined className="icon" />
-                  <span>{item.area}</span>
+                  <span>{item.size}</span>
                 </div>
               </div>
             </div>
@@ -63,7 +63,7 @@ export default function PropertyCard({ item }) {
               </div>
             </div>
             <p className="card-description">
-              <span className="">{item.description}</span>
+              <span className="">{item.desc}</span>
             </p>
             <div className="card-actions">
               <AiOutlineHeart className="icon action-icon" />

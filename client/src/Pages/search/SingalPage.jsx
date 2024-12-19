@@ -4,7 +4,7 @@ import Map from "./Map";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import DOMPurify from "dompurify"
+import DOMPurify from "dompurify";
 
 function SinglePage() {
   let smallMap = true;
@@ -29,13 +29,13 @@ function SinglePage() {
       } catch (err) {
         setError(err.message);
       } finally {
-          setLoading(false);
+        setLoading(false);
       }
     };
-  
+
     fetchData();
   }, [id]);
-  
+
   if (loading) {
     return (
       <div className="loading-container">
@@ -46,7 +46,6 @@ function SinglePage() {
       </div>
     );
   }
-  
 
   if (error) {
     return <div className="error-message">{error}</div>;
@@ -56,28 +55,12 @@ function SinglePage() {
     return <div className="error-message">Property not found!</div>;
   }
 
-  const {
-    title,
-    address,
-    price,
-    images,
-    bathroom,
-    bedroom,
-    user,
-    postDetail,
-  } = propertyData;
+  const { title, address, price, images, bathroom, bedroom, user, postDetail } =
+    propertyData;
 
   const { username, avatar } = user || {};
-  const {
-    desc,
-    utilities,
-    pet,
-    income,
-    size,
-    school,
-    bus,
-    restaurant,
-  } = postDetail || {};
+  const { desc, utilities, pet, income, size, school, bus, restaurant } =
+    postDetail || {};
 
   return (
     <div className="singlePageContainer pt-5">
@@ -100,7 +83,10 @@ function SinglePage() {
                   <span>{username}</span>
                 </div>
               </div>
-              <div className="bottom" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(desc)}}></div>
+              <div
+                className="bottom"
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(desc) }}
+              ></div>
             </div>
           </div>
         </div>
@@ -172,10 +158,12 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>School</span>
-                  <p>{school >999? school/1000 + " km":school+" m"} away</p>
+                  <p>
+                    {school > 999 ? school / 1000 + " km" : school + " m"} away
+                  </p>
                 </div>
               </div>
-             
+
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png"
@@ -183,7 +171,7 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>Bus Stop</span>
-                  <p>{bus >999? bus/1000 + " km":bus+" m"} away</p>
+                  <p>{bus > 999 ? bus / 1000 + " km" : bus + " m"} away</p>
                 </div>
               </div>
               <div className="feature">
@@ -193,7 +181,12 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>Restaurant</span>
-                  <p>{restaurant >999? restaurant/1000 + " km":restaurant+" m"} away</p>
+                  <p>
+                    {restaurant > 999
+                      ? restaurant / 1000 + " km"
+                      : restaurant + " m"}{" "}
+                    away
+                  </p>
                 </div>
               </div>
             </div>

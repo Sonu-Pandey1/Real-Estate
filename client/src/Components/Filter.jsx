@@ -1,14 +1,45 @@
 
+import { useSearchParams } from "react-router-dom";
 import "./Filter.scss";
-import { FaRegSave, FaSearch } from "react-icons/fa";
+import { useState } from "react";
+import { FaSearch } from "react-icons/fa";
 
 export default function Filter({ city,type,locality }) {
+
+  const [searchParams,setSearchParams] = useSearchParams();
+  console.log(searchParams.get("city"))
+  // console.log(city)
+  // console.log(locality)
+  // console.log(type)
+  const [query,setQuery] = useState({
+    type: searchParams.get("type") || "",
+    city: searchParams.get("city") || "",
+    property: searchParams.get("property") || "",
+    minPrice: searchParams.get("minPrice") || 0,
+    maxPrice: searchParams.get("maxPrice") || 100000000,
+    bedroom: searchParams.get("bedroom") || 1,
+
+  })
+
+  const handleChange =e =>{
+    setQuery({
+      ...query,
+      [e.target.name]:e.target.value
+    })
+  }
+
+  const handleFilter = ()=>{
+    setSearchParams(query);
+
+  }
+
   return (
     <div className="filterContainer">
+    <h1>{query.city}</h1>
       <div className="filterOptions">
         <div className="filterGroup">
           <label htmlFor="propertyType">Property Type</label>
-          <select id="propertyType" name="propertyType">
+          <select id="propertyType" name="property" onChange={handleChange} defaultValue={query.property}>
             <option value="">Any</option>
             <option value="apartment">Apartment</option>
             <option value="house">House</option>
@@ -38,7 +69,7 @@ export default function Filter({ city,type,locality }) {
 
         <div className="filterGroup">
           <label htmlFor="saleType">Sale Type</label>
-          <select id="saleType" name="saleType">
+          <select id="saleType" name="type" onChange={handleChange} defaultValue={query.type}>
             <option value="">Any</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
@@ -58,9 +89,9 @@ export default function Filter({ city,type,locality }) {
         {/* <button type="button" className="filterSave">
           <FaRegSave className="icon" /> Save Search
         </button> */}
-        {/* <button type="button" className="filterSave mt-2">
+        <button type="button" className="filterSave mt-2" onClick={handleFilter}>
           <FaSearch className="icon" /> Search
-        </button> */}
+        </button>
         {/* <button type="submit" className="Searchbutton ">
           <img
             className=" "

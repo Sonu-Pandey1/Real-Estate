@@ -1,7 +1,7 @@
 .singlePageContainer {
   .singlePage {
     display: flex;
-    flex-direction: row; 
+    flex-direction: row;
     height: 100%;
 
     .details {
@@ -20,7 +20,7 @@
           margin-top: 50px;
           .top {
             display: flex;
-            flex-direction: column; 
+            flex-direction: column;
             gap: 15px;
 
             .post {
@@ -216,7 +216,6 @@
 
   @media (max-width: 480px) {
     .singlePage {
-
       .features {
         .sizes .size {
           width: 100%;
@@ -231,8 +230,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 100vh; 
-
+  height: 100vh;
 
   .loader {
     display: flex;
@@ -248,7 +246,7 @@
   width: 50px;
   height: 50px;
   padding-bottom: 5px;
-  border: 5px solid #dfd7d7; 
+  border: 5px solid #dfd7d7;
   border-top: 5px solid #3206f3;
   border-radius: 50%;
   animation: spin 1s linear infinite;
