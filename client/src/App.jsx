@@ -24,6 +24,7 @@ import { Route, Routes } from "react-router-dom";
 import Profile from "./Pages/profile/Profile.jsx";
 import ProfileUpdatePage from "./Pages/profile/ProfileUpdatePage.jsx";
 import NewPostPage from "./Pages/profile/NewPostPage.jsx";
+// import { singlePageLoader } from "../lib/Loaders.js";
 
 function App() {
   return (
@@ -55,7 +56,7 @@ function App() {
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:id" element={<SingalPage />} />
         <Route path="/profile" element={<Profile/>}/>
-        <Route path="/profile/:id" element={<SingalPage/>}/>
+        <Route path="/profile/:id" element={<SingalPage/>} />
         <Route path="/profile/update" element={<ProfileUpdatePage/>}/>
         <Route path="/profile/addPost" element={<NewPostPage/>}/>
 
@@ -73,3 +74,8 @@ function App() {
 }
 
 export default App;
+
+
+
+
+

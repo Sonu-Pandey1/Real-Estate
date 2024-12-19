@@ -224,3 +224,40 @@
     }
   }
 }
+
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh; 
+
+
+  .loader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+  }
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  padding-bottom: 5px;
+  border: 5px solid #dfd7d7; 
+  border-top: 5px solid #3206f3;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

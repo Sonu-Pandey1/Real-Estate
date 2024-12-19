@@ -1,76 +1,144 @@
 import "./SingalPage.scss";
 import Slider from "../../Components/Slider";
 import Map from "./Map";
-import { PropertyData } from "../../../lib/propertyData";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
+import { useEffect, useState } from "react";
+import { PuffLoader } from "react-spinners";
 
 function SinglePage() {
-  const { id } = useParams();
-  const parsedId = parseInt(id, 10);
-  const propertyData = PropertyData.find((item) => item.id === parsedId);
-  if (!propertyData) {
-    return <div className="pt-5 mt-5 h-100">Property not found!</div>;
-  }
   let smallMap = true;
+  const { id } = useParams();
+  const [error, setError] = useState(null);
+  const [loading, setLoading] = useState(true);
+  const [propertyData, setPropertyData] = useState(null);
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+        if (!response.ok) {
+          throw new Error("Failed to fetch property data.");
+        }
+        const data = await response.json();
+        if (data?.postDetail) {
+          setPropertyData(data);
+        } else {
+          throw new Error("Invalid property data structure.");
+        }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        // Delay setting loading to false by 5 seconds
+        // setTimeout(() => {
+          setLoading(false);
+        // }, 1000); 
+      }
+    };
+  
+    fetchData();
+  }, [id]);
+  
+  if (loading) {
+    return (
+      <div className="loading-container">
+        <div className="loader">
+          <div className="spinner"></div> {/* Optional spinner animation */}
+          <p>Loading...</p>
+        </div>
+      </div>
+    );
+  }
+  
+
+  if (error) {
+    return <div className="error-message">{error}</div>;
+  }
+
+  if (!propertyData) {
+    return <div className="error-message">Property not found!</div>;
+  }
+
+  const {
+    title,
+    address,
+    price,
+    images,
+    bathroom,
+    bedroom,
+    user,
+    postDetail,
+  } = propertyData;
+
+  const { username, avatar } = user || {};
+  const {
+    desc,
+    utilities,
+    pet,
+    income,
+    size,
+    school,
+    bus,
+    restaurant,
+  } = postDetail || {};
 
   return (
-    <div className="singlePageContainer pt-5 ">
-      <div className="singlePage pt-4 container pb-4 ">
-        <div className="details ">
-          <div className="wrapper ">
-            <Slider images={propertyData.images} />
-            <div className="info ">
+    <div className="singlePageContainer pt-5">
+      <div className="singlePage pt-4 container pb-4">
+        <div className="details">
+          <div className="wrapper">
+            <Slider images={images || []} />
+            <div className="info">
               <div className="top">
                 <div className="post">
-                  <h1>{propertyData.title}</h1>
+                  <h1>{title}</h1>
                   <div className="address">
                     <IoLocationOutline />
-                    <span>{propertyData.address}</span>
+                    <span>{address}</span>
                   </div>
-                  <div className="price">$ {propertyData.price}</div>
+                  <div className="price">$ {price}</div>
                 </div>
                 <div className="user">
-                  <img src={propertyData.ownerImg} alt="" />
-                  <span>{propertyData.ownerName}</span>
+                  <img src={avatar} alt="User Avatar" />
+                  <span>{username}</span>
                 </div>
               </div>
-              <div className="bottom">{propertyData.description}</div>
+              <div className="bottom">{desc}</div>
             </div>
           </div>
         </div>
         <div className="features">
           <div className="wrapper">
-            <p className="title ">General</p>
+            <p className="title">General</p>
             <div className="listVertical">
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/11670/11670393.png"
-                  alt=""
+                  alt="Utilities Icon"
                 />
                 <div className="featureText">
-                  <span>Utilities</span>
+                  <span>{utilities}</span>
                   <p>Renter is responsible</p>
                 </div>
               </div>
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/16757/16757980.png"
-                  alt=""
+                  alt="Pet Policy Icon"
                 />
                 <div className="featureText">
                   <span>Pet Policy</span>
-                  <p>Pets Allowed</p>
+                  <p>{pet}</p>
                 </div>
               </div>
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
-                  alt=""
+                  alt="Property Fees Icon"
                 />
                 <div className="featureText">
                   <span>Property Fees</span>
-                  <p>Must have 3x the rent in total household income</p>
+                  <p>{income}</p>
                 </div>
               </div>
             </div>
@@ -79,23 +147,23 @@ function SinglePage() {
               <div className="size">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png"
-                  alt=""
+                  alt="Size Icon"
                 />
-                <span>{propertyData.area} sqft</span>
+                <span>{size} sqft</span>
               </div>
               <div className="size">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/864/864595.png"
-                  alt=""
+                  alt="Bedroom Icon"
                 />
-                <span>{propertyData.bedrooms} bedroom</span>
+                <span>{bedroom} bedroom</span>
               </div>
               <div className="size">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/259/259973.png"
-                  alt=""
+                  alt="Bathroom Icon"
                 />
-                <span>{propertyData.bathrooms} bathroom</span>
+                <span>{bathroom} bathroom</span>
               </div>
             </div>
             <p className="title mt-3">Nearby Places</p>
@@ -103,31 +171,31 @@ function SinglePage() {
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/158/158234.png"
-                  alt=""
+                  alt="School Icon"
                 />
                 <div className="featureText">
                   <span>School</span>
-                  <p>{propertyData.school} away</p>
+                  <p>{school} away</p>
                 </div>
               </div>
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png"
-                  alt=""
+                  alt="Bus Stop Icon"
                 />
                 <div className="featureText">
                   <span>Bus Stop</span>
-                  <p>{propertyData.bus} away</p>
+                  <p>{bus} away</p>
                 </div>
               </div>
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/562/562678.png"
-                  alt=""
+                  alt="Restaurant Icon"
                 />
                 <div className="featureText">
                   <span>Restaurant</span>
-                  <p>{propertyData.restaurant} away</p>
+                  <p>{restaurant} away</p>
                 </div>
               </div>
             </div>
