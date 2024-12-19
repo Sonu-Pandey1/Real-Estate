@@ -4,6 +4,7 @@ import Map from "./Map";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
+import DOMPurify from "dompurify"
 
 function SinglePage() {
   let smallMap = true;
@@ -99,7 +100,7 @@ function SinglePage() {
                   <span>{username}</span>
                 </div>
               </div>
-              <div className="bottom">{desc}</div>
+              <div className="bottom" dangerouslySetInnerHTML={{__html:DOMPurify.sanitize(desc)}}></div>
             </div>
           </div>
         </div>
