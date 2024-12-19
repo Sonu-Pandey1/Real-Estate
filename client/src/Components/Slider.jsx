@@ -35,15 +35,15 @@ function Slider({ images }) {
           </div>
 
         )}
-        <div className="bigImage ">
+        <div className="bigImage border">
           <img
-            src={images}
+            src={images[0]}
             alt="Main Preview"
             onClick={() => setImageIndex(0)}
           />
         </div>
         <div className="smallImages">
-          {images.slice(1).map((image, index) => (
+          {images.map((image, index) => (
             <img
               src={image}
               alt={`Thumbnail ${index + 1}`}

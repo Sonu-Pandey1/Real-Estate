@@ -4,7 +4,6 @@ import Map from "./Map";
 import { useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
 import { useEffect, useState } from "react";
-import { PuffLoader } from "react-spinners";
 
 function SinglePage() {
   let smallMap = true;
@@ -29,10 +28,7 @@ function SinglePage() {
       } catch (err) {
         setError(err.message);
       } finally {
-        // Delay setting loading to false by 5 seconds
-        // setTimeout(() => {
           setLoading(false);
-        // }, 1000); 
       }
     };
   
@@ -175,9 +171,10 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>School</span>
-                  <p>{school} away</p>
+                  <p>{school >999? school/1000 + " km":school+" m"} away</p>
                 </div>
               </div>
+             
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png"
@@ -185,7 +182,7 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>Bus Stop</span>
-                  <p>{bus} away</p>
+                  <p>{bus >999? bus/1000 + " km":bus+" m"} away</p>
                 </div>
               </div>
               <div className="feature">
@@ -195,7 +192,7 @@ function SinglePage() {
                 />
                 <div className="featureText">
                   <span>Restaurant</span>
-                  <p>{restaurant} away</p>
+                  <p>{restaurant >999? restaurant/1000 + " km":restaurant+" m"} away</p>
                 </div>
               </div>
             </div>
