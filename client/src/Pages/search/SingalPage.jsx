@@ -1,9 +1,11 @@
 import "./SingalPage.scss";
 import Slider from "../../Components/Slider";
 import Map from "./Map";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
-import { useEffect, useState } from "react";
+import { useEffect, useState,useContext } from "react";
+import {AuthContext} from "..//../Context/AuthContext";
+import axios from "axios";
 import DOMPurify from "dompurify";
 
 function SinglePage() {
@@ -12,29 +14,71 @@ function SinglePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
+  const {currentUser} = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [saved,setSaved] = useState(false);
+  
 
+  const handleSave =async ()=>{
+    // setSaved((prev)=> !prev);
+    if(!currentUser){
+      navigate("/")
+    }
+    try {
+      const response  = await axios.post("http://localhost:3000/api/users/save",{ postId: id }, {
+        withCredentials: true, // Include cookies in the request
+      });
+      console.log(response.data.message)
+      setSaved(!saved)
+    } catch (error) {
+      console.log(error)
+      // setSaved((prev)=> !prev);
+
+    }
+
+  }
+
+  // useEffect(() => {
+  //   const fetchData = async () => {
+  //     try {
+  //       const response = await fetch(`http://localhost:3000/api/posts/${id}`);
+  //      
+  //       const data = await response.json();
+  //       if (data?.postDetail) {
+  //         setPropertyData(data);
+  //         setSaved(response.data?.isSaved || false);
+  //       } else {
+  //         throw new Error("Invalid property data structure.");
+  //       }
+  //     } catch (err) {
+  //       setError(err.message);
+  //     } finally {
+  //       setLoading(false);
+  //     }
+  //   };
+
+  //   fetchData();
+  // }, [id]);
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(`http://localhost:3000/api/posts/${id}`);
-        if (!response.ok) {
-          throw new Error("Failed to fetch property data.");
+        try {
+            const response = await axios.get(`http://localhost:3000/api/posts/${id}`, {
+                withCredentials: true,
+            });
+            if (response.data) {
+                setPropertyData(response.data);
+                setSaved(response.data.isSaved || false);
+            }
+        } catch (err) {
+            setError(err.message);
+        } finally {
+            setLoading(false);
         }
-        const data = await response.json();
-        if (data?.postDetail) {
-          setPropertyData(data);
-        } else {
-          throw new Error("Invalid property data structure.");
-        }
-      } catch (err) {
-        setError(err.message);
-      } finally {
-        setLoading(false);
-      }
     };
 
     fetchData();
-  }, [id]);
+}, [id]);
+
 
   if (loading) {
     return (
@@ -58,7 +102,7 @@ function SinglePage() {
   const { title, address, price, images, bathroom, bedroom, user, postDetail } =
     propertyData;
 
-  const { username, avatar } = user || {};
+  const { username, avatar} = user || {};
   const { desc, utilities, pet, income, size, school, bus, restaurant } =
     postDetail || {};
 
@@ -194,6 +238,21 @@ function SinglePage() {
             <div className="mapContainer">
               <Map className="map" items={[propertyData]} smallMap={smallMap} />
             </div>
+            <div className="buttons">
+            <button>
+              <img src="/chat.png" alt="" />
+              Send a Message
+            </button>
+            <button
+              onClick={handleSave}
+              style={{
+                backgroundColor: saved ? "#fece51" : "white",
+              }}
+            >
+              <img src="/save.png" alt="" />
+              {saved ? "Place Saved" : "Save the Place"}
+            </button>
+          </div>
           </div>
         </div>
       </div>
@@ -202,3 +261,9 @@ function SinglePage() {
 }
 
 export default SinglePage;
+
+
+
+
+
+

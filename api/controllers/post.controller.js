@@ -1,5 +1,5 @@
 import prisma from "../lib/prisma.js"
-
+import jwt from "jsonwebtoken"
 
 
 
@@ -30,26 +30,60 @@ export const Posts  = async (req,res)=>{
 
 
 
-export const Post  = async (req,res)=>{
-    const id = req.params.id
+export const Post = async (req, res) => {
+    const id = req.params.id;
+
     try {
-        const Post = await prisma.post.findUnique({
-            where:{id},
-            include:{
-                postDetail:true,
-                user:{
-                    select:{
-                        username:true,
-                        avatar:true
-                    }
-                }
-            }
+        // Fetch the post details
+        const post = await prisma.post.findUnique({
+            where: { id },
+            include: {
+                postDetail: true,
+                user: {
+                    select: {
+                        username: true,
+                        avatar: true,
+                    },
+                },
+            },
         });
-        res.status(200).json(Post);
-        
+
+        if (!post) {
+            return res.status(404).json({ message: "Post not found" });
+        }
+
+        // Check if the user is logged in
+        const token = req.cookies?.token;
+
+        if (token) {
+            try {
+                // Verify the JWT token
+                const payload = jwt.verify(token, process.env.JWT_SECRET_KEY);
+
+                // Check if the post is saved by the logged-in user
+                const saved = await prisma.savePost.findUnique({
+                    where: {
+                        userId_postId: {
+                            postId: id,
+                            userId: payload.id,
+                        },
+                    },
+                });
+
+                // Respond with the post data including the `isSaved` state
+                return res.status(200).json({ ...post, isSaved: saved ? true : false });
+            } catch (err) {
+                console.error("JWT verification error:", err);
+                return res.status(401).json({ message: "Invalid or expired token" });
+            }
+        }
+
+        // If the user is not logged in, return the post data with `isSaved: false`
+        return res.status(200).json({ ...post, isSaved: false });
+
     } catch (error) {
-        console.log(error);
-        res.status(500).json({message:"Failed To get Post"});
+        console.error("Error fetching post:", error);
+        res.status(500).json({ message: "Failed to fetch post" });
     }
 };
 
