@@ -9,7 +9,7 @@ import { AuthContext } from "../../Context/AuthContext";
 function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
-  console.log(currentUser);
+  // console.log(currentUser);
 
   useEffect(() => {
     if (!currentUser) {
@@ -77,6 +77,10 @@ function Profile() {
             </div>
 
             <List />
+            <div className="title">
+            <h1>Saved List</h1>
+          </div>
+          <List/>
           </div>
         </div>
 

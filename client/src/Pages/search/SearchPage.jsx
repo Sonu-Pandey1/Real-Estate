@@ -8,10 +8,7 @@ import { useEffect, useState } from "react";
 export default function SearchPage() {
   const {search} = useLocation();
   const URL = search.split("?")[1];
-  console.log(URL)
-  // const type = queryParams.get("type") || "buy";
-  // const city = queryParams.get("city") || "All Cities";
-  // const locality = queryParams.get("locality") || "";
+  // console.log(URL)
   const [propertyData,setPropertyData] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
