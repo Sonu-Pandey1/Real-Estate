@@ -34,7 +34,7 @@ function List() {
 
   if (loading) {
     return (
-      <div className="loading-container">
+      <div className="loading-container ">
         <div className="loader">
           <div className="spinner"></div>
           <p>Loading...</p>

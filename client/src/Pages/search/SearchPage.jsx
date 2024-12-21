@@ -37,7 +37,7 @@ export default function SearchPage() {
 
   if (loading) {
     return (
-      <div className="loading-container bg-danger">
+      <div className="loading-container">
         <div className="loader">
           <div className="spinner"></div> 
           <p>Loading...</p>
