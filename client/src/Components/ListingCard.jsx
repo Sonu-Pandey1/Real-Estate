@@ -40,6 +40,31 @@ export default function PropertyCard({ item }) {
     }
   };
 
+  const handleShare = async (e) => {
+    e.preventDefault(); 
+
+  // e.stopPropagation();
+    //todo need to prevent navigate
+    const shareData = {
+      title: item.title,
+      text: `${item.title} - ${item.address}\nCheck out this amazing property listed for ${item.price}!`,
+      url: `${window.location.origin}/${item.id}`, // Shareable URL
+    };
+
+    if (navigator.share) {
+      try {
+        await navigator.share(shareData);
+        console.log("Shared successfully!");
+      } catch (error) {
+        console.log("Error sharing:", error);
+      }
+    } else {
+      // Fallback for browsers that don't support Web Share API
+      navigator.clipboard.writeText(shareData.url);
+      alert("Link copied to clipboard! Share it with your friends.");
+    }
+  };
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -111,7 +136,7 @@ export default function PropertyCard({ item }) {
                   <div className="card-actions">
                     <button
                       onClick={handleSave}
-                      className={`p-0 heart-button ${saved ? "liked" : ""}`}
+                      className={` heart-button ${saved ? "liked" : ""}`}
                     >
                       {saved ? (
                         <AiFillHeart className=" heart-filled" />
@@ -119,9 +144,14 @@ export default function PropertyCard({ item }) {
                         <AiOutlineHeart className=" heart-outline" />
                       )}
                     </button>
-                    <button>
-                    <AiOutlineShareAlt className=" share action-icon" />
+                    <button
+                      onClick={handleShare}
+                      className="share-button"
+                      title="Share"
+                    >
+                      <AiOutlineShareAlt className="icon share action-icon" />
                     </button>
+                    
                   </div>
                 </div>
               </div>
@@ -132,3 +162,11 @@ export default function PropertyCard({ item }) {
     </NavLink>
   );
 }
+
+
+
+
+
+                    
+                    
+                 

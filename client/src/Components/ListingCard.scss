@@ -3,7 +3,6 @@
   justify-content: center;
   padding: 20px 0px;
   background-color: #f9f9f9;
- 
 
   .custom-card {
     display: flex;
@@ -23,7 +22,6 @@
     }
 
     .card-img-container {
-      
       width: 300px;
       overflow: hidden;
 
@@ -142,7 +140,7 @@
 
         button {
           border: none;
-          background-color:transparent;
+          background-color: transparent;
         }
 
         .heart-button {
@@ -154,6 +152,11 @@
 
         .heart-button:active {
           transform: scale(1.2);
+        }
+
+        .heart-outline:hover {
+          color: #007bff !important;
+          transform: scale(1.1);
         }
 
         .heart-outline {
@@ -183,11 +186,18 @@
           margin-right: 5px;
         }
 
-        .card-actions {
-          display: flex;
-          align-items: center;
-          gap: 10px;
+        // share functionality
+        .share-button {
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          transition: transform 0.2s ease, color 0.2s ease;
         }
+        .share-button:hover {
+          color: #007bff;
+          transform: scale(1.1);
+        }
+        
       }
     }
   }
