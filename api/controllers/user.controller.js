@@ -125,7 +125,7 @@ export const ProfilePosts = async (req,res) =>{
       }
     });
 
-    const saved = await prisma.post.findMany({
+    const saved = await prisma.savePost.findMany({
       // savePost
       where:{
         userId:tokenUserId,

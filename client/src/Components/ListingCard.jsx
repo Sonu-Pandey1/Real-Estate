@@ -12,6 +12,7 @@ import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 
 export default function PropertyCard({ item }) {
+  // console.log(item)
   return (
     <NavLink to={`${item.id}`} className={" text-decoration-none"}>
       <div className="listingCardContainer">

@@ -1,30 +1,36 @@
-import './List.scss';
-import ListingCard from './ListingCard';
-import { useState, useEffect } from 'react';
-import axios from 'axios';
+import "./List.scss";
+import ListingCard from "./ListingCard";
+import { useState, useEffect } from "react";
+import axios from "axios";
 
 function List() {
-  const [propertyData, setPropertyData] = useState([]);
+  const [userPosts, setUserPosts] = useState([]);
+  const [savedPost, setSavedPosts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get('http://localhost:3000/api/users/profilePosts', {
-          withCredentials: true, // Include cookies if needed
-        });
+        const response = await axios.get(
+          "http://localhost:3000/api/users/profilePosts",
+          {
+            withCredentials: true, // Include cookies if needed
+          }
+        );
 
-        setPropertyData(response.data); // Update state with fetched data
+        const { userPosts, savedPost } = response.data;
+        setUserPosts(userPosts || []);
+        setSavedPosts(savedPost || []);
       } catch (err) {
-        setError(err.message || 'Failed to fetch property data.');
+        setError(err.message || "Failed to fetch property data.");
       } finally {
         setLoading(false);
       }
     };
 
     fetchData();
-  }, []); // Re-run this effect whenever `propertyData` is updated
+  }, []);
 
   if (loading) {
     return (
@@ -41,16 +47,33 @@ function List() {
     return <div className="error-message">{error}</div>;
   }
 
-  if (!propertyData || propertyData.length === 0) {
-    return <div className="error-message mt-5 pt-5">Property not found!</div>;
+  if (
+    (!userPosts || userPosts.length === 0) &&
+    (!savedPost || savedPost.length === 0)
+  ) {
+    return <div className="error-message pt-5 text-center">No posts found!</div>;
   }
-
-  console.log(propertyData)
+  // if(savedPost.length<=0){
+  //   return <div>No post found </div>
+  // }
   return (
     <div className="list">
-      {propertyData.map((item) => (
-        <ListingCard key={item.id} item={item} />
-      ))}
+      {userPosts && userPosts.length > 0 ? (
+        userPosts.map((item) => <ListingCard key={item.id} item={item} />)
+      ) : (
+        <div className="text-center pt-5">No posts found!</div>
+      )}
+
+      <div>
+        <div className="title">
+          <h1>Saved Posts</h1>
+        </div>
+        {savedPost && savedPost.length > 0 ? (
+          savedPost.map((item) => <ListingCard key={item.id} item={item} />)
+        ) : (
+          <div className="text-center pt-5">No posts found!</div>
+        )}
+      </div>
     </div>
   );
 }

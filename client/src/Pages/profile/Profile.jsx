@@ -72,15 +72,12 @@ function Profile() {
             <div className="title">
               <h1>My List</h1>
               <NavLink to={"/profile/addPost"}>
-              <button>Create New Post</button>
+                <button>Create New Post</button>
               </NavLink>
             </div>
 
             <List />
-            <div className="title">
-            <h1>Saved List</h1>
-          </div>
-          <List/>
+            
           </div>
         </div>
 
