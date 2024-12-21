@@ -61,15 +61,19 @@ export default function PropertyCard({ item }) {
                   <IoLocationOutline className="icon" />
                   <span>Prime Location</span>
                 </div>
-              </div>
-            </div>
-            <p className="card-description">
+                <div className=" ms-auto ">
+            {/* <p className="card-description">
               <span className="">{item.desc}</span>
-            </p>
+            </p> */}
             <div className="card-actions">
               <AiOutlineHeart className="icon action-icon" />
               <AiOutlineShareAlt className="icon action-icon" />
             </div>
+            </div>
+              </div>
+              
+            </div>
+            
           </div>
         </div>
       </div>
