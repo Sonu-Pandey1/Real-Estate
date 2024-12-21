@@ -32,10 +32,7 @@ function SinglePage() {
       setSaved(!saved)
     } catch (error) {
       console.log(error)
-      // setSaved((prev)=> !prev);
-
     }
-
   }
 
   // useEffect(() => {

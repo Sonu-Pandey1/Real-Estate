@@ -1,201 +1,219 @@
 .listingCardContainer {
+  display: flex;
+  justify-content: center;
+  padding: 20px 0px;
+  background-color: #f9f9f9;
+
+  .custom-card {
     display: flex;
-    justify-content: center;
-    padding: 20px 0px;
-    background-color: #f9f9f9;
-  
-    .custom-card {
-      display: flex;
-      flex-direction: row;
-      background: #ffffff;
-      border-radius: 15px;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    flex-direction: row;
+    background: #ffffff;
+    border-radius: 15px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    overflow: hidden;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    height: 250px;
+    overflow-y: scroll;
+
+    &:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .card-img-container {
+      width: 300px;
       overflow: hidden;
-      transition: transform 0.3s ease, box-shadow 0.3s ease;
-      width: 100%;
-      height:250px;
-      overflow-y: scroll;
-  
-      &:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
-      }
-  
-      .card-img-container {
-        width: 300px; 
-        // height: 300px;
-        overflow: hidden;
-  
-        img {
-          width: 100%;
-          height: 100%;
-          object-fit: cover; /* Maintains aspect ratio and ensures the image fills the container */
-          transition: transform 0.3s ease;
-  
-          &:hover {
-            transform: scale(1.05);
-          }
+
+      img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        transition: transform 0.3s ease;
+
+        &:hover {
+          transform: scale(1.05);
         }
       }
-  
-      .card-body {
-        flex: 1; /* Allows the body to take the remaining space */
-        padding: 20px;
-  
-        .card-title {
-          font-size: 20px;
-          font-weight: bold;
-          color: #333;
-          margin-bottom: 10px;
+    }
 
-          display: -webkit-box;
+    .card-body {
+      flex: 1;
+      padding: 20px;
+
+      .card-title {
+        font-size: 20px;
+        font-weight: bold;
+        color: #333;
+        margin-bottom: 10px;
+        display: -webkit-box;
         -webkit-line-clamp: 1;
+        line-clamp: 1;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      .card-location {
+        display: flex;
+        align-items: center;
+        font-size: 14px;
+        color: #777;
+        margin-bottom: 10px;
+
+        .icon {
+          font-size: 16px;
+          margin-right: 8px;
+          color: #007bff;
         }
-  
-        .card-location {
+      }
+
+      .card-price {
+        font-size: 16px;
+        font-weight: bold;
+        color: #28a745;
+        margin-bottom: 15px;
+      }
+
+      .card-details {
+        display: flex;
+        justify-content: space-between;
+        margin-bottom: 15px;
+
+        .detail {
           display: flex;
           align-items: center;
           font-size: 14px;
-          color: #777;
-          margin-bottom: 10px;
-  
+          color: #555;
+
           .icon {
             font-size: 16px;
             margin-right: 8px;
             color: #007bff;
           }
         }
-  
-        .card-price {
-          font-size: 16px;
-          font-weight: bold;
-          color: #28a745;
-          margin-bottom: 15px;
-        }
-  
-        .card-details {
-          display: flex;
-          justify-content: space-between;
-          margin-bottom: 15px;
-  
-          .detail {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #555;
-  
-            .icon {
-              font-size: 16px;
-              margin-right: 8px;
-              color: #007bff;
-            }
-          }
-        }
-  
-        .card-amenities {
-          margin-bottom: 15px;
-  
-          p {
-            margin-bottom: 10px;
-            font-size: 14px;
-            font-weight: bold;
-            color: #555;
-          }
-  
-          .amenity {
-            display: flex;
-            align-items: center;
-            font-size: 14px;
-            color: #555;
-  
-            .icon {
-              font-size: 16px;
-              margin-right: 8px;
-              color: #007bff;
-            }
-          }
-        }
-  
-        .card-description {
-          font-size: 14px;
-          color: #666;
-          line-height: 1.5;
-          margin-bottom: 15px;
+      }
 
-        /* Truncation */
+      .card-amenities {
+        margin-bottom: 15px;
+
+        p {
+          margin-bottom: 10px;
+          font-size: 14px;
+          font-weight: bold;
+          color: #555;
+        }
+
+        .amenity {
+          display: flex;
+          align-items: center;
+          font-size: 14px;
+          color: #555;
+
+          .icon {
+            font-size: 16px;
+            margin-right: 8px;
+            color: #007bff;
+          }
+        }
+      }
+
+      .card-description {
+        font-size: 14px;
+        color: #666;
+        line-height: 1.5;
+        margin-bottom: 15px;
         display: -webkit-box;
         -webkit-line-clamp: 2;
+        line-clamp: 2;
         -webkit-box-orient: vertical;
         overflow: hidden;
         text-overflow: ellipsis;
+      }
+
+      .card-actions {
+        display: flex;
+        font-size: 20px;
+        justify-content: flex-end;
+        gap: 15px;
+        align-items: center;
+
+        button {
+          border: none;
+          background-color:transparent;
         }
-  
-        .card-actions {
-          display: flex;
-          justify-content: flex-end;
-          gap: 15px;
-  
-          .action-icon {
-            font-size: 18px;
-            color: #555;
-            cursor: pointer;
-            transition: color 0.3s ease;
-  
-            &:hover {
-              color: #007bff;
-            }
+
+        .heart-button {
+          border: none;
+          background: transparent;
+          cursor: pointer;
+          transition: transform 0.2s ease;
+        }
+
+        .heart-button:active {
+          transform: scale(1.2);
+        }
+
+        .heart-outline {
+          color: rgb(43, 42, 42);
+          font-size: 20px;
+        }
+
+        .heart-filled {
+          color: red;
+          font-size: 1.5rem;
+          animation: pop 0.3s ease-out;
+        }
+
+        @keyframes pop {
+          0% {
+            transform: scale(0.8);
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
           }
         }
-      }
-    }
-  }
-  
 
-  .icon.action-icon.liked {
-    color: red;
-    animation: heart-pulse 0.5s ease;
-  }
-  
-  @keyframes heart-pulse {
-    0% {
-      transform: scale(1);
-    }
-    50% {
-      transform: scale(1.3);
-    }
-    100% {
-      transform: scale(1);
-    }
-  }
+        .icon {
+          margin-right: 5px;
+        }
 
-  @media (max-width:1200px) {
-    .card-img-container {
-      width: 230px !important; 
-      height: auto;
-      overflow: hidden;
-    }    
-  }
-
-  @media (max-width:500px) {
-    .custom-card {
-      display: flex;
-      flex-direction: column !important;
-      width: 100% !important;
-      
-      .card-img-container {
-        width: 100% !important;
-        height: 220px !important;
-        border-bottom: 2px solid orange;
-  
-        img {
-          width: 100%;
-          height: 100%;
+        .card-actions {
+          display: flex;
+          align-items: center;
+          gap: 10px;
         }
       }
-
     }
-    
   }
+}
+
+@media (max-width: 1200px) {
+  .card-img-container {
+    width: 230px !important;
+    height: auto;
+    overflow: hidden;
+  }
+}
+
+@media (max-width: 500px) {
+  .custom-card {
+    display: flex;
+    flex-direction: column !important;
+    width: 100% !important;
+
+    .card-img-container {
+      width: 100% !important;
+      height: 220px !important;
+      border-bottom: 2px solid orange;
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
+  }
+}

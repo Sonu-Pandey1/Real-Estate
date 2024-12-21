@@ -8,21 +8,67 @@ import {
   FaCar,
   FaSwimmingPool,
 } from "react-icons/fa";
-import { AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
+import { NavLink, useNavigate } from "react-router-dom";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../Context/AuthContext";
+import axios from "axios";
 
 export default function PropertyCard({ item }) {
-  // console.log(item)
+  const { currentUser } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const [saved, setSaved] = useState(false);
+
+  const handleSave = async (e) => {
+    e.preventDefault();
+    if (!currentUser) {
+      navigate("/");
+      return;
+    }
+    try {
+      const response = await axios.post(
+        "http://localhost:3000/api/users/save",
+        { postId: item.id },
+        {
+          withCredentials: true,
+        }
+      );
+      console.log(response.data.message);
+      setSaved(!saved);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get(
+          `http://localhost:3000/api/posts/${item.id}`,
+          {
+            withCredentials: true,
+          }
+        );
+        if (response.data) {
+          setSaved(response.data.isSaved || false);
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, [item.id]);
+
   return (
-    <NavLink to={`${item.id}`} className={" text-decoration-none"}>
+    <NavLink to={`${item.id}`} className={"text-decoration-none"}>
       <div className="listingCardContainer">
         <div className="card custom-card">
           <div className="card-img-container">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
-            {/* to={`${item.id}`} */}
           </div>
           <div className="card-body">
-            <h5 className="card-title ">{item.title}</h5>
+            <h5 className="card-title">{item.title}</h5>
             <p className="card-location">
               <IoLocationOutline className="icon" />
               {item.address}
@@ -61,19 +107,25 @@ export default function PropertyCard({ item }) {
                   <IoLocationOutline className="icon" />
                   <span>Prime Location</span>
                 </div>
-                <div className=" ms-auto ">
-            {/* <p className="card-description">
-              <span className="">{item.desc}</span>
-            </p> */}
-            <div className="card-actions">
-              <AiOutlineHeart className="icon action-icon" />
-              <AiOutlineShareAlt className="icon action-icon" />
-            </div>
-            </div>
+                <div className="ms-auto">
+                  <div className="card-actions">
+                    <button
+                      onClick={handleSave}
+                      className={`p-0 heart-button ${saved ? "liked" : ""}`}
+                    >
+                      {saved ? (
+                        <AiFillHeart className=" heart-filled" />
+                      ) : (
+                        <AiOutlineHeart className=" heart-outline" />
+                      )}
+                    </button>
+                    <button>
+                    <AiOutlineShareAlt className=" share action-icon" />
+                    </button>
+                  </div>
+                </div>
               </div>
-              
             </div>
-            
           </div>
         </div>
       </div>
