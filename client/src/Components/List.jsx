@@ -13,7 +13,7 @@ function List() {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          "http://localhost:3000/api/users/profilePosts",
+          `${import.meta.env.BACKEND_BASEURL}/api/users/profilePosts`,
           {
             withCredentials: true, // Include cookies if needed
           }

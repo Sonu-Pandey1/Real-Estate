@@ -20,7 +20,7 @@ function ProfileUpdatePage() {
     const { username, email, password } = Object.fromEntries(formData);
 
     try {
-      const res = await axios.put(`http://localhost:3000/api/users/${currentUser.id}`, {
+      const res = await axios.put(`${import.meta.env.BACKEND_BASEURL}/api/users/${currentUser.id}`, {
         username,
         email,
         password,

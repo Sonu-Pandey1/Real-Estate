@@ -9,7 +9,7 @@ import cors from "cors"
 // const express = require("express")
 
 const app = express();
-let PORT = 3000;
+let PORT = process.env.PORT || 3000;
 
 app.get("/",(req,res)=>{
     console.log("home")
@@ -18,7 +18,7 @@ app.get("/",(req,res)=>{
 })
 
 app.use(cors({
-    origin: 'http://localhost:5173', 
+    origin: process.env.CLIENT_URL, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
     credentials: true, 
   }));

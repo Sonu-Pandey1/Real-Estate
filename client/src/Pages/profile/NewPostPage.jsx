@@ -1,5 +1,5 @@
 import { useState } from "react";
-import "./newPostPage.scss";
+import "./NewPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 import UploadWidget from "../../components/UploadWidget";
@@ -20,7 +20,7 @@ function NewPostPage() {
 
     try {
       const res = await axios.post(
-        `http://localhost:3000/api/posts`,
+        `${import.meta.env.BACKEND_BASEURL}/api/posts`,
         {
           postData: {
             title: inputs.title,
@@ -170,8 +170,8 @@ function NewPostPage() {
         <UploadWidget
           uwConfig={{
             multiple: true,
-            cloudName: "dkig0nxxf",
-            uploadPreset: "estate",
+            cloudName:`${import.meta.env.CLOUDINARY_CLOUD_NAME}`,
+            uploadPreset: `${import.meta.env.CLOUDNARY_UPLOAD_PRESET}`,
             folder: "posts",
           }}
           setState={setImages}

@@ -25,7 +25,7 @@ function SinglePage() {
       navigate("/")
     }
     try {
-      const response  = await axios.post("http://localhost:3000/api/users/save",{ postId: id }, {
+      const response  = await axios.post(`${import.meta.env.BACKEND_BASEURL}/api/users/save`,{ postId: id }, {
         withCredentials: true, // Include cookies in the request
       });
       console.log(response.data.message)
@@ -35,31 +35,11 @@ function SinglePage() {
     }
   }
 
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     try {
-  //       const response = await fetch(`http://localhost:3000/api/posts/${id}`);
-  //      
-  //       const data = await response.json();
-  //       if (data?.postDetail) {
-  //         setPropertyData(data);
-  //         setSaved(response.data?.isSaved || false);
-  //       } else {
-  //         throw new Error("Invalid property data structure.");
-  //       }
-  //     } catch (err) {
-  //       setError(err.message);
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   };
 
-  //   fetchData();
-  // }, [id]);
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get(`http://localhost:3000/api/posts/${id}`, {
+            const response = await axios.get(`${import.meta.env.BACKEND_BASEURL}/api/posts/${id}`, {
                 withCredentials: true,
             });
             if (response.data) {

@@ -27,7 +27,7 @@ export default function PropertyCard({ item }) {
     }
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/users/save",
+        `${import.meta.env.BACKEND_BASEURL}/api/users/save`,
         { postId: item.id },
         {
           withCredentials: true,
@@ -69,7 +69,7 @@ export default function PropertyCard({ item }) {
     const fetchData = async () => {
       try {
         const response = await axios.get(
-          `http://localhost:3000/api/posts/${item.id}`,
+          `${import.meta.env.BACKEND_BASEURL}/api/posts/${item.id}`,
           {
             withCredentials: true,
           }

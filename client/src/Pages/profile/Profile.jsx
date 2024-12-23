@@ -21,7 +21,7 @@ function Profile() {
   const handleLogout = async () => {
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/logout"
+        `${import.meta.env.BACKEND_BASEURL}/api/auth/logout`
       );
       console.log(response.data);
       // localStorage.removeItem("user")

@@ -38,7 +38,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/register",
+        `${import.meta.env.BACKEND_BASEURL}/api/auth/register`,
         {
           username,
           email,
@@ -69,7 +69,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
 
     try {
       const response = await axios.post(
-        "http://localhost:3000/api/auth/login",
+        `${import.meta.env.BACKEND_BASEURL}/api/auth/login`,
         {
           email,
           password,
