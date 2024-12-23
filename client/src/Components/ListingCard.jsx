@@ -26,8 +26,7 @@ export default function PropertyCard({ item }) {
       return;
     }
     try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,
         { postId: item.id },
         {
           withCredentials: true,

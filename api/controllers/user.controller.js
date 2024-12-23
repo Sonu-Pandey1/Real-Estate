@@ -78,8 +78,13 @@ export const deleteUser = async (req, res) => {
 export const savePost = async (req, res) => {
   const postId = req.body.postId;
   const tokenUserId = req.userId;
-  // console.log(tokenUserId)
-  // console.log(postId)
+  console.log(tokenUserId)
+  console.log(postId)
+
+
+  if (!postId) {
+    return res.status(400).json({ message: "Post ID is required." });
+  }
 
   try {
    const savedPost = await prisma.savePost.findUnique({

@@ -12,11 +12,10 @@ function List() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(
-          `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/profilePosts`,
-          // {
-          //   withCredentials: true, // Include cookies if needed
-          // }
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/profilePosts`,
+          {
+            withCredentials: true, // Include cookies if needed
+          }
         );
 
         const { userPosts, savedPost } = response.data;
