@@ -25,8 +25,7 @@ function ProfileUpdatePage() {
         email,
         password,
         avatar:avatar[0]
-      },
-      
+      },  
       {
         withCredentials: true, // Include cookies in the request
       }

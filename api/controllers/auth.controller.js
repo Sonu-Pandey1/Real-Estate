@@ -33,8 +33,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password,"login");
-  console.log("login")
+  console.log(email, password);
 
   try {
     // check if the user exists or not
@@ -55,7 +54,6 @@ export const login = async (req, res) => {
     const Token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY, {
       expiresIn: age,
     });
-    console.log(Token, "token hai mere bahi");
 
     // setting cookie---
     const { password: userPassword, ...userInfo } = user;
@@ -69,7 +67,6 @@ export const login = async (req, res) => {
       })
       .status(200)
       .json(userInfo);
-      console.log("login success");
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });

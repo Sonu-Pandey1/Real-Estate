@@ -21,9 +21,9 @@ app.get("/",(req,res)=>{
 })
 
 app.use(cors({
-    origin: process.env.CLIENT_URL?.replace(/\/$/, ""), // Ensure no trailing slash
-    methods: ['GET', 'POST', 'PUT', 'DELETE'],
-    credentials: true,
+    origin: process.env.CLIENT_URL, 
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], 
+    credentials: true, 
   }));
 app.use(express.json());
 app.use(cookieParser());

@@ -65,11 +65,11 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
 
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email, password,"loginapp");
+    console.log(email, password);
 
     try {
-      console.log("ram")
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/login`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/login`,
         {
           email,
           password,
