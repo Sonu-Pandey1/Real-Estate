@@ -33,7 +33,8 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+  console.log(email, password,"login");
+  console.log("login")
 
   try {
     // check if the user exists or not
