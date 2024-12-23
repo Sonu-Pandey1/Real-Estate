@@ -2,7 +2,7 @@ import { useState } from "react";
 import "./NewPostPage.scss";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
-import UploadWidget from "../../components/UploadWidget";
+import UploadWidget from "../../Components/UploadWidget";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 
