@@ -13,7 +13,7 @@ export default function SearchPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   
-// console.log(import.meta.env.VITE_BACKEND_BASEURL);
+console.log(import.meta.env.VITE_BACKEND_BASEURL);
   useEffect(() => {
     const fetchData = async () => {
       try {
