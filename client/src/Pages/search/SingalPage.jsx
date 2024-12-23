@@ -25,7 +25,7 @@ function SinglePage() {
       navigate("/")
     }
     try {
-      const response  = await axios.post(`${import.meta.env.BACKEND_BASEURL}/api/users/save`,{ postId: id }, {
+      const response  = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,{ postId: id }, {
         withCredentials: true, // Include cookies in the request
       });
       console.log(response.data.message)
@@ -39,7 +39,7 @@ function SinglePage() {
   useEffect(() => {
     const fetchData = async () => {
         try {
-            const response = await axios.get(`${import.meta.env.BACKEND_BASEURL}/api/posts/${id}`, {
+            const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
                 withCredentials: true,
             });
             if (response.data) {

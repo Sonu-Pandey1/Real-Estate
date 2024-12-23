@@ -20,7 +20,7 @@ function NewPostPage() {
 
     try {
       const res = await axios.post(
-        `${import.meta.env.BACKEND_BASEURL}/api/posts`,
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
         {
           postData: {
             title: inputs.title,
@@ -170,8 +170,8 @@ function NewPostPage() {
         <UploadWidget
           uwConfig={{
             multiple: true,
-            cloudName:`${import.meta.env.CLOUDINARY_CLOUD_NAME}`,
-            uploadPreset: `${import.meta.env.CLOUDNARY_UPLOAD_PRESET}`,
+            cloudName:`${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
+            uploadPreset: `${import.meta.env.VITE_CLOUDNARY_UPLOAD_PRESET}`,
             folder: "posts",
           }}
           setState={setImages}

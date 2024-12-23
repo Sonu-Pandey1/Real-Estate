@@ -20,7 +20,7 @@ function ProfileUpdatePage() {
     const { username, email, password } = Object.fromEntries(formData);
 
     try {
-      const res = await axios.put(`${import.meta.env.BACKEND_BASEURL}/api/users/${currentUser.id}`, {
+      const res = await axios.put(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`, {
         username,
         email,
         password,
@@ -73,8 +73,8 @@ function ProfileUpdatePage() {
         <img src={avatar[0] || currentUser.avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif" } alt="avatar" className="avatar" />
         <UploadWidget
           uwConfig={{
-            cloudName: "dkig0nxxf", //chnage name
-            uploadPreset: "estate", // chnage preset
+            cloudName:`${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
+            uploadPreset: `${import.meta.env.VITE_CLOUDNARY_UPLOAD_PRESET}`,
             multiple: false,
             maxImageFileSize: 2000000,
             folder: "avatars",

@@ -6,7 +6,9 @@ import authRoute from "./routers/auth.route.js";
 import testRoute from "./routers/test.route.js"
 import userRoute from "./routers/user.route.js"
 import cors from "cors"
+import dotenv from "dotenv";
 // const express = require("express")
+dotenv.config(); 
 
 const app = express();
 let PORT = process.env.PORT || 3000;

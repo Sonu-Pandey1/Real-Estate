@@ -13,11 +13,11 @@ export default function SearchPage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   
-
+// console.log(import.meta.env.VITE_BACKEND_BASEURL);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch(`${import.meta.env.BACKEND_BASEURL}/api/posts?`+URL);
+        const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts?`+URL);
         const res =await response.json();
         setPropertyData(res)
         console.log(propertyData)
