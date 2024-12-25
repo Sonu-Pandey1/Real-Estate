@@ -7,11 +7,9 @@ import Modal from "./Modal";
 import { AuthContext } from "../Context/AuthContext";
 
 function Navbar() {
-   const {currentUser} = useContext(AuthContext);
-  
-  const [isPopupOpen, setIsPopupOpen] = useState(false);
-  
+  const { currentUser } = useContext(AuthContext);
 
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const navigate = useNavigate();
 
@@ -123,22 +121,32 @@ function Navbar() {
                 </div>
               </li>
               <li>
-                {
-                  currentUser? <div className="user">
-                  <img src={currentUser.avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"} alt="userImg" />
-                    <span>{currentUser.username}</span>
+                {currentUser ? (
+                  <div className="user">
+                    <NavLink className=" text-decoration-none text-light" to={"/profile/update"}>
+                      <img
+                        src={
+                          currentUser.avatar ||
+                          "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
+                        }
+                        alt="userImg"
+                      />
+                      <span >{currentUser.username}</span>
+                    </NavLink>
+
                     <NavLink to={"/profile"} className={"profile"}>
                       <div className="notification">3</div>
                       <span>Profile</span>
                     </NavLink>
-                  </div>:
+                  </div>
+                ) : (
                   <button
-                  onClick={() => setIsPopupOpen(true)}
-                  className="btn btn-primary"
-                >
-                  Login/Signup
-                </button>
-                }
+                    onClick={() => setIsPopupOpen(true)}
+                    className="btn btn-primary"
+                  >
+                    Login/Signup
+                  </button>
+                )}
               </li>
               {/* <li className="nav-item">
                 <div className="">
@@ -895,12 +903,9 @@ function Navbar() {
               </ul>
             </div>
           </div>
-
         </div>
 
-
         <Modal isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} />
-
       </nav>
     </>
   );

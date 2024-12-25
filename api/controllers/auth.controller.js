@@ -21,7 +21,7 @@ export const register = async (req, res) => {
         username,
         email,
         password: hashedPassword,
-        avatar: avatar || "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
+        avatar: avatar || "https://cdn-icons-gif.flaticon.com/8797/8797862.gif",
       },
     });
 
@@ -128,7 +128,7 @@ export const google = async (req, res) => {
         username,
         email,
         password: hashedPassword,
-        avatar: photo || "default-avatar-url", 
+        avatar: photo || "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png", 
       },
     });
  

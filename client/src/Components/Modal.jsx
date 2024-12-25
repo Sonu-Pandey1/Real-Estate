@@ -11,24 +11,24 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   // const [isPopupOpen2, setIsPopupOpen2] = useState(false);
   // console.log(isPopupOpen2)
   const [activeTab, setActiveTab] = useState("login");
-  const [profileImage, setProfileImage] = useState(
-    "https://cdn-icons-gif.flaticon.com/8797/8797862.gif"
-  );
+  // const [profileImage, setProfileImage] = useState(
+  //   "https://cdn-icons-gif.flaticon.com/8797/8797862.gif"
+  // );
   // const [formData,setFormData] =
 
   const navigate = useNavigate();
     const {updateUser} = useContext(AuthContext)
 
-  const handleProfileImageChange = (event) => {
-    const file = event.target.files[0];
-    if (file) {
-      const reader = new FileReader();
-      reader.onload = () => {
-        setProfileImage(reader.result);
-      };
-      reader.readAsDataURL(file);
-    }
-  };
+  // const handleProfileImageChange = (event) => {
+  //   const file = event.target.files[0];
+  //   if (file) {
+  //     const reader = new FileReader();
+  //     reader.onload = () => {
+  //       setProfileImage(reader.result);
+  //     };
+  //     reader.readAsDataURL(file);
+  //   }
+  // };
 
   const handleRegister = async (e) => {
     e.preventDefault();
@@ -38,8 +38,6 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     const username = formData.get("username");
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(username, email, password);
-    let ram = "ramgopal"
 
     try {
       const response = await axios.post(
@@ -97,7 +95,6 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     }
   };
 
-  let ramm = "ramgopal"
 
   return (
     <>
@@ -238,7 +235,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
               {activeTab === "signup" && (
                 <form onSubmit={handleRegister}>
                   {/* <h4 className="text-center mb-3">Signup</h4> */}
-                  <div className="mb-3 text-center">
+                  {/* <div className="mb-3 text-center">
                     <label htmlFor="signupPhoto">
                       <img
                         src={profileImage}
@@ -260,7 +257,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       onChange={handleProfileImageChange}
                       style={{ display: "none" }}
                     />
-                  </div>
+                  </div> */}
                   <div className="mb-3">
                     <label htmlFor="signupUsername" className="form-label">
                       Username
