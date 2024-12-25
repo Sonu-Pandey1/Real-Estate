@@ -67,7 +67,11 @@ export const deleteUser = async (req, res) => {
     await prisma.user.delete({
       where: { id: id },
     });
-    res.status(200).json({ message: "User Deleted!" });
+
+    res.clearCookie("token")
+    res.status(200).json({ message: "User Deleted!" })
+
+    
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "faild to delete Usre!" });

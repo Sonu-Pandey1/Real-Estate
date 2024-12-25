@@ -35,7 +35,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  console.log(email, password);
+  // console.log(email, password);
 
   try {
     // check if the user exists or not
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
         maxAge: age,
       })
       .status(200)
-      .json(userInfo);
+      .json(userInfo );
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });

@@ -9,15 +9,6 @@ import { AuthContext } from "../../Context/AuthContext";
 function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
-  // console.log(currentUser);
-
-  // useEffect(() => {
-  //   if (!currentUser) {
-  //     navigate("/");
-  //   }
-
-  // }, [currentUser, navigate]);
-  // // todo -- use a highorder component for protacted route check in if the user is login or not if not then redirect to lgoin page .
 
   const handleLogout = async () => {
     try {
@@ -32,9 +23,28 @@ function Profile() {
       console.log(error);
     }
   };
-  if(!currentUser){
-    return <div className="my-5 pt-5 text-center">current user not found please login </div>
 
+  const handleDelete = async () => {
+    try {
+      const response = await axios.delete(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
+        {
+          withCredentials: true,
+        });
+        
+      console.log(response.data);
+      updateUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  if (!currentUser) {
+    return (
+      <div className="my-5 pt-5 text-center">
+        current user not found please login{" "}
+      </div>
+    );
   }
 
   return (
@@ -68,10 +78,17 @@ function Profile() {
                 Email: <b>{currentUser.email}</b>
               </span>
               <button
-                className="btn btn-outline-danger w-25 mt-4"
+                className="btn btn-outline-info w-25 mt-4"
                 onClick={handleLogout}
               >
                 Logout
+              </button>
+
+              <button
+                className="btn btn-outline-danger w-25 "
+                onClick={handleDelete}
+              >
+                Delete Account
               </button>
             </div>
             <div className="title">
@@ -82,7 +99,6 @@ function Profile() {
             </div>
 
             <List />
-            
           </div>
         </div>
 
