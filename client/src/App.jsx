@@ -1,4 +1,3 @@
-
 import PWABadge from "./PWABadge.jsx";
 import "./App.scss";
 import Navbar from "./Components/Navbar.jsx";
@@ -24,6 +23,8 @@ import { Route, Routes } from "react-router-dom";
 import Profile from "./Pages/profile/Profile.jsx";
 import ProfileUpdatePage from "./Pages/profile/ProfileUpdatePage.jsx";
 import NewPostPage from "./Pages/profile/NewPostPage.jsx";
+import PrivateRoute from "./Components/PrivateRoute.jsx";
+import Page404 from "./Components/Page404.jsx";
 // import { singlePageLoader } from "../lib/Loaders.js";
 
 function App() {
@@ -55,10 +56,15 @@ function App() {
         <Route path="/login-register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:id" element={<SingalPage />} />
-        <Route path="/profile" element={<Profile/>}/>
-        <Route path="/profile/:id" element={<SingalPage/>} />
-        <Route path="/profile/update" element={<ProfileUpdatePage/>}/>
-        <Route path="/profile/addPost" element={<NewPostPage/>}/>
+        <Route path="/*" element={<Page404/>} />
+
+        {/* Profile */}
+        <Route element={<PrivateRoute />}>
+          <Route path="/profile" element={<Profile />} />
+        </Route>
+        <Route path="/profile/:id" element={<SingalPage />} />
+        <Route path="/profile/update" element={<ProfileUpdatePage />} />
+        <Route path="/profile/addPost" element={<NewPostPage />} />
 
         {/* Rent, Commercial, PG, and Plots */}
         <Route path="/rent" element={<Rent />} />
@@ -74,8 +80,3 @@ function App() {
 }
 
 export default App;
-
-
-
-
-

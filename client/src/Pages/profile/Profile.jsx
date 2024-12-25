@@ -11,12 +11,13 @@ function Profile() {
   const { currentUser, updateUser } = useContext(AuthContext);
   // console.log(currentUser);
 
-  useEffect(() => {
-    if (!currentUser) {
-      navigate("/");
-    }
-  }, [currentUser, navigate]);
-  // todo -- use a highorder component for protacted route check in if the user is login or not if not then redirect to lgoin page .
+  // useEffect(() => {
+  //   if (!currentUser) {
+  //     navigate("/");
+  //   }
+
+  // }, [currentUser, navigate]);
+  // // todo -- use a highorder component for protacted route check in if the user is login or not if not then redirect to lgoin page .
 
   const handleLogout = async () => {
     try {
@@ -31,6 +32,10 @@ function Profile() {
       console.log(error);
     }
   };
+  if(!currentUser){
+    return <div className="my-5 pt-5 text-center">current user not found please login </div>
+
+  }
 
   return (
     currentUser && (
