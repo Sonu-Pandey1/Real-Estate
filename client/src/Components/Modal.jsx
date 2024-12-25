@@ -7,6 +7,9 @@ import { AuthContext } from "../Context/AuthContext";
 import Oauth from "./Oauth";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
+  console.log(isPopupOpen)
+  // const [isPopupOpen2, setIsPopupOpen2] = useState(false);
+  // console.log(isPopupOpen2)
   const [activeTab, setActiveTab] = useState("login");
   const [profileImage, setProfileImage] = useState(
     "https://cdn-icons-gif.flaticon.com/8797/8797862.gif"
@@ -36,6 +39,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     const email = formData.get("email");
     const password = formData.get("password");
     console.log(username, email, password);
+    let ram = "ramgopal"
 
     try {
       const response = await axios.post(
@@ -53,6 +57,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         }
       );
       console.log(response.data);
+      setIsPopupOpen(false);
       navigate("/profile")
     } catch (error) {
       console.log(error);
@@ -85,11 +90,14 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
       console.log(response.data)
       // localStorage.setItem("user",JSON.stringify(response.data));
       updateUser(response.data);
+      setIsPopupOpen(false);
       navigate("/")
     } catch (error) {
       console.log(error);
     }
   };
+
+  let ramm = "ramgopal"
 
   return (
     <>
@@ -214,10 +222,10 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   <NavLink className={" text-decoration-none"}>
                     <p className=" text-end">Forgot password?</p>
                   </NavLink>
-                  <button type="submit" className="btn btn-primary w-100">
+                  <button type="submit" className={`btn btn-primary w-100 `}> 
                     Login
                   </button>
-                  <Oauth/>
+                  <Oauth isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} ra={"ram"}/>
                   <p className="text-center pt-3">
                     Not a Member?{" "}
                     <NavLink onClick={() => setActiveTab("signup")}>
@@ -295,7 +303,9 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   <button type="submit" className="btn btn-primary w-100">
                     Signup
                   </button>
-                  <Oauth/>
+                  <Oauth isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} ra={"ram"}/>
+              
+
                   <p className="text-center pt-3">
                     Already have an account?
                     <NavLink
@@ -314,3 +324,5 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     </>
   );
 }
+
+

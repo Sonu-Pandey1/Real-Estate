@@ -3,7 +3,8 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
-  const { username, password, email } = req.body;
+  console.log(req.body)
+  const { username, password, email,avatar } = req.body;
 
   try {
     // Check if a user with the given email already exists
@@ -20,6 +21,7 @@ export const register = async (req, res) => {
         username,
         email,
         password: hashedPassword,
+        avatar: avatar || "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
       },
     });
 
