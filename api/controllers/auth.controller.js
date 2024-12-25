@@ -64,7 +64,7 @@ export const login = async (req, res) => {
         secure: process.env.NODE_ENV === "production",
         // secure: true,
         // sameSite: "none", // "strict" to non i do then working .
-        sameSite: 'strict',
+        sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
         maxAge: age,
       })
       .status(200)
@@ -87,107 +87,6 @@ export const logout = (req, res) => {
   res.status(200).json({ message: "Logout Successfully" });
 };
 
-
-
-
-// export const google = async (req, res) => {
-//   try {
-//     const { email, name, photo } = req.body;
-
-//     let user = await prisma.user.findUnique({ where: { email } });
-
-//     if (user) {
-//       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY);
-//       const { password, ...userInfo } = user;
-//       res
-//         .cookie("access_token", token, {
-//           httpOnly: true,
-//           secure: process.env.NODE_ENV === "production",
-//           sameSite: "strict",
-//           maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-//         })
-//         .status(200)
-//         .json(userInfo);
-//     } else {
-//       const generatedPassword = Math.random().toString(36).slice(-8);
-//       const hashedPassword = await bcrypt.hash(generatedPassword, 10);
-
-//       user = await prisma.user.create({
-//         data: {
-//           username: `${name.split(" ").join("").toLowerCase()}${Math.random().toString(36).slice(-4)}`,
-//           email,
-//           password: hashedPassword,
-//           avatar: photo,
-//         },
-//       });
-
-//       const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET_KEY);
-//       const { password, ...userInfo } = user;
-//       res
-//         .cookie("access_token", token, {
-//           httpOnly: true,
-//           secure: process.env.NODE_ENV === "production",
-//           sameSite: "strict",
-//           maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-//         })
-//         .status(200)
-//         .json(userInfo);
-//     }
-//   } catch (error) {
-//     console.error("Error during Google authentication", error);
-//     res.status(500).json({ message: "Something went wrong." });
-//   }
-// };
-
-
-// export const google = async (req, res) => {
-//   try {
-//     const { email, name, photo } = req.body;
-
-//     let user = await prisma.user.findUnique({ where: { email } });
-
-//     const token = jwt.sign({ id: user ? user.id : null }, process.env.JWT_SECRET_KEY, {
-//       expiresIn: "7d",
-//     });
-
-//     const cookieOptions = {
-//       httpOnly: true,
-//       secure: process.env.NODE_ENV === "production",
-//       sameSite: process.env.NODE_ENV === "production" ? "none" : "lax", // Cross-origin for production
-//       maxAge: 1000 * 60 * 60 * 24 * 7, // 7 days
-//     };
-
-//     if (user) {
-//       const { password, ...userInfo } = user;
-//       return res
-//         .cookie("token", token, cookieOptions)
-//         .status(200)
-//         .json(userInfo);
-//     }
-
-//     const generatedPassword = Math.random().toString(36).slice(-8);
-//     const hashedPassword = await bcrypt.hash(generatedPassword, 10);
-
-//     user = await prisma.user.create({
-//       data: {
-//         // username: `${name.split(" ").join("").toLowerCase()}${Math.random().toString(36).slice(-4)}`,
-//         username: name,
-//         email,
-//         password: hashedPassword,
-//         avatar: photo,
-//       },
-//     });
-
-//     const { password, ...userInfo } = user;
-//     res
-//       .cookie("token", token, cookieOptions)
-//       .status(200)
-//       .json(userInfo);
-//   } catch (error) {
-//     console.error("Error during Google authentication", error);
-//     res.status(500).json({ message: "Something went wrong." });
-//   }
-// };
 
 export const google = async (req, res) => {
   try {
