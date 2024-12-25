@@ -122,7 +122,7 @@ export const savePost = async (req, res) => {
 
 export const ProfilePosts = async (req,res) =>{
   const tokenUserId = req.userId
-  console.log(tokenUserId)
+  // console.log(tokenUserId)
   try {
     const userPosts = await prisma.post.findMany({
       where:{

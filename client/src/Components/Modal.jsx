@@ -4,6 +4,7 @@ import "./Modal.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
+import Oauth from "./Oauth";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   const [activeTab, setActiveTab] = useState("login");
@@ -216,6 +217,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   <button type="submit" className="btn btn-primary w-100">
                     Login
                   </button>
+                  <Oauth/>
                   <p className="text-center pt-3">
                     Not a Member?{" "}
                     <NavLink onClick={() => setActiveTab("signup")}>
@@ -290,9 +292,10 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       required
                     />
                   </div>
-                  <button type="submit" className="btn btn-success w-100">
+                  <button type="submit" className="btn btn-primary w-100">
                     Signup
                   </button>
+                  <Oauth/>
                   <p className="text-center pt-3">
                     Already have an account?
                     <NavLink

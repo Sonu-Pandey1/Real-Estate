@@ -20,7 +20,7 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
         const response = await fetch(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts?`+URL);
         const res =await response.json();
         setPropertyData(res)
-        console.log(propertyData)
+        // console.log(propertyData)
         if (!response.ok) {
           throw new Error("Failed to fetch property data.");
         }
