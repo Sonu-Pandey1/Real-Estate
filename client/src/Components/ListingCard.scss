@@ -4,6 +4,10 @@
   padding: 20px 0px;
   background-color: #f9f9f9;
 
+  .ProfileCard{
+    height: 300px !important;
+  }
+
   .custom-card {
     display: flex;
     flex-direction: row;
@@ -13,7 +17,7 @@
     overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    height: 250px;
+    height :240px;
     // overflow-y: scroll;
 
     &:hover {

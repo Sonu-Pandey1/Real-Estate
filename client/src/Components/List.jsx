@@ -66,10 +66,10 @@ function List({ type }) {
   return (
     <div className="list">
       {type === "myListings" &&
-        userPosts.map((item) => <ListingCard key={item.id} item={item} />)}
+        userPosts.map((item) => <ListingCard type={type} key={item.id} item={item} />)}
 
       {type === "savedListings" &&
-        savedPosts.map((item) => <ListingCard key={item.id} item={item} />)}
+        savedPosts.map((item) => <ListingCard type={type} key={item.id} item={item} />)}
     </div>
   );
 }

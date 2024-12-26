@@ -28,20 +28,29 @@ function Profile() {
 
   // todo -- user deleted successfully but when the user have some saved post or creates listings the throughing error handle it later.
 
+ 
   const handleDelete = async () => {
-    try {
-      const response = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
-        {
-          withCredentials: true,
-        }
-      );
+    const confirmation = window.confirm(
+      "Are you sure you want to delete your account and all your posts? This action cannot be undone."
+    );
 
-      console.log(response.data);
-      updateUser(null);
-      navigate("/");
-    } catch (error) {
-      console.log(error);
+    if (confirmation) {
+      try {
+        const response = await axios.delete(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
+          {
+            withCredentials: true,
+          }
+        );
+
+        console.log(response.data);
+        updateUser(null);
+        navigate("/");
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Account deletion canceled.");
     }
   };
 
@@ -117,7 +126,7 @@ function Profile() {
                 My Listings
               </button>
               <button
-                className={`btn ms-2 ${
+                className={`btn  ms-2 ${
                   activeTab === "savedListings"
                     ? "btn-primary"
                     : "btn-outline-primary"

@@ -1,3 +1,4 @@
+
 /* eslint-disable react/prop-types */
 import "./ListingCard.scss";
 import { IoLocationOutline } from "react-icons/io5";
@@ -14,7 +15,7 @@ import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
 
-export default function PropertyCard({ item }) {
+export default function PropertyCard({ item, type }) {
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
@@ -26,11 +27,10 @@ export default function PropertyCard({ item }) {
       return;
     }
     try {
-      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,
         { postId: item.id },
-        {
-          withCredentials: true,
-        }
+        { withCredentials: true }
       );
       console.log(response.data.message);
       setSaved(!saved);
@@ -40,14 +40,11 @@ export default function PropertyCard({ item }) {
   };
 
   const handleShare = async (e) => {
-    e.preventDefault(); 
-
-  // e.stopPropagation();
-    //todo need to prevent navigate
+    e.preventDefault();
     const shareData = {
       title: item.title,
       text: `${item.title} - ${item.address}\nCheck out this amazing property listed for ${item.price}!`,
-      url: `${window.location.origin}/${item.id}`, // Shareable URL
+      url: `${window.location.origin}/${item.id}`, 
     };
 
     if (navigator.share) {
@@ -58,9 +55,27 @@ export default function PropertyCard({ item }) {
         console.log("Error sharing:", error);
       }
     } else {
-      // Fallback for browsers that don't support Web Share API
       navigator.clipboard.writeText(shareData.url);
       alert("Link copied to clipboard! Share it with your friends.");
+    }
+  };
+
+  const handleEdit = (e) => {
+    e.preventDefault();
+    navigate(`/edit-listing/${item.id}`);
+  };
+
+  const handleDelete = async (e) => {
+    e.preventDefault();
+    try {
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
+        { withCredentials: true }
+      );
+      console.log(response.data.message);
+      window.location.reload(); 
+    } catch (error) {
+      console.log(error);
     }
   };
 
@@ -69,9 +84,7 @@ export default function PropertyCard({ item }) {
       try {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
-          {
-            withCredentials: true,
-          }
+          { withCredentials: true }
         );
         if (response.data) {
           setSaved(response.data.isSaved || false);
@@ -87,7 +100,7 @@ export default function PropertyCard({ item }) {
   return (
     <NavLink to={`${item.id}`} className={"text-decoration-none"}>
       <div className="listingCardContainer">
-        <div className="card custom-card">
+        <div className={`card custom-card ${type === "myListings" || type === "savedListings" ? "ProfileCard" : ""}`}>
           <div className="card-img-container">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
@@ -98,61 +111,72 @@ export default function PropertyCard({ item }) {
               {item.address}
             </p>
             <p className="card-price">{item.price}</p>
-            <div className="card-details">
-              <div className="d-flex justify-content-between gap-4">
-                <div className="detail">
-                  <FaBed className="icon" />
-                  <span>{item.bedroom}</span>
-                </div>
-                <div className="detail">
-                  <FaBath className="icon" />
-                  <span>{item.bathroom}</span>
-                </div>
-                <div className="detail">
-                  <FaRulerCombined className="icon" />
-                  <span>{item.size}</span>
-                </div>
-              </div>
-            </div>
-            <div className="card-amenities">
-              <p>
-                <strong>Amenities:</strong>
-              </p>
-              <div className="d-flex flex-wrap gap-3">
-                <div className="amenity">
-                  <FaCar className="icon" />
-                  <span>Parking</span>
-                </div>
-                <div className="amenity">
-                  <FaSwimmingPool className="icon" />
-                  <span>Swimming Pool</span>
-                </div>
-                <div className="amenity">
-                  <IoLocationOutline className="icon" />
-                  <span>Prime Location</span>
-                </div>
-                <div className="ms-auto">
-                  <div className="card-actions">
-                    <button
-                      onClick={handleSave}
-                      className={` heart-button ${saved ? "liked" : ""}`}
-                    >
-                      {saved ? (
-                        <AiFillHeart className=" heart-filled" />
-                      ) : (
-                        <AiOutlineHeart className=" heart-outline" />
-                      )}
-                    </button>
-                    <button
-                      onClick={handleShare}
-                      className="share-button"
-                      title="Share"
-                    >
-                      <AiOutlineShareAlt className="icon share action-icon" />
-                    </button>
-                    
+            <div className="card-amenitiesContainer">
+              <div className="card-details">
+                <div className="d-flex justify-content-between gap-4">
+                  <div className="detail">
+                    <FaBed className="icon" />
+                    <span>{item.bedroom}</span>
+                  </div>
+                  <div className="detail">
+                    <FaBath className="icon" />
+                    <span>{item.bathroom}</span>
+                  </div>
+                  <div className="detail">
+                    <FaRulerCombined className="icon" />
+                    <span>{item.size}</span>
                   </div>
                 </div>
+              </div>
+              <div className="card-amenities">
+                <p>
+                  <strong>Amenities:</strong>
+                </p>
+                <div className="d-flex flex-wrap gap-3">
+                  <div className="amenity">
+                    <FaCar className="icon" />
+                    <span>Parking</span>
+                  </div>
+                  <div className="amenity">
+                    <FaSwimmingPool className="icon" />
+                    <span>Swimming Pool</span>
+                  </div>
+                  <div className="amenity">
+                    <IoLocationOutline className="icon" />
+                    <span>Prime Location</span>
+                  </div>
+                  <div className="ms-auto">
+                    <div className="card-actions">
+                      <button
+                        onClick={handleSave}
+                        className={`heart-button ${saved ? "liked" : ""}`}
+                      >
+                        {saved ? (
+                          <AiFillHeart className="heart-filled" />
+                        ) : (
+                          <AiOutlineHeart className="heart-outline" />
+                        )}
+                      </button>
+                      <button
+                        onClick={handleShare}
+                        className="share-button"
+                        title="Share"
+                      >
+                        <AiOutlineShareAlt className="icon share action-icon" />
+                      </button>
+                    </div>
+                  </div>
+                </div>
+                {currentUser && (type === "myListings" || type === "savedListings") && (
+                  <div className="card-buttons mt-3">
+                    <button onClick={handleEdit} className="btn btn-outline-info ">
+                      Edit
+                    </button>
+                    <button onClick={handleDelete} className="btn btn-outline-danger ms-2">
+                      Delete
+                    </button>
+                  </div>
+                )}
               </div>
             </div>
           </div>
@@ -161,11 +185,3 @@ export default function PropertyCard({ item }) {
     </NavLink>
   );
 }
-
-
-
-
-
-                    
-                    
-                 
