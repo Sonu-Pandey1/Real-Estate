@@ -8,7 +8,7 @@ import { useEffect, useState } from "react";
 export default function SearchPage() {
   const {search} = useLocation();
   const URL = search.split("?")[1];
-  // console.log(URL)
+  console.log(URL) 
   const [propertyData,setPropertyData] = useState();
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -47,7 +47,7 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
   }
 
   if (error) {
-    return <div className="error-message">{error}</div>;
+    return <div className="error-message mt-5 pt-5 text-danger text-center fs-2 vh-100">{error}</div>;
   }
 
   if (!propertyData) {
@@ -60,13 +60,13 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
       <div className="searchPageContainer">
         <div className="container-fluid">
           <div className="filterHeader pt-2">
-            <h1>
+            {/* <h1>
               Search Results for <b>{propertyData.city}</b>
-            </h1>
+            </h1> */}
           </div>
           <div className="sticky-filterr ">
             <div>
-              <Filter type={propertyData.type} city={propertyData.city} locality={propertyData.locality} />
+              <Filter  />
             </div>
           </div>
           <div className="row">

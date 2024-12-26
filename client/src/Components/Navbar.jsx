@@ -5,13 +5,30 @@ import { PiUserCircleCheckDuotone } from "react-icons/pi";
 import { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import { AuthContext } from "../Context/AuthContext";
+import { FaSearch } from "react-icons/fa";
 
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
-
+  const [searchTerm, setSearchTerm] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const navigate = useNavigate();
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const urlParams = new URLSearchParams(window.location.search);
+    urlParams.set('searchTerm', searchTerm);
+    const searchQuery = urlParams.toString();
+    navigate(`/search?${searchQuery}`);
+  };
+
+  useEffect(() => {
+    const urlParams = new URLSearchParams(location.search);
+    const searchTermFromUrl = urlParams.get('searchTerm');
+    if (searchTermFromUrl) {
+      setSearchTerm(searchTermFromUrl);
+    }
+  }, []);
 
   const handleNavigate = () => {
     navigate("/list-Property");
@@ -71,15 +88,23 @@ function Navbar() {
                 //todo --> Mega Menu Uncomment If Needed get in to github this file prev commits
               </li> */}
 
-              {/* <li className="nav-item mega-dropdown">
-                <div className="navlinkWrapper">
-                  <NavLink className="navlink" to={"/for-tenants"}>
-                    For Tenants
-                  </NavLink>
-                </div>
-              </li> */}
+              <form
+          onSubmit={handleSubmit}
+          className='bg-slate-100 p-3 rounded-lg flex items-center'
+        >
+          <input
+            type='text'
+            placeholder='Search...'
+            className='bg-transparent focus:outline-none w-24 sm:w-64'
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+          />
+          <button>
+            <FaSearch className='text-slate-600' />
+          </button>
+        </form>
 
-              <li className="nav-item mega-dropdown d-lg-block d-none">
+              {/* <li className="nav-item mega-dropdown d-lg-block d-none">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/for-owners"}>
                     For Owners
@@ -93,7 +118,7 @@ function Navbar() {
                     For Dealers / Builders
                   </NavLink>
                 </div>
-              </li>
+              </li> */}
 
               <li className="nav-item mega-dropdown">
                 <div className="navlinkWrapper">

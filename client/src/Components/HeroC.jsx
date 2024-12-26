@@ -300,9 +300,9 @@ export default function HeroC() {
   const location = useLocation();
 
   const localities = {
-    Noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
-    Delhi: ["Connaught Place", "Chandni Chowk", "Saket", "Dwarka"],
-    Gurgaon: ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
+    noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
+    delhi: ["Connaught Place", "Chandni Chowk", "Saket", "Dwarka"],
+    gurgaon: ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
   };
 
   const cities = Object.keys(localities);
@@ -316,9 +316,11 @@ export default function HeroC() {
   const handleSearch = (e) => {
     e.preventDefault();
     const params = new URLSearchParams({
-      type: propertyType,
       city: selectedCity,
-      locality: selectedLocality, // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page 
+      type: propertyType,
+      searchTerm: selectedLocality,
+      
+     // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page 
     }).toString();
 
     navigate(`/search?${params}`);
