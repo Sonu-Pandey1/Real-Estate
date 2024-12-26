@@ -135,7 +135,7 @@ function Navbar() {
                     </NavLink>
 
                     <NavLink to={"/profile"} className={"profile"}>
-                      <div className="notification">3</div>
+                      {/* <div className="notification">3</div> */}
                       <span>Profile</span>
                     </NavLink>
                   </div>

@@ -3,12 +3,14 @@ import Chat from "../../Components/Chat";
 import List from "../../Components/List";
 import "./Profile.scss";
 import { NavLink, useNavigate } from "react-router-dom";
-import { useContext, useEffect } from "react";
+import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
 
 function Profile() {
   const navigate = useNavigate();
   const { currentUser, updateUser } = useContext(AuthContext);
+
+  const [activeTab, setActiveTab] = useState("myListings"); // Default to "My Listings"
 
   const handleLogout = async () => {
     try {
@@ -28,10 +30,12 @@ function Profile() {
 
   const handleDelete = async () => {
     try {
-      const response = await axios.delete(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
+      const response = await axios.delete(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
         {
           withCredentials: true,
-        });
+        }
+      );
 
       console.log(response.data);
       updateUser(null);
@@ -100,18 +104,47 @@ function Profile() {
               </NavLink>
             </div>
 
-            <List />
+            {/* Buttons to switch between tabs */}
+            <div className="list-tabs">
+              <button
+                className={`btn ${
+                  activeTab === "myListings"
+                    ? "btn-primary"
+                    : "btn-outline-primary"
+                }`}
+                onClick={() => setActiveTab("myListings")}
+              >
+                My Listings
+              </button>
+              <button
+                className={`btn ms-2 ${
+                  activeTab === "savedListings"
+                    ? "btn-primary"
+                    : "btn-outline-primary"
+                }`}
+                onClick={() => setActiveTab("savedListings")}
+              >
+                Saved Listings
+              </button>
+            </div>
+
+            {/* Conditional rendering based on activeTab */}
+            {activeTab === "myListings" && <List type="myListings" />}
+            {activeTab === "savedListings" && <List type="savedListings" />}
           </div>
         </div>
-
-        <div className="chatContainer">
+        {/* //? we are not now using chet fnctionality also its is not complited yet */}
+        {/* <div className="chatContainer">
           <div className="wrapper">
             <Chat />
           </div>
-        </div>
+        </div> */}
       </div>
     )
   );
 }
 
 export default Profile;
+
+
+

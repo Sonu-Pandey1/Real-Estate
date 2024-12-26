@@ -1,18 +1,21 @@
+/* eslint-disable react/prop-types */
+
 import "./List.scss";
 import ListingCard from "./ListingCard";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
-function List() {
+function List({ type }) {
   const [userPosts, setUserPosts] = useState([]);
-  const [savedPost, setSavedPosts] = useState([]);
+  const [savedPosts, setSavedPosts] = useState([]);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/profilePosts`,
+        const response = await axios.get(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/profilePosts`,
           {
             withCredentials: true, // Include cookies if needed
           }
@@ -22,7 +25,7 @@ function List() {
         setUserPosts(userPosts || []);
         setSavedPosts(savedPost || []);
       } catch (err) {
-        setError(err.message || "Failed to fetch property data.");
+        setError(err.message || "Failed to fetch posts.");
       } finally {
         setLoading(false);
       }
@@ -33,7 +36,7 @@ function List() {
 
   if (loading) {
     return (
-      <div className="loading-container ">
+      <div className="loading-container">
         <div className="loader">
           <div className="spinner"></div>
           <p>Loading...</p>
@@ -47,32 +50,26 @@ function List() {
   }
 
   if (
-    (!userPosts || userPosts.length === 0) &&
-    (!savedPost || savedPost.length === 0)
+    type === "myListings" &&
+    (!userPosts || userPosts.length === 0)
   ) {
-    return <div className="error-message pt-5 text-center">No posts found!</div>;
+    return <div className="error-message text-center">No My Listings found!</div>;
   }
-  // if(savedPost.length<=0){
-  //   return <div>No post found </div>
-  // }
+
+  if (
+    type === "savedListings" &&
+    (!savedPosts || savedPosts.length === 0)
+  ) {
+    return <div className="error-message text-center">No Saved Listings found!</div>;
+  }
+
   return (
     <div className="list">
-      {userPosts && userPosts.length > 0 ? (
-        userPosts.map((item) => <ListingCard key={item.id} item={item} />)
-      ) : (
-        <div className="text-center pt-5">No posts found!</div>
-      )}
+      {type === "myListings" &&
+        userPosts.map((item) => <ListingCard key={item.id} item={item} />)}
 
-      <div>
-        <div className="title">
-          <h1>Saved Posts</h1>
-        </div>
-        {savedPost && savedPost.length > 0 ? (
-          savedPost.map((item) => <ListingCard key={item.id} item={item} />)
-        ) : (
-          <div className="text-center pt-5">No posts found!</div>
-        )}
-      </div>
+      {type === "savedListings" &&
+        savedPosts.map((item) => <ListingCard key={item.id} item={item} />)}
     </div>
   );
 }
