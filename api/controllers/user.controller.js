@@ -64,6 +64,18 @@ export const deleteUser = async (req, res) => {
     return res.status(403).json({ message: "Not Authorized!" });
   }
   try {
+     // Archive or delete user's saved posts
+     await prisma.savePost.deleteMany({
+      where: { id: id },
+    });
+
+     //todo --  Archive or transfer ownership of listings handle this archive listings idf user deleted your account 
+    // await prisma.listing.updateMany({
+    //   where: { userId: parseInt(userId) },
+    //   data: { userId: null }, // Set userId to null for orphaning
+    // });
+
+    // Delete user
     await prisma.user.delete({
       where: { id: id },
     });
@@ -126,7 +138,7 @@ export const savePost = async (req, res) => {
 
 export const ProfilePosts = async (req,res) =>{
   const tokenUserId = req.userId
-  // console.log(tokenUserId)
+  // console.log(tokenUserId,"not found")
   try {
     const userPosts = await prisma.post.findMany({
       where:{

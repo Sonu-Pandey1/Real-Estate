@@ -5,7 +5,7 @@ import { useContext, } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
 export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
-  console.log(isPopupOpen)
+  // console.log(isPopupOpen)
   const navigate = useNavigate();
   const { updateUser } = useContext(AuthContext);
 

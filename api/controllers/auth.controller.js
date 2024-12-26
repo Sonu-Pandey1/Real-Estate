@@ -42,13 +42,13 @@ export const login = async (req, res) => {
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user)
-      return res.status(404).json({ message: "Invalid Credentials1!" });
+      return res.status(401).json({ message: "Invalid Credentialss!" });
 
     // check if the password is correct
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid)
-      return res.status(404).json({ message: "Invalid Credentials!" });
+      return res.status(401).json({ message: "Invalid Credentials!" });
 
     // generat cookie token and send to user
     const age = 1000 * 60 * 60 * 24 * 7;

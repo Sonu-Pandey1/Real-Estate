@@ -24,13 +24,15 @@ function Profile() {
     }
   };
 
+  // todo -- user deleted successfully but when the user have some saved post or creates listings the throughing error handle it later.
+
   const handleDelete = async () => {
     try {
       const response = await axios.delete(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
         {
           withCredentials: true,
         });
-        
+
       console.log(response.data);
       updateUser(null);
       navigate("/");

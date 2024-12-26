@@ -120,7 +120,7 @@ export const addPost  = async (req,res)=>{
 
 
 
-
+// todo still not apply btn to update listing do it later for this create updatelisting page and fetch the cutrrent data and show and ability to modify like update user  .
 export const UpdatePost  = async (req,res)=>{
     try {
         
@@ -132,7 +132,7 @@ export const UpdatePost  = async (req,res)=>{
 
 
 
-
+// todo still not apply btn to delete listing do it later .
 export const DeletePost = async (req,res)=>{
     const id = req.params.id;
     const tokenUserId = req.userId;

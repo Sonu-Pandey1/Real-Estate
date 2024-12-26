@@ -74,7 +74,7 @@ model PostDetail {
 model SavePost {
   id String  @id @default(auto()) @map("_id") @db.ObjectId
   post Post @relation(fields: [postId],references: [id])
-  user User @relation(fields: [userId],references: [id])
+  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
   postId String @db.ObjectId
   userId String @db.ObjectId 
   createdAt  DateTime @default(now())

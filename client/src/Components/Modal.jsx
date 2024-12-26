@@ -7,10 +7,12 @@ import { AuthContext } from "../Context/AuthContext";
 import Oauth from "./Oauth";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
-  console.log(isPopupOpen)
+  // console.log(isPopupOpen)
   // const [isPopupOpen2, setIsPopupOpen2] = useState(false);
   // console.log(isPopupOpen2)
   const [activeTab, setActiveTab] = useState("login");
+  const [errorMessage, setErrorMessage] = useState("");
+  console.log(errorMessage)
   // const [profileImage, setProfileImage] = useState(
   //   "https://cdn-icons-gif.flaticon.com/8797/8797862.gif"
   // );
@@ -66,10 +68,8 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-
     const email = formData.get("email");
     const password = formData.get("password");
-    console.log(email, password);
 
     try {
       const response = await axios.post(
@@ -85,13 +85,18 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
           withCredentials: true,
         }
       );
-      console.log(response.data)
+      // console.log(response.data)
       // localStorage.setItem("user",JSON.stringify(response.data));
       updateUser(response.data);
       setIsPopupOpen(false);
       navigate("/")
-    } catch (error) {
-      console.log(error);
+    } catch (error) { 
+       // Handle the error //todo t thing i used to respons.data.message for error message.
+       if (error.response && error.response.data) {
+        setErrorMessage(error.response.data.message);
+      } else {
+        setErrorMessage("An unexpected error occurred");
+      }
     }
   };
 
@@ -184,6 +189,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   >
                     Signup
                   </button>
+                  
                 </li>
               </ul>
 
@@ -228,6 +234,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                     <NavLink onClick={() => setActiveTab("signup")}>
                       Create Account
                     </NavLink>
+                    {errorMessage && <p className="error-message text-danger">{errorMessage}</p>}
                   </p>
                 </form>
               )}
@@ -312,7 +319,9 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       Log In
                     </NavLink>
                   </p>
+                  
                 </form>
+                
               )}
             </div>
           </div>
