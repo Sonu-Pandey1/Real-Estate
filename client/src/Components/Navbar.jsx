@@ -9,7 +9,7 @@ import { FaSearch } from "react-icons/fa";
 
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
-  const [searchTerm, setSearchTerm] = useState('');
+  const [searchTerm, setSearchTerm] = useState("");
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const navigate = useNavigate();
@@ -17,14 +17,14 @@ function Navbar() {
   const handleSubmit = (e) => {
     e.preventDefault();
     const urlParams = new URLSearchParams(window.location.search);
-    urlParams.set('searchTerm', searchTerm);
+    urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
   };
 
   useEffect(() => {
     const urlParams = new URLSearchParams(location.search);
-    const searchTermFromUrl = urlParams.get('searchTerm');
+    const searchTermFromUrl = urlParams.get("searchTerm");
     if (searchTermFromUrl) {
       setSearchTerm(searchTermFromUrl);
     }
@@ -89,20 +89,20 @@ function Navbar() {
               </li> */}
 
               <form
-          onSubmit={handleSubmit}
-          className='bg-slate-100 p-3 rounded-lg flex items-center'
-        >
-          <input
-            type='text'
-            placeholder='Search...'
-            className='bg-transparent focus:outline-none w-24 sm:w-64'
-            value={searchTerm}
-            onChange={(e) => setSearchTerm(e.target.value)}
-          />
-          <button>
-            <FaSearch className='text-slate-600' />
-          </button>
-        </form>
+                onSubmit={handleSubmit}
+                className="d-flex align-items-center bg-light border rounded-pill shadow-sm  "
+              >
+                <input
+                  type="text"
+                  placeholder="Search..."
+                  className=" border-0 bg-transparent px-1 ms-3  "
+                  value={searchTerm}
+                  onChange={(e) => setSearchTerm(e.target.value)}
+                />
+                <button type="submit" className="btn  ">
+                  <FaSearch />
+                </button>
+              </form>
 
               {/* <li className="nav-item mega-dropdown d-lg-block d-none">
                 <div className="navlinkWrapper">
@@ -148,7 +148,10 @@ function Navbar() {
               <li>
                 {currentUser ? (
                   <div className="user">
-                    <NavLink className=" text-decoration-none text-light" to={"/profile/update"}>
+                    <NavLink
+                      className=" text-decoration-none text-light"
+                      to={"/profile/update"}
+                    >
                       <img
                         src={
                           currentUser.avatar ||
@@ -156,7 +159,7 @@ function Navbar() {
                         }
                         alt="userImg"
                       />
-                      <span >{currentUser.username}</span>
+                      <span>{currentUser.username}</span>
                     </NavLink>
 
                     <NavLink to={"/profile"} className={"profile"}>

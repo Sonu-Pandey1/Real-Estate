@@ -1,8 +1,9 @@
+
+
 import { useContext, useState } from "react";
 import "./ProfileUpdatePage.scss";
 import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
-// import UploadWidget from "../../components/uploadWidget/UploadWidget";
 import axios from "axios";
 import UploadWidget from "../../Components/UploadWidget";
 
@@ -20,29 +21,52 @@ function ProfileUpdatePage() {
     const { username, email, password } = Object.fromEntries(formData);
 
     try {
-      const res = await axios.put(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`, {
-        username,
-        email,
-        password,
-        avatar:avatar[0]
-      },  
-      {
-        withCredentials: true, // Include cookies in the request
-      }
-    );
+      const res = await axios.put(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
+        {
+          username,
+          email,
+          password,
+          avatar: avatar[0],
+        },
+        {
+          withCredentials: true,
+        }
+      );
       updateUser(res.data);
       navigate("/profile");
     } catch (err) {
       console.log(err);
-      setError(err.response.data.message);
+      setError(err.response?.data?.message || "An error occurred.");
     }
   };
 
   return (
     <div className="profileUpdatePage">
-      <div className="formContainer">
+      <div className="sideContainer ">
+        <img
+          src={
+            avatar[0] ||
+            currentUser.avatar ||
+            "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
+          }
+          alt="avatar"
+          className="avatar"
+        />
+        <UploadWidget
+          uwConfig={{
+            cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
+            uploadPreset: `${import.meta.env.VITE_CLOUDNARY_UPLOAD_PRESET}`,
+            multiple: false,
+            maxImageFileSize: 2000000,
+            folder: "avatars",
+          }}
+          setState={setAvatar}
+        />
+      </div>
+      <div className="formContainer shadow-lg">
         <form onSubmit={handleSubmit}>
-          <h1>Update Profile</h1>
+          <h1 className="formTitle">Update Profile</h1>
           <div className="item">
             <label htmlFor="username">Username</label>
             <input
@@ -50,6 +74,7 @@ function ProfileUpdatePage() {
               name="username"
               type="text"
               defaultValue={currentUser.username}
+              placeholder="Enter your username"
             />
           </div>
           <div className="item">
@@ -59,28 +84,21 @@ function ProfileUpdatePage() {
               name="email"
               type="email"
               defaultValue={currentUser.email}
+              placeholder="Enter your email"
             />
           </div>
           <div className="item">
             <label htmlFor="password">Password</label>
-            <input id="password" name="password" type="password" />
+            <input
+              id="password"
+              name="password"
+              type="password"
+              placeholder="Enter your new password"
+            />
           </div>
-          <button>Update</button>
-          {error && <span>error</span>}
+          <button className="submitButton">Update</button>
+          {error && <span className="errorMessage">{error}</span>}
         </form>
-      </div>
-      <div className="sideContainer">
-        <img src={avatar[0] || currentUser.avatar || "https://cdn-icons-gif.flaticon.com/17626/17626903.gif" } alt="avatar" className="avatar" />
-        <UploadWidget
-          uwConfig={{
-            cloudName:`${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
-            uploadPreset: `${import.meta.env.VITE_CLOUDNARY_UPLOAD_PRESET}`,
-            multiple: false,
-            maxImageFileSize: 2000000,
-            folder: "avatars",
-          }}
-          setState={setAvatar}
-        />
       </div>
     </div>
   );

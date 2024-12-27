@@ -31,6 +31,23 @@
     position: relative;
   }
 
+  form{
+    input{
+      background-color: transparent;
+      border: none;
+      // color: white;
+      outline: none;
+      transition: all 0.3s ease-in-out;
+      border-right: 10px solid rgb(216, 23, 23);
+    }
+    button{
+      border: none;
+      
+    }
+
+    
+  }
+
   .navlink {
     color: $lightwhite;
     text-decoration: none;
