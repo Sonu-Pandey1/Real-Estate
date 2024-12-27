@@ -1,64 +1,72 @@
-import { createContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
+import "./UploadWidget.scss"; // Import styling for the widget
 
-// Create a context to manage the script loading state
-const CloudinaryScriptContext = createContext();
-
-function UploadWidget({ uwConfig,  setState }) {
+function UploadWidget({ uwConfig, setState }) {
   const [loaded, setLoaded] = useState(false);
+  const [widget, setWidget] = useState(null);
 
   useEffect(() => {
-    // Check if the script is already loaded
-    if (!loaded) {
-      const uwScript = document.getElementById("uw");
-      if (!uwScript) {
-        // If not loaded, create and load the script
+    const initializeScript = () => {
+      const existingScript = document.getElementById("cloudinary-upload-widget-script");
+      if (!existingScript) {
         const script = document.createElement("script");
-        script.setAttribute("async", "");
-        script.setAttribute("id", "uw");
+        script.id = "cloudinary-upload-widget-script";
         script.src = "https://upload-widget.cloudinary.com/global/all.js";
-        script.addEventListener("load", () => setLoaded(true));
+        script.async = true;
+        script.onload = () => setLoaded(true);
+        script.onerror = () => console.error("Failed to load Cloudinary upload widget script.");
         document.body.appendChild(script);
       } else {
-        // If already loaded, update the state
         setLoaded(true);
       }
-    }
-  }, [loaded]);
+    };
 
-  const initializeCloudinaryWidget = () => {
-    if (loaded) {
-      var myWidget = window.cloudinary.createUploadWidget(
+    initializeScript();
+  }, []);
+
+  useEffect(() => {
+    if (loaded && !widget) {
+      // Initialize the Cloudinary upload widget once the script is loaded
+      const cloudinaryWidget = window.cloudinary?.createUploadWidget(
         uwConfig,
         (error, result) => {
-          if (!error && result && result.event === "success") {
-            console.log("Done! Here is the image info: ", result.info);
-            setState(prev =>[...prev,result.info.secure_url])
+          if (error) {
+            console.error("Cloudinary Widget Error:", error);
+          }
+          if (result && result.event === "success") {
+            console.log("Uploaded image info:", result.info);
+            setState((prev) => [...prev, result.info.secure_url]);
           }
         }
       );
+      setWidget(cloudinaryWidget);
+    }
+  }, [loaded, uwConfig, setState, widget]);
 
-      document.getElementById("upload_widget").addEventListener(
-        "click",
-        function () {
-          myWidget.open();
-        },
-        false
-      );
+  const handleUploadClick = () => {
+    if (widget) {
+      widget.open();
+    } else {
+      console.error("Upload widget is not initialized yet.");
     }
   };
 
   return (
-    <CloudinaryScriptContext.Provider value={{ loaded }}>
-      <button
-        id="upload_widget"
-        className="cloudinary-button"
-        onClick={initializeCloudinaryWidget}
-      >
-        Upload
-      </button>
-    </CloudinaryScriptContext.Provider>
+    <button
+      id="upload_widget"
+      className="upload-widget-button"
+      onClick={handleUploadClick}
+      disabled={!loaded}
+    >
+      {loaded ? "Upload Image" : "Loading..."}
+    </button>
   );
 }
 
+UploadWidget.propTypes = {
+  uwConfig: PropTypes.object.isRequired, // Cloudinary widget configuration
+  setState: PropTypes.func.isRequired, // Function to update the parent state
+};
+
 export default UploadWidget;
-export { CloudinaryScriptContext };

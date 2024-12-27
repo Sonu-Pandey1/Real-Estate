@@ -1,5 +1,3 @@
-
-
 import { useContext, useState } from "react";
 import "./ProfileUpdatePage.scss";
 import { AuthContext } from "../../Context/AuthContext";
@@ -58,11 +56,30 @@ function ProfileUpdatePage() {
             cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
             uploadPreset: `${import.meta.env.VITE_CLOUDNARY_UPLOAD_PRESET}`,
             multiple: false,
-            maxImageFileSize: 2000000,
+            maxImageFileSize: 5000000,
             folder: "avatars",
+            clientAllowedFormats: ["image"],
+            styles: {
+              palette: {
+                // window: "#0018ff", // Background color of the popup
+                // sourceBg: "#FFFFFF", // Background color of source buttons
+                windowBorder: "#0018ff", // Border color of the popup
+                inactiveTabIcon: "#C4C5CC", // Color for inactive tabs
+                link: "#0078FF", // Hyperlink color
+              }
+            },
           }}
           setState={setAvatar}
         />
+        {/* Clear Avatar Button */}
+        {avatar.length > 0 && (
+          <button
+            onClick={() => setAvatar([])}
+            className="clearAvatarButton "
+          >
+            Clear Avatar
+          </button>
+        )}
       </div>
       <div className="formContainer shadow-lg">
         <form onSubmit={handleSubmit}>
