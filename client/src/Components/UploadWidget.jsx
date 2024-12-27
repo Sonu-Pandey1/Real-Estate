@@ -55,7 +55,7 @@ function UploadWidget({ uwConfig, setState }) {
   return (
     <button
       id="upload_widget"
-      className="upload-widget-button"
+      className=" btn btn-outline-primary "
       onClick={handleUploadClick}
       disabled={!loaded}
     >
