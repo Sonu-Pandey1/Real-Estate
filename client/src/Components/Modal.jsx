@@ -7,36 +7,15 @@ import { AuthContext } from "../Context/AuthContext";
 import Oauth from "./Oauth";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
-  // console.log(isPopupOpen)
-  // const [isPopupOpen2, setIsPopupOpen2] = useState(false);
-  // console.log(isPopupOpen2)
   const [activeTab, setActiveTab] = useState("login");
   const [errorMessage, setErrorMessage] = useState("");
-  console.log(errorMessage)
-  // const [profileImage, setProfileImage] = useState(
-  //   "https://cdn-icons-gif.flaticon.com/8797/8797862.gif"
-  // );
-  // const [formData,setFormData] =
-
   const navigate = useNavigate();
-    const {updateUser} = useContext(AuthContext)
-
-  // const handleProfileImageChange = (event) => {
-  //   const file = event.target.files[0];
-  //   if (file) {
-  //     const reader = new FileReader();
-  //     reader.onload = () => {
-  //       setProfileImage(reader.result);
-  //     };
-  //     reader.readAsDataURL(file);
-  //   }
-  // };
+  const { updateUser } = useContext(AuthContext);
 
   const handleRegister = async (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
-
     const username = formData.get("username");
     const email = formData.get("email");
     const password = formData.get("password");
@@ -58,7 +37,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
       );
       console.log(response.data);
       setIsPopupOpen(false);
-      navigate("/profile")
+      navigate("/profile");
     } catch (error) {
       console.log(error);
     }
@@ -85,21 +64,19 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
           withCredentials: true,
         }
       );
-      // console.log(response.data)
-      // localStorage.setItem("user",JSON.stringify(response.data));
+
       updateUser(response.data);
       setIsPopupOpen(false);
-      navigate("/")
-    } catch (error) { 
-       // Handle the error //todo t thing i used to respons.data.message for error message.
-       if (error.response && error.response.data) {
+      navigate("/");
+    } catch (error) {
+      //todo t thing i used to respons.data.message for error message.
+      if (error.response && error.response.data) {
         setErrorMessage(error.response.data.message);
       } else {
         setErrorMessage("An unexpected error occurred");
       }
     }
   };
-
 
   return (
     <>
@@ -133,7 +110,6 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                 borderRadius: "10px",
                 width: "90%",
                 maxWidth: "400px",
-                //   height:"100%",
                 maxHeight: "600px",
                 position: "relative",
               }}
@@ -189,13 +165,11 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   >
                     Signup
                   </button>
-                  
                 </li>
               </ul>
 
               {activeTab === "login" && (
                 <form onSubmit={handleLogin}>
-                  {/* <h4 className="text-center mb-3">Login</h4> */}
                   <div className="mb-3">
                     <label htmlFor="loginEmail" className="form-label">
                       Email
@@ -225,46 +199,30 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   <NavLink className={" text-decoration-none"}>
                     <p className=" text-end">Forgot password?</p>
                   </NavLink>
-                  <button type="submit" className={`btn btn-primary w-100 `}> 
+                  <button type="submit" className={`btn btn-primary w-100 `}>
                     Login
                   </button>
-                  <Oauth isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} ra={"ram"}/>
+                  <Oauth
+                    isPopupOpen={isPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
+                    ra={"ram"}
+                  />
                   <p className="text-center pt-3">
                     Not a Member?{" "}
                     <NavLink onClick={() => setActiveTab("signup")}>
                       Create Account
                     </NavLink>
-                    {errorMessage && <p className="error-message text-danger">{errorMessage}</p>}
+                    {errorMessage && (
+                      <p className="error-message text-danger">
+                        {errorMessage}
+                      </p>
+                    )}
                   </p>
                 </form>
               )}
 
               {activeTab === "signup" && (
                 <form onSubmit={handleRegister}>
-                  {/* <h4 className="text-center mb-3">Signup</h4> */}
-                  {/* <div className="mb-3 text-center">
-                    <label htmlFor="signupPhoto">
-                      <img
-                        src={profileImage}
-                        alt="Profile"
-                        className="rounded-circle border border-info "
-                        style={{
-                          width: "80px",
-                          height: "80px",
-                          objectFit: "cover",
-                          cursor: "pointer",
-                        }}
-                        title="Upload Profile Image"
-                      />
-                    </label>
-                    <input
-                      type="file"
-                      id="signupPhoto"
-                      className="form-control"
-                      onChange={handleProfileImageChange}
-                      style={{ display: "none" }}
-                    />
-                  </div> */}
                   <div className="mb-3">
                     <label htmlFor="signupUsername" className="form-label">
                       Username
@@ -307,8 +265,11 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                   <button type="submit" className="btn btn-primary w-100">
                     Signup
                   </button>
-                  <Oauth isPopupOpen={isPopupOpen} setIsPopupOpen={setIsPopupOpen} ra={"ram"}/>
-              
+                  <Oauth
+                    isPopupOpen={isPopupOpen}
+                    setIsPopupOpen={setIsPopupOpen}
+                    ra={"ram"}
+                  />
 
                   <p className="text-center pt-3">
                     Already have an account?
@@ -319,9 +280,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       Log In
                     </NavLink>
                   </p>
-                  
                 </form>
-                
               )}
             </div>
           </div>
@@ -330,5 +289,3 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
     </>
   );
 }
-
-

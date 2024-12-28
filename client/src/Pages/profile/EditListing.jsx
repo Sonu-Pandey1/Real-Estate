@@ -31,6 +31,7 @@ function EditListing() {
   const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
+  const [hasPreviousImages, setHasPreviousImages] = useState(false);
   const navigate = useNavigate();
   const { id } = useParams();
   // console.log(images);
@@ -43,8 +44,6 @@ function EditListing() {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`
         );
         const post = response.data;
-        // console.log(post);
-
         // Ensure postDetail exists before accessing properties
         const postDetail = post.postDetail || {};
 
@@ -60,8 +59,6 @@ function EditListing() {
           property: post.property || "",
           propertyCondition: post.propertyCondition || "",
           parking: post.parking || "",
-          //   lat: parseFloat(post.lat) || 0.0,
-          //   long: parseFloat(post.long) || 0.0,
           lat: post.lat || "",
           long: post.long || "",
           utilities: postDetail.utilities || "",
@@ -72,14 +69,15 @@ function EditListing() {
           bus: postDetail.bus || "",
           restaurant: postDetail.restaurant || "",
         });
-        setValue(postDetail.desc || ""); // Populate description
-        setImages(post.images || []); // Populate images
+
+        setValue(postDetail.desc || "");
+        setImages(post.images || []);
+        setHasPreviousImages(post.images && post.images.length > 0);
       } catch (err) {
         console.error("Error fetching post data:", err);
         setError("Failed to load post data. Please try again.");
       }
     };
-
     fetchPost();
   }, [id]);
 
@@ -151,6 +149,12 @@ function EditListing() {
       ...prevState,
       [name]: value,
     }));
+  };
+
+  // Reset the images to empty
+  const handleResetImages = () => {
+    setImages([]);
+    setHasPreviousImages(false);
   };
 
   return (
@@ -288,6 +292,11 @@ function EditListing() {
                 </div>
               )}
             </div>
+            {hasPreviousImages && (
+              <button onClick={handleResetImages} className="btn btn-outline-danger me-2">
+                Reset Images
+              </button>
+            )}
             <UploadWidget
               uwConfig={{
                 cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,

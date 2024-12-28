@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./UploadWidget.scss"; // Import styling for the widget
+import "./UploadWidget.scss"; 
 
 function UploadWidget({ uwConfig, setState }) {
   const [loaded, setLoaded] = useState(false);
@@ -35,7 +35,7 @@ function UploadWidget({ uwConfig, setState }) {
             console.error("Cloudinary Widget Error:", error);
           }
           if (result && result.event === "success") {
-            console.log("Uploaded image info:", result.info);
+            // console.log("Uploaded image info:", result.info);
             setState((prev) => [...prev, result.info.secure_url]);
           }
         }
@@ -65,8 +65,8 @@ function UploadWidget({ uwConfig, setState }) {
 }
 
 UploadWidget.propTypes = {
-  uwConfig: PropTypes.object.isRequired, // Cloudinary widget configuration
-  setState: PropTypes.func.isRequired, // Function to update the parent state
+  uwConfig: PropTypes.object.isRequired, 
+  setState: PropTypes.func.isRequired, 
 };
 
 export default UploadWidget;
