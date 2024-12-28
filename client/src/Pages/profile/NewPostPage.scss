@@ -1,201 +1,4 @@
-// .newPostPage {
-//     height: 100%;
-//     display: flex;
-  
-//     .formContainer {
-//       flex: 3;
-//       overflow: scroll;
-  
-//       .wrapper {
-//         margin: 30px 50px 100px 0px;
-  
-//         form {
-//           display: flex;
-//           justify-content: space-between;
-//           flex-wrap: wrap;
-//           gap: 20px;
-  
-//           .item {
-//             width: 30%;
-//             display: flex;
-//             flex-direction: column;
-//             gap: 5px;
-  
-//             label {
-//             }
-  
-//             input {
-//               padding: 20px;
-//               border-radius: 5px;
-//               border: 1px solid gray;
-//             }
-  
-//             select {
-//               padding: 19px;
-//             }
-  
-//             &.description {
-//               width: 100%;
-//               height: 320px;
-  
-//               .quill > .ql-container > .ql-editor{
-//                 height: 200px;
-//                 font-size: 16px;
-//               }
-//             }
-//           }
-//           .sendButton {
-//             width: 30%;
-//             border-radius: 5px;
-//             border: none;
-//             background-color: teal;
-//             color: white;
-//             font-weight: bold;
-//             cursor: pointer;
-//           }
-//         }
-//       }
-//     }
-  
-//     .sideContainer {
-//       flex: 2;
-//       background-color: #fcf5f3;
-//       display: flex;
-//       flex-direction: column;
-//       gap: 20px;
-//       align-items: center;
-//       justify-content: center;
-  
-//       img {
-//         width: 50%;
-//         height: 180px;
-//         object-fit: cover;
-//         border-radius: 5px;
-//       }
-//     }
-//   }
 
-
-// .newPostPage {
-//   display: flex;
-//   // flex-direction: column;
-//   gap: 30px;
-//   padding: 50px;
-//   height: 100%;
-
-//   .formContainer {
-//     display: flex;
-//     flex-direction: column;
-//     gap: 30px;
-//     flex: 1;
-
-//     h1 {
-//       font-size: 1.6rem;
-//       color: #333;
-//       margin-top: 20px;
-//       text-align: center;
-//     }
-
-//     .form {
-//       display: flex;
-//       flex-direction: column;
-//       gap: 20px;
-
-//       .item {
-//         display: flex;
-//         flex-direction: column;
-//         gap: 5px;
-
-//         label {
-//           font-size: 1rem;
-//           color: #000000;
-//         }
-
-//         input,
-//         select {
-//           padding: 12px;
-//           border-radius: 8px;
-//           border: 1px solid #ccc;
-//           font-size: 1rem;
-//         }
-
-//         .description textarea {
-//           padding: 12px;
-//           font-size: 1rem;
-//         }
-//       }
-
-//       .submitSection {
-//         display: flex;
-//         justify-content: flex-end;
-//         width: 100%;
-
-//         .sendButton {
-//           padding: 12px 20px;
-//           background-color: #007bff;
-//           color: white;
-//           border: none;
-//           border-radius: 8px;
-//           font-size: 1.2rem;
-//           cursor: pointer;
-
-//           &:hover {
-//             background-color: #0056b3;
-//           }
-//         }
-//       }
-//     }
-//   }
-
-//   .sideContainer {
-//     background-color: #f9f9f9;
-//     padding: 20px;
-//     border-radius: 8px;
-//     display: flex;
-//     flex-direction: column;
-//     gap: 20px;
-
-//     h3 {
-//       text-align: center;
-//       font-size: 1.5rem;
-//       color: #333;
-//     }
-
-//     .imagesPreview {
-//       display: flex;
-//       gap: 10px;
-//       flex-wrap: wrap;
-
-//       img {
-//         width: 120px;
-//         height: 120px;
-//         object-fit: cover;
-//         border-radius: 8px;
-//       }
-//     }
-//   }
-
-//   .errorMessage {
-//     color: red;
-//     font-size: 1rem;
-//     text-align: center;
-//   }
-
-//   @media (max-width: 768px) {
-//     .newPostPage {
-//       flex-direction: column;
-//     }
-
-//     .formContainer,
-//     .sideContainer {
-//       width: 100%;
-//     }
-
-//     .form {
-//       gap: 15px;
-//     }
-//   }
-// }
 
 .newPostPage {
   padding: 2rem;
@@ -259,6 +62,10 @@
           border: 1px solid #ced4da;
           border-radius: 4px;
           font-size: 1rem;
+
+          &::placeholder{
+            font-size: 0.9rem;
+          }
         }
 
         input:focus,
@@ -267,6 +74,12 @@
           border-color: #064ee9;
           box-shadow: 0 0 0 0.1rem rgba(0, 123, 255, 0.20);
         }
+
+        .custom-select {
+          font-size: 0.9rem; 
+        }
+       
+        
       }
 
       .description {

@@ -38,6 +38,9 @@ model Post {
   long  String
   type Type
   property Property
+  // offer             Boolean?
+  propertyCondition String? 
+  parking           String? 
   user User @relation(fields: [userId],references: [id])
   userId String @db.ObjectId
   postDetail PostDetail?
@@ -46,16 +49,21 @@ model Post {
 }
 
 enum Type {
-  buy 
+  buy
   rent
+  commercial
+  plots
+  co_living
 }
 
 enum Property {
-  apartment 
+  apartment
   house
-  land
   condo
+  land
+  shop
 }
+
 
 model PostDetail {
   id String  @id @default(auto()) @map("_id") @db.ObjectId

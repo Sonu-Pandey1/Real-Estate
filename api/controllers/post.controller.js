@@ -94,6 +94,81 @@ import jwt from "jsonwebtoken"
   
 
 
+// export const getListings = async (req, res) => {
+//     try {
+//       // Pagination
+//       const limit = parseInt(req.query.limit) || 9;
+//       const startIndex = parseInt(req.query.startIndex) || 0;
+  
+//       // Filtering parameters
+//       let type = req.query.type === undefined || req.query.type === "all" ? ['buy', 'rent'] : [req.query.type];
+//       let property = req.query.property; // Property could be something like apartment, house, etc.
+//       let city = req.query.city; // City filter
+//       let minPrice = parseInt(req.query.minPrice) || 0;  // Min price filter
+//       let maxPrice = parseInt(req.query.maxPrice) || 10000000;  // Max price filter
+  
+//       // Search term (fuzzy search)
+//       const searchTerm = req.query.searchTerm || '';
+  
+//       // Sorting parameters
+//       const sort = req.query.sort || 'createdAt';
+//       const order = req.query.order || 'desc';
+  
+//       // Build query object
+//       const query = {
+//         where: {
+//           OR: [
+//             {
+//               title: {
+//                 contains: searchTerm,
+//                 mode: 'insensitive', // Case insensitive search
+//               },
+//             },
+//             {
+//               city: {
+//                 contains: searchTerm,
+//                 mode: 'insensitive',
+//               },
+//             },
+//             {
+//               address: {
+//                 contains: searchTerm,
+//                 mode: 'insensitive',
+//               },
+//             },
+//           ],
+//           type: {
+//             in: type, // Pass the array or single value directly to 'in'
+//           },
+//           property: property || undefined,  // Handle property filtering
+//           city: city || undefined,  // Handle city filtering
+//           price: {
+//             gte: minPrice,  // Greater than or equal to min price
+//             lte: maxPrice,  // Less than or equal to max price
+//           },
+//         },
+//         orderBy: {
+//           [sort]: order, // Dynamic sorting based on the query parameter
+//         },
+//         take: limit, // Pagination limit
+//         skip: startIndex, // Pagination start
+//       };
+  
+//       // Query Prisma for listings with the given filters
+//       const listings = await prisma.post.findMany(query);
+  
+//       // Return the listings
+//       return res.status(200).json(listings);
+//     } catch (error) {
+//       console.log(error);
+//       return res.status(500).json({ message: 'Internal server error' });
+//     }
+//   };
+  
+
+
+
+
 export const getListings = async (req, res) => {
     try {
       // Pagination
@@ -101,67 +176,51 @@ export const getListings = async (req, res) => {
       const startIndex = parseInt(req.query.startIndex) || 0;
   
       // Filtering parameters
-      let type = req.query.type === undefined || req.query.type === "all" ? ['buy', 'rent'] : [req.query.type];
-      let property = req.query.property; // Property could be something like apartment, house, etc.
-      let city = req.query.city; // City filter
-      let minPrice = parseInt(req.query.minPrice) || 0;  // Min price filter
-      let maxPrice = parseInt(req.query.maxPrice) || 10000000;  // Max price filter
+      const type = req.query.type === undefined || req.query.type === "all" ? ["buy", "rent"] : [req.query.type];
+      const property = req.query.property || undefined; // Property filter
+      const city = req.query.city || undefined; // City filter
+      const minPrice = parseInt(req.query.minPrice) || 0; // Minimum price
+      const maxPrice = parseInt(req.query.maxPrice) || 10000000; // Maximum price
+    //   const offer = req.query.offer ? req.query.offer === "true" : undefined; // Convert query param to Boolean
   
       // Search term (fuzzy search)
-      const searchTerm = req.query.searchTerm || '';
+      const searchTerm = req.query.searchTerm || "";
   
       // Sorting parameters
-      const sort = req.query.sort || 'createdAt';
-      const order = req.query.order || 'desc';
+      const sort = req.query.sort || "createdAt";
+      const order = req.query.order || "desc";
   
       // Build query object
-      const query = {
-        where: {
-          OR: [
-            {
-              title: {
-                contains: searchTerm,
-                mode: 'insensitive', // Case insensitive search
-              },
-            },
-            {
-              city: {
-                contains: searchTerm,
-                mode: 'insensitive',
-              },
-            },
-            {
-              address: {
-                contains: searchTerm,
-                mode: 'insensitive',
-              },
-            },
-          ],
-          type: {
-            in: type, // Pass the array or single value directly to 'in'
+      const whereClause = {
+        AND: [
+          {
+            OR: [
+              { title: { contains: searchTerm, mode: "insensitive" } },
+              { city: { contains: searchTerm, mode: "insensitive" } },
+              { address: { contains: searchTerm, mode: "insensitive" } },
+            ],
           },
-          property: property || undefined,  // Handle property filtering
-          city: city || undefined,  // Handle city filtering
-          price: {
-            gte: minPrice,  // Greater than or equal to min price
-            lte: maxPrice,  // Less than or equal to max price
-          },
-        },
-        orderBy: {
-          [sort]: order, // Dynamic sorting based on the query parameter
-        },
-        take: limit, // Pagination limit
-        skip: startIndex, // Pagination start
+          { type: { in: type } },
+          property ? { property } : undefined,
+          city ? { city } : undefined,
+        //   offer !== undefined ? { offer } : undefined,
+          { price: { gte: minPrice, lte: maxPrice } },
+        ].filter(Boolean), // Remove undefined filters
       };
   
-      // Query Prisma for listings with the given filters
-      const listings = await prisma.post.findMany(query);
+      // Query Prisma for listings
+      const listings = await prisma.post.findMany({
+        where: whereClause,
+        orderBy: { [sort]: order },
+        take: limit,
+        skip: startIndex,
+      });
   
       // Return the listings
       return res.status(200).json(listings);
     } catch (error) {
-      console.log(error);
-      return res.status(500).json({ message: 'Internal server error' });
+      console.error(error);
+      return res.status(500).json({ message: "Internal server error" });
     }
   };
   

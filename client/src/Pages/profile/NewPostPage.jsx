@@ -1,3 +1,5 @@
+
+
 import { useState } from "react";
 import "./NewPostPage.scss";
 import ReactQuill from "react-quill";
@@ -17,6 +19,7 @@ function NewPostPage() {
     const formData = new FormData(e.target);
     const inputs = Object.fromEntries(formData);
 
+    // inputs.offer = inputs.offer === "on";
     try {
       const res = await axios.post(
         `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
@@ -30,6 +33,9 @@ function NewPostPage() {
             bathroom: parseInt(inputs.bathroom),
             type: inputs.type,
             property: inputs.property,
+            propertyCondition: inputs.propertyCondition,
+            parking: inputs.parking,
+            // offer: inputs.offer  , // Convert checkbox value to boolean
             lat: inputs.latitude,
             long: inputs.longitude,
             images: images,
@@ -56,6 +62,71 @@ function NewPostPage() {
     }
   };
 
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  
+  //   // Collect form data
+  //   const formData = new FormData(e.target);
+  //   const inputs = Object.fromEntries(formData);
+  
+  //   // Convert checkbox and numeric fields to appropriate types
+  //   inputs.offer = inputs.offer === "true" || inputs.offer === true; // Convert checkbox value to boolean
+  //   inputs.price = parseInt(inputs.price, 10);
+  //   inputs.bedroom = parseInt(inputs.bedroom, 10);
+  //   inputs.bathroom = parseInt(inputs.bathroom, 10);
+  //   inputs.size = parseInt(inputs.size || 0, 10); // Optional field, default to 0 if empty
+  //   inputs.school = parseInt(inputs.school || 0, 10); // Optional field, default to 0 if empty
+  //   inputs.bus = parseInt(inputs.bus || 0, 10); // Optional field, default to 0 if empty
+  //   inputs.restaurant = parseInt(inputs.restaurant || 0, 10); // Optional field, default to 0 if empty
+  
+  //   // Prepare payload
+  //   const payload = {
+  //     postData: {
+  //       title: inputs.title,
+  //       price: inputs.price,
+  //       address: inputs.address,
+  //       city: inputs.city,
+  //       bedroom: inputs.bedroom,
+  //       bathroom: inputs.bathroom,
+  //       type: inputs.type,
+  //       property: inputs.property,
+  //       propertyCondition: inputs.propertyCondition,
+  //       parking: inputs.parking,
+  //       offer: inputs.offer,
+  //       lat: inputs.latitude,
+  //       long: inputs.longitude,
+  //       images: images, // Ensure 'images' is correctly managed in component state
+  //     },
+  //     postDetail: {
+  //       desc: value, // Assuming 'value' is managed by ReactQuill's onChange handler
+  //       utilities: inputs.utilities,
+  //       pet: inputs.pet,
+  //       income: inputs.income,
+  //       size: inputs.size,
+  //       school: inputs.school,
+  //       bus: inputs.bus,
+  //       restaurant: inputs.restaurant,
+  //     },
+  //   };
+  
+  //   // Send data to the backend
+  //   try {
+  //     const res = await axios.post(
+  //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
+  //       payload,
+  //       { withCredentials: true } // Include credentials for authentication
+  //     );
+  
+  //     // Navigate to the newly created post's profile
+  //     navigate("/profile/" + res.data.id);
+  //   } catch (err) {
+  //     console.error("Error while submitting the post:", err);
+  //     setError("Error while submitting the post. Please try again.");
+  //   }
+  // };
+  
+
+  
   return (
     <div className="newPostPage">
       <div className="container">
@@ -106,26 +177,8 @@ function NewPostPage() {
                   />
                 </div>
                 <div className="item">
-                  <label htmlFor="bedroom">Bedrooms</label>
-                  <input
-                    min={1}
-                    id="bedroom"
-                    name="bedroom"
-                    type="number"
-                    placeholder="Enter number of bedrooms"
-                    required
-                  />
-                </div>
-                <div className="item">
-                  <label htmlFor="bathroom">Bathrooms</label>
-                  <input
-                    min={1}
-                    id="bathroom"
-                    name="bathroom"
-                    type="number"
-                    placeholder="Enter number of bathrooms"
-                    required
-                  />
+                  <label htmlFor="size">Total Size (sqft)</label>
+                  <input min={0} id="size" name="size" type="number" placeholder="Enter Size" />
                 </div>
                 <div className="item">
                   <label htmlFor="latitude">Latitude</label>
@@ -148,24 +201,68 @@ function NewPostPage() {
                   />
                 </div>
                 <div className="item">
+                  <label htmlFor="bedroom">Bedrooms</label>
+                  <input
+                    min={1}
+                    id="bedroom"
+                    name="bedroom"
+                    type="number"
+                    placeholder="Enter number of bedrooms"
+                    required
+                  />
+                </div>
+                <div className="item">
+                  <label htmlFor="bathroom">Bathrooms</label>
+                  <input
+                    min={1}
+                    id="bathroom"
+                    name="bathroom"
+                    type="number"
+                    placeholder="Enter number of bathrooms"
+                    required
+                  />
+                </div>
+                <div className="item">
                   <label htmlFor="type">Listing Type</label>
-                  <select name="type" required>
-                    <option value="rent">Rent</option>
-                    <option value="buy">Buy</option>
+                  <select name="type" className="custom-select" required>
+                    <option className="" value="rent">Buy</option>
+                    <option value="buy">Rent</option>
+                    <option value="buy">Commercial</option>
+                    <option value="buy">Plots</option>
+                    <option value="buy">Pg / Co-living</option>
                   </select>
                 </div>
                 <div className="item">
                   <label htmlFor="property">Property Type</label>
-                  <select name="property" required>
+                  <select name="property" className="custom-select" required>
                     <option value="apartment">Apartment</option>
                     <option value="house">House</option>
-                    <option value="condo">Condo</option>
-                    <option value="land">Land</option>
+                    <option value="condo">Vila</option>
+                    <option value="land">Plot</option>
+                    <option value="land">Shop</option>
                   </select>
                 </div>
                 <div className="item">
+                  <label htmlFor="propertyCondition">Property Condition</label>
+                  <select name="propertyCondition" className="custom-select" required>
+                    <option value="row">Row</option>
+                    <option value="semi-furnished">Semi-Furnished</option>
+                    <option value="furnished">Furnished</option>
+                  </select>
+                </div>
+                <div className="item">
+                  <label htmlFor="parking">Parking</label>
+                  <select name="parking" className="custom-select" required>
+                    <option value="none">None</option>
+                    <option value="street">Covered</option>
+                    <option value="street">Open</option>
+                    <option value="garage">Garage</option>
+                  </select>
+                </div>
+
+                <div className="item">
                   <label htmlFor="utilities">Utilities Policy</label>
-                  <select name="utilities">
+                  <select name="utilities" className="custom-select">
                     <option value="owner">Owner is responsible</option>
                     <option value="tenant">Tenant is responsible</option>
                     <option value="shared">Shared</option>
@@ -173,7 +270,7 @@ function NewPostPage() {
                 </div>
                 <div className="item">
                   <label htmlFor="pet">Pet Policy</label>
-                  <select name="pet">
+                  <select name="pet" className="custom-select">
                     <option value="allowed">Allowed</option>
                     <option value="not-allowed">Not Allowed</option>
                   </select>
@@ -188,40 +285,41 @@ function NewPostPage() {
                   />
                 </div>
                 <div className="item">
-                  <label htmlFor="size">Total Size (sqft)</label>
-                  <input min={0} id="size" name="size" type="number" />
-                </div>
-                <div className="item">
                   <label htmlFor="school">School</label>
-                  <input min={0} id="school" name="school" type="number" />
+                  <input min={0} id="school" name="school" type="number" placeholder="Enter school distance" />
                 </div>
                 <div className="item">
                   <label htmlFor="bus">Bus</label>
-                  <input min={0} id="bus" name="bus" type="number" />
+                  <input min={0} id="bus" name="bus" type="number" placeholder="Enter bus-stop distance" />
                 </div>
                 <div className="item">
                   <label htmlFor="restaurant">Restaurant</label>
-                  <input
-                    min={0}
-                    id="restaurant"
-                    name="restaurant"
-                    type="number"
-                  />
+                  <input min={0} id="restaurant" name="restaurant" type="number" placeholder="Enter restaurant distance" />
                 </div>
+                {/* <div className="item">
+                  <label htmlFor="offer" className="form-check-label">Offer Available
+                  </label>
+                    <input
+                      type="checkbox"
+                      name="offer"
+                      id="offer"
+                      className="form-check-input ms-0 mt-2"
+                    />
+                    
+                </div> */}
               </div>
-
               <div className="item description">
                 <label htmlFor="desc">Description</label>
-                <ReactQuill theme="snow" onChange={setValue} value={value} />
+                <ReactQuill theme="snow" onChange={setValue} value={value} placeholder="Enter Your Description Here... " />
               </div>
-
               <div className="submitSection">
-                <button className="btn btn-outline-primary">Post Listing</button>
+                <button className="btn btn-outline-primary">
+                  Post Listing
+                </button>
                 {error && <span className="errorMessage">{error}</span>}
               </div>
             </form>
           </div>
-
           <div className="sideContainer col-lg-4 text-center">
             <h3>Upload Images</h3>
             <div className="imagesPreview">
@@ -240,7 +338,7 @@ function NewPostPage() {
               )}
             </div>
             <div className="mt-4">
-              <UploadWidget
+            <UploadWidget
                 uwConfig={{
                   cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
                   uploadPreset: `${
@@ -249,6 +347,13 @@ function NewPostPage() {
                   multiple: true,
                   maxImageFileSize: 5000000,
                   folder: "posts",
+                  styles: {
+                    palette: {
+                      windowBorder: "#0018ff", 
+                      inactiveTabIcon: "#C4C5CC", 
+                      link: "#0078FF",
+                    },
+                  },
                 }}
                 setState={setImages}
               />
