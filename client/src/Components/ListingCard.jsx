@@ -1,4 +1,3 @@
-
 /* eslint-disable react/prop-types */
 import "./ListingCard.scss";
 import { IoLocationOutline } from "react-icons/io5";
@@ -44,7 +43,7 @@ export default function PropertyCard({ item, type }) {
     const shareData = {
       title: item.title,
       text: `${item.title} - ${item.address}\nCheck out this amazing property listed for ${item.price}!`,
-      url: `${window.location.origin}/${item.id}`, 
+      url: `${window.location.origin}/${item.id}`,
     };
 
     if (navigator.share) {
@@ -62,20 +61,29 @@ export default function PropertyCard({ item, type }) {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    navigate(`/edit-listing/${item.id}`);
+    // navigate(`ram`);
+    navigate(`edit-post/${item.id}`);
   };
 
   const handleDelete = async (e) => {
     e.preventDefault();
-    try {
-      const response = await axios.delete(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
-        { withCredentials: true }
-      );
-      console.log(response.data.message);
-      window.location.reload(); 
-    } catch (error) {
-      console.log(error);
+
+    const confirmation = window.confirm(
+      "Are you sure you want to delete your post? This action cannot be undone."
+    );
+    if (confirmation) {
+      try {
+        const response = await axios.delete(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
+          { withCredentials: true }
+        );
+        console.log(response.data.message);
+        window.location.reload();
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      console.log("Listing deletion canceled.");
     }
   };
 
@@ -100,7 +108,13 @@ export default function PropertyCard({ item, type }) {
   return (
     <NavLink to={`${item.id}`} className={"text-decoration-none"}>
       <div className="listingCardContainer">
-        <div className={`card custom-card ${type === "myListings" || type === "savedListings" ? "ProfileCard" : ""}`}>
+        <div
+          className={`card custom-card ${
+            type === "myListings" || type === "savedListings"
+              ? "ProfileCard"
+              : ""
+          }`}
+        >
           <div className="card-img-container">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
@@ -167,16 +181,23 @@ export default function PropertyCard({ item, type }) {
                     </div>
                   </div>
                 </div>
-                {currentUser && (type === "myListings" || type === "savedListings") && (
-                  <div className="card-buttons mt-3">
-                    <button onClick={handleEdit} className="btn btn-outline-info ">
-                      Edit
-                    </button>
-                    <button onClick={handleDelete} className="btn btn-outline-danger ms-2">
-                      Delete
-                    </button>
-                  </div>
-                )}
+                {currentUser &&
+                  (type === "myListings" || type === "savedListings") && (
+                    <div className="card-buttons mt-3">
+                      <button
+                        onClick={handleEdit}
+                        className="btn btn-outline-info "
+                      >
+                        Edit
+                      </button>
+                      <button
+                        onClick={handleDelete}
+                        className="btn btn-outline-danger ms-2"
+                      >
+                        Delete
+                      </button>
+                    </div>
+                  )}
               </div>
             </div>
           </div>

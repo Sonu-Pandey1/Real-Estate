@@ -108,7 +108,7 @@ function Profile() {
             </div>
             <div className="title">
               <h1>My List</h1>
-              <NavLink to={"/profile/addPost"}>
+              <NavLink to={"/profile/add-listing"}>
                 <button className="btn btn-outline-info">Create New Post</button>
               </NavLink>
             </div>

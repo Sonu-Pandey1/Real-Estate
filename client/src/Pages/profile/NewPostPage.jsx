@@ -62,69 +62,69 @@ function NewPostPage() {
     }
   };
 
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
+  // ""// const handleSubmit = async (e) => {
+  // //   e.preventDefault();
   
-  //   // Collect form data
-  //   const formData = new FormData(e.target);
-  //   const inputs = Object.fromEntries(formData);
+  // //   // Collect form data
+  // //   const formData = new FormData(e.target);
+  // //   const inputs = Object.fromEntries(formData);
   
-  //   // Convert checkbox and numeric fields to appropriate types
-  //   inputs.offer = inputs.offer === "true" || inputs.offer === true; // Convert checkbox value to boolean
-  //   inputs.price = parseInt(inputs.price, 10);
-  //   inputs.bedroom = parseInt(inputs.bedroom, 10);
-  //   inputs.bathroom = parseInt(inputs.bathroom, 10);
-  //   inputs.size = parseInt(inputs.size || 0, 10); // Optional field, default to 0 if empty
-  //   inputs.school = parseInt(inputs.school || 0, 10); // Optional field, default to 0 if empty
-  //   inputs.bus = parseInt(inputs.bus || 0, 10); // Optional field, default to 0 if empty
-  //   inputs.restaurant = parseInt(inputs.restaurant || 0, 10); // Optional field, default to 0 if empty
+  // //   // Convert checkbox and numeric fields to appropriate types
+  // //   inputs.offer = inputs.offer === "true" || inputs.offer === true; // Convert checkbox value to boolean
+  // //   inputs.price = parseInt(inputs.price, 10);
+  // //   inputs.bedroom = parseInt(inputs.bedroom, 10);
+  // //   inputs.bathroom = parseInt(inputs.bathroom, 10);
+  // //   inputs.size = parseInt(inputs.size || 0, 10); // Optional field, default to 0 if empty
+  // //   inputs.school = parseInt(inputs.school || 0, 10); // Optional field, default to 0 if empty
+  // //   inputs.bus = parseInt(inputs.bus || 0, 10); // Optional field, default to 0 if empty
+  // //   inputs.restaurant = parseInt(inputs.restaurant || 0, 10); // Optional field, default to 0 if empty
   
-  //   // Prepare payload
-  //   const payload = {
-  //     postData: {
-  //       title: inputs.title,
-  //       price: inputs.price,
-  //       address: inputs.address,
-  //       city: inputs.city,
-  //       bedroom: inputs.bedroom,
-  //       bathroom: inputs.bathroom,
-  //       type: inputs.type,
-  //       property: inputs.property,
-  //       propertyCondition: inputs.propertyCondition,
-  //       parking: inputs.parking,
-  //       offer: inputs.offer,
-  //       lat: inputs.latitude,
-  //       long: inputs.longitude,
-  //       images: images, // Ensure 'images' is correctly managed in component state
-  //     },
-  //     postDetail: {
-  //       desc: value, // Assuming 'value' is managed by ReactQuill's onChange handler
-  //       utilities: inputs.utilities,
-  //       pet: inputs.pet,
-  //       income: inputs.income,
-  //       size: inputs.size,
-  //       school: inputs.school,
-  //       bus: inputs.bus,
-  //       restaurant: inputs.restaurant,
-  //     },
-  //   };
+  // //   // Prepare payload
+  // //   const payload = {
+  // //     postData: {
+  // //       title: inputs.title,
+  // //       price: inputs.price,
+  // //       address: inputs.address,
+  // //       city: inputs.city,
+  // //       bedroom: inputs.bedroom,
+  // //       bathroom: inputs.bathroom,
+  // //       type: inputs.type,
+  // //       property: inputs.property,
+  // //       propertyCondition: inputs.propertyCondition,
+  // //       parking: inputs.parking,
+  // //       offer: inputs.offer,
+  // //       lat: inputs.latitude,
+  // //       long: inputs.longitude,
+  // //       images: images, // Ensure 'images' is correctly managed in component state
+  // //     },
+  // //     postDetail: {
+  // //       desc: value, // Assuming 'value' is managed by ReactQuill's onChange handler
+  // //       utilities: inputs.utilities,
+  // //       pet: inputs.pet,
+  // //       income: inputs.income,
+  // //       size: inputs.size,
+  // //       school: inputs.school,
+  // //       bus: inputs.bus,
+  // //       restaurant: inputs.restaurant,
+  // //     },
+  // //   };
   
-  //   // Send data to the backend
-  //   try {
-  //     const res = await axios.post(
-  //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-  //       payload,
-  //       { withCredentials: true } // Include credentials for authentication
-  //     );
+  // //   // Send data to the backend
+  // //   try {
+  // //     const res = await axios.post(
+  // //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
+  // //       payload,
+  // //       { withCredentials: true } // Include credentials for authentication
+  // //     );
   
-  //     // Navigate to the newly created post's profile
-  //     navigate("/profile/" + res.data.id);
-  //   } catch (err) {
-  //     console.error("Error while submitting the post:", err);
-  //     setError("Error while submitting the post. Please try again.");
-  //   }
-  // };
-  
+  // //     // Navigate to the newly created post's profile
+  // //     navigate("/profile/" + res.data.id);
+  // //   } catch (err) {
+  // //     console.error("Error while submitting the post:", err);
+  // //     setError("Error while submitting the post. Please try again.");
+  // //   }
+  // // };
+  // ""
 
   
   return (

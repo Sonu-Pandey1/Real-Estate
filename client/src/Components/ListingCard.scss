@@ -6,6 +6,7 @@
 
   .ProfileCard{
     height: 300px !important;
+   
   }
 
   .custom-card {
@@ -216,7 +217,12 @@
 }
 
 @media (max-width: 500px) {
+  .ProfileCard{
+    height: 350px !important;
+  }
+ 
   .custom-card {
+    
     display: flex;
     flex-direction: column !important;
     width: 100% !important;

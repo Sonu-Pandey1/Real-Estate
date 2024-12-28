@@ -151,16 +151,43 @@ export const addlisting  = async (req,res)=>{
 
 
 
-
-// todo still not apply btn to update listing do it later for this create updatelisting page and fetch the cutrrent data and show and ability to modify like update user  .
-export const Updatelisting  = async (req,res)=>{
+export const Updatelisting = async (req, res) => {
+    const { id } = req.params; // ID of the post to update
+    const body = req.body; // Incoming request body
+    const tokenUserId = req.userId; // Extract the authenticated user ID
+  
     try {
-        
+      // Fetch the post to ensure it exists and is owned by the current user
+      const post = await prisma.post.findUnique({
+        where: { id },
+      });
+  
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+  
+      if (post.userId !== tokenUserId) {
+        return res.status(403).json({ message: "Not authorized to update this post" });
+      }
+  
+      // Update the post and related post details
+      const updatedPost = await prisma.post.update({
+        where: { id },
+        data: {
+          ...body.postData, // Update post fields
+          postDetail: {
+            update: body.postDetail, // Update associated post details
+          },
+        },
+      });
+  
+      res.status(200).json({ message: "Post updated successfully", updatedPost });
     } catch (error) {
-        console.log(error);
-        res.status(500).json({message:"Failed To Update Post"});
+      console.error("Error updating post:", error);
+      res.status(500).json({ message: "Failed to update post" });
     }
-};
+  };
+  
 
 export const Deletelisting = async (req,res)=>{
     const id = req.params.id;
