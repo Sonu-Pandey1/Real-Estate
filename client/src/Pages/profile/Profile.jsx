@@ -70,7 +70,7 @@ function Profile() {
             <div className="title">
               <h1>User Information</h1>
               <NavLink to={"/profile/update"}>
-                <button>Update Profile</button>
+                <button className="btn btn-outline-success">Update Profile</button>
               </NavLink>
             </div>
             <div className="info">
@@ -93,7 +93,7 @@ function Profile() {
                 Email: <b>{currentUser.email}</b>
               </span>
               <button
-                className="btn btn-outline-info w-25 mt-4"
+                className="btn btn-outline-warning w-25 mt-4"
                 onClick={handleLogout}
               >
                 Logout
@@ -109,7 +109,7 @@ function Profile() {
             <div className="title">
               <h1>My List</h1>
               <NavLink to={"/profile/addPost"}>
-                <button>Create New Post</button>
+                <button className="btn btn-outline-info">Create New Post</button>
               </NavLink>
             </div>
 

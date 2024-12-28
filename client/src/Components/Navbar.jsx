@@ -150,7 +150,7 @@ function Navbar() {
                   <div className="user">
                     <NavLink
                       className=" text-decoration-none text-light"
-                      to={"/profile/update"}
+                      to={"/profile"}
                     >
                       <img
                         src={
