@@ -6,6 +6,7 @@ import { useContext, useEffect, useState } from "react";
 import Modal from "./Modal";
 import { AuthContext } from "../Context/AuthContext";
 import { FaSearch } from "react-icons/fa";
+import axios from "axios";
 
 function Navbar() {
   const { currentUser } = useContext(AuthContext);
@@ -13,6 +14,7 @@ function Navbar() {
   const [isPopupOpen, setIsPopupOpen] = useState(false);
 
   const navigate = useNavigate();
+  const { updateUser } = useContext(AuthContext);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -20,6 +22,19 @@ function Navbar() {
     urlParams.set("searchTerm", searchTerm);
     const searchQuery = urlParams.toString();
     navigate(`/search?${searchQuery}`);
+  };
+
+  const handleLogout = async () => {
+    try {
+      const response = await axios.post(
+        `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/logout`
+      );
+      console.log(response.data);
+      updateUser(null);
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   useEffect(() => {
@@ -145,35 +160,51 @@ function Navbar() {
                   </button>
                 </div>
               </li>
-              <li>
+              <li className=" list-unstyled">
                 {currentUser ? (
                   <div className="user">
-                    <NavLink
-                      className=" text-decoration-none text-light"
-                      to={"/profile"}
+                    <button
+                      className="offcanvasNavlinkWrapper border-0 bg-transparent"
+                      data-bs-dismiss="offcanvas"
                     >
-                      <img
-                        src={
-                          currentUser.avatar ||
-                          "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
-                        }
-                        alt="userImg"
-                      />
-                      <span>{currentUser.username}</span>
-                    </NavLink>
+                      <NavLink
+                        className=" text-decoration-none text-light "
+                        to={"/profile"}
+                      >
+                        <div className="d-flex align-items-center">
+                          <img
+                            src={
+                              currentUser.avatar ||
+                              "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
+                            }
+                            alt="userImg"
+                          />
 
-                    <NavLink to={"/profile"} className={"profile"}>
-                      {/* <div className="notification">3</div> */}
-                      <span>Profile</span>
-                    </NavLink>
+                          <div className="d-flex flex-column sidebarProfileWrapper">
+                            <span className="username">
+                              {currentUser.username}
+                            </span>
+                            <span className="profile2">Manage Profile</span>
+                          </div>
+                        </div>
+                      </NavLink>
+                    </button>
                   </div>
                 ) : (
-                  <button
-                    onClick={() => setIsPopupOpen(true)}
-                    className="btn btn-primary"
-                  >
-                    Login/Signup
-                  </button>
+                  <>
+                    <button
+                      className="offcanvasNavlinkWrapper border-0 bg-transparent"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      <NavLink
+                        className={"  fw-semibold text-light "}
+                        onClick={() => setIsPopupOpen(true)}
+                      >
+                        <PiUserCircleCheckDuotone className="fs-2 " />
+                        <span className="ps-3">Login / Register</span>
+                      </NavLink>
+                    </button>
+                  </>
                 )}
               </li>
               {/* <li className="nav-item">
@@ -206,7 +237,56 @@ function Navbar() {
           >
             <div className="offcanvas-header shadow ">
               <p className="offcanvas-title" id="offcanvasNavbarLabel">
-                <PiUserCircleCheckDuotone className="fs-2 " />
+                <ul className="p-0 m-0">
+                  <li className=" list-unstyled">
+                    {currentUser ? (
+                      <div className="user">
+                        <button
+                          className="offcanvasNavlinkWrapper border-0 bg-transparent"
+                          data-bs-dismiss="offcanvas"
+                        >
+                          <NavLink
+                            className=" text-decoration text-dark "
+                            to={"/profile"}
+                          >
+                            <div className="d-flex align-items-center">
+                              <img
+                                src={
+                                  currentUser.avatar ||
+                                  "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
+                                }
+                                alt="userImg"
+                              />
+
+                              <div className="d-flex flex-column sidebarProfileWrapper">
+                                <span className="username">
+                                  {currentUser.username}
+                                </span>
+                                <span className="profile ">Manage Profile</span>
+                              </div>
+                            </div>
+                          </NavLink>
+                        </button>
+                      </div>
+                    ) : (
+                      <>
+                        <button
+                          className="offcanvasNavlinkWrapper border-0 bg-transparent"
+                          data-bs-dismiss="offcanvas"
+                        >
+                          <NavLink
+                            className={"  fw-semibold "}
+                            onClick={() => setIsPopupOpen(true)}
+                          >
+                            <PiUserCircleCheckDuotone className="fs-2 " />
+                            <span className="ps-3">Login / Register</span>
+                          </NavLink>
+                        </button>
+                      </>
+                    )}
+                  </li>
+                </ul>
+                {/* <PiUserCircleCheckDuotone className="fs-2 " />
                 <button
                   className="offcanvasNavlinkWrapper border-0 bg-transparent"
                   data-bs-dismiss="offcanvas"
@@ -217,7 +297,7 @@ function Navbar() {
                   >
                     Login / Register
                   </NavLink>
-                </button>
+                </button> */}
               </p>
               <button
                 type="button"
@@ -237,9 +317,14 @@ function Navbar() {
                 <div className="d-flex flex-column align-items-center gap-2 ">
                   <p className="m-0">Looking to Sell / Rent Your Property ? </p>
                   {/* <p>Then Why You Wating For List Yor Property Free</p> */}
-                  <button className="btn btn-outline-warning text-dark rounded-3">
-                    Post Property
-                  </button>
+                  <NavLink to="/list-Property">
+                    <button
+                      className="btn btn-outline-warning text-dark rounded-3 offcanvasNavlinkWrapper"
+                      data-bs-dismiss="offcanvas"
+                    >
+                      Post Property
+                    </button>
+                  </NavLink>
                 </div>
               </div>
 
@@ -250,7 +335,7 @@ function Navbar() {
                 >
                   <NavLink
                     className="text-decoration-none main-nav "
-                    to={"/premium"}
+                    to={"/profile"}
                   >
                     <li className="nav-item d-flex align-items-center rounded-3">
                       <img
@@ -259,7 +344,7 @@ function Navbar() {
                         alt="icon"
                       />
                       <span className="ps-4 navlinks">
-                        Zero Brokerage Properties
+                        Manage / Edit Your Listings
                       </span>
                     </li>
                   </NavLink>
@@ -271,14 +356,14 @@ function Navbar() {
                 >
                   <NavLink
                     className="text-decoration-none  "
-                    to={"/user-profile/my-transactions"}
+                    to={"/profile/my-responses"}
                   >
                     <li className="nav-item d-flex align-items-center rounded-3">
                       <img
                         src="https://cdn-icons-png.flaticon.com/128/8231/8231679.png"
                         alt="icon"
                       />
-                      <span className="ps-4 navlinks">My Transactions</span>
+                      <span className="ps-4 navlinks">My Responses</span>
                     </li>
                   </NavLink>
                 </button>
@@ -289,7 +374,7 @@ function Navbar() {
                 >
                   <NavLink
                     className=" text-decoration-none main-nav"
-                    to={"user-profile/my-review"}
+                    to={"/profile/my-plan"}
                   >
                     <li className="nav-item d-flex border-bottom align-items-center rounded-3">
                       <img
@@ -298,7 +383,7 @@ function Navbar() {
                         alt="icon"
                       />
 
-                      <span className="ps-4 navlinks">My Reviews</span>
+                      <span className="ps-4 navlinks">My Plan</span>
                     </li>
                   </NavLink>
                 </button>
@@ -310,7 +395,7 @@ function Navbar() {
                   <div className="accordion-item border-0">
                     <h2 className="accordion-header d-flex align-items-center">
                       <button
-                        className="accordion-button  px-0 collapsed border-0 shadow-none"
+                        className="accordion-button px-0 collapsed border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseOne"
@@ -318,11 +403,10 @@ function Navbar() {
                         aria-controls="flush-collapseOne"
                       >
                         <img
-                          className=""
-                          src="https://cdn-icons-png.flaticon.com/128/4423/4423990.png"
+                          src="https://cdn-icons-png.flaticon.com/128/16988/16988865.png"
                           alt="icon"
                         />
-                        <span className="ps-4">Quick Links</span>
+                        <span className="ps-4">Profile</span>
                       </button>
                     </h2>
                     <div
@@ -331,143 +415,57 @@ function Navbar() {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div className="accordion-body p-0 py-2">
-                        <div className="bodyWrapper d-flex flex-wrap gap-3">
+                        <div className="bodyWrapper border-0 d-flex flex-column gap-3">
                           <button
-                            className="offcanvasNavlinkWrapper "
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border  rounded d-flex justify-content-center align-items-center flex-column">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
-                                  alt="home"
-                                />
-                                <div className="Qlinks text-center">Home</div>
-                              </div>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/list-Property"}
+                            >
+                              <div className="">Post Property</div>
                             </NavLink>
                           </button>
 
                           <button
-                            className="offcanvasNavlinkWrapper"
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 fs-6 border d-flex justify-content-center align-items-center flex-column rounded ">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
-                                  alt="owner-packages"
-                                />
-                                <div className="Qlinks text-center">
-                                  Owner Packages
-                                </div>
-                              </div>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/profile/update"}
+                            >
+                              <div>Modify Profile</div>
                             </NavLink>
                           </button>
 
                           <button
-                            className="offcanvasNavlinkWrapper "
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
-                                  alt="post-propetys"
-                                />
-                                <div className="Qlinks text-center">
-                                  Post Properties
-                                </div>
-                              </div>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/profile/add-listing"}
+                            >
+                              <div>Add Listing</div>
                             </NavLink>
                           </button>
 
                           <button
-                            className="offcanvasNavlinkWrapper"
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
+                            onClick={handleLogout}
                           >
                             <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
-                                  alt="news-icon"
-                                />
-                                <div className="Qlinks text-center">News</div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
-                                  alt="research"
-                                />
-                                <div className="Qlinks text-center">
-                                  Research
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  className=""
-                                  src="https://cdn-icons-png.flaticon.com/128/636/636600.png"
-                                  alt="icon"
-                                />
-                                <div className="Qlinks text-center">
-                                  Housing Premium
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/4393/4393392.png"
-                                  alt="pay-on-credit-icon"
-                                />
-                                <div className="Qlinks text-center">
-                                  Pay on Credit
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded ">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/10055/10055352.png"
-                                  alt="protact-icon"
-                                />
-                                <div className="Qlinks text-center">
-                                  Housing Protect
-                                </div>
-                              </div>
+                              <div>Logout</div>
                             </NavLink>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
+
                   <div className="accordion-item border-0">
                     <h2 className="accordion-header d-flex align-items-center">
                       <button
@@ -482,7 +480,7 @@ function Navbar() {
                           src="https://cdn-icons-png.flaticon.com/128/16988/16988865.png"
                           alt="icon"
                         />
-                        <span className="ps-4">Housing Edge</span>
+                        <span className="ps-4">Our Plans</span>
                       </button>
                     </h2>
                     <div
@@ -491,95 +489,38 @@ function Navbar() {
                       data-bs-parent="#accordionFlushExample"
                     >
                       <div className="accordion-body p-0 py-2">
-                        <div className="bodyWrapper d-flex flex-wrap gap-3">
+                        <div className="bodyWrapper border-0 d-flex flex-column gap-3">
                           <button
-                            className="offcanvasNavlinkWrapper"
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
-                                  alt="home"
-                                />
-                                <div className="Qlinks text-center">
-                                  Pay on Credit{" "}
-                                </div>
-                              </div>
+                            <NavLink className="accordion-nav" to={"/plans"}>
+                              <div className="">Dealer Plans</div>
                             </NavLink>
                           </button>
 
                           <button
-                            className="offcanvasNavlinkWrapper"
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 fs-6 border d-flex justify-content-center align-items-center flex-column rounded ">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
-                                  alt="owner-packages"
-                                />
-                                <div className="Qlinks text-center">
-                                  Home Loans
-                                </div>
-                              </div>
+                            <NavLink className="accordion-nav" to={"/plans"}>
+                              <div>View Boss Plans</div>
                             </NavLink>
                           </button>
 
                           <button
-                            className="offcanvasNavlinkWrapper"
+                            className="offcanvasNavlinkWrapper py-2"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
-                                  alt="post-propetys"
-                                />
-                                <div className="Qlinks text-center">
-                                  Housing Premium
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
-                                  alt="news-icon"
-                                />
-                                <div className="Qlinks text-center">
-                                  Housing Protect
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
-                                  alt="research"
-                                />
-                                <div className="Qlinks text-center">
-                                  Rent Receipts
-                                </div>
-                              </div>
+                            <NavLink className="accordion-nav" to={"/plans"}>
+                              <div>Others</div>
                             </NavLink>
                           </button>
                         </div>
                       </div>
                     </div>
                   </div>
+
                   <div className="accordion-item border-0">
                     <h2 className="accordion-header d-flex align-items-center">
                       <button
@@ -608,7 +549,10 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={`/search?type=buy`}
+                            >
                               <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
@@ -625,7 +569,10 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={`/search?type=rent`}
+                            >
                               <div className="QlinksWrapper p-2 fs-6 border d-flex justify-content-center align-items-center flex-column rounded ">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
@@ -642,7 +589,30 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={`/search?type=commercial`}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
+                                  alt="post-propetys"
+                                />
+                                <div className="Qlinks text-center">
+                                  Commercial
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={`/search?type=pg`}
+                            >
                               <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
@@ -659,15 +629,16 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={`/search?type=plots`}
+                            >
                               <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
                                 <img
-                                  src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
-                                  alt="news-icon"
+                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
+                                  alt="post-propetys"
                                 />
-                                <div className="Qlinks text-center">
-                                  Apply For Home Loan
-                                </div>
+                                <div className="Qlinks text-center">Plots</div>
                               </div>
                             </NavLink>
                           </button>
@@ -676,24 +647,10 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
-                                  alt="research"
-                                />
-                                <div className="Qlinks text-center">
-                                  EMI Calculator
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/property-value"}
+                            >
                               <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
                                 <img
                                   className=""
@@ -710,21 +667,23 @@ function Navbar() {
                       </div>
                     </div>
                   </div>
-                  <div className="accordion-item border-0 ">
+
+                  <div className="accordion-item border-0">
                     <h2 className="accordion-header d-flex align-items-center">
                       <button
-                        className="accordion-button px-0 collapsed border-0 shadow-none"
+                        className="accordion-button  px-0 collapsed border-0 shadow-none"
                         type="button"
                         data-bs-toggle="collapse"
                         data-bs-target="#flush-collapseFour"
                         aria-expanded="false"
-                        aria-controls="flush-collapseTwo"
+                        aria-controls="flush-collapseFour"
                       >
                         <img
-                          src="https://cdn-icons-png.flaticon.com/128/2168/2168120.png"
+                          className=""
+                          src="https://cdn-icons-png.flaticon.com/128/4423/4423990.png"
                           alt="icon"
                         />
-                        <span className="ps-4"> Top Search</span>
+                        <span className="ps-4">Quick Links</span>
                       </button>
                     </h2>
                     <div
@@ -738,7 +697,191 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/quick-links/news"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
+                                  alt="news-icon"
+                                />
+                                <div className="Qlinks text-center">News</div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink className="accordion-nav" to={"/plans/"}>
+                              <div className="QlinksWrapper p-2 fs-6 border d-flex justify-content-center align-items-center flex-column rounded ">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
+                                  alt="owner-packages"
+                                />
+                                <div className="Qlinks text-center">
+                                  Owner Packages
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper "
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/list-Property"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
+                                  alt="post-propetys"
+                                />
+                                <div className="Qlinks text-center">
+                                  Post Properties
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"//quick-links/research"}
+                            >
+                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
+                                  alt="research"
+                                />
+                                <div className="Qlinks text-center">
+                                  Research
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/quick-links/premium"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  className=""
+                                  src="https://cdn-icons-png.flaticon.com/128/636/636600.png"
+                                  alt="icon"
+                                />
+                                <div className="Qlinks text-center">
+                                  Buy Premium
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/quick-links/pay-on-credit"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/4393/4393392.png"
+                                  alt="pay-on-credit-icon"
+                                />
+                                <div className="Qlinks text-center">
+                                  Pay on Credit
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/quick-links/homeloan"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
+                                  alt="news-icon"
+                                />
+                                <div className="Qlinks text-center">
+                                  Apply For Home Loan
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/quick-links/calculator"}
+                            >
+                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
+                                  alt="research"
+                                />
+                                <div className="Qlinks text-center">
+                                  EMI Calculator
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="accordion-item border-0 ">
+                    <h2 className="accordion-header d-flex align-items-center">
+                      <button
+                        className="accordion-button px-0 collapsed border-0 shadow-none"
+                        type="button"
+                        data-bs-toggle="collapse"
+                        data-bs-target="#flush-collapseFive"
+                        aria-expanded="false"
+                        aria-controls="flush-collapseFive"
+                      >
+                        <img
+                          src="https://cdn-icons-png.flaticon.com/128/2168/2168120.png"
+                          alt="icon"
+                        />
+                        <span className="ps-4"> Top Search</span>
+                      </button>
+                    </h2>
+                    <div
+                      id="flush-collapseFive"
+                      className="accordion-collapse collapse"
+                      data-bs-parent="#accordionFlushExample"
+                    >
+                      <div className="accordion-body p-0 py-2">
+                        <div className="bodyWrapper d-flex flex-wrap gap-3">
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink className="accordion-nav" to={"/search"}>
                               <div className="QlinksWrapper  rounded d-flex justify-content-center align-items-center flex-column">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/2413/2413074.png"
@@ -755,7 +898,10 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/search?type=rent&area=top-localities"}
+                            >
                               <div className="QlinksWrapper p-2 fs-6 border d-flex justify-content-center align-items-center flex-column rounded ">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
@@ -773,13 +919,13 @@ function Navbar() {
                             data-bs-dismiss="offcanvas"
                           >
                             <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
                                 <img
-                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
-                                  alt="post-propetys"
+                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
+                                  alt="research"
                                 />
                                 <div className="Qlinks text-center">
-                                  Prise Trends
+                                  Buy in Top Socities
                                 </div>
                               </div>
                             </NavLink>
@@ -789,7 +935,30 @@ function Navbar() {
                             className="offcanvasNavlinkWrapper"
                             data-bs-dismiss="offcanvas"
                           >
-                            <NavLink className="accordion-nav" to={"/"}>
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/price-trends"}
+                            >
+                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
+                                <img
+                                  src="https://cdn-icons-png.flaticon.com/128/16828/16828036.png"
+                                  alt="post-propetys"
+                                />
+                                <div className="Qlinks text-center">
+                                  Price Trends
+                                </div>
+                              </div>
+                            </NavLink>
+                          </button>
+
+                          <button
+                            className="offcanvasNavlinkWrapper"
+                            data-bs-dismiss="offcanvas"
+                          >
+                            <NavLink
+                              className="accordion-nav"
+                              to={"/collections"}
+                            >
                               <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded">
                                 <img
                                   src="https://cdn-icons-png.flaticon.com/128/81/81460.png"
@@ -797,67 +966,6 @@ function Navbar() {
                                 />
                                 <div className="Qlinks text-center">
                                   Collections
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper border d-flex justify-content-center align-items-center flex-column rounded">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/15178/15178510.png"
-                                  alt="research"
-                                />
-                                <div className="Qlinks text-center">
-                                  Rent in Top Socities
-                                </div>
-                              </div>
-                            </NavLink>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div className="accordion-item border-0">
-                    <h2 className="accordion-header d-flex align-items-center">
-                      <button
-                        className="accordion-button px-0 collapsed border-0 shadow-none"
-                        type="button"
-                        data-bs-toggle="collapse"
-                        data-bs-target="#flush-collapseFive"
-                        aria-expanded="false"
-                        aria-controls="flush-collapseThree"
-                      >
-                        <img
-                          src="https://cdn-icons-png.flaticon.com/128/3176/3176276.png"
-                          alt="icon"
-                        />
-                        <span className="ps-4">Housing Advice</span>
-                      </button>
-                    </h2>
-                    <div
-                      id="flush-collapseFive"
-                      className="accordion-collapse collapse"
-                      data-bs-parent="#accordionFlushExample"
-                    >
-                      <div className="accordion-body p-0 py-2">
-                        <div className="bodyWrapper d-flex flex-wrap gap-3">
-                          <button
-                            className="offcanvasNavlinkWrapper"
-                            data-bs-dismiss="offcanvas"
-                          >
-                            <NavLink className="accordion-nav" to={"/"}>
-                              <div className="QlinksWrapper p-2 border d-flex justify-content-center align-items-center flex-column rounded ">
-                                <img
-                                  src="https://cdn-icons-png.flaticon.com/128/10055/10055352.png"
-                                  alt="protact-icon"
-                                />
-                                <div className="Qlinks text-center">
-                                  Buying Guide
                                 </div>
                               </div>
                             </NavLink>

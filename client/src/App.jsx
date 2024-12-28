@@ -26,6 +26,8 @@ import NewPostPage from "./Pages/profile/NewPostPage.jsx";
 import PrivateRoute from "./Components/PrivateRoute.jsx";
 import Page404 from "./Components/Page404.jsx";
 import EditListing from "./Pages/profile/EditListing.jsx";
+import MyPlan from "./Pages/profile/MyPlan.jsx";
+import MyResponses from "./Pages/profile/MyResponses.jsx";
 // import { singlePageLoader } from "../lib/Loaders.js";
 
 function App() {
@@ -67,7 +69,8 @@ function App() {
         <Route path="/profile/update" element={<ProfileUpdatePage />} />
         <Route path="/profile/add-listing" element={<NewPostPage />} />
         <Route path="/profile/edit-post/:id" element={<EditListing/>} />
-        {/* <Route path="/profile/ram" element={<EditListing/>} /> */}
+        <Route path="/profile/my-responses" element={<MyResponses />} />
+        <Route path="/profile/my-plan" element={<MyPlan/>} />
 
         {/* Rent, Commercial, PG, and Plots */}
         <Route path="/rent" element={<Rent />} />
