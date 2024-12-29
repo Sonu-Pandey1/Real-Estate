@@ -72,12 +72,9 @@ function Navbar() {
 
   return (
     <>
-      <nav
-        className={`navbar fixed-top w-100  ${
-          isSticky ? "sticky-topp" : ""
-        } px-2 px-md-5`}
-      >
-        <div className="container-fluid mx-2 align-items-center ">
+      <nav className={`navbar fixed-top w-100  px-md-5  ${isSticky ? "sticky-topp" : ""} `}>
+
+        <div className="container ms p-0 align-items-center ">
           <img
             className="img img-fluid"
             src="https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"
@@ -92,16 +89,6 @@ function Navbar() {
                   </NavLink>
                 </div>
               </li>
-
-              {/* <li className="nav-item mega-dropdown">
-                <div className="navlinkWrapper">
-                  <NavLink className="navlink" to={"/for-buyers"}>
-                    For Buyers
-                  </NavLink>
-                </div>
-
-                //todo --> Mega Menu Uncomment If Needed get in to github this file prev commits
-              </li> */}
 
               <form
                 onSubmit={handleSubmit}
@@ -118,22 +105,6 @@ function Navbar() {
                   <FaSearch />
                 </button>
               </form>
-
-              {/* <li className="nav-item mega-dropdown d-lg-block d-none">
-                <div className="navlinkWrapper">
-                  <NavLink className="navlink" to={"/for-owners"}>
-                    For Owners
-                  </NavLink>
-                </div>
-              </li>
-
-              <li className="nav-item mega-dropdown d-lg-block d-none">
-                <div className="navlinkWrapper">
-                  <NavLink className="navlink" to={"/for-dealers-builders"}>
-                    For Dealers / Builders
-                  </NavLink>
-                </div>
-              </li> */}
 
               <li className="nav-item mega-dropdown">
                 <div className="navlinkWrapper">
@@ -207,11 +178,6 @@ function Navbar() {
                   </>
                 )}
               </li>
-              {/* <li className="nav-item">
-                <div className="">
-                  <button onClick={()=>setIsPopupOpen(!isPopupOpen)} type="button" className="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">Login/Signup</button>
-                </div>
-              </li> */}
             </ul>
           </div>
 
@@ -223,7 +189,7 @@ function Navbar() {
             aria-controls="offcanvasNavbar"
             aria-label="Toggle navigation"
           >
-            <span className=" fs-3">
+            <span className=" fs-3 ">
               <RiMenu2Line />
             </span>
           </button>
@@ -286,18 +252,6 @@ function Navbar() {
                     )}
                   </li>
                 </ul>
-                {/* <PiUserCircleCheckDuotone className="fs-2 " />
-                <button
-                  className="offcanvasNavlinkWrapper border-0 bg-transparent"
-                  data-bs-dismiss="offcanvas"
-                >
-                  <NavLink
-                    className={"ps-3 text-decoration-none  fw-semibold "}
-                    onClick={() => setIsPopupOpen(true)}
-                  >
-                    Login / Register
-                  </NavLink>
-                </button> */}
               </p>
               <button
                 type="button"
