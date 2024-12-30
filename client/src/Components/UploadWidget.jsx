@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import PropTypes from "prop-types";
-import "./UploadWidget.scss"; 
+import "./UploadWidget.scss";
 
 function UploadWidget({ uwConfig, setState }) {
   const [loaded, setLoaded] = useState(false);
@@ -14,10 +14,15 @@ function UploadWidget({ uwConfig, setState }) {
         script.id = "cloudinary-upload-widget-script";
         script.src = "https://upload-widget.cloudinary.com/global/all.js";
         script.async = true;
+
         script.onload = () => setLoaded(true);
-        script.onerror = () => console.error("Failed to load Cloudinary upload widget script.");
+        script.onerror = () => {
+          console.error("Failed to load Cloudinary upload widget script.");
+          setLoaded(false);
+        };
+
         document.body.appendChild(script);
-      } else {
+      } else if (window.cloudinary) {
         setLoaded(true);
       }
     };
@@ -26,16 +31,15 @@ function UploadWidget({ uwConfig, setState }) {
   }, []);
 
   useEffect(() => {
-    if (loaded && !widget) {
-      // Initialize the Cloudinary upload widget once the script is loaded
-      const cloudinaryWidget = window.cloudinary?.createUploadWidget(
+    if (loaded && !widget && window.cloudinary) {
+      // Initialize Cloudinary upload widget
+      const cloudinaryWidget = window.cloudinary.createUploadWidget(
         uwConfig,
         (error, result) => {
           if (error) {
             console.error("Cloudinary Widget Error:", error);
-          }
-          if (result && result.event === "success") {
-            // console.log("Uploaded image info:", result.info);
+          } else if (result.event === "success") {
+            console.log("Uploaded image info:", result.info);
             setState((prev) => [...prev, result.info.secure_url]);
           }
         }
@@ -55,9 +59,9 @@ function UploadWidget({ uwConfig, setState }) {
   return (
     <button
       id="upload_widget"
-      className=" btn btn-outline-primary "
+      className="btn btn-outline-primary"
       onClick={handleUploadClick}
-      disabled={!loaded}
+      disabled={!loaded || !widget} // Disable until widget is initialized
     >
       {loaded ? "Upload Image" : "Loading..."}
     </button>

@@ -72,8 +72,11 @@ function Navbar() {
 
   return (
     <>
-      <nav className={`navbar fixed-top w-100  px-md-5  ${isSticky ? "sticky-topp" : ""} `}>
-
+      <nav
+        className={`navbar fixed-top w-100  px-md-5  ${
+          isSticky ? "sticky-topp" : ""
+        } `}
+      >
         <div className="container ms p-0 align-items-center ">
           <img
             className="img img-fluid"
@@ -134,48 +137,32 @@ function Navbar() {
               <li className=" list-unstyled">
                 {currentUser ? (
                   <div className="user">
-                    <button
-                      className="offcanvasNavlinkWrapper border-0 bg-transparent"
-                      data-bs-dismiss="offcanvas"
+                    <NavLink
+                      className="offcanvasNavlinkWrapper d-flex align-items-center text-decoration-none text-light"
+                      to="/profile"
                     >
-                      <NavLink
-                        className=" text-decoration-none text-light "
-                        to={"/profile"}
-                      >
-                        <div className="d-flex align-items-center">
-                          <img
-                            src={
-                              currentUser.avatar ||
-                              "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
-                            }
-                            alt="userImg"
-                          />
-
-                          <div className="d-flex flex-column sidebarProfileWrapper">
-                            <span className="username">
-                              {currentUser.username}
-                            </span>
-                            <span className="profile2">Manage Profile</span>
-                          </div>
-                        </div>
-                      </NavLink>
-                    </button>
+                      <img
+                        src={
+                          currentUser.avatar ||
+                          "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
+                        }
+                        alt="userImg"
+                        className="user-avatar"
+                      />
+                      <div className="d-flex flex-column sidebarProfileWrapper ms-2">
+                        <span className="username">{currentUser.username}</span>
+                        <span className="profile2">Manage Profile</span>
+                      </div>
+                    </NavLink>
                   </div>
                 ) : (
-                  <>
-                    <button
-                      className="offcanvasNavlinkWrapper border-0 bg-transparent"
-                      data-bs-dismiss="offcanvas"
-                    >
-                      <NavLink
-                        className={"  fw-semibold text-light "}
-                        onClick={() => setIsPopupOpen(true)}
-                      >
-                        <PiUserCircleCheckDuotone className="fs-2 " />
-                        <span className="ps-3">Login / Register</span>
-                      </NavLink>
-                    </button>
-                  </>
+                  <NavLink
+                    className="offcanvasNavlinkWrapper d-flex align-items-center text-light fw-semibold"
+                    onClick={() => setIsPopupOpen(true)}
+                  >
+                    <PiUserCircleCheckDuotone className="fs-2" />
+                    <span className="ps-3">Login / Register</span>
+                  </NavLink>
                 )}
               </li>
             </ul>
@@ -202,7 +189,7 @@ function Navbar() {
             style={{ transition: "transform .6s ease-in-out" }}
           >
             <div className="offcanvas-header shadow ">
-              <p className="offcanvas-title" id="offcanvasNavbarLabel">
+              <div className="offcanvas-title" id="offcanvasNavbarLabel">
                 <ul className="p-0 m-0">
                   <li className=" list-unstyled">
                     {currentUser ? (
@@ -252,7 +239,7 @@ function Navbar() {
                     )}
                   </li>
                 </ul>
-              </p>
+              </div>
               <button
                 type="button"
                 className="btn-close"

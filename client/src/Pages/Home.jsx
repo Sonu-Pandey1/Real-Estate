@@ -13,7 +13,7 @@ import { AuthContext } from "../Context/AuthContext";
 function Home() {
 
   const {currentUser} = useContext(AuthContext)
-  console.log(currentUser)
+  // console.log(currentUser)
   const blogData = [
     {
       image:
