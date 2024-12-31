@@ -6,7 +6,12 @@
         }
     
     }
+    ::-webkit-scrollbar {
+       display: none;
+      }
+    
 }
+
 
 
 // #loginEmail,#loginPassword {

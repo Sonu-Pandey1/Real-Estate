@@ -1,10 +1,12 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
+import { useFormik } from "formik";
 import "./Modal.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import Oauth from "./Oauth";
+import {loginSchema ,signupSchema} from "../../lib/schemas/LoginLogout";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   const [activeTab, setActiveTab] = useState("login");
@@ -12,71 +14,65 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   const navigate = useNavigate();
   const { updateUser } = useContext(AuthContext);
 
-  const handleRegister = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const username = formData.get("username");
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/register`,
-        {
-          username,
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
+  const loginFormik = useFormik({
+    initialValues: {
+      email: "",
+      password: "",
+    },
+    validationSchema: loginSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/login`,
+          values,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        updateUser(response.data);
+        setIsPopupOpen(false);
+        navigate("/");
+        loginFormik.resetForm()
+      } catch (error) {
+        if (error.response && error.response.data) {
+          setErrorMessage(error.response.data.message);
+        } else {
+          setErrorMessage("An unexpected error occurred");
         }
-      );
-      console.log(response.data);
-      setIsPopupOpen(false);
-      navigate("/profile");
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  const handleLogin = async (e) => {
-    e.preventDefault();
-
-    const formData = new FormData(e.target);
-    const email = formData.get("email");
-    const password = formData.get("password");
-
-    try {
-      const response = await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/login`,
-        {
-          email,
-          password,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      updateUser(response.data);
-      setIsPopupOpen(false);
-      navigate("/");
-    } catch (error) {
-      //todo t thing i used to respons.data.message for error message.
-      if (error.response && error.response.data) {
-        setErrorMessage(error.response.data.message);
-      } else {
-        setErrorMessage("An unexpected error occurred");
       }
-    }
-  };
+    },
+  });
+
+  const signupFormik = useFormik({
+    initialValues: {
+      username: "",
+      email: "",
+      password: "",
+      CPassword: "",
+      terms: false,
+    },
+    validationSchema: signupSchema,
+    onSubmit: async (values) => {
+      try {
+        const response = await axios.post(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/register`,
+          values,
+          {
+            headers: { "Content-Type": "application/json" },
+            withCredentials: true,
+          }
+        );
+        console.log("Signup Response:", response); 
+        signupFormik.resetForm(); 
+        // setIsPopupOpen(false); 
+        // navigate("/");
+        setActiveTab("login");
+      } catch (error) {
+        console.error(error);
+      }
+    },
+  });
 
   return (
     <>
@@ -106,6 +102,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
               className="popupForm pt-2"
               style={{
                 background: "#fff",
+                overflowY:"scroll",
                 padding: "0px 20px",
                 borderRadius: "10px",
                 width: "90%",
@@ -169,7 +166,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
               </ul>
 
               {activeTab === "login" && (
-                <form onSubmit={handleLogin}>
+                <form onSubmit={loginFormik.handleSubmit}>
                   <div className="mb-3">
                     <label htmlFor="loginEmail" className="form-label">
                       Email
@@ -178,10 +175,19 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       type="email"
                       id="loginEmail"
                       name="email"
-                      className="form-control"
                       placeholder="Enter your email"
-                      required
+                      onBlur={loginFormik.handleBlur}
+                      onChange={loginFormik.handleChange}
+                      value={loginFormik.values.email}
+                      className={
+                        loginFormik.errors.email && loginFormik.touched.email
+                          ? "input-error form-control"
+                          : "form-control "
+                      }
                     />
+                    {loginFormik.touched.email && loginFormik.errors.email && (
+                      <p className="error  pt-2">{loginFormik.errors.email}</p>
+                    )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="loginPassword" className="form-label">
@@ -191,10 +197,23 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       type="password"
                       name="password"
                       id="loginPassword"
-                      className="form-control"
                       placeholder="Enter your password"
-                      required
+                      onChange={loginFormik.handleChange}
+                      value={loginFormik.values.password}
+                      onBlur={loginFormik.handleBlur}
+                      className={
+                        loginFormik.errors.password &&
+                        loginFormik.touched.password
+                          ? "input-error form-control"
+                          : "form-control"
+                      }
                     />
+                    {loginFormik.touched.password &&
+                      loginFormik.errors.password && (
+                        <p className="error  pt-2">
+                          {loginFormik.errors.password}
+                        </p>
+                      )}
                   </div>
                   <NavLink className={" text-decoration-none"}>
                     <p className=" text-end">Forgot password?</p>
@@ -222,7 +241,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
               )}
 
               {activeTab === "signup" && (
-                <form onSubmit={handleRegister}>
+                <form onSubmit={signupFormik.handleSubmit} className="">
                   <div className="mb-3">
                     <label htmlFor="signupUsername" className="form-label">
                       Username
@@ -231,10 +250,23 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       type="text"
                       id="signupUsername"
                       name="username"
-                      className="form-control"
                       placeholder="Choose a username"
-                      required
+                      onChange={signupFormik.handleChange}
+                      value={signupFormik.values.username}
+                      onBlur={signupFormik.handleBlur}
+                      className={
+                        signupFormik.errors.username &&
+                        signupFormik.touched.username
+                          ? "input-error form-control"
+                          : "form-control"
+                      }
                     />
+                    {signupFormik.touched.username &&
+                      signupFormik.errors.username && (
+                        <p className="error pt-2">
+                          {signupFormik.errors.username}
+                        </p>
+                      )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="signupEmail" className="form-label">
@@ -244,10 +276,22 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       type="email"
                       name="email"
                       id="signupEmail"
-                      className="form-control"
                       placeholder="Enter your email"
-                      required
+                      onChange={signupFormik.handleChange}
+                      value={signupFormik.values.email}
+                      onBlur={signupFormik.handleBlur}
+                      className={
+                        signupFormik.errors.email && signupFormik.touched.email
+                          ? "input-error form-control"
+                          : "form-control"
+                      }
                     />
+                    {signupFormik.touched.email &&
+                      signupFormik.errors.email && (
+                        <p className="error pt-2">
+                          {signupFormik.errors.email}
+                        </p>
+                      )}
                   </div>
                   <div className="mb-3">
                     <label htmlFor="signupPassword" className="form-label">
@@ -257,10 +301,71 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                       type="password"
                       id="signupPassword"
                       name="password"
-                      className="form-control"
                       placeholder="Choose a password"
-                      required
+                      onChange={signupFormik.handleChange}
+                      value={signupFormik.values.password}
+                      onBlur={signupFormik.handleBlur}
+                      className={
+                        signupFormik.errors.password &&
+                        signupFormik.touched.password
+                          ? "input-error form-control"
+                          : "form-control"
+                      }
                     />
+                    {signupFormik.touched.password &&
+                      signupFormik.errors.password && (
+                        <p className="error pt-2">
+                          {signupFormik.errors.password}
+                        </p>
+                      )}
+                  </div>
+                  <div className="mb-3">
+                    <label htmlFor="signupCPassword" className="form-label">
+                      Confirm Password
+                    </label>
+                    <input
+                      type="password"
+                      id="signupCPassword"
+                      name="CPassword"
+                      placeholder="Confirm your password"
+                      onChange={signupFormik.handleChange}
+                      value={signupFormik.values.CPassword}
+                      onBlur={signupFormik.handleBlur}
+                      className={`form-control ${
+                        signupFormik.touched.CPassword &&
+                        signupFormik.errors.CPassword
+                          ? "input-error form-control"
+                          : "form-control"
+                      }`}
+                    />
+                    {signupFormik.touched.CPassword &&
+                      signupFormik.errors.CPassword && (
+                        <p className="error pt-2">
+                          {signupFormik.errors.CPassword}
+                        </p>
+                      )}
+                  </div>
+                  <div className="mb-3">
+                    <input
+                      type="checkbox"
+                      id="terms"
+                      name="terms"
+                      onChange={signupFormik.handleChange}
+                      value={signupFormik.values.terms}
+                      onBlur={signupFormik.handleBlur}
+                      className={
+                        signupFormik.errors.terms && signupFormik.touched.terms
+                          ? "input-error "
+                          : ""
+                      }
+                    />
+                    <label htmlFor="terms" className="form-label ps-2">
+                      Accept Terms & Conditions
+                    </label>
+                    {signupFormik.touched.terms &&
+                      signupFormik.errors.terms && (
+                        <p className="error ">{signupFormik.errors.terms}</p>
+                      )}
                   </div>
                   <button type="submit" className="btn btn-primary w-100">
                     Signup
@@ -270,7 +375,6 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                     setIsPopupOpen={setIsPopupOpen}
                     ra={"ram"}
                   />
-
                   <p className="text-center pt-3">
                     Already have an account?
                     <NavLink
