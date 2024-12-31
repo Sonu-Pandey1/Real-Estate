@@ -28,3 +28,12 @@
   }
 }
 
+/* Style for input fields with errors */
+.input-error {
+  border: 1px solid red !important;  
+}
+.error {
+  color: red; 
+  font-size: 13px;
+  margin: 0px;
+}

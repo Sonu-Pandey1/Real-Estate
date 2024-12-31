@@ -2,7 +2,7 @@
 .profileUpdatePage {
   height: 100%;
   display: flex;
-  padding: 100px;
+  padding: 80px;
   gap: 20px;
   flex-direction: row; 
   // background-color: #0056b3;
@@ -133,7 +133,7 @@
       height: 250px;
       border-radius: 50%;
       object-fit: cover;
-      border: 2px solid orangered;
+      border: 2px solid orange;
       transition: transform 0.3s ease;
 
       &:hover {
@@ -147,3 +147,5 @@
     }
   }
 }
+
+

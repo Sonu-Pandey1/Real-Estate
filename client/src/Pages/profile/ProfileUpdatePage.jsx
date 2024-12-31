@@ -4,44 +4,53 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import UploadWidget from "../../Components/UploadWidget";
+import { useFormik } from "formik";
+import "../../App.scss";
+import profileUpdateSchema from "../../../lib/schemas/ProfileUpdateSchema";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
   const [error, setError] = useState("");
   const [avatar, setAvatar] = useState([]);
-
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-
-    const { username, email, password } = Object.fromEntries(formData);
-
-    try {
-      const res = await axios.put(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
-        {
-          username,
-          email,
-          password,
-          avatar: avatar[0],
-        },
-        {
-          withCredentials: true,
-        }
-      );
-      updateUser(res.data);
-      navigate("/profile");
-    } catch (err) {
-      console.log(err);
-      setError(err.response?.data?.message || "An error occurred.");
-    }
-  };
+  // Formik hook for handling form state
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit,  isSubmitting } = useFormik({
+    initialValues: {
+      username: currentUser.username,
+      email: currentUser.email,
+      password: "",
+      confirmPassword: "", // Added for confirm password
+    },
+    validationSchema: profileUpdateSchema,
+    onSubmit: async (values) => {
+      try {
+        // Ensure avatar is sent correctly
+        const res = await axios.put(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
+          {
+            username: values.username,
+            email: values.email,
+            password: values.password,
+            avatar: avatar.length > 0 ? avatar[0] : currentUser.avatar,
+          },
+          {
+            withCredentials: true,
+          }
+        );
+        updateUser(res.data);
+        // resetForm(); // Reset the form after successful submission
+        navigate("/profile");
+      } catch (err) {
+        console.log(err);
+        setError(err.response?.data?.message || "An error occurred.");
+      }
+    },
+  });
 
   return (
     <div className="profileUpdatePage">
-      <div className="sideContainer ">
+      <div className="sideContainer">
         <img
           src={
             avatar[0] ||
@@ -61,22 +70,16 @@ function ProfileUpdatePage() {
             clientAllowedFormats: ["image"],
             styles: {
               palette: {
-                // window: "#0018ff", // Background color of the popup
-                // sourceBg: "#FFFFFF", // Background color of source buttons
                 windowBorder: "#0018ff", // Border color of the popup
                 inactiveTabIcon: "#C4C5CC", // Color for inactive tabs
                 link: "#0078FF", // Hyperlink color
-              }
+              },
             },
           }}
           setState={setAvatar}
         />
-        {/* Clear Avatar Button */}
         {avatar.length > 0 && (
-          <button
-            onClick={() => setAvatar([])}
-            className="clearAvatarButton "
-          >
+          <button onClick={() => setAvatar([])} className="clearAvatarButton">
             Clear Avatar
           </button>
         )}
@@ -90,9 +93,15 @@ function ProfileUpdatePage() {
               id="username"
               name="username"
               type="text"
-              defaultValue={currentUser.username}
               placeholder="Enter your username"
+              value={values.username}
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className={errors.username && touched.username ? "input-error" : ""}
             />
+            {errors.username && touched.username && (
+              <p className="error">{errors.username}</p>
+            )}
           </div>
           <div className="item">
             <label htmlFor="email">Email</label>
@@ -100,9 +109,13 @@ function ProfileUpdatePage() {
               id="email"
               name="email"
               type="email"
-              defaultValue={currentUser.email}
+              value={values.email}
               placeholder="Enter your email"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className={errors.email && touched.email ? "input-error" : ""}
             />
+            {errors.email && touched.email && <p className="error">{errors.email}</p>}
           </div>
           <div className="item">
             <label htmlFor="password">Password</label>
@@ -110,10 +123,33 @@ function ProfileUpdatePage() {
               id="password"
               name="password"
               type="password"
+              value={values.password}
               placeholder="Enter your new password"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className={errors.password && touched.password ? "input-error" : ""}
             />
+            {errors.password && touched.password && <p className="error  ">{errors.password}</p>}
           </div>
-          <button className="submitButton">Update</button>
+          <div className="item">
+            <label htmlFor="confirmPassword">Confirm Password</label>
+            <input
+              id="confirmPassword"
+              name="confirmPassword"
+              type="password"
+              value={values.confirmPassword}
+              placeholder="Confirm your new password"
+              onBlur={handleBlur}
+              onChange={handleChange}
+              className={errors.confirmPassword && touched.confirmPassword ? "input-error" : ""}
+            />
+            {errors.confirmPassword && touched.confirmPassword && (
+              <p className="error">{errors.confirmPassword}</p>
+            )}
+          </div>
+          <button className="submitButton" type="submit" disabled={isSubmitting}>
+            {isSubmitting ? "Updating..." : "Update"}
+          </button>
           {error && <span className="errorMessage">{error}</span>}
         </form>
       </div>

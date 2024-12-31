@@ -1,5 +1,3 @@
-
-
 import { useState } from "react";
 import "./NewPostPage.scss";
 import ReactQuill from "react-quill";
@@ -7,133 +5,201 @@ import "react-quill/dist/quill.snow.css";
 import UploadWidget from "../../Components/UploadWidget";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
+import addListingSchema from "../../../lib/schemas/AddListing";
+import { useFormik } from "formik";
 
 function NewPostPage() {
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
   const [images, setImages] = useState([]);
   const [error, setError] = useState("");
   const navigate = useNavigate();
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const formData = new FormData(e.target);
-    const inputs = Object.fromEntries(formData);
-
-    // inputs.offer = inputs.offer === "on";
-    try {
-      const res = await axios.post(
-        `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-        {
-          postData: {
-            title: inputs.title,
-            price: parseInt(inputs.price),
-            address: inputs.address,
-            city: inputs.city,
-            bedroom: parseInt(inputs.bedroom),
-            bathroom: parseInt(inputs.bathroom),
-            type: inputs.type,
-            property: inputs.property,
-            propertyCondition: inputs.propertyCondition,
-            parking: inputs.parking,
-            // offer: inputs.offer  , // Convert checkbox value to boolean
-            lat: inputs.latitude,
-            long: inputs.longitude,
-            images: images,
+  const {
+    values,
+    errors,
+    touched,
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    setFieldValue,
+    setFieldTouched,
+    isSubmitting,
+  } = useFormik({
+    initialValues: {
+      title: "",
+      price: "",
+      address: "",
+      city: "",
+      size: "",
+      lat: "",
+      long: "",
+      bedroom: "",
+      bathroom: "",
+      listingType: "buy",
+      propertyType: "Apartment",
+      propertyCondition: "Row",
+      parking: "none",
+      desc: "",
+      uPolicy: "owner is responsible",
+      petPolicy: "Allowed",
+      iPolicy: "",
+      school: "",
+      bus: "",
+      restaurant: "",
+    },
+    validationSchema: addListingSchema,
+    onSubmit: async (values) => {
+      try {
+        const res = await axios.post(
+          `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
+          {
+            postData: {
+              title: values.title,
+              price: parseInt(values.price),
+              address: values.address,
+              city: values.city,
+              bedroom: parseInt(values.bedroom),
+              bathroom: parseInt(values.bathroom),
+              type: values.listingType,
+              property: values.propertyType,
+              propertyCondition: values.propertyCondition,
+              parking: values.parking,
+              lat: values.lat,
+              long: values.long,
+              images: images,
+            },
+            postDetail: {
+              desc: values.desc,
+              utilities: values.uPolicy,
+              pet: values.petPolicy,
+              income: values.iPolicy,
+              size: parseInt(values.size),
+              school: parseInt(values.school),
+              bus: parseInt(values.bus),
+              restaurant: parseInt(values.restaurant),
+            },
           },
-          postDetail: {
-            desc: value,
-            utilities: inputs.utilities,
-            pet: inputs.pet,
-            income: inputs.income,
-            size: parseInt(inputs.size),
-            school: parseInt(inputs.school),
-            bus: parseInt(inputs.bus),
-            restaurant: parseInt(inputs.restaurant),
-          },
-        },
-        {
-          withCredentials: true, // Include cookies in the request
-        }
-      );
-      navigate("/profile/" + res.data.id);
-    } catch (err) {
-      console.log(err);
-      setError("Error while submitting the post. Please try again.");
-    }
-  };
+          { withCredentials: true }
+        );
+        navigate(`/profile/${res.data.id}`);
+      } catch (err) {
+        console.error("Error while submitting the post.", err);
+        setError(err.response?.data?.message || "An error occurred.");
+      }
+    },
+  });
+  console.log(values)
+  console.log(images)
 
-  // ""// const handleSubmit = async (e) => {
-  // //   e.preventDefault();
-  
-  // //   // Collect form data
-  // //   const formData = new FormData(e.target);
-  // //   const inputs = Object.fromEntries(formData);
-  
-  // //   // Convert checkbox and numeric fields to appropriate types
-  // //   inputs.offer = inputs.offer === "true" || inputs.offer === true; // Convert checkbox value to boolean
-  // //   inputs.price = parseInt(inputs.price, 10);
-  // //   inputs.bedroom = parseInt(inputs.bedroom, 10);
-  // //   inputs.bathroom = parseInt(inputs.bathroom, 10);
-  // //   inputs.size = parseInt(inputs.size || 0, 10); // Optional field, default to 0 if empty
-  // //   inputs.school = parseInt(inputs.school || 0, 10); // Optional field, default to 0 if empty
-  // //   inputs.bus = parseInt(inputs.bus || 0, 10); // Optional field, default to 0 if empty
-  // //   inputs.restaurant = parseInt(inputs.restaurant || 0, 10); // Optional field, default to 0 if empty
-  
-  // //   // Prepare payload
-  // //   const payload = {
-  // //     postData: {
-  // //       title: inputs.title,
-  // //       price: inputs.price,
-  // //       address: inputs.address,
-  // //       city: inputs.city,
-  // //       bedroom: inputs.bedroom,
-  // //       bathroom: inputs.bathroom,
-  // //       type: inputs.type,
-  // //       property: inputs.property,
-  // //       propertyCondition: inputs.propertyCondition,
-  // //       parking: inputs.parking,
-  // //       offer: inputs.offer,
-  // //       lat: inputs.latitude,
-  // //       long: inputs.longitude,
-  // //       images: images, // Ensure 'images' is correctly managed in component state
-  // //     },
-  // //     postDetail: {
-  // //       desc: value, // Assuming 'value' is managed by ReactQuill's onChange handler
-  // //       utilities: inputs.utilities,
-  // //       pet: inputs.pet,
-  // //       income: inputs.income,
-  // //       size: inputs.size,
-  // //       school: inputs.school,
-  // //       bus: inputs.bus,
-  // //       restaurant: inputs.restaurant,
-  // //     },
-  // //   };
-  
-  // //   // Send data to the backend
-  // //   try {
-  // //     const res = await axios.post(
-  // //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-  // //       payload,
-  // //       { withCredentials: true } // Include credentials for authentication
-  // //     );
-  
-  // //     // Navigate to the newly created post's profile
-  // //     navigate("/profile/" + res.data.id);
-  // //   } catch (err) {
-  // //     console.error("Error while submitting the post:", err);
-  // //     setError("Error while submitting the post. Please try again.");
-  // //   }
-  // // };
-  // ""
+  // const {
+  //   values,
+  //   errors,
+  //   touched,
+  //   handleBlur,
+  //   handleChange,
+  //   handleSubmit,
+  //   setFieldValue,
+  //   setFieldTouched,
+  //   isSubmitting,
+  // } = useFormik({
+  //   initialValues: {
+  //     title: "",
+  //     price: "",
+  //     address: "",
+  //     city: "",
+  //     size: "",
+  //     lat: "",
+  //     long: "",
+  //     bedroom: "",
+  //     bathroom: "",
+  //     listingType: "buy",
+  //     propertyType: "Apartment",
+  //     propertyCondition: "Row",
+  //     parking: "none",
+  //     desc: "",
+  //     uPolicy: "owner is responsible",
+  //     petPolicy: "Allowed",
+  //     iPolicy: "",
+  //     school: "",
+  //     bus: "",
+  //     restaurant: "",
+  //   },
+  //   validationSchema: addListingSchema,
+  //   onSubmit: async (values) => {
+  //     try {
+  //       const res = await axios.post(
+  //         `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
+  //         {
+  //           postData: {
+  //             ...values,
+  //             images,
+  //           },
+  //         },
+  //         { withCredentials: true }
+  //       );
+  //       navigate("/profile/" + res.data.id);
+  //     } catch (err) {
+  //       console.error("Error while submitting the post.", error);
+  //       setError(err.response?.data?.message || "An error occurred.");
+  //     }
+  //   },
+  // });
 
-  
+  // const handleSubmit = async (e) => {
+  //   e.preventDefault();
+  //   const formData = new FormData(e.target);
+  //   const inputs = Object.fromEntries(formData);
+
+  //   // inputs.offer = inputs.offer === "on";
+  //   try {
+  //     const res = await axios.post(
+  //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
+  //       {
+  //         postData: {
+  //           title: inputs.title,
+  //           price: parseInt(inputs.price),
+  //           address: inputs.address,
+  //           city: inputs.city,
+  //           bedroom: parseInt(inputs.bedroom),
+  //           bathroom: parseInt(inputs.bathroom),
+  //           type: inputs.type,
+  //           property: inputs.property,
+  //           propertyCondition: inputs.propertyCondition,
+  //           parking: inputs.parking,
+  //           // offer: inputs.offer  , // Convert checkbox value to boolean
+  //           lat: inputs.latitude,
+  //           long: inputs.longitude,
+  //           images: images,
+  //         },
+  //         postDetail: {
+  //           desc: value,
+  //           utilities: inputs.utilities,
+  //           pet: inputs.pet,
+  //           income: inputs.income,
+  //           size: parseInt(inputs.size),
+  //           school: parseInt(inputs.school),
+  //           bus: parseInt(inputs.bus),
+  //           restaurant: parseInt(inputs.restaurant),
+  //         },
+  //       },
+  //       {
+  //         withCredentials: true, // Include cookies in the request
+  //       }
+  //     );
+  //     navigate("/profile/" + res.data.id);
+  //   } catch (err) {
+  //     console.log(err);
+  //     setError("Error while submitting the post. Please try again.");
+  //   }
+  // };
+
   return (
     <div className="newPostPage">
       <div className="container">
         <div className="row">
           <div className="formContainer col-lg-8">
             <h1>Create a Listing</h1>
-            <form onSubmit={handleSubmit} className="form">
+            <form onSubmit={handleSubmit}  className="form">
               <div className="formGrid">
                 <div className="item">
                   <label htmlFor="title">Title</label>
@@ -142,8 +208,16 @@ function NewPostPage() {
                     name="title"
                     type="text"
                     placeholder="Enter title"
-                    required
+                    value={values.title}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.title && touched.title ? "input-error" : ""
+                    }
                   />
+                  {errors.title && touched.title && (
+                    <p className="error">{errors.title}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="price">Price</label>
@@ -152,9 +226,17 @@ function NewPostPage() {
                     id="price"
                     name="price"
                     type="number"
-                    placeholder="Enter price"
-                    required
+                    placeholder="Enter price ($2000)"
+                    value={values.price}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.price && touched.price ? "input-error" : ""
+                    }
                   />
+                  {errors.price && touched.price && (
+                    <p className="error">{errors.price}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="address">Address</label>
@@ -163,8 +245,16 @@ function NewPostPage() {
                     name="address"
                     type="text"
                     placeholder="Enter address"
-                    required
+                    value={values.address}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.address && touched.address ? "input-error" : ""
+                    }
                   />
+                  {errors.address && touched.address && (
+                    <p className="error">{errors.address}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="city">City</label>
@@ -173,33 +263,68 @@ function NewPostPage() {
                     name="city"
                     type="text"
                     placeholder="Enter city"
-                    required
+                    value={values.city}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={errors.city && touched.city ? "input-error" : ""}
                   />
+                  {errors.city && touched.city && (
+                    <p className="error">{errors.city}</p>
+                  )}
                 </div>
+
                 <div className="item">
-                  <label htmlFor="size">Total Size (sqft)</label>
-                  <input min={0} id="size" name="size" type="number" placeholder="Enter Size" />
+                  <label htmlFor="size">Total Size</label>
+                  <input
+                    min={0}
+                    id="size"
+                    name="size"
+                    type="number"
+                    placeholder="Enter Size (sqft)"
+                    value={values.size}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={errors.size && touched.size ? "input-error" : ""}
+                  />
+                  {errors.size && touched.size && (
+                    <p className="error">{errors.size}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="latitude">Latitude</label>
                   <input
                     id="latitude"
-                    name="latitude"
+                    name="lat"
                     type="text"
-                    placeholder="Enter latitude"
-                    required
+                    placeholder="Enter latitude (28.535517)"
+                    value={values.lat}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={errors.lat && touched.lat ? "input-error" : ""}
                   />
+                  {errors.lat && touched.lat && (
+                    <p className="error">{errors.lat}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="longitude">Longitude</label>
                   <input
                     id="longitude"
-                    name="longitude"
+                    name="long"
                     type="text"
-                    placeholder="Enter longitude"
-                    required
+                    placeholder="Enter longitude (77.391029)"
+                    value={values.long}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={errors.long && touched.long ? "input-error" : ""}
                   />
+                  {errors.long && touched.long && (
+                    <p className="error">{errors.long}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="bedroom">Bedrooms</label>
                   <input
@@ -208,9 +333,18 @@ function NewPostPage() {
                     name="bedroom"
                     type="number"
                     placeholder="Enter number of bedrooms"
-                    required
+                    value={values.bedroom}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.bedroom && touched.bedroom ? "input-error" : ""
+                    }
                   />
+                  {errors.bedroom && touched.bedroom && (
+                    <p className="error">{errors.bedroom}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="bathroom">Bathrooms</label>
                   <input
@@ -219,82 +353,218 @@ function NewPostPage() {
                     name="bathroom"
                     type="number"
                     placeholder="Enter number of bathrooms"
-                    required
+                    value={values.bathroom}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.bathroom && touched.bathroom ? "input-error" : ""
+                    }
                   />
+                  {errors.bathroom && touched.bathroom && (
+                    <p className="error">{errors.bathroom}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="type">Listing Type</label>
-                  <select name="type" className="custom-select" required>
-                    <option className="" value="rent">Buy</option>
-                    <option value="buy">Rent</option>
-                    <option value="buy">Commercial</option>
-                    <option value="buy">Plots</option>
-                    <option value="buy">Pg / Co-living</option>
+                  <select
+                    name="listingType"
+                    value={values.listingType}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.listingType && touched.listingType
+                        ? "input-error"
+                        : "custom-select"
+                    }
+                  >
+                    <option value="buy">Buy</option>
+                    <option value="rent">Rent</option>
+                    <option value="commericial">Commercial</option>
+                    <option value="plots">Plots</option>
+                    <option value="pg">Pg / Co-living</option>
                   </select>
+                  {errors.listingType && touched.listingType && (
+                    <p className="error">{errors.listingType}</p>
+                  )}
                 </div>
+
                 <div className="item">
                   <label htmlFor="property">Property Type</label>
-                  <select name="property" className="custom-select" required>
+                  <select
+                    name="propertyType"
+                    value={values.propertyType}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.propertyType && touched.propertyType
+                        ? "input-error"
+                        : "custom-select"
+                    }
+                  >
                     <option value="apartment">Apartment</option>
                     <option value="house">House</option>
                     <option value="condo">Vila</option>
                     <option value="land">Plot</option>
                     <option value="land">Shop</option>
                   </select>
+                  {errors.propertyType && touched.propertyType && (
+                    <p className="error">{errors.propertyType}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="propertyCondition">Property Condition</label>
-                  <select name="propertyCondition" className="custom-select" required>
+                  <select
+                    name="propertyCondition"
+                    value={values.propertyCondition}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.propertyCondition && touched.propertyCondition
+                        ? "input-error"
+                        : "custom-select"
+                    }
+                  >
                     <option value="row">Row</option>
                     <option value="semi-furnished">Semi-Furnished</option>
                     <option value="furnished">Furnished</option>
                   </select>
+                  {errors.propertyCondition && touched.propertyCondition && (
+                    <p className="error">{errors.propertyCondition}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="parking">Parking</label>
-                  <select name="parking" className="custom-select" required>
+                  <select
+                    name="parking"
+                    value={values.parking}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.parking && touched.parking ? "input-error" : "custom-select"
+                    }
+                  >
                     <option value="none">None</option>
                     <option value="street">Covered</option>
                     <option value="street">Open</option>
                     <option value="garage">Garage</option>
                   </select>
+                  {errors.parking && touched.parking && (
+                    <p className="error">{errors.parking}</p>
+                  )}
                 </div>
 
                 <div className="item">
                   <label htmlFor="utilities">Utilities Policy</label>
-                  <select name="utilities" className="custom-select">
+                  <select
+                    name="uPolicy"
+                    value={values.uPolicy}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.uPolicy && touched.uPolicy ? "input-error" : "custom-select"
+                    }
+                  >
                     <option value="owner">Owner is responsible</option>
                     <option value="tenant">Tenant is responsible</option>
                     <option value="shared">Shared</option>
                   </select>
+                  {errors.uPolicy && touched.uPolicy && (
+                    <p className="error">{errors.uPolicy}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="pet">Pet Policy</label>
-                  <select name="pet" className="custom-select">
+                  <select
+                    name="petPolicy"
+                    value={values.petPolicy}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.petPolicy && touched.petPolicy ? "input-error" : "custom-select"
+                    }
+                  >
                     <option value="allowed">Allowed</option>
                     <option value="not-allowed">Not Allowed</option>
                   </select>
+                  {errors.petPolicy && touched.petPolicy && (
+                    <p className="error">{errors.petPolicy}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="income">Income Policy</label>
                   <input
                     id="income"
-                    name="income"
+                    name="iPolicy"
                     type="text"
                     placeholder="Income Policy"
+                    value={values.iPolicy}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.iPolicy && touched.iPolicy ? "input-error" : ""
+                    }
                   />
+                  {errors.iPolicy && touched.iPolicy && (
+                    <p className="error">{errors.iPolicy}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="school">School</label>
-                  <input min={0} id="school" name="school" type="number" placeholder="Enter school distance" />
+                  <input
+                    min={0}
+                    id="school"
+                    name="school"
+                    type="number"
+                    placeholder="Enter school distance"
+                    value={values.school}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.school && touched.school ? "input-error" : ""
+                    }
+                  />
+                  {errors.school && touched.school && (
+                    <p className="error">{errors.school}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="bus">Bus</label>
-                  <input min={0} id="bus" name="bus" type="number" placeholder="Enter bus-stop distance" />
+                  <input
+                    min={0}
+                    id="bus"
+                    name="bus"
+                    type="number"
+                    placeholder="Enter bus-stop distance"
+                    value={values.bus}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={errors.bus && touched.bus ? "input-error" : ""}
+                  />
+                  {errors.bus && touched.bus && (
+                    <p className="error">{errors.bus}</p>
+                  )}
                 </div>
                 <div className="item">
                   <label htmlFor="restaurant">Restaurant</label>
-                  <input min={0} id="restaurant" name="restaurant" type="number" placeholder="Enter restaurant distance" />
+                  <input
+                    min={0}
+                    id="restaurant"
+                    name="restaurant"
+                    type="number"
+                    placeholder="Enter restaurant distance"
+                    value={values.restaurant}
+                    onBlur={handleBlur}
+                    onChange={handleChange}
+                    className={
+                      errors.restaurant && touched.restaurant
+                        ? "input-error"
+                        : ""
+                    }
+                  />
+                  {errors.restaurant && touched.restaurant && (
+                    <p className="error">{errors.restaurant}</p>
+                  )}
                 </div>
                 {/* <div className="item">
                   <label htmlFor="offer" className="form-check-label">Offer Available
@@ -310,11 +580,24 @@ function NewPostPage() {
               </div>
               <div className="item description">
                 <label htmlFor="desc">Description</label>
-                <ReactQuill theme="snow" onChange={setValue} value={value} placeholder="Enter Your Description Here... " />
+                <ReactQuill
+                  theme="snow"
+                  value={values.desc}
+                  onChange={(val) => setFieldValue("desc", val)}
+                  onBlur={() => setFieldTouched("desc", true)}
+                  placeholder="Enter Your Description Here... "
+                />
+                {errors.desc && touched.desc && (
+                  <p className="error">{errors.desc}</p>
+                )}
               </div>
               <div className="submitSection">
-                <button className="btn btn-outline-primary">
-                  Post Listing
+                <button
+                  type="submit"
+                  className="btn btn-outline-primary"
+                  disabled={isSubmitting}
+                >
+                  {isSubmitting ? "Posting..." : "Post Listing"}
                 </button>
                 {error && <span className="errorMessage">{error}</span>}
               </div>
@@ -338,7 +621,7 @@ function NewPostPage() {
               )}
             </div>
             <div className="mt-4">
-            <UploadWidget
+              <UploadWidget
                 uwConfig={{
                   cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
                   uploadPreset: `${
@@ -349,8 +632,8 @@ function NewPostPage() {
                   folder: "posts",
                   styles: {
                     palette: {
-                      windowBorder: "#0018ff", 
-                      inactiveTabIcon: "#C4C5CC", 
+                      windowBorder: "#0018ff",
+                      inactiveTabIcon: "#C4C5CC",
                       link: "#0078FF",
                     },
                   },
