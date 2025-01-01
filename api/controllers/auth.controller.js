@@ -42,13 +42,13 @@ export const login = async (req, res) => {
     const user = await prisma.user.findUnique({ where: { email } });
 
     if (!user)
-      return res.status(401).json({ message: "Invalid Credentialss!" });
+      return res.status(401).json({ error: "Invalid Credentialss!" });
 
     // check if the password is correct
 
     const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid)
-      return res.status(401).json({ message: "Invalid Credentials!" });
+      return res.status(401).json({ error: "Invalid Credentials!" });
 
     // generat cookie token and send to user
     const age = 1000 * 60 * 60 * 24 * 7;
@@ -96,7 +96,7 @@ export const google = async (req, res) => {
 
     if (!email || !name) {
       console.error("Missing required fields:", { email, name });
-      return res.status(400).json({ message: "Email and name are required." });
+      return res.status(400).json({ error: "Email and name are required." });
     }
 
     let user = await prisma.user.findUnique({ where: { email } });
@@ -144,7 +144,7 @@ export const google = async (req, res) => {
       .json(userInfo);
   } catch (error) {
     console.error("Error during Google authentication", error);
-    res.status(500).json({ message: "Something went wrong." });
+    res.status(500).json({ error: "Something went wrong." });
   }
 };
 

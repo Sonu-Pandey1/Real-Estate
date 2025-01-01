@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import axios from "axios";
 import addListingSchema from "../../../lib/schemas/AddListing";
 import { useFormik } from "formik";
+import { Bounce, toast } from "react-toastify";
 
 function NewPostPage() {
   // const [value, setValue] = useState("");
@@ -60,8 +61,8 @@ function NewPostPage() {
               city: values.city,
               bedroom: parseInt(values.bedroom),
               bathroom: parseInt(values.bathroom),
-              type: values.listingType,
-              property: values.propertyType,
+              type: values.listingType  ,
+              property: values.propertyType.toLowerCase(),
               propertyCondition: values.propertyCondition,
               parking: values.parking,
               lat: values.lat,
@@ -81,117 +82,35 @@ function NewPostPage() {
           },
           { withCredentials: true }
         );
-        navigate(`/profile/${res.data.id}`);
+        // console.log(res)
+        // console.log(res.data)
+        toast.success("" + (res.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true, 
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
+        navigate(`/profile/${res.data.post.id}`);
       } catch (err) {
-        console.error("Error while submitting the post.", err);
+        console.log(err)
+        toast.error("❌ "+ (err.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
         setError(err.response?.data?.message || "An error occurred.");
       }
     },
   });
-  console.log(values)
-  console.log(images)
-
-  // const {
-  //   values,
-  //   errors,
-  //   touched,
-  //   handleBlur,
-  //   handleChange,
-  //   handleSubmit,
-  //   setFieldValue,
-  //   setFieldTouched,
-  //   isSubmitting,
-  // } = useFormik({
-  //   initialValues: {
-  //     title: "",
-  //     price: "",
-  //     address: "",
-  //     city: "",
-  //     size: "",
-  //     lat: "",
-  //     long: "",
-  //     bedroom: "",
-  //     bathroom: "",
-  //     listingType: "buy",
-  //     propertyType: "Apartment",
-  //     propertyCondition: "Row",
-  //     parking: "none",
-  //     desc: "",
-  //     uPolicy: "owner is responsible",
-  //     petPolicy: "Allowed",
-  //     iPolicy: "",
-  //     school: "",
-  //     bus: "",
-  //     restaurant: "",
-  //   },
-  //   validationSchema: addListingSchema,
-  //   onSubmit: async (values) => {
-  //     try {
-  //       const res = await axios.post(
-  //         `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-  //         {
-  //           postData: {
-  //             ...values,
-  //             images,
-  //           },
-  //         },
-  //         { withCredentials: true }
-  //       );
-  //       navigate("/profile/" + res.data.id);
-  //     } catch (err) {
-  //       console.error("Error while submitting the post.", error);
-  //       setError(err.response?.data?.message || "An error occurred.");
-  //     }
-  //   },
-  // });
-
-  // const handleSubmit = async (e) => {
-  //   e.preventDefault();
-  //   const formData = new FormData(e.target);
-  //   const inputs = Object.fromEntries(formData);
-
-  //   // inputs.offer = inputs.offer === "on";
-  //   try {
-  //     const res = await axios.post(
-  //       `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-  //       {
-  //         postData: {
-  //           title: inputs.title,
-  //           price: parseInt(inputs.price),
-  //           address: inputs.address,
-  //           city: inputs.city,
-  //           bedroom: parseInt(inputs.bedroom),
-  //           bathroom: parseInt(inputs.bathroom),
-  //           type: inputs.type,
-  //           property: inputs.property,
-  //           propertyCondition: inputs.propertyCondition,
-  //           parking: inputs.parking,
-  //           // offer: inputs.offer  , // Convert checkbox value to boolean
-  //           lat: inputs.latitude,
-  //           long: inputs.longitude,
-  //           images: images,
-  //         },
-  //         postDetail: {
-  //           desc: value,
-  //           utilities: inputs.utilities,
-  //           pet: inputs.pet,
-  //           income: inputs.income,
-  //           size: parseInt(inputs.size),
-  //           school: parseInt(inputs.school),
-  //           bus: parseInt(inputs.bus),
-  //           restaurant: parseInt(inputs.restaurant),
-  //         },
-  //       },
-  //       {
-  //         withCredentials: true, // Include cookies in the request
-  //       }
-  //     );
-  //     navigate("/profile/" + res.data.id);
-  //   } catch (err) {
-  //     console.log(err);
-  //     setError("Error while submitting the post. Please try again.");
-  //   }
-  // };
 
   return (
     <div className="newPostPage">
@@ -380,7 +299,7 @@ function NewPostPage() {
                   >
                     <option value="buy">Buy</option>
                     <option value="rent">Rent</option>
-                    <option value="commericial">Commercial</option>
+                    <option value="commercial">Commercial</option>
                     <option value="plots">Plots</option>
                     <option value="pg">Pg / Co-living</option>
                   </select>
@@ -406,7 +325,7 @@ function NewPostPage() {
                     <option value="house">House</option>
                     <option value="condo">Vila</option>
                     <option value="land">Plot</option>
-                    <option value="land">Shop</option>
+                    <option value="shop">Shop</option>
                   </select>
                   {errors.propertyType && touched.propertyType && (
                     <p className="error">{errors.propertyType}</p>
@@ -599,7 +518,7 @@ function NewPostPage() {
                 >
                   {isSubmitting ? "Posting..." : "Post Listing"}
                 </button>
-                {error && <span className="errorMessage">{error}</span>}
+                {/* {error && <span className="errorMessage">{error}</span>} */}
               </div>
             </form>
           </div>

@@ -6,7 +6,8 @@ import { NavLink, useNavigate } from "react-router-dom";
 import axios from "axios";
 import { AuthContext } from "../Context/AuthContext";
 import Oauth from "./Oauth";
-import {loginSchema ,signupSchema} from "../../lib/schemas/LoginLogout";
+import { Bounce, toast } from "react-toastify";
+import { loginSchema, signupSchema } from "../../lib/schemas/LoginLogout";
 
 export default function Modal({ isPopupOpen, setIsPopupOpen }) {
   const [activeTab, setActiveTab] = useState("login");
@@ -33,13 +34,33 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         updateUser(response.data);
         setIsPopupOpen(false);
         navigate("/");
-        loginFormik.resetForm()
+        toast.success("🎉 Login successful!"+ (response.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
+        loginFormik.resetForm();
       } catch (error) {
         if (error.response && error.response.data) {
           setErrorMessage(error.response.data.message);
         } else {
           setErrorMessage("An unexpected error occurred");
         }
+        toast.error("❌ "  + (error.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
       }
     },
   });
@@ -63,13 +84,33 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
             withCredentials: true,
           }
         );
-        console.log("Signup Response:", response); 
-        signupFormik.resetForm(); 
-        // setIsPopupOpen(false); 
+        console.log("Signup Response:", response);
+        signupFormik.resetForm();
+        // setIsPopupOpen(false);
         // navigate("/");
         setActiveTab("login");
+        toast.success("🎉 Signup successful! You can now log in."+ (response.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
       } catch (error) {
-        console.error(error);
+        // console.error(error);
+        toast.error("❌ " + (error.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition: Bounce,
+        });
       }
     },
   });
@@ -102,7 +143,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
               className="popupForm pt-2"
               style={{
                 background: "#fff",
-                overflowY:"scroll",
+                overflowY: "scroll",
                 padding: "0px 20px",
                 borderRadius: "10px",
                 width: "90%",

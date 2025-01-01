@@ -29,11 +29,27 @@ import EditListing from "./Pages/profile/EditListing.jsx";
 import MyPlan from "./Pages/profile/MyPlan.jsx";
 import MyResponses from "./Pages/profile/MyResponses.jsx";
 // import { singlePageLoader } from "../lib/Loaders.js";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   return (
     <>
       <Navbar />
+
+       {/* ToastContainer for global toast notifications */}
+       <ToastContainer
+        position="bottom-right"
+        autoClose={5000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="dark"
+      />
 
       {/* Dynamic Hero Section */}
       <Routes>

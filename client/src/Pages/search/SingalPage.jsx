@@ -7,6 +7,7 @@ import { useEffect, useState,useContext } from "react";
 import {AuthContext} from "..//../Context/AuthContext";
 import axios from "axios";
 import DOMPurify from "dompurify";
+import { Bounce, toast } from "react-toastify";
 
 function SinglePage() {
   let smallMap = true;
@@ -28,10 +29,30 @@ function SinglePage() {
       const response  = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,{ postId: id }, {
         withCredentials: true, // Include cookies in the request
       });
-      console.log(response.data.message)
+      // console.log(response.data.message)
+      toast.success("" + (response.data.message || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, 
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
       setSaved(!saved)
-    } catch (error) {
-      console.log(error)
+    } catch (err) {
+      // console.log(error)
+      toast.error("❌ "+ (err.response.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     }
   }
 
@@ -42,6 +63,7 @@ function SinglePage() {
             const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
                 withCredentials: true,
             });
+            // console.log(response.data)
             if (response.data) {
                 setPropertyData(response.data);
                 setSaved(response.data.isSaved || false);

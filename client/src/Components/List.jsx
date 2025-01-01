@@ -20,7 +20,7 @@ function List({ type }) {
             withCredentials: true, // Include cookies if needed
           }
         );
-
+        // console.log(response.data)
         const { userPosts, savedPost } = response.data;
         setUserPosts(userPosts || []);
         setSavedPosts(savedPost || []);

@@ -31,7 +31,7 @@ export const updateUser = async (req, res) => {
   const { password, avatar, ...inputs } = req.body;
 
   if (id !== tokenUserId) {
-    return res.status(403).json({ message: "Not Authorized!" });
+    return res.status(403).json({ error: "Not Authorized!" });
   }
   let updatedPassword = null;
   try {
@@ -47,14 +47,21 @@ export const updateUser = async (req, res) => {
       },
     });
     const { password: userPassword, ...rest } = updatedUser;
-    res.status(200).json(rest);
+    // res.status(200).json({message:"User Details Updated!"})
+    // res.status(200).json(rest);
+    res.status(200).json({
+      user: rest,
+      message: "User Details Updated Successfully!",
+    });
+    
     // res.status(200).json({ user: rest, message: "User Updated" });
 
   } catch (err) {
     console.log(err);
-    res.status(500).json({ message: "Failed to update users!" });
+    res.status(500).json({ error: "Failed to update users!" });
   }
 };
+// paaas singal response for tost message
 
 export const deleteUser = async (req, res) => {
   const id = req.params.id;
@@ -81,12 +88,12 @@ export const deleteUser = async (req, res) => {
     });
 
     res.clearCookie("token")
-    res.status(200).json({ message: "User Deleted!" })
+    res.status(200).json({ message: "Account Deleted!" })
 
     
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "faild to delete Usre!" });
+    res.status(500).json({ error: "faild to delete Account!" });
   }
 };
 
@@ -132,7 +139,7 @@ export const savePost = async (req, res) => {
 
   } catch (error) {
     console.log(error);
-    res.status(500).json({ message: "Faild to Save Post!" });
+    res.status(500).json({ error: "Faild to Save Post!" });
   }
 };
 

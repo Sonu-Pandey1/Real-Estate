@@ -53,11 +53,12 @@ enum Type {
   rent
   commercial
   plots
-  co_living
+  pg
 }
 
 enum Property {
   apartment
+  Apartment
   house
   condo
   land

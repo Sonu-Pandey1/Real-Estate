@@ -1,10 +1,11 @@
 import axios from "axios";
-import Chat from "../../Components/Chat";
+// import Chat from "../../Components/Chat";
 import List from "../../Components/List";
 import "./Profile.scss";
 import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Context/AuthContext";
+import { Bounce, toast } from "react-toastify";
 
 function Profile() {
   const navigate = useNavigate();
@@ -21,8 +22,28 @@ function Profile() {
       // localStorage.removeItem("user")
       updateUser(null);
       navigate("/");
+      toast.success(""+ (response.data.message || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
+      });
     } catch (error) {
-      console.log(error);
+      // console.log(error);
+      toast.error("❌ Logout failed: " + (error.response.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     }
   };
 
@@ -46,11 +67,41 @@ function Profile() {
         console.log(response.data);
         updateUser(null);
         navigate("/");
+        toast.success("" + (response.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
       } catch (error) {
-        console.log(error);
+        toast.error("❌" + (error.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
       }
     } else {
       console.log("Account deletion canceled.");
+      toast.error("❌ Account deletion canceled. ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
+
     }
   };
 

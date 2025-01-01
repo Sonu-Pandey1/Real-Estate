@@ -141,11 +141,15 @@ export const addlisting  = async (req,res)=>{
                 }
             }
         })
-        res.status(200).json(newPost)
+        // res.status(200).json(newPost)
+        res.status(200).json({
+          post: newPost,
+          message: "Listing Added Successfully!",
+        });
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:"Failed To Add Post"});
+        res.status(500).json({error:"Failed To Add Listing."});
     }
 };
 
@@ -163,11 +167,11 @@ export const Updatelisting = async (req, res) => {
       });
   
       if (!post) {
-        return res.status(404).json({ message: "Post not found" });
+        return res.status(404).json({ error: "Listing not found!" });
       }
   
       if (post.userId !== tokenUserId) {
-        return res.status(403).json({ message: "Not authorized to update this post" });
+        return res.status(403).json({ error: "Not authorized to update this post!" });
       }
   
       // Update the post and related post details
@@ -181,10 +185,10 @@ export const Updatelisting = async (req, res) => {
         },
       });
   
-      res.status(200).json({ message: "Post updated successfully", updatedPost });
+      res.status(200).json({ message: "Listing updated successfully!", updatedPost });
     } catch (error) {
       console.error("Error updating post:", error);
-      res.status(500).json({ message: "Failed to update post" });
+      res.status(500).json({ message: "Failed to update Listing." });
     }
   };
   
@@ -198,17 +202,17 @@ export const Deletelisting = async (req,res)=>{
         })
 
         if(post.userId !== tokenUserId){
-            return res.status(403).json({message:"Not Authorized!"})
+            return res.status(403).json({error:"Not Authorized!"})
         }
 
         await prisma.post.delete({
             where:{id}
 
         });
-        res.status(200).json({message:"Post Deleted!"})
+        res.status(200).json({message:"Listing Deleted!"})
         
     } catch (error) {
         console.log(error);
-        res.status(500).json({message:"Failed To Delete Post"});
+        res.status(500).json({error:"Failed To Delete Listing"});
     }
 };

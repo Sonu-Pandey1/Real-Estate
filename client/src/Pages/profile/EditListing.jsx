@@ -5,6 +5,7 @@ import "react-quill/dist/quill.snow.css";
 import UploadWidget from "../../Components/UploadWidget";
 import { useNavigate, useParams } from "react-router-dom";
 import axios from "axios";
+import { Bounce, toast } from "react-toastify";
 
 function EditListing() {
   const [formData, setFormData] = useState({
@@ -73,8 +74,9 @@ function EditListing() {
         setValue(postDetail.desc || "");
         setImages(post.images || []);
         setHasPreviousImages(post.images && post.images.length > 0);
+        
       } catch (err) {
-        console.error("Error fetching post data:", err);
+    
         setError("Failed to load post data. Please try again.");
       }
     };
@@ -133,8 +135,27 @@ function EditListing() {
       } else {
         setError("Unexpected response from the server.");
       }
+      toast.success("" + (res.data.message || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, 
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     } catch (err) {
-      console.error("Error updating post:", err.response?.data || err.message);
+      toast.error("❌ "+ (err.response.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
       setError(
         err.response?.data?.message ||
           "Error updating the post. Please try again."

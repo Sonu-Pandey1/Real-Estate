@@ -13,6 +13,7 @@ import { NavLink, useNavigate } from "react-router-dom";
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import axios from "axios";
+import { Bounce, toast } from "react-toastify";
 
 export default function PropertyCard({ item, type }) {
   const { currentUser } = useContext(AuthContext);
@@ -31,10 +32,30 @@ export default function PropertyCard({ item, type }) {
         { postId: item.id },
         { withCredentials: true }
       );
-      console.log(response.data.message);
+      // console.log(response.data.message);
       setSaved(!saved);
-    } catch (error) {
-      console.log(error);
+      toast.success("" + (response.data.message || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, 
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
+    } catch (err) {
+      // console.log(error);
+      toast.error("❌ "+ (err.response.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     }
   };
 
@@ -77,13 +98,42 @@ export default function PropertyCard({ item, type }) {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
           { withCredentials: true }
         );
-        console.log(response.data.message);
+        // console.log(response.data.message);
+        toast.success("" + (response.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true, 
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
         window.location.reload();
-      } catch (error) {
-        console.log(error);
+      } catch (err) {
+        toast.error("❌ "+ (err.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
       }
     } else {
       console.log("Listing deletion canceled.");
+      toast.error("❌ Listing deletion canceled. ", {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     }
   };
 

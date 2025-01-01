@@ -7,6 +7,7 @@ import UploadWidget from "../../Components/UploadWidget";
 import { useFormik } from "formik";
 import "../../App.scss";
 import profileUpdateSchema from "../../../lib/schemas/ProfileUpdateSchema";
+import { Bounce, toast } from "react-toastify";
 
 function ProfileUpdatePage() {
   const { currentUser, updateUser } = useContext(AuthContext);
@@ -38,12 +39,34 @@ function ProfileUpdatePage() {
             withCredentials: true,
           }
         );
-        updateUser(res.data);
+        // console.log(res.data.user)
+        // console.log(res.data.message)
+        updateUser(res.data.user);
+        toast.success("" + (res.data.message || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
         // resetForm(); // Reset the form after successful submission
         navigate("/profile");
       } catch (err) {
         console.log(err);
-        setError(err.response?.data?.message || "An error occurred.");
+        setError(err.response?.data?.error || "An error occurred.");
+        toast.error("❌ "+ (err.response.data.error || ""), {
+          position: "bottom-right",
+          autoClose: 5000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "dark",
+          transition:Bounce,
+        });
       }
     },
   });

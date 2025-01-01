@@ -44,8 +44,8 @@ const addListingSchema = yup.object().shape({
   bathrooms: yup.number(),
 
   listingType: yup
-    .string()
-    .oneOf(["buy", "rent", "commericial", "pg","plots"], "Please select one"),
+    .string(),
+    // .oneOf(["buy", "rent", "commericial", "pg","plots"], "Please select one"),
 
   propertyType: yup.string(),
 
