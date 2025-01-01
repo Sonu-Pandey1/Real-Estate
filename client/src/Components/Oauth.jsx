@@ -3,6 +3,7 @@ import { app } from "../../lib/Firebase";
 import { useNavigate } from "react-router-dom";
 import { useContext, } from "react";
 import { AuthContext } from "../Context/AuthContext";
+import { Bounce, toast } from "react-toastify";
 
 export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
   // console.log(isPopupOpen)
@@ -35,23 +36,43 @@ export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
           }),
         }
       );
-      
+      // console.log(res)
 
       if (!res.ok) {
         throw new Error("Failed to communicate with the backend.");
       }
 
       const data = await res.json();
+      // console.log(data.message)
       
 
       // Update user context
       
-      updateUser(data);
-      
-      navigate("/profile");
+      updateUser(data.user);
       setIsPopupOpen(false);
-    } catch (error) {
-      console.error("Could not sign in with Google", error);
+      navigate("/profile");
+      toast.success("🎉🎉" + (data.message || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true, 
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
+    } catch (err) {
+      console.error("Could not sign in with Google", err);
+      toast.error("❌ "+ (err.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition:Bounce,
+      });
     }
   };
 

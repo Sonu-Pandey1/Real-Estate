@@ -58,7 +58,7 @@ enum Type {
 
 enum Property {
   apartment
-  Apartment
+  Apartment //unnessary but i aaded becuse frofile post cna not fetch need to work on that .
   house
   condo
   land

@@ -115,8 +115,12 @@ export const google = async (req, res) => {
           maxAge: 1000 * 60 * 60 * 24 * 7,
         })
         .status(200)
-        .json(userInfo);
+      .json({
+        user:userInfo,
+        message:"Login successfully!"
+      });
     }
+    console.log(userInfo)
 
     const generatedPassword = Math.random().toString(36).slice(-8);
     const hashedPassword = await bcrypt.hash(generatedPassword, 10);
@@ -141,7 +145,11 @@ export const google = async (req, res) => {
         maxAge: 1000 * 60 * 60 * 24 * 7,
       })
       .status(200)
-      .json(userInfo);
+      .json({
+        user:userInfo,
+        message:"SignUp&Login successfully!"
+      });
+      console.log(userInfo)
   } catch (error) {
     console.error("Error during Google authentication", error);
     res.status(500).json({ error: "Something went wrong." });
