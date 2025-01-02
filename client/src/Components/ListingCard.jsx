@@ -165,17 +165,17 @@ export default function PropertyCard({ item, type }) {
               : ""
           }`}
         >
-          <div className="card-img-container">
+          <div className="card-img-container ">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
-          <div className="card-body">
+          <div className="card-body ">
             <h5 className="card-title">{item.title}</h5>
             <p className="card-location">
               <IoLocationOutline className="icon" />
               {item.address}
             </p>
             <p className="card-price">{item.price}</p>
-            <div className="card-amenitiesContainer">
+            <div className="card-amenitiesContainer ">
               <div className="card-details">
                 <div className="d-flex justify-content-between gap-4">
                   <div className="detail">

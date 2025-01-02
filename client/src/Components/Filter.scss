@@ -107,10 +107,44 @@
 
   .filterOptions {
     display: flex;
-    flex-wrap: wrap;
+    // flex-wrap: wrap;
+    overflow-x: scroll;
     gap: 15px;
     align-items: center;
+    &::-webkit-scrollbar {
+      display: none !important;
+    }
 
+    .filterGroupp {
+      display: flex;
+      flex-direction: column;
+      width: 150px;
+      
+      label {
+        font-size: 14px;
+        color: #666;
+        margin-bottom: 5px;
+      }
+
+      .filterGrouppWrapper{
+        display: flex;
+      
+        select,
+        input {
+          padding: 5px 10px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+          font-size: 14px;
+        }
+  
+        .priceInput {
+          width: 70px;
+          margin-right: 5px;
+        }
+
+      }
+     
+    }
     .filterGroup {
       display: flex;
       flex-direction: column;
@@ -143,6 +177,7 @@
       font-size: 14px;
       border-radius: 4px;
       cursor: pointer;
+      border: none;
       display: flex;
       align-items: center;
       gap: 8px;

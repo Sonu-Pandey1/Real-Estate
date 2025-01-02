@@ -1,18 +1,16 @@
 
 .searchPageContainer {
-  padding-top: 60px;
-  .roww{
-    // background-color: red;
-    
-  }
+  padding-top: 43px;
+
   .container-fluid {
     
     .row {
       
-      .sticky-filter{
+      .sticky-filterr{
         position: sticky;
         top: 9.9vh;
         z-index: 100;
+        // padding: 2px !important;
 
       }
       .listContainer {
@@ -70,7 +68,7 @@
 
 .filterHeader {
   text-align: center;
-  margin-bottom: 20px;
+  // margin-bottom: 20px;
 
   h1 {
     font-size: 24px;

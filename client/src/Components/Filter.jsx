@@ -165,7 +165,7 @@ export default function Filter() {
   };
 
   return (
-    <div className="filterContainer">
+    <div className="filterContainer ">
       <div className="filterOptions">
         <div className="filterGroup">
           <label htmlFor="city">City</label>
@@ -227,9 +227,9 @@ export default function Filter() {
           </select>
         </div>
 
-        <div className="filterGroup">
-          <label htmlFor="price">Price Range</label>
-          <div>
+        <div className="filterGroupp">
+          <label htmlFor="price" className="fgp">Price Range</label>
+          <div className="filterGrouppWrapper">
             <input
               type="number"
               placeholder="Min"
@@ -259,7 +259,7 @@ export default function Filter() {
           </select>
         </div>
 
-        <div className="filterGroup">
+        {/* <div className="filterGroup">
           <label>
             <input
               type="checkbox"
@@ -281,7 +281,7 @@ export default function Filter() {
             />
             Offer
           </label>
-        </div>
+        </div> */}
 
         <button type="button" className="filterSave" onClick={handleFilter}>
           <FaSearch className="icon" /> Search

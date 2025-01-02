@@ -64,17 +64,15 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
               Search Results for <b>{propertyData.city}</b>
             </h1> */}
           </div>
-          <div className="sticky-filterr ">
+          <div className="sticky-filter p-0 pt-1">
             <div>
               <Filter  />
             </div>
           </div>
           <div className="row">
-            <div className="col-12 col-md-8">
-              {/* <div className="sticky-filter ">
-                <Filter type={type} city={city} locality={locality} />
-              </div> */}
-              <div className="listContainer h-100">
+            <div className="col-12 col-md-8 ">
+    
+              <div className="listContainer h-100 ">
                 {propertyData.map((item) => (
                   <NavLink
                     className={" text-decoration-none"}
@@ -86,13 +84,14 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
                 ))}
               </div>
             </div>
-            <div className="col-12 col-md-4 ">
-              <div className="mapContainer mt-3  pt-sm-0">
+            <div className="col-12 col-md-4">
+              <div className="mapContainer mt-3 bg-secondary-subtle  pt-sm-0">
+            
                 <Map items={propertyData} />
               </div>
             </div>
           </div>
-          <div className="row mt-5 p-5">
+          {/* <div className="row mt-5 p-5">
             <p>
               Lorem ipsum dolor, sit amet consectetur adipisicing elit. Facilis
               sint, ipsa velit delectus quaerat iure aut earum sed quae,
@@ -165,7 +164,7 @@ console.log(import.meta.env.VITE_BACKEND_BASEURL);
               sed voluptatum! Porro, voluptates itaque deserunt soluta ad,
               alias, temporibus magni eius sapiente voluptate fugiat.
             </p>
-          </div>
+          </div> */}
         </div>
       </div>
     </>

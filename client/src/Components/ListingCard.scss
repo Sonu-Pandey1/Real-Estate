@@ -4,21 +4,22 @@
   padding: 20px 0px;
   background-color: #f9f9f9;
 
-  .ProfileCard{
-    height: 300px !important;
-   
+  .ProfileCard {
+    height: 300px !important; //thereislititleissuein responvness a point
+    &::-webkit-scrollbar-thumb {
+      display: none;
+    }
   }
-
   .custom-card {
     display: flex;
     flex-direction: row;
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    overflow: hidden;
+    // overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
-    height :240px;
+    height: 250px;
     // overflow-y: scroll;
 
     &:hover {
@@ -202,39 +203,61 @@
           color: #007bff;
           transform: scale(1.1);
         }
-        
       }
     }
   }
 }
 
 @media (max-width: 1200px) {
-  .card-img-container {
-    width: 230px !important;
-    height: auto;
-    overflow: hidden;
+  .listingCardContainer {
+    .custom-card {
+      display: flex;
+      // flex-direction: column;
+
+      .card-img-container {
+        width: 230px;
+        height: 100%;
+        overflow: hidden;
+
+        img {
+          width: 100%;
+          height: 100%;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 990px) {
+  .ProfileCard {
+    height: 500px !important;
+    overflow-y: scroll;
+    // background-color: red !important;
+  }
+  .custom-card {
+    height: 280px !important;
   }
 }
 
 @media (max-width: 500px) {
-  .ProfileCard{
-    height: 350px !important;
-  }
- 
-  .custom-card {
-    
-    display: flex;
-    flex-direction: column !important;
-    width: 100% !important;
+  .listingCardContainer {
+    .ProfileCard {
+      // height: 100% ;
+    }
 
-    .card-img-container {
-      width: 100% !important;
-      height: 220px !important;
-      border-bottom: 2px solid orange;
+    .custom-card {
+      height: 100% !important;
 
-      img {
+      flex-direction: column;
+      .card-img-container {
         width: 100%;
         height: 100%;
+        border-bottom: 2px solid rgb(255, 0, 0);
+
+        img {
+          width: 100%;
+          height: 180px !important ;
+        }
       }
     }
   }

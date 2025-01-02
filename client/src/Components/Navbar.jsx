@@ -49,6 +49,10 @@ function Navbar() {
     navigate("/list-Property");
   };
 
+  const handleNavigate2 = () => {
+    navigate("/");
+  };
+
   const [isSticky, setIsSticky] = useState(false);
 
   const handleScroll = () => {
@@ -78,11 +82,14 @@ function Navbar() {
         } `}
       >
         <div className="container ms p-0 align-items-center ">
-          <img
-            className="img img-fluid"
-            src="https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"
-            alt="logo"
-          />
+          <button className=" btn p-0 m-0" onClick={handleNavigate2} >
+            <img
+              className="img img-fluid"
+              src="https://prasidhirealtysolutions.in/wp-content/uploads/2024/05/prasidhi-realty-solutions_LOGO.svg"
+              alt="logo"
+            />
+          </button>
+
           <div className="d-none d-md-block ms-auto pe-5 align-items-center">
             <ul className="navbar-nav me-auto mb-lg-0 flex-row gap-4 align-items-center ">
               <li className="nav-item">
