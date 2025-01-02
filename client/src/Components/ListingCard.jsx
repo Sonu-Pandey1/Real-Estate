@@ -38,15 +38,15 @@ export default function PropertyCard({ item, type }) {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true, 
+        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
     } catch (err) {
       // console.log(error);
-      toast.error("❌ "+ (err.response.data.error || ""), {
+      toast.error("❌ " + (err.response.data.error || ""), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -54,7 +54,7 @@ export default function PropertyCard({ item, type }) {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
     }
   };
@@ -103,15 +103,15 @@ export default function PropertyCard({ item, type }) {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
-          closeOnClick: true, 
+          closeOnClick: true,
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
         window.location.reload();
       } catch (err) {
-        toast.error("❌ "+ (err.response.data.error || ""), {
+        toast.error("❌ " + (err.response.data.error || ""), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -119,7 +119,7 @@ export default function PropertyCard({ item, type }) {
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
       }
     } else {
@@ -132,7 +132,7 @@ export default function PropertyCard({ item, type }) {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
     }
   };

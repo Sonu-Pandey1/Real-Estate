@@ -22,7 +22,7 @@ function Profile() {
       // localStorage.removeItem("user")
       updateUser(null);
       navigate("/");
-      toast.success(""+ (response.data.message || ""), {
+      toast.success("" + (response.data.message || ""), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -42,14 +42,13 @@ function Profile() {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
     }
   };
 
   // todo -- user deleted successfully but when the user have some saved post or creates listings the throughing error handle it later.
 
- 
   const handleDelete = async () => {
     const confirmation = window.confirm(
       "Are you sure you want to delete your account and all your posts? This action cannot be undone."
@@ -75,7 +74,7 @@ function Profile() {
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
       } catch (error) {
         toast.error("❌" + (error.response.data.error || ""), {
@@ -86,7 +85,7 @@ function Profile() {
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
       }
     } else {
@@ -99,9 +98,8 @@ function Profile() {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
-
     }
   };
 
@@ -121,7 +119,9 @@ function Profile() {
             <div className="title">
               <h1>User Information</h1>
               <NavLink to={"/profile/update"}>
-                <button className="btn btn-outline-success">Update Profile</button>
+                <button className="btn btn-outline-success">
+                  Update Profile
+                </button>
               </NavLink>
             </div>
             <div className="info">
@@ -143,24 +143,29 @@ function Profile() {
               <span>
                 Email: <b>{currentUser.email}</b>
               </span>
-              <button
-                className="btn btn-outline-warning w-25 mt-4"
-                onClick={handleLogout}
-              >
-                Logout
-              </button>
+              <div className="d-flex flex-column flex-sm-row justify-content-between gap-3 gap-sm-5">
+  <button
+    className="btn btn-outline-warning w-100 w-sm-25 mt-2 mt-sm-4"
+    onClick={handleLogout}
+  >
+    Logout
+  </button>
 
-              <button
-                className="btn btn-outline-danger w-25 "
-                onClick={handleDelete}
-              >
-                Delete Account
-              </button>
+  <button
+    className="btn btn-outline-danger w-100 w-sm-25 mt-0 mt-sm-4"
+    onClick={handleDelete}
+  >
+    Delete Account
+  </button>
+</div>
+
             </div>
             <div className="title">
               <h1>My List</h1>
               <NavLink to={"/profile/add-listing"}>
-                <button className="btn btn-outline-info">Create New Post</button>
+                <button className="btn btn-outline-info">
+                  Create New Post
+                </button>
               </NavLink>
             </div>
 
@@ -205,6 +210,3 @@ function Profile() {
 }
 
 export default Profile;
-
-
-
