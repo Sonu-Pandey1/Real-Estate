@@ -8,7 +8,6 @@
 
 // export default function HeroC() {
 
-
 // const [propertyType, setPropertyType] = useState("buy");
 //   const [selectedCity, setSelectedCity] = useState("");
 //   const [localitySuggestions, setLocalitySuggestions] = useState([]);
@@ -42,11 +41,6 @@
 //   };
 
 //   const [selectedLocality, setSelectedLocality] = useState("");
-
-
- 
-
-
 
 //   var settings = {
 //     dots: false,
@@ -94,7 +88,6 @@
 //     "Sector 14",
 //     "Sector 2",
 //   ];
-
 
 //   const heroConfig = {
 //     "/": {
@@ -152,7 +145,7 @@
 //                 <NavLink onClick={() => setPropertyType("buy")} className={`navlink ${propertyType === "buy" ? "active" : ""}`} to={"/"}>
 //                   Buy
 //                 </NavLink>
-                
+
 //                 <NavLink onClick={() => setPropertyType("rent")} className={`navlink ${propertyType === "rent" ? "active" : ""}`} to={"/rent"}>
 //                   Rent
 //                 </NavLink>
@@ -174,7 +167,7 @@
 //               </nav>
 //             </div>
 //             {/* {/* search bar */}
-           
+
 //             <form onSubmit={handleSearch} className="property-search-form mx-auto ">
 //   <div className="form-container d-flex justify-content-center align-items-center rounded-pill shadow-lg p-0 p-sm-2">
 //     {/* City Dropdown */}
@@ -281,8 +274,6 @@
 //   );
 // }
 
-
-
 import "./HeroC.scss";
 import PopularLocalitiesSlider from "../Components/PopularLocalitiesSlider";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
@@ -294,14 +285,20 @@ import { useState } from "react";
 export default function HeroC() {
   const [propertyType, setPropertyType] = useState("buy");
   const [selectedCity, setSelectedCity] = useState("noida");
-  const [localitySuggestions, setLocalitySuggestions] = useState([]);
+  const [localitySuggestions, setLocalitySuggestions] = useState([
+    "Sector 84",
+    "Sector 48",
+    "Sector 34",
+    "Sector 24",
+    "sector 62",
+  ]);
   const [selectedLocality, setSelectedLocality] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-
+  console.log(localitySuggestions);
   const localities = {
     noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
-    delhi: ["Connaught Place", "Chandni Chowk", "Saket", "Dwarka"],
+    delhi: ["CP", "Chandni C", "Saket", "Dwarka"],
     gurgaon: ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
   };
 
@@ -319,45 +316,48 @@ export default function HeroC() {
       city: selectedCity,
       type: propertyType,
       searchTerm: selectedLocality,
-      
-     // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page 
+
+      // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page
     }).toString();
 
     navigate(`/search?${params}`);
   };
 
-  const heroConfig = {
+  const getHeroConfig = (city) => ({
     "/": {
       background:
         "url('https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg')",
-      title: "Properties to buy in Noida",
+      title: `Properties to buy in ${city}`,
       placeholder: "Search for locality, project, or builder",
     },
     "/rent": {
       background:
         "url('https://c.housingcdn.com/demand/s/client/common/assets/rentCover.c47ae7d7.jpg')",
-      title: "Properties for rent in Noida",
+      title: `Properties for rent in ${city}`,
       placeholder: "Search for city, budget, or size",
     },
     "/pg-coliving": {
       background:
         "url('https://c.housingcdn.com/demand/s/client/common/assets/pgCover.d07e5816.jpg')",
-      title: "PG/Co-Living in Noida",
+      title: `PG/Co-Living in ${city}`,
       placeholder: "Search for PG or co-living spaces",
     },
     "/commercial": {
       background:
         "url('https://c.housingcdn.com/demand/s/client/common/assets/commercialCover.c5df3aef.jpg')",
-      title: "Commercial Real Estate in Noida",
+      title: `Commercial Real Estate in ${city}`,
       placeholder: "Search for offices or retail spaces",
     },
     "/plots": {
       background:
         "url('https://c.housingcdn.com/demand/s/client/common/assets/plotsCover.effff013.jpg')",
-      title: "Plots for sale in Noida",
+      title: `Plots for sale in ${city}`,
       placeholder: "Search for plots, spaces",
     },
-  };
+  });
+
+  const city = selectedCity;
+  const heroConfig = getHeroConfig(city);
 
   const currentConfig = heroConfig[location.pathname] || heroConfig["/"];
 
@@ -385,17 +385,6 @@ export default function HeroC() {
     ],
   };
 
-  const popularLocalities = [
-    "Sector 84",
-    "Sector 48",
-    "Sector 34",
-    "Sector 24",
-    "Sector 29",
-    "Sector 18",
-    "Sector 14",
-    "Sector 2",
-  ];
-
   return (
     <div>
       <div
@@ -417,14 +406,18 @@ export default function HeroC() {
               <nav className="d-flex nav">
                 <NavLink
                   onClick={() => setPropertyType("buy")}
-                  className={`navlink ${propertyType === "buy" ? "active" : ""}`}
+                  className={`navlink ${
+                    propertyType === "buy" ? "active" : ""
+                  }`}
                   to="/"
                 >
                   Buy
                 </NavLink>
                 <NavLink
                   onClick={() => setPropertyType("rent")}
-                  className={`navlink ${propertyType === "rent" ? "active" : ""}`}
+                  className={`navlink ${
+                    propertyType === "rent" ? "active" : ""
+                  }`}
                   to="/rent"
                 >
                   Rent
@@ -476,7 +469,6 @@ export default function HeroC() {
                     value={selectedCity}
                     onChange={handleCityChange}
                   >
-                   
                     {cities.map((city) => (
                       <option key={city} value={city}>
                         {city}
@@ -514,6 +506,7 @@ export default function HeroC() {
           </div>
         </form>
 
+        {/* Popular Localities */}
         <div className="pps row align-items-center justify-content-center text-center mx-auto">
           <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-md-4">
             <GrOptimize className="localIcon fs-6" />
@@ -521,45 +514,47 @@ export default function HeroC() {
           </div>
           <div className="col-12 col-md-7 col-lg-6 pe-4 text-center">
             <div className="PopularLocalitiesSliderWrapper mx-5">
-              <PopularLocalitiesSlider settings={settings}>
-                {popularLocalities.map((locality, index) => (
+            {/* need to search on click on locality but not imliment yet */}
+              <PopularLocalitiesSlider settings={settings} city={selectedCity}>
+                {localitySuggestions.map((locality, index) => (
                   <div key={index} className="text-center w-75">
-                    <p className="m-0 rounded-2 py-1">{locality} &gt;</p>
+                    <p className="m-0 rounded-2 py-1 ">{locality} &gt;</p>
                   </div>
                 ))}
               </PopularLocalitiesSlider>
             </div>
           </div>
         </div>
-        <div className="downPara  h-100">
-{/* <h1>ram</h1> */}
-<div className=" paraRounded d-flex px-2 ">
-  <div className="starsWrapper">
-    <img
-      className="star1 "
-      src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
-      alt="star1"
-    />
-  </div>
-  <img
-    className="star2 pt-3 "
-    src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
-    alt="star2"
-  />
 
-  <p className="m-0 py-2 px-3  ">
-    Are you a Property Owner?{" "}
-    <NavLink className={"navlinks"} to={"/"}>
-      Sell / Rent for FREE
-    </NavLink>{" "}
-  </p>
-  <img
-    className="star3 pt-2"
-    src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
-    alt="star3"
-  />
-</div>
-</div>
+        <div className="downPara  h-100">
+          {/* <h1>ram</h1> */}
+          <div className=" paraRounded d-flex px-2 ">
+            <div className="starsWrapper">
+              <img
+                className="star1 "
+                src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
+                alt="star1"
+              />
+            </div>
+            <img
+              className="star2 pt-3 "
+              src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
+              alt="star2"
+            />
+
+            <p className="m-0 py-2 px-3  ">
+              Are you a Property Owner?{" "}
+              <NavLink className={"navlinks"} to={"/"}>
+                Sell / Rent for FREE
+              </NavLink>{" "}
+            </p>
+            <img
+              className="star3 pt-2"
+              src="https://c.housingcdn.com/demand/s/client/common/assets/white_diamond_card_icon.74fc11b3.svg"
+              alt="star3"
+            />
+          </div>
+        </div>
       </div>
     </div>
   );
