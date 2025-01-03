@@ -12,7 +12,7 @@ import { AuthContext } from "../Context/AuthContext";
 
 function Home() {
 
-  const {currentUser} = useContext(AuthContext)
+  const {currentUser,listings} = useContext(AuthContext)
   // console.log(currentUser)
   const blogData = [
     {
@@ -854,6 +854,13 @@ focusOnSelect: true,
                       location={rentData.location}
                       price={rentData.price}
                       description={rentData.description}
+                      // title={rentData.title}
+                      // image={rentData.images[0]}
+                      // company={rentData.propertyCondition}
+                      // size={rentData.property}
+                      // location={rentData.address}
+                      // price={rentData.price}
+                      // description={rentData.description}
                     />
                   </NavLink>
                 </div>
