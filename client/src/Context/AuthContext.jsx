@@ -77,7 +77,7 @@ export const AuthContextProvider = ({ children }) => {
 
   const getSpotlightListings = async () => {
     try {
-      const res = await axios.get("http://localhost:3000/api/posts", {
+      const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`, {
         withCredentials: true,
       });
       setListings(res.data); // Assuming res.data contains the listing data
