@@ -13,13 +13,6 @@ dotenv.config();
 const app = express();
 let PORT = process.env.PORT || 3000;
  
-
-app.get("/",(req,res)=>{
-    console.log("home")
-    res.send("welcome to home ")
-    console.log(process.env.CLIENT_URL)
-})
-
 app.use(cors({
     origin: process.env.CLIENT_URL, 
     methods: ['GET', 'POST', 'PUT', 'DELETE'], 
@@ -33,6 +26,12 @@ app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/posts",postRoute);
 app.use("/api/test",testRoute)
+
+app.get("/",(req,res)=>{
+    console.log("home")
+    res.send("welcome to home ")
+    console.log(process.env.CLIENT_URL)
+})
 
 
 app.listen(PORT,(req,res)=>{
