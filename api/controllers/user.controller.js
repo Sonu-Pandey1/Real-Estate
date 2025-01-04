@@ -147,7 +147,6 @@ export const ProfilePosts = async (req,res) =>{
   const tokenUserId = req.userId
   // console.log(tokenUserId,"not found")
   try {
-
     const userPosts = await prisma.post.findMany({
       where:{
         userId:tokenUserId,
