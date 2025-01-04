@@ -10,6 +10,15 @@ import DevelopersCard from "../Components/DevelopersCard";
 import { useContext } from "react";
 import { AuthContext } from "../Context/AuthContext";
 
+// todo ---> allmost complete from myside 95% remaing thinks are 
+// 1 how user login (role of the user) 
+// 2 based on user role  show the user data 
+// 3 user can add the listing /projects based on user role .
+// 4 thern you have all modals almost which render on frontend with all details 
+// 5 insure all the filed which nessary on fronend are there when a user add a listing 
+// 
+
+
 function Home() {
 
   const {currentUser,listings} = useContext(AuthContext)
