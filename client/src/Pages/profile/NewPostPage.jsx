@@ -38,8 +38,8 @@ function NewPostPage() {
       bathroom: "",
       listingType: "buy",
       propertyType: "Apartment",
-      propertyCondition: "Row",
-      parking: "none",
+      // propertyCondition: "row",
+      // parking: "none",
       desc: "",
       uPolicy: "owner is responsible",
       petPolicy: "Allowed",
@@ -63,8 +63,8 @@ function NewPostPage() {
               bathroom: parseInt(values.bathroom),
               type: values.listingType  ,
               property: values.propertyType.toLowerCase(),
-              propertyCondition: values.propertyCondition,
-              parking: values.parking,
+              // propertyCondition: values.propertyCondition,
+              // parking: values.parking,
               lat: values.lat,
               long: values.long,
               images: images,
@@ -331,7 +331,7 @@ function NewPostPage() {
                     <p className="error">{errors.propertyType}</p>
                   )}
                 </div>
-                <div className="item">
+                {/* <div className="item">
                   <label htmlFor="propertyCondition">Property Condition</label>
                   <select
                     name="propertyCondition"
@@ -351,8 +351,8 @@ function NewPostPage() {
                   {errors.propertyCondition && touched.propertyCondition && (
                     <p className="error">{errors.propertyCondition}</p>
                   )}
-                </div>
-                <div className="item">
+                </div> */}
+                {/* <div className="item">
                   <label htmlFor="parking">Parking</label>
                   <select
                     name="parking"
@@ -371,7 +371,7 @@ function NewPostPage() {
                   {errors.parking && touched.parking && (
                     <p className="error">{errors.parking}</p>
                   )}
-                </div>
+                </div> */}
 
                 <div className="item">
                   <label htmlFor="utilities">Utilities Policy</label>
