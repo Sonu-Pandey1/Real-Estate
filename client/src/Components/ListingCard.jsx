@@ -16,6 +16,7 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 export default function PropertyCard({ item, type }) {
+ 
   const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
@@ -169,7 +170,7 @@ export default function PropertyCard({ item, type }) {
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
           <div className="card-body ">
-            <h5 className="card-title">{item.title}</h5>
+            <h5 className="card-title">{item.title} / views {item.views}</h5>
             <p className="card-location">
               <IoLocationOutline className="icon" />
               {item.address}

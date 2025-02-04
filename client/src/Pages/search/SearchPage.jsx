@@ -109,7 +109,9 @@ import { useEffect, useState } from "react";
 export default function SearchPage() {
   const { search } = useLocation();
   const queryParams = search.split("?")[1]; // Extract query params
+  //  console.log(queryParams);
   const [propertyData, setPropertyData] = useState([]);
+  // console.log(propertyData)
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 

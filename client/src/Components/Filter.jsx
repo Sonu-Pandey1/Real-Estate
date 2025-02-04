@@ -1,4 +1,3 @@
-
 // import { useSearchParams } from "react-router-dom";
 // import "./Filter.scss";
 // import { useState } from "react";
@@ -119,7 +118,6 @@
 //   );
 // }
 
-
 import { useSearchParams } from "react-router-dom";
 import "./Filter.scss";
 import { useState } from "react";
@@ -127,14 +125,14 @@ import { FaSearch } from "react-icons/fa";
 
 export default function Filter() {
   const [searchParams, setSearchParams] = useSearchParams();
-  console.log(searchParams)
+  console.log(searchParams);
 
   const initialQuery = {
     searchTerm: searchParams.get("searchTerm") || "",
     condition: searchParams.get("condition") || "",
     parking: searchParams.get("parking") === "true",
     offer: searchParams.get("offer") === "true",
-    
+
     // bedroom: searchParams.get("bedroom") || "",
     // bathroom: searchParams.get("bathroom") || "",
 
@@ -143,10 +141,11 @@ export default function Filter() {
     property: searchParams.get("property") || "",
     minPrice: searchParams.get("minPrice") || "",
     maxPrice: searchParams.get("maxPrice") || "",
-    
+    sort: searchParams.get("sort") || "newest", // Default to 'newest'
   };
 
   const [query, setQuery] = useState(initialQuery);
+  console.log(query);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -167,6 +166,67 @@ export default function Filter() {
   return (
     <div className="filterContainer ">
       <div className="filterOptions">
+
+        {/* <div className="filterGroup">
+          <label>
+            <input
+              type="checkbox"
+              name="newest"
+              checked={query.newest}
+              onChange={handleChange}
+            />
+            Newest
+          </label>
+        </div>
+        <div className="filterGroup">
+          <label>
+            <input
+              type="checkbox"
+              name="oldest"
+              checked={query.oldest}
+              onChange={handleChange}
+            />
+            Oldest
+          </label>
+        </div>
+        <div className="filterGroup">
+          <label>
+            <input
+              type="checkbox"
+              name="popular"
+              checked={query.popular}
+              onChange={handleChange}
+            />
+            Popular
+          </label>
+        </div>
+        <div className="filterGroup">
+          <label>
+            <input
+              type="checkbox"
+              name="trending"
+              checked={query.trending}
+              onChange={handleChange}
+            />
+            Trending
+          </label>
+        </div> */}
+        <div className="filterGroup">
+          <label htmlFor="sort">Sort By</label>
+          <select
+            id="sort"
+            name="sort"
+            onChange={handleChange}
+            value={query.sort}
+          >
+            <option value="newest">Newest</option>
+            <option value="oldest">Oldest</option>
+            <option value="popular">Popular</option>
+            <option value="trending">Trending</option>
+          </select>
+        </div>
+
+
         <div className="filterGroup">
           <label htmlFor="city">City</label>
           <select
@@ -228,7 +288,9 @@ export default function Filter() {
         </div>
 
         <div className="filterGroupp">
-          <label htmlFor="price" className="fgp">Price Range</label>
+          <label htmlFor="price" className="fgp">
+            Price Range
+          </label>
           <div className="filterGrouppWrapper">
             <input
               type="number"
@@ -251,7 +313,12 @@ export default function Filter() {
 
         <div className="filterGroup">
           <label htmlFor="type">Type</label>
-          <select id="type" name="type" onChange={handleChange} value={query.type}>
+          <select
+            id="type"
+            name="type"
+            onChange={handleChange}
+            value={query.type}
+          >
             <option value="">Any</option>
             <option value="buy">Buy</option>
             <option value="rent">Rent</option>
@@ -290,31 +357,3 @@ export default function Filter() {
     </div>
   );
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

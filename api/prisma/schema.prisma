@@ -1,9 +1,3 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
-
 generator client {
   provider = "prisma-client-js"
 }
@@ -14,38 +8,39 @@ datasource db {
 }
 
 model User {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  email String  @unique
+  id        String     @id @default(auto()) @map("_id") @db.ObjectId
+  email     String     @unique
   username  String
   password  String
-  avatar  String?
-  posts Post[]
+  avatar    String?
+  posts     Post[]
   savePosts SavePost[]
-  createdAt  DateTime @default(now())
+  createdAt DateTime   @default(now())
 }
 
-
 model Post {
-  id    String  @id @default(auto()) @map("_id") @db.ObjectId
-  title String  
-  price  Int
-  images String[]
-  address  String
-  city  String
-  bedroom  Int
-  bathroom  Int
-  lat  String
-  long  String
-  type Type
-  property Property
+  id                String      @id @default(auto()) @map("_id") @db.ObjectId
+  title             String
+  price             Int
+  images            String[]
+  address           String
+  city              String
+  bedroom           Int
+  bathroom          Int
+  lat               String
+  long              String
+  type              Type
+  property          Property
   // offer             Boolean?
-  propertyCondition String? 
-  parking           String? 
-  user User @relation(fields: [userId],references: [id])
-  userId String @db.ObjectId
-  postDetail PostDetail?
-  savePosts SavePost[]
-  createdAt  DateTime @default(now())
+  propertyCondition String?
+  parking           String?
+  user              User        @relation(fields: [userId], references: [id])
+  userId            String      @db.ObjectId
+  postDetail        PostDetail?
+  savePosts         SavePost[]
+  createdAt         DateTime    @default(now())
+  views             Int         @default(0)
+  visitedByUsers    String[]    @default([]) // Track unique users (user IDs or IPs)
 }
 
 enum Type {
@@ -65,27 +60,27 @@ enum Property {
   shop
 }
 
-
 model PostDetail {
-  id String  @id @default(auto()) @map("_id") @db.ObjectId
-  desc String
-  utilities String?
-  pet String?
-  income String?
-  size Int?
-  school Int?
-  bus Int?
+  id         String  @id @default(auto()) @map("_id") @db.ObjectId
+  desc       String
+  utilities  String?
+  pet        String?
+  income     String?
+  size       Int?
+  school     Int?
+  bus        Int?
   restaurant Int?
-  post Post @relation(fields: [postId],references: [id],onDelete: Cascade)
-  postId String @db.ObjectId @unique
+  post       Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
+  postId     String  @unique @db.ObjectId
 }
 
 model SavePost {
-  id String  @id @default(auto()) @map("_id") @db.ObjectId
-  post Post @relation(fields: [postId],references: [id],onDelete: Cascade)
-  user User @relation(fields: [userId],references: [id],onDelete: Cascade)
-  postId String @db.ObjectId
-  userId String @db.ObjectId 
-  createdAt  DateTime @default(now())
-  @@unique([userId,postId])
+  id        String   @id @default(auto()) @map("_id") @db.ObjectId
+  post      Post     @relation(fields: [postId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  postId    String   @db.ObjectId
+  userId    String   @db.ObjectId
+  createdAt DateTime @default(now())
+
+  @@unique([userId, postId])
 }

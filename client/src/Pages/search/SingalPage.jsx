@@ -15,6 +15,8 @@ function SinglePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
+  console.log(propertyData)
+  // console.log(propertyData.views)
   const {currentUser} = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved,setSaved] = useState(false);
@@ -98,7 +100,7 @@ function SinglePage() {
     return <div className="error-message">Property not found!</div>;
   }
 
-  const { title, address, price, images, bathroom, bedroom, user, postDetail } =
+  const { title, address, price, images, bathroom, bedroom, user, postDetail, views } =
     propertyData;
 
   const { username, avatar} = user || {};
@@ -114,7 +116,7 @@ function SinglePage() {
             <div className="info">
               <div className="top">
                 <div className="post">
-                  <h1>{title}</h1>
+                  <h1>{title}and views is {views}</h1>
                   <div className="address">
                     <IoLocationOutline />
                     <span>{address}</span>

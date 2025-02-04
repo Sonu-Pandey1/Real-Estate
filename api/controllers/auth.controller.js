@@ -120,7 +120,7 @@ export const google = async (req, res) => {
         message:"Login successfully!"
       });
     }
-    console.log(userInfo)
+    // console.log(userInfo)
 
     const generatedPassword = Math.random().toString(36).slice(-8);
     const hashedPassword = await bcrypt.hash(generatedPassword, 10);
