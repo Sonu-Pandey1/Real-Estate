@@ -3,8 +3,8 @@ import Slider from "../../Components/Slider";
 import Map from "./Map";
 import { useNavigate, useParams } from "react-router-dom";
 import { IoLocationOutline } from "react-icons/io5";
-import { useEffect, useState,useContext } from "react";
-import {AuthContext} from "..//../Context/AuthContext";
+import { useEffect, useState, useContext } from "react";
+import { AuthContext } from "..//../Context/AuthContext";
 import axios from "axios";
 import DOMPurify from "dompurify";
 import { Bounce, toast } from "react-toastify";
@@ -17,18 +17,18 @@ function SinglePage() {
   const [propertyData, setPropertyData] = useState(null);
   console.log(propertyData)
   // console.log(propertyData.views)
-  const {currentUser} = useContext(AuthContext);
+  const { currentUser } = useContext(AuthContext);
   const navigate = useNavigate();
-  const [saved,setSaved] = useState(false);
-  
+  const [saved, setSaved] = useState(false);
 
-  const handleSave =async ()=>{
+
+  const handleSave = async () => {
     // setSaved((prev)=> !prev);
-    if(!currentUser){
+    if (!currentUser) {
       navigate("/")
     }
     try {
-      const response  = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`,{ postId: id }, {
+      const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`, { postId: id }, {
         withCredentials: true, // Include cookies in the request
       });
       // console.log(response.data.message)
@@ -36,16 +36,16 @@ function SinglePage() {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true, 
+        closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
       setSaved(!saved)
     } catch (err) {
       // console.log(error)
-      toast.error("❌ "+ (err.response.data.error || ""), {
+      toast.error("❌ " + (err.response.data.error || ""), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -53,7 +53,7 @@ function SinglePage() {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
       });
     }
   }
@@ -61,31 +61,31 @@ function SinglePage() {
 
   useEffect(() => {
     const fetchData = async () => {
-        try {
-            const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
-                withCredentials: true,
-            });
-            // console.log(response.data)
-            if (response.data) {
-                setPropertyData(response.data);
-                setSaved(response.data.isSaved || false);
-            }
-        } catch (err) {
-            setError(err.message);
-        } finally {
-            setLoading(false);
+      try {
+        const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
+          withCredentials: true,
+        });
+        // console.log(response.data)
+        if (response.data) {
+          setPropertyData(response.data);
+          setSaved(response.data.isSaved || false);
         }
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
     };
 
     fetchData();
-}, [id]);
+  }, [id]);
 
 
   if (loading) {
     return (
       <div className="loading-container">
         <div className="loader">
-          <div className="spinner"></div> {/* Optional spinner animation */}
+          <div className="spinner"></div>
           <p>Loading...</p>
         </div>
       </div>
@@ -100,37 +100,60 @@ function SinglePage() {
     return <div className="error-message">Property not found!</div>;
   }
 
-  const { title, address, price, images, bathroom, bedroom, user, postDetail, views } =
-    propertyData;
+  const {
+    propertyName,
+    address,
+    price,
+    images = [],
+    bathroom,
+    bedroom,
+    user = {},
+    description,
+    views,
+    amenities = [],
+    propertyType,
+    buildingType,
+    listingType,
+    size,
+    city,
+    state,
+    parking,
+    balcony,
+    nearbyPlaces = [],
+    nearbyDistances = {},
+  } = propertyData;
 
-  const { username, avatar} = user || {};
-  const { desc, utilities, pet, income, size, school, bus, restaurant } =
-    postDetail || {};
+  const { username, avatar } = user || {};
 
   return (
     <div className="singlePageContainer pt-5">
       <div className="singlePage pt-4 container pb-4">
         <div className="details">
           <div className="wrapper">
-            <Slider images={images || []} />
+            {/* <Slider images={images || []} /> */}
+            <Slider images={images.length ? images : ["/placeholder.jpg"]} />
             <div className="info">
               <div className="top">
                 <div className="post">
-                  <h1>{title}and views is {views}</h1>
+                  <h1>{propertyName} and views is {views}</h1>
                   <div className="address">
                     <IoLocationOutline />
-                    <span>{address}</span>
+                    <span>{address}, {city}, {state}</span>
                   </div>
                   <div className="price">$ {price}</div>
                 </div>
-                <div className="user">
+                {/* <div className="user">
                   <img src={avatar} alt="User Avatar" />
                   <span>{username}</span>
+                </div> */}
+                <div className="user">
+                  <img src={user.avatar || "/default-avatar.jpg"} alt="User Avatar" />
+                  <span>{user.username || "Unknown"}</span>
                 </div>
               </div>
               <div
                 className="bottom"
-                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(desc) }}
+                dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description || "No description available.") }}
               ></div>
             </div>
           </div>
@@ -138,7 +161,7 @@ function SinglePage() {
         <div className="features">
           <div className="wrapper">
             <p className="title">General</p>
-            <div className="listVertical">
+            {/* <div className="listVertical">
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/11670/11670393.png"
@@ -169,8 +192,15 @@ function SinglePage() {
                   <p>{income}</p>
                 </div>
               </div>
+            </div> */}
+            <div className="listVertical">
+              {amenities.length > 0 && amenities.map((item, index) => (
+                <div key={index} className="feature">
+                  <span>{item}</span>
+                </div>
+              ))}
             </div>
-            <p className="title">Sizes</p>
+            <p className="title">Sizes & Rooms</p>
             <div className="sizes">
               <div className="size">
                 <img
@@ -194,8 +224,13 @@ function SinglePage() {
                 <span>{bathroom} bathroom</span>
               </div>
             </div>
+            <div className="sizes">
+              <span>{size} sqft</span>
+              <span>{bedroom} Bedroom</span>
+              <span>{bathroom} Bathroom</span>
+            </div>
             <p className="title mt-3">Nearby Places</p>
-            <div className="listHorizontal">
+            {/* <div className="listHorizontal">
               <div className="feature">
                 <img
                   src="https://cdn-icons-png.flaticon.com/128/158/158234.png"
@@ -234,26 +269,34 @@ function SinglePage() {
                   </p>
                 </div>
               </div>
+            </div> */}
+            <div className="listHorizontal">
+              {nearbyPlaces.length > 0 && nearbyPlaces.map((place, index) => (
+                <div key={index} className="feature">
+                  <span>{place}</span>
+                  <p>{nearbyDistances[place] || "Unknown distance"} away</p>
+                </div>
+              ))}
             </div>
             <p className="title mt-3 pb-3">Location</p>
             <div className="mapContainer">
               <Map className="map" items={[propertyData]} smallMap={smallMap} />
             </div>
             <div className="buttons">
-            <button>
-              <img src="/chat.png" alt="" />
-              Send a Message
-            </button>
-            <button
-              onClick={handleSave}
-              style={{
-                backgroundColor: saved ? "#fece51" : "white",
-              }}
-            >
-              <img src="/save.png" alt="" />
-              {saved ? "Place Saved" : "Save the Place"}
-            </button>
-          </div>
+              <button>
+                <img src="/chat.png" alt="" />
+                Send a Message
+              </button>
+              <button
+                onClick={handleSave}
+                style={{
+                  backgroundColor: saved ? "#fece51" : "white",
+                }}
+              >
+                <img src="/save.png" alt="" />
+                {saved ? "Place Saved" : "Save the Place"}
+              </button>
+            </div>
           </div>
         </div>
       </div>
@@ -262,9 +305,5 @@ function SinglePage() {
 }
 
 export default SinglePage;
-
-
-
-
 
 

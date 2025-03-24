@@ -1,81 +1,98 @@
 import * as yup from "yup";
 
 const addListingSchema = yup.object().shape({
-  title: yup
-    .string()
-    .min(2, "Title must be at least 3 characters")
-    .max(30, "Title cannot be longer than 30 characters")
-    .required("Title is required"),
 
-  price: yup
-    .number()
-    .required("Price is required"),
-
-  address: yup
+  listingType: yup
     .string()
-    .min(2, "Title must be at least 3 characters")
-    .max(50, "Title cannot be longer than 50 characters")
-    .required("Addrerss is required"),
+    .required("Listing Type is required"),
+  // .oneOf(["buy", "rent", "commericial", "pg","plots"], "Please select one"),
+
+  buildingType: yup
+    .string()
+    .required("Building Type is required"),
+  // .oneOf(["Residential", "commericial",], "Please select one"),
+
+  propertyType: yup
+    .string()
+    .required("Property Type is required"),
+  // .oneOf(["Apartment", "Villas",], "Please select one"),
+
+  propertyAvailability: yup
+    .string()
+    .required("Property Availability is required"),
+  // .oneOf(["Ready to move ", "under constration", "in 3 month", "in 6 months"], "Please select one"),
+
+  propertyCondition: yup
+    .string()
+    .required("Property Condition is required"),
+  // .oneOf(["Row ", "semi-furnished", "furnished"], "Please select one"),
+
+  state: yup
+    .string()
+    .required("State is required"),
 
   city: yup
     .string()
-    .min(2, "Title must be at least 3 characters")
-    .max(15, "Title cannot be longer than 15 characters")
     .required("City is required"),
+
+  address: yup
+    .string()
+    .required("Address is required"),
+
+  propertyName: yup
+    .string()
+    .min(2, "Property Name must be at least 2 characters")
+    .max(30, "Property Name cannot be longer than 30 characters")
+    .required("Property Name is required"),
+
+  price: yup
+    .string()
+    .min(2, "Price must be at least 2 characters")
+    .max(20, "Price cannot be longer than 10 characters")
+    .required("Price is required"),
 
   size: yup
     .number()
     .required("Size is required"),
 
+  bedroom: yup
+    .number(),
+
+  bathroom: yup
+    .number(),
+
+  balcony: yup
+    .number(),
+
+  parking: yup
+    .string()
+    .required("Parking is required"),
+  // .oneOf(["open", "covered",], "Please select one"),
+
   lat: yup
     .string()
     .min(7, "Latitude must be at least 7 characters")
-    .max(9, "Latitude cannot be longer than 9 characters")
-    .required("Latitude is required"),
+    .max(9, "Latitude cannot be longer than 9 characters"),
+  // .required("Latitude is required"),
 
   long: yup
     .string()
     .min(7, "Latitude must be at least 7 characters")
-    .max(9, "Latitude cannot be longer than 9 characters")
-    .required("Longitude is required"),
+    .max(9, "Latitude cannot be longer than 9 characters"),
+  // .required("Longitude is required"),
 
-  bedrooms: yup.number(),
-
-  bathrooms: yup.number(),
-
-  listingType: yup
-    .string(),
-    // .oneOf(["buy", "rent", "commericial", "pg","plots"], "Please select one"),
-
-  propertyType: yup.string(),
-
-  propertyCondition: yup.string(),
-
-  parking: yup  
-    .string()
-    .required("Email is required"),
-
-  uPolicy: yup.string(),
-
-  petPolicy: yup.string(),
-
-  iPolicy: yup.string(),
-
-  school: yup.string(),
-
-  bus: yup.string(),
-
-  restaurant: yup.string(),
-
-  desc: yup
+  description: yup
     .string()
     .min(3, "description must be at least 6 characters")
-    .max(5000, "description cannot be longer than 8 characters")
-    .required("Description is required"),
+    .max(5000, "description cannot be longer than 8 characters"),
+    // .required("Description is required"),
 
-  // acceptedToc: yup
-  //   .boolean()
-  //   .oneOf([true], "Please accept the term & conditions"),
+  offer: yup
+    .boolean(),
+
+  tac: yup
+    .boolean()
+    .oneOf([true], "Please accept the term & conditions"),
 });
 
 export default addListingSchema;

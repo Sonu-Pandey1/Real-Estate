@@ -126,6 +126,7 @@ export default function SearchPage() {
           throw new Error("Failed to fetch property data.");
         }
         const data = await response.json();
+        console.log(data);
         setPropertyData(data);
       } catch (err) {
         setError(err.message);
