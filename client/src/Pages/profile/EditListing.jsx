@@ -86,7 +86,7 @@ function EditListing() {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`
         );
         const post = response.data;
-        console.log(post)
+        // console.log(post)
         setFormData({
           propertyName: post.propertyName || "",
           price: post.price || "",
@@ -142,7 +142,7 @@ function EditListing() {
           { postData: values, images },
           { withCredentials: true }
         );
-        console.log(res)
+        // console.log(res)
         toast.success("Listing updated successfully!", {
           position: "bottom-right",
           autoClose: 5000,

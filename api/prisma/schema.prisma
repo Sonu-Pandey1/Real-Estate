@@ -18,103 +18,38 @@ model User {
   createdAt DateTime   @default(now())
 }
 
-// model Post {
-//   id                String      @id @default(auto()) @map("_id") @db.ObjectId
-//   propertyName             String
-//   price             Int
-//   images            String[]
-//   address           String
-//   city              String
-//   state             String
-//   size              String
-//   bedroom           Int
-//   bathroom          Int
-//   balcony          Int
-//   lat               String
-//   long              String
-//   listingType              String
-//   buildingType              String
-//   propertyType          String
-//   description            String
-//   offer             Boolean?
-//   tac             Boolean?
-//   nearbyDistances: {}
-//    amenities: postData.amenities?.map(item => item.value) || [], // Store only values
-//         nearbyPlaces: postData.nearbyPlaces?.map(item => item.value) || [], // Store only values
-//   propertyCondition String?
-//   propertyAvailability String?
-//   parking           String?
-//   user              User        @relation(fields: [userId], references: [id])
-//   userId            String      @db.ObjectId
-//   savePosts         SavePost[]
-//   createdAt         DateTime    @default(now())
-//   views             Int         @default(0)
-//   visitedByUsers    String[]    @default([]) // Track unique users (user IDs or IPs)
-// }
-
-// enum Type {
-//   buy
-//   rent
-//   commercial
-//   plots
-//   pg
-// }
-
-// enum Property {
-//   apartment
-//   Apartment //unnessary but i aaded becuse frofile post cna not fetch need to work on that .
-//   house
-//   condo
-//   land
-//   shop
-// }
-
-// model PostDetail {
-//   id         String  @id @default(auto()) @map("_id") @db.ObjectId
-//   desc       String
-//   utilities  String?
-//   pet        String?
-//   income     String?
-//   size       Int?
-//   school     Int?
-//   bus        Int?
-//   restaurant Int?
-//   post       Post    @relation(fields: [postId], references: [id], onDelete: Cascade)
-//   postId     String  @unique @db.ObjectId
-// }
-
 model Post {
-  id                  String      @id @default(auto()) @map("_id") @db.ObjectId
-  propertyName        String
-  price              Int
-  images             String[]
-  address            String
-  city               String
-  state              String
-  size               Int
-  bedroom            Int
-  bathroom           Int
-  balcony           Int
-  lat                Float?
-  long               Float?
-  listingType        String
-  buildingType       String
-  propertyType       String
-  description        String
-  offer             Boolean?
-  tac               Boolean?
-  nearbyDistances    Json?    // Use JSON for flexible structure
-  amenities          String[] // Store as an array of strings
-  nearbyPlaces       String[] // Store as an array of strings
-  propertyCondition  String?
+  id                   String     @id @default(auto()) @map("_id") @db.ObjectId
+  propertyName         String
+  price                Int
+  images               String[]
+  address              String
+  city                 String
+  state                String
+  size                 Int
+  bedroom              Int
+  bathroom             Int
+  balcony              Int
+  lat                  Float?
+  long                 Float?
+  listingType          String
+  buildingType         String
+  propertyType         String
+  description          String
+  offer                Boolean?
+  tac                  Boolean?
+  nearbyDistances      Json?
+  amenities            String[]
+  nearbyPlaces         String[]
+  propertyCondition    String?
   propertyAvailability String?
-  parking           String?
-  user              User        @relation(fields: [userId], references: [id])
-  userId            String      @db.ObjectId
-  savePosts         SavePost[]
-  createdAt         DateTime    @default(now())
-  views             Int         @default(0)
-  visitedByUsers    String[]    @default([]) // Track unique users (user IDs or IPs)
+  parking              String?
+  user                 User       @relation(fields: [userId], references: [id])
+  userId               String     @db.ObjectId
+  savePosts            SavePost[]
+  createdAt            DateTime   @default(now())
+  views                Int        @default(0)
+  visitedByUsers       String[]   @default([]) // Track unique users (user IDs or IPs)
 }
 
 enum Type {

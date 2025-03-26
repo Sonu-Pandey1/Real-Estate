@@ -39,7 +39,7 @@ function UploadWidget({ uwConfig, setState }) {
           if (error) {
             console.error("Cloudinary Widget Error:", error);
           } else if (result.event === "success") {
-            console.log("Uploaded image info:", result.info);
+            // console.log("Uploaded image info:", result.info);
             setState((prev) => [...prev, result.info.secure_url]);
           }
         }

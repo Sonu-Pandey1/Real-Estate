@@ -50,7 +50,7 @@ function NewPostPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [customAmenity, setCustomAmenity] = useState("");
-  console.log(images)
+  // console.log(images)
 
   const {
     values,
@@ -92,14 +92,14 @@ function NewPostPage() {
     validationSchema: addListingSchema,
     onSubmit: async (values) => {
       try {
-        console.log(values)
+        // console.log(values)
         const res = await axios.post(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
           { postData: values, images },
           { withCredentials: true }
         );
-        console.log(res)
-        console.log(res.data)
+        // console.log(res)
+        // console.log(res.data)
         toast.success("" + (res.data.message || ""), {
           position: "bottom-right",
           autoClose: 5000,
@@ -112,7 +112,7 @@ function NewPostPage() {
         });
         navigate(`/profile/${res.data.post.id}`);
       } catch (err) {
-        console.log(err)
+        // console.log(err)
         toast.error("❌ " + (err.response.data.error || ""), {
           position: "bottom-right",
           autoClose: 5000,
