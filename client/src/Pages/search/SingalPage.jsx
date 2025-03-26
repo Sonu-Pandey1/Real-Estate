@@ -65,7 +65,7 @@ function SinglePage() {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
           withCredentials: true,
         });
-        // console.log(response.data)
+        console.log(response.data)
         if (response.data) {
           setPropertyData(response.data);
           setSaved(response.data.isSaved || false);

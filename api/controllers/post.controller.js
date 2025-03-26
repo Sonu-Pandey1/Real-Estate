@@ -1,6 +1,386 @@
 import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
+
+export const Deletelisting = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    await prisma.post.delete({ where: { id } });
+
+    return res.status(200).json({ message: "Listing deleted successfully" });
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+export const listings = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const listing = await prisma.post.findUnique({
+      where: { id },
+      include: {
+        user: {
+          select: {
+            id: true,
+            username: true, // Fix: Ensure this field is selected
+            email: true,
+            avatar: true,
+          },
+        },
+      },
+    });
+
+    if (!listing) {
+      return res.status(404).json({ message: "Listing not found" });
+    }
+
+    return res.status(200).json(listing);
+  } catch (error) {
+    console.error(error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+// export const Updatelisting = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const updateData = req.body;
+//     console.log(updateData)
+
+//     // // Ensure price is stored as a string if updated
+//     // if (updateData.price) {
+//     //   updateData.price = updateData.price.toString();
+//     // }
+
+//     // // Ensure amenities and nearbyPlaces are arrays
+//     // if (updateData.amenities && !Array.isArray(updateData.amenities)) {
+//     //   updateData.amenities = JSON.parse(updateData.amenities);
+//     // }
+
+//     // if (updateData.nearbyPlaces && !Array.isArray(updateData.nearbyPlaces)) {
+//     //   updateData.nearbyPlaces = JSON.parse(updateData.nearbyPlaces);
+//     // }
+
+//     // Update the post data in the database
+//     const updatedListing = await prisma.post.update({
+//       where: { id },
+//       data: {
+//         propertyName: updateData.propertyName,
+//         price: updateData.price,
+//         address: updateData.address,
+//         city: updateData.city,
+//         state: updateData.state,
+//         size: updateData.size,
+//         lat: updateData.lat,
+//         long: updateData.long,
+//         bedroom: updateData.bedroom,
+//         bathroom: updateData.bathroom,
+//         balcony: updateData.balcony,
+//         listingType: updateData.listingType,
+//         buildingType: updateData.buildingType,
+//         propertyType: updateData.propertyType,
+//         propertyAvailability: updateData.propertyAvailability,
+//         propertyCondition: updateData.propertyCondition,
+//         parking: updateData.parking,
+//         description: updateData.description,
+//         offer: updateData.offer,
+//         tac: updateData.tac,
+//         nearbyPlaces: updateData.nearbyPlaces,  // Directly assign this field
+//         nearbyDistances: updateData.nearbyDistances, // Directly assign this field
+//         amenities: updateData.amenities,  // Directly assign this field
+//         images: updateData.images,  // Directly assign this field
+//       },
+//     });
+
+//     return res.status(200).json(updatedListing);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+
+export const Updatelisting = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const { postData, images } = req.body;  // Extract postData correctly from the request body
+
+    console.log("Received data to update:", postData);
+
+    // Handle optional fields like lat/long to set null if empty strings are passed
+    if (postData.lat === '') postData.lat = null;
+    if (postData.long === '') postData.long = null;
+
+    // Ensure amenities and nearbyPlaces are arrays (in case they are sent as strings or incorrectly formatted)
+    if (postData.amenities && !Array.isArray(postData.amenities)) {
+      postData.amenities = JSON.parse(postData.amenities);
+    }
+
+    if (postData.nearbyPlaces && !Array.isArray(postData.nearbyPlaces)) {
+      postData.nearbyPlaces = JSON.parse(postData.nearbyPlaces);
+    }
+
+    // Ensure images is an array
+    if (postData.images && !Array.isArray(postData.images)) {
+      postData.images = JSON.parse(postData.images);
+    }
+
+    // Handle empty images array (if images is empty, don't send it to Prisma as it may be unintentional)
+    const updatedImages = images.length > 0 ? images : postData.images;
+
+    // Prepare update data for Prisma
+    const updatedListing = await prisma.post.update({
+      where: { id },
+      data: {
+        propertyName: postData.propertyName,
+        price: postData.price,
+        address: postData.address,
+        city: postData.city,
+        state: postData.state,
+        size: postData.size,
+        lat: postData.lat,
+        long: postData.long,
+        bedroom: postData.bedroom,
+        bathroom: postData.bathroom,
+        balcony: postData.balcony,
+        listingType: postData.listingType,
+        buildingType: postData.buildingType,
+        propertyType: postData.propertyType,
+        propertyAvailability: postData.propertyAvailability,
+        propertyCondition: postData.propertyCondition,
+        parking: postData.parking,
+        description: postData.description,
+        offer: postData.offer,
+        tac: postData.tac,
+        nearbyPlaces: postData.nearbyPlaces,
+        nearbyDistances: postData.nearbyDistances,
+        amenities: postData.amenities,
+        images: updatedImages,  // Use the images passed in the request or from postData
+      },
+    });
+console.log("updatedListing",updatedListing)
+    return res.status(200).json(updatedListing);  // Return the updated listing
+  } catch (error) {
+    console.error("Error updating listing:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+export const addlisting = async (req, res) => {
+  console.log("Received body:", req.body);
+
+  const userId = req.userId;
+  if (!userId) {
+    return res.status(401).json({ error: "Unauthorized. User ID is required." });
+  }
+
+  try {
+    // Ensure req.body contains postData
+    if (!req.body || !req.body.postData || Object.keys(req.body.postData).length === 0) {
+      return res.status(400).json({ error: "Invalid request data." });
+    }
+
+    const { postData,images } = req.body; // Extract postData correctly
+    console.log("Parsed Data:", postData);
+
+    // Format and ensure proper data conversion
+    const formattedData = {
+      user: { connect: { id: userId } },
+      propertyName: postData.propertyName?.trim() || "Untitled",
+      price: postData.price ? Number(postData.price) : 0,
+      images: Array.isArray(postData.images) ? postData.images : [],
+      address: postData.address?.trim() || "",
+      city: postData.city?.trim() || "",
+      state: postData.state?.trim() || "",
+      size: postData.size ? Number(postData.size) : 0,
+      bedroom: postData.bedroom ? Number(postData.bedroom) : 0,
+      bathroom: postData.bathroom ? Number(postData.bathroom) : 0,
+      balcony: postData.balcony ? Number(postData.balcony) : 0,
+      lat: postData.lat ? parseFloat(postData.lat) : null,
+      long: postData.long ? parseFloat(postData.long) : null,
+      listingType: postData.listingType?.trim() || "sell",
+      buildingType: postData.buildingType?.trim() || "residential",
+      propertyType: postData.propertyType?.trim() || "apartment",
+      description: postData.description?.trim() || "",
+      offer: postData.offer === "true" || postData.offer === true,
+      tac: postData.tac === "true" || postData.tac === true,
+      amenities: Array.isArray(postData.amenities) ? postData.amenities.map(item => item.value) : [],
+      nearbyPlaces: Array.isArray(postData.nearbyPlaces) ? postData.nearbyPlaces.map(item => item.value) : [],
+      nearbyDistances: typeof postData.nearbyDistances === "object" ? postData.nearbyDistances : {},
+      propertyCondition: postData.propertyCondition?.trim() || null,
+      propertyAvailability: postData.propertyAvailability?.trim() || null,
+      parking: postData.parking?.trim() || null,
+      images: Array.isArray(images) ? images : [],
+    };
+
+    console.log("Formatted Data:", formattedData);
+
+    // Create the new post
+    const newPost = await prisma.post.create({
+      data: formattedData,
+    });
+
+    return res.status(201).json({ post: newPost, message: "Listing Added Successfully!" });
+
+  } catch (error) {
+    console.error("Error creating listing:", error);
+    return res.status(500).json({ error: "Failed To Add Listing." });
+  }
+};
+
+// export const getListings = async (req, res) => {
+//   try {
+//     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+//     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+//     const listingType =
+//       req.query.listingType === "all" || !req.query.listingType
+//         ? ["sell", "rent/lease"]
+//         : [req.query.listingType];
+
+//     const propertyType = req.query.propertyType || null;
+//     const buildingType = req.query.buildingType || null;
+//     const city = req.query.city || null;
+//     const minPrice = Number(req.query.minPrice) || 0;
+//     const maxPrice = Number(req.query.maxPrice) || 10000000;
+//     const searchTerm = req.query.searchTerm?.trim() || "";
+
+//     let sortObj = { createdAt: "desc" };
+
+//     if (req.query.sort === "oldest") {
+//       sortObj = { createdAt: "asc" };
+//     } else if (req.query.sort === "popular") {
+//       sortObj = { views: "desc" };
+//     }
+
+//     const whereClause = {
+//       AND: [
+//         searchTerm
+//           ? {
+//               OR: [
+//                 { propertyName: { contains: searchTerm, mode: "insensitive" } },
+//                 { city: { contains: searchTerm, mode: "insensitive" } },
+//                 { address: { contains: searchTerm, mode: "insensitive" } },
+//               ],
+//             }
+//           : null,
+//         { listingType: { in: listingType } },
+//         propertyType ? { propertyType } : null,
+//         buildingType ? { buildingType } : null,
+//         city ? { city } : null,
+//         { price: { gte: minPrice, lte: maxPrice } },
+//         req.query.sort === "trending"
+//           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+//           : null, // Trending filter
+//       ].filter(Boolean), // Remove null values
+//     };
+
+//     console.log("Query:", JSON.stringify(whereClause, null, 2));
+//     console.log("Sort:", JSON.stringify(sortObj, null, 2));
+
+//     const listings = await prisma.post.findMany({
+//       where: whereClause,
+//       orderBy: sortObj,
+//       take: limit,
+//       skip: startIndex,
+//     });
+
+//     return res.status(200).json(listings);
+//   } catch (error) {
+//     console.error("Error fetching listings:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+export const getListings = async (req, res) => {
+  try {
+    // Pagination parameters
+    const limit = Math.max(1, parseInt(req.query.limit) || 9);
+    const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+    // Filters
+    const listingType = req.query.listingType === "all" || !req.query.listingType
+      ? ["sell", "rent/lease"]
+      : [req.query.listingType];
+
+    const propertyType = req.query.propertyType || null;
+    const buildingType = req.query.buildingType || null;
+    const city = req.query.city || null;
+    const minPrice = Number(req.query.minPrice) || 0;
+    const maxPrice = Number(req.query.maxPrice) || 10000000;
+    const searchTerm = req.query.searchTerm?.trim() || "";
+
+    // Sorting options
+    let sortObj = { createdAt: "desc" };
+
+    if (req.query.sort === "oldest") {
+      sortObj = { createdAt: "asc" };
+    } else if (req.query.sort === "popular") {
+      sortObj = { views: "desc" };
+    }
+
+    // Build the WHERE clause for Prisma query
+    const whereClause = {
+      AND: [
+        // Only add search term condition if it exists
+        searchTerm
+          ? {
+              OR: [
+                { propertyName: { contains: searchTerm, mode: "insensitive" } },
+                { city: { contains: searchTerm, mode: "insensitive" } },
+                { address: { contains: searchTerm, mode: "insensitive" } },
+              ],
+            }
+          : null,
+
+        // Only add listingType condition if it's valid
+        { listingType: { in: listingType } },
+
+        // Only add propertyType condition if it's valid
+        propertyType ? { propertyType } : null,
+
+        // Only add buildingType condition if it's valid
+        buildingType ? { buildingType } : null,
+
+        // Only add city condition if it's valid
+        city ? { city } : null,
+
+        // Add price range condition
+        { price: { gte: minPrice, lte: maxPrice } },
+
+        // Only add trending condition if needed
+        req.query.sort === "trending"
+          ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+          : null,
+      ].filter(Boolean), // Removes any null values
+    };
+
+    console.log("Query:", JSON.stringify(whereClause, null, 2)); // Debugging
+
+    // Prisma query to fetch listings with pagination and sorting
+    const listings = await prisma.post.findMany({
+      where: whereClause,
+      orderBy: sortObj,
+      take: limit,
+      skip: startIndex,
+    });
+
+    return res.status(200).json(listings); // Return the listings
+  } catch (error) {
+    console.error("Error fetching listings:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+
+
+
+
+
+
 // export const getListings = async (req, res) => {
 //   try {
 //     // Pagination
@@ -591,34 +971,7 @@ import jwt from "jsonwebtoken";
 // };
 
 
-export const listings = async (req, res) => {
-  try {
-    const { id } = req.params;
 
-    const listing = await prisma.post.findUnique({
-      where: { id },
-      include: {
-        user: {
-          select: {
-            id: true,
-            username: true, // Fix: Ensure this field is selected
-            email: true,
-            avatar: true,
-          },
-        },
-      },
-    });
-
-    if (!listing) {
-      return res.status(404).json({ message: "Listing not found" });
-    }
-
-    return res.status(200).json(listing);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
 
 // export const getListings = async (req, res) => {
 //   try {
@@ -795,27 +1148,27 @@ export const listings = async (req, res) => {
 //   }
 // };
 
-export const Updatelisting = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const updateData = req.body;
+// export const Updatelisting = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const updateData = req.body;
 
-    // Ensure price is stored as a string if updated
-    if (updateData.price) {
-      updateData.price = updateData.price.toString();
-    }
+//     // Ensure price is stored as a string if updated
+//     if (updateData.price) {
+//       updateData.price = updateData.price.toString();
+//     }
 
-    const updatedListing = await prisma.post.update({
-      where: { id },
-      data: updateData,
-    });
+//     const updatedListing = await prisma.post.update({
+//       where: { id },
+//       data: updateData,
+//     });
 
-    return res.status(200).json(updatedListing);
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
+//     return res.status(200).json(updatedListing);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
 
 // export const addlisting = async (req, res) => {
 //   console.log("Received body:", req.body);
@@ -894,130 +1247,7 @@ export const Updatelisting = async (req, res) => {
 //   }
 // };
 
-export const addlisting = async (req, res) => {
-  console.log("Received body:", req.body);
 
-  const userId = req.userId;
-  if (!userId) {
-    return res.status(401).json({ error: "Unauthorized. User ID is required." });
-  }
-
-  try {
-    // Ensure req.body contains postData
-    if (!req.body || !req.body.postData || Object.keys(req.body.postData).length === 0) {
-      return res.status(400).json({ error: "Invalid request data." });
-    }
-
-    const { postData } = req.body; // Extract postData correctly
-    console.log("Parsed Data:", postData);
-
-    // Format and ensure proper data conversion
-    const formattedData = {
-      user: { connect: { id: userId } },
-      propertyName: postData.propertyName?.trim() || "Untitled",
-      price: postData.price ? Number(postData.price) : 0,
-      images: Array.isArray(postData.images) ? postData.images : [],
-      address: postData.address?.trim() || "",
-      city: postData.city?.trim() || "",
-      state: postData.state?.trim() || "",
-      size: postData.size ? Number(postData.size) : 0,
-      bedroom: postData.bedroom ? Number(postData.bedroom) : 0,
-      bathroom: postData.bathroom ? Number(postData.bathroom) : 0,
-      balcony: postData.balcony ? Number(postData.balcony) : 0,
-      lat: postData.lat ? parseFloat(postData.lat) : null,
-      long: postData.long ? parseFloat(postData.long) : null,
-      listingType: postData.listingType?.trim() || "sell",
-      buildingType: postData.buildingType?.trim() || "residential",
-      propertyType: postData.propertyType?.trim() || "apartment",
-      description: postData.description?.trim() || "",
-      offer: postData.offer === "true" || postData.offer === true,
-      tac: postData.tac === "true" || postData.tac === true,
-      amenities: Array.isArray(postData.amenities) ? postData.amenities.map(item => item.value) : [],
-      nearbyPlaces: Array.isArray(postData.nearbyPlaces) ? postData.nearbyPlaces.map(item => item.value) : [],
-      nearbyDistances: typeof postData.nearbyDistances === "object" ? postData.nearbyDistances : {},
-      propertyCondition: postData.propertyCondition?.trim() || null,
-      propertyAvailability: postData.propertyAvailability?.trim() || null,
-      parking: postData.parking?.trim() || null,
-    };
-
-    console.log("Formatted Data:", formattedData);
-
-    // Create the new post
-    const newPost = await prisma.post.create({
-      data: formattedData,
-    });
-
-    return res.status(201).json({ post: newPost, message: "Listing Added Successfully!" });
-
-  } catch (error) {
-    console.error("Error creating listing:", error);
-    return res.status(500).json({ error: "Failed To Add Listing." });
-  }
-};
-
-export const getListings = async (req, res) => {
-  try {
-    const limit = Math.max(1, parseInt(req.query.limit) || 9);
-    const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
-
-    const listingType =
-      req.query.listingType === "all" || !req.query.listingType
-        ? ["sell", "rent/lease"]
-        : [req.query.listingType];
-
-    const propertyType = req.query.propertyType || null;
-    const buildingType = req.query.buildingType || null;
-    const city = req.query.city || null;
-    const minPrice = Number(req.query.minPrice) || 0;
-    const maxPrice = Number(req.query.maxPrice) || 10000000;
-    const searchTerm = req.query.searchTerm?.trim() || "";
-
-    let sortObj = { createdAt: "desc" };
-
-    if (req.query.sort === "oldest") {
-      sortObj = { createdAt: "asc" };
-    } else if (req.query.sort === "popular") {
-      sortObj = { views: "desc" };
-    }
-
-    const whereClause = {
-      AND: [
-        searchTerm
-          ? {
-              OR: [
-                { propertyName: { contains: searchTerm, mode: "insensitive" } },
-                { city: { contains: searchTerm, mode: "insensitive" } },
-                { address: { contains: searchTerm, mode: "insensitive" } },
-              ],
-            }
-          : null,
-        { listingType: { in: listingType } },
-        propertyType ? { propertyType } : null,
-        buildingType ? { buildingType } : null,
-        city ? { city } : null,
-        { price: { gte: minPrice, lte: maxPrice } },
-        req.query.sort === "trending"
-          ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
-          : null, // Trending filter
-      ].filter(Boolean), // Remove null values
-    };
-
-    console.log("Query:", JSON.stringify(whereClause, null, 2));
-    console.log("Sort:", JSON.stringify(sortObj, null, 2));
-
-    const listings = await prisma.post.findMany({
-      where: whereClause,
-      orderBy: sortObj,
-      take: limit,
-      skip: startIndex,
-    });
-
-    return res.status(200).json(listings);
-  } catch (error) {
-    console.error("Error fetching listings:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
 
 
 // export const getListings = async (req, res) => {
@@ -1033,18 +1263,7 @@ export const getListings = async (req, res) => {
 //   }
 // };
 
-export const Deletelisting = async (req, res) => {
-  try {
-    const { id } = req.params;
 
-    await prisma.post.delete({ where: { id } });
-
-    return res.status(200).json({ message: "Listing deleted successfully" });
-  } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
 
 // export const getUserListings = async (req, res) => {
 //   try {
@@ -1110,3 +1329,570 @@ export const Deletelisting = async (req, res) => {
 //     return res.status(500).json({ message: "Internal server error" });
 //   }
 // };
+
+
+
+
+
+
+
+///todo--- cheygpt chat 
+
+// still this erro come "
+// Query: {
+//   "AND": [
+//     {},
+//     {
+//       "listingType": {
+//         "in": [
+//           "sell",
+//           "rent/lease"
+//         ]
+//       }
+//     },
+//     {},
+//     {},
+//     {},
+//     {
+//       "price": {
+//         "gte": 0,
+//         "lte": 10000000
+//       }
+//     },
+//     {}
+//   ]
+// }
+// Query: {
+//   "AND": [
+//     {},
+//     {
+//       "listingType": {
+//         "in": [
+//           "sell",
+//           "rent/lease"
+//         ]
+//       }
+//     },
+//     {},
+//     {},
+//     {},
+//     {
+//       "price": {
+//         "gte": 0,
+//         "lte": 10000000
+//       }
+//     },
+//     {}
+//   ]
+// }
+//  " there is my all apis fix issues "import prisma from "../lib/prisma.js";
+// import jwt from "jsonwebtoken";
+
+
+// export const Deletelisting = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     await prisma.post.delete({ where: { id } });
+
+//     return res.status(200).json({ message: "Listing deleted successfully" });
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+// export const listings = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+
+//     const listing = await prisma.post.findUnique({
+//       where: { id },
+//       include: {
+//         user: {
+//           select: {
+//             id: true,
+//             username: true, // Fix: Ensure this field is selected
+//             email: true,
+//             avatar: true,
+//           },
+//         },
+//       },
+//     });
+
+//     if (!listing) {
+//       return res.status(404).json({ message: "Listing not found" });
+//     }
+
+//     return res.status(200).json(listing);
+//   } catch (error) {
+//     console.error(error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+// // export const Updatelisting = async (req, res) => {
+// //   try {
+// //     const { id } = req.params;
+// //     const updateData = req.body;
+// //     console.log(updateData)
+
+// //     // // Ensure price is stored as a string if updated
+// //     // if (updateData.price) {
+// //     //   updateData.price = updateData.price.toString();
+// //     // }
+
+// //     // // Ensure amenities and nearbyPlaces are arrays
+// //     // if (updateData.amenities && !Array.isArray(updateData.amenities)) {
+// //     //   updateData.amenities = JSON.parse(updateData.amenities);
+// //     // }
+
+// //     // if (updateData.nearbyPlaces && !Array.isArray(updateData.nearbyPlaces)) {
+// //     //   updateData.nearbyPlaces = JSON.parse(updateData.nearbyPlaces);
+// //     // }
+
+// //     // Update the post data in the database
+// //     const updatedListing = await prisma.post.update({
+// //       where: { id },
+// //       data: {
+// //         propertyName: updateData.propertyName,
+// //         price: updateData.price,
+// //         address: updateData.address,
+// //         city: updateData.city,
+// //         state: updateData.state,
+// //         size: updateData.size,
+// //         lat: updateData.lat,
+// //         long: updateData.long,
+// //         bedroom: updateData.bedroom,
+// //         bathroom: updateData.bathroom,
+// //         balcony: updateData.balcony,
+// //         listingType: updateData.listingType,
+// //         buildingType: updateData.buildingType,
+// //         propertyType: updateData.propertyType,
+// //         propertyAvailability: updateData.propertyAvailability,
+// //         propertyCondition: updateData.propertyCondition,
+// //         parking: updateData.parking,
+// //         description: updateData.description,
+// //         offer: updateData.offer,
+// //         tac: updateData.tac,
+// //         nearbyPlaces: updateData.nearbyPlaces,  // Directly assign this field
+// //         nearbyDistances: updateData.nearbyDistances, // Directly assign this field
+// //         amenities: updateData.amenities,  // Directly assign this field
+// //         images: updateData.images,  // Directly assign this field
+// //       },
+// //     });
+
+// //     return res.status(200).json(updatedListing);
+// //   } catch (error) {
+// //     console.error(error);
+// //     return res.status(500).json({ message: "Internal server error" });
+// //   }
+// // };
+
+
+// export const Updatelisting = async (req, res) => {
+//   try {
+//     const { id } = req.params;
+//     const { postData, images } = req.body;  // Extract postData correctly from the request body
+
+//     console.log("Received data to update:", postData);
+
+//     // Handle optional fields like lat/long to set null if empty strings are passed
+//     if (postData.lat === '') postData.lat = null;
+//     if (postData.long === '') postData.long = null;
+
+//     // Ensure amenities and nearbyPlaces are arrays (in case they are sent as strings or incorrectly formatted)
+//     if (postData.amenities && !Array.isArray(postData.amenities)) {
+//       postData.amenities = JSON.parse(postData.amenities);
+//     }
+
+//     if (postData.nearbyPlaces && !Array.isArray(postData.nearbyPlaces)) {
+//       postData.nearbyPlaces = JSON.parse(postData.nearbyPlaces);
+//     }
+
+//     // Ensure images is an array
+//     if (postData.images && !Array.isArray(postData.images)) {
+//       postData.images = JSON.parse(postData.images);
+//     }
+
+//     // Handle empty images array (if images is empty, don't send it to Prisma as it may be unintentional)
+//     const updatedImages = images.length > 0 ? images : postData.images;
+
+//     // Prepare update data for Prisma
+//     const updatedListing = await prisma.post.update({
+//       where: { id },
+//       data: {
+//         propertyName: postData.propertyName,
+//         price: postData.price,
+//         address: postData.address,
+//         city: postData.city,
+//         state: postData.state,
+//         size: postData.size,
+//         lat: postData.lat,
+//         long: postData.long,
+//         bedroom: postData.bedroom,
+//         bathroom: postData.bathroom,
+//         balcony: postData.balcony,
+//         listingType: postData.listingType,
+//         buildingType: postData.buildingType,
+//         propertyType: postData.propertyType,
+//         propertyAvailability: postData.propertyAvailability,
+//         propertyCondition: postData.propertyCondition,
+//         parking: postData.parking,
+//         description: postData.description,
+//         offer: postData.offer,
+//         tac: postData.tac,
+//         nearbyPlaces: postData.nearbyPlaces,
+//         nearbyDistances: postData.nearbyDistances,
+//         amenities: postData.amenities,
+//         images: updatedImages,  // Use the images passed in the request or from postData
+//       },
+//     });
+// console.log("updatedListing",updatedListing)
+//     return res.status(200).json(updatedListing);  // Return the updated listing
+//   } catch (error) {
+//     console.error("Error updating listing:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+
+// export const addlisting = async (req, res) => {
+//   console.log("Received body:", req.body);
+
+//   const userId = req.userId;
+//   if (!userId) {
+//     return res.status(401).json({ error: "Unauthorized. User ID is required." });
+//   }
+
+//   try {
+//     // Ensure req.body contains postData
+//     if (!req.body || !req.body.postData || Object.keys(req.body.postData).length === 0) {
+//       return res.status(400).json({ error: "Invalid request data." });
+//     }
+
+//     const { postData,images } = req.body; // Extract postData correctly
+//     console.log("Parsed Data:", postData);
+
+//     // Format and ensure proper data conversion
+//     const formattedData = {
+//       user: { connect: { id: userId } },
+//       propertyName: postData.propertyName?.trim() || "Untitled",
+//       price: postData.price ? Number(postData.price) : 0,
+//       images: Array.isArray(postData.images) ? postData.images : [],
+//       address: postData.address?.trim() || "",
+//       city: postData.city?.trim() || "",
+//       state: postData.state?.trim() || "",
+//       size: postData.size ? Number(postData.size) : 0,
+//       bedroom: postData.bedroom ? Number(postData.bedroom) : 0,
+//       bathroom: postData.bathroom ? Number(postData.bathroom) : 0,
+//       balcony: postData.balcony ? Number(postData.balcony) : 0,
+//       lat: postData.lat ? parseFloat(postData.lat) : null,
+//       long: postData.long ? parseFloat(postData.long) : null,
+//       listingType: postData.listingType?.trim() || "sell",
+//       buildingType: postData.buildingType?.trim() || "residential",
+//       propertyType: postData.propertyType?.trim() || "apartment",
+//       description: postData.description?.trim() || "",
+//       offer: postData.offer === "true" || postData.offer === true,
+//       tac: postData.tac === "true" || postData.tac === true,
+//       amenities: Array.isArray(postData.amenities) ? postData.amenities.map(item => item.value) : [],
+//       nearbyPlaces: Array.isArray(postData.nearbyPlaces) ? postData.nearbyPlaces.map(item => item.value) : [],
+//       nearbyDistances: typeof postData.nearbyDistances === "object" ? postData.nearbyDistances : {},
+//       propertyCondition: postData.propertyCondition?.trim() || null,
+//       propertyAvailability: postData.propertyAvailability?.trim() || null,
+//       parking: postData.parking?.trim() || null,
+//       images: Array.isArray(images) ? images : [],
+//     };
+
+//     console.log("Formatted Data:", formattedData);
+
+//     // Create the new post
+//     const newPost = await prisma.post.create({
+//       data: formattedData,
+//     });
+
+//     return res.status(201).json({ post: newPost, message: "Listing Added Successfully!" });
+
+//   } catch (error) {
+//     console.error("Error creating listing:", error);
+//     return res.status(500).json({ error: "Failed To Add Listing." });
+//   }
+// };
+
+// // export const getListings = async (req, res) => {
+// //   try {
+// //     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+// //     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+// //     const listingType =
+// //       req.query.listingType === "all" || !req.query.listingType
+// //         ? ["sell", "rent/lease"]
+// //         : [req.query.listingType];
+
+// //     const propertyType = req.query.propertyType || null;
+// //     const buildingType = req.query.buildingType || null;
+// //     const city = req.query.city || null;
+// //     const minPrice = Number(req.query.minPrice) || 0;
+// //     const maxPrice = Number(req.query.maxPrice) || 10000000;
+// //     const searchTerm = req.query.searchTerm?.trim() || "";
+
+// //     let sortObj = { createdAt: "desc" };
+
+// //     if (req.query.sort === "oldest") {
+// //       sortObj = { createdAt: "asc" };
+// //     } else if (req.query.sort === "popular") {
+// //       sortObj = { views: "desc" };
+// //     }
+
+// //     const whereClause = {
+// //       AND: [
+// //         searchTerm
+// //           ? {
+// //               OR: [
+// //                 { propertyName: { contains: searchTerm, mode: "insensitive" } },
+// //                 { city: { contains: searchTerm, mode: "insensitive" } },
+// //                 { address: { contains: searchTerm, mode: "insensitive" } },
+// //               ],
+// //             }
+// //           : null,
+// //         { listingType: { in: listingType } },
+// //         propertyType ? { propertyType } : null,
+// //         buildingType ? { buildingType } : null,
+// //         city ? { city } : null,
+// //         { price: { gte: minPrice, lte: maxPrice } },
+// //         req.query.sort === "trending"
+// //           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+// //           : null, // Trending filter
+// //       ].filter(Boolean), // Remove null values
+// //     };
+
+// //     console.log("Query:", JSON.stringify(whereClause, null, 2));
+// //     console.log("Sort:", JSON.stringify(sortObj, null, 2));
+
+// //     const listings = await prisma.post.findMany({
+// //       where: whereClause,
+// //       orderBy: sortObj,
+// //       take: limit,
+// //       skip: startIndex,
+// //     });
+
+// //     return res.status(200).json(listings);
+// //   } catch (error) {
+// //     console.error("Error fetching listings:", error);
+// //     return res.status(500).json({ message: "Internal server error" });
+// //   }
+// // };
+
+// export const getListings = async (req, res) => {
+//   try {
+//     // Pagination parameters
+//     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+//     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+//     // Filters
+//     const listingType = req.query.listingType === "all" || !req.query.listingType
+//       ? ["sell", "rent/lease"]
+//       : [req.query.listingType];
+
+//     const propertyType = req.query.propertyType || null;
+//     const buildingType = req.query.buildingType || null;
+//     const city = req.query.city || null;
+//     const minPrice = Number(req.query.minPrice) || 0;
+//     const maxPrice = Number(req.query.maxPrice) || 10000000;
+//     const searchTerm = req.query.searchTerm?.trim() || "";
+
+//     // Sorting options
+//     let sortObj = { createdAt: "desc" };
+
+//     if (req.query.sort === "oldest") {
+//       sortObj = { createdAt: "asc" };
+//     } else if (req.query.sort === "popular") {
+//       sortObj = { views: "desc" };
+//     }
+
+//     // Build the WHERE clause for Prisma query
+//     const whereClause = {
+//       AND: [
+//         searchTerm
+//           ? {
+//               OR: [
+//                 { propertyName: { contains: searchTerm, mode: "insensitive" } },
+//                 { city: { contains: searchTerm, mode: "insensitive" } },
+//                 { address: { contains: searchTerm, mode: "insensitive" } },
+//               ],
+//             }
+//           : {},
+//         { listingType: { in: listingType } },
+//         propertyType ? { propertyType } : {},
+//         buildingType ? { buildingType } : {},
+//         city ? { city } : {},
+//         { price: { gte: minPrice, lte: maxPrice } },
+//         req.query.sort === "trending"
+//           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+//           : {},
+//       ].filter(Boolean), // Removes any null or undefined values
+//     };
+
+//     console.log("Query:", JSON.stringify(whereClause, null, 2)); // Debugging
+
+//     // Prisma query to fetch listings with pagination and sorting
+//     const listings = await prisma.post.findMany({
+//       where: whereClause,
+//       orderBy: sortObj,
+//       take: limit,
+//       skip: startIndex,
+//     });
+
+//     return res.status(200).json(listings); // Return the listings
+//   } catch (error) {
+//     console.error("Error fetching listings:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+// "
+
+// ChatGPT said:
+// The issue you're facing seems to be that empty objects {} are being added to your AND clause in the Prisma query. This happens when optional filters like searchTerm, propertyType, buildingType, city, etc., are not provided in the query string. When these values are missing, you're still pushing empty objects into the AND clause, which results in the invalid query you posted.
+
+// Solution
+// To fix this, you need to ensure that only the filters with actual values (non-empty) are included in the AND array. The .filter(Boolean) method is already in place, but it's not filtering out these empty objects because they exist as an empty object {}, which is considered truthy in JavaScript.
+
+// You can adjust the way you're building the whereClause to avoid pushing empty objects by ensuring that only conditions with values are included in the AND array.
+
+// Here's the updated approach to properly handle optional filters and avoid including empty objects in the AND array:
+
+// Updated getListings API:
+// javascript
+// Copy
+// export const getListings = async (req, res) => {
+//   try {
+//     // Pagination parameters
+//     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+//     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+//     // Filters
+//     const listingType = req.query.listingType === "all" || !req.query.listingType
+//       ? ["sell", "rent/lease"]
+//       : [req.query.listingType];
+
+//     const propertyType = req.query.propertyType || null;
+//     const buildingType = req.query.buildingType || null;
+//     const city = req.query.city || null;
+//     const minPrice = Number(req.query.minPrice) || 0;
+//     const maxPrice = Number(req.query.maxPrice) || 10000000;
+//     const searchTerm = req.query.searchTerm?.trim() || "";
+
+//     // Sorting options
+//     let sortObj = { createdAt: "desc" };
+
+//     if (req.query.sort === "oldest") {
+//       sortObj = { createdAt: "asc" };
+//     } else if (req.query.sort === "popular") {
+//       sortObj = { views: "desc" };
+//     }
+
+//     // Build the WHERE clause for Prisma query
+//     const whereClause = {
+//       AND: [
+//         // Only add search term condition if it exists
+//         searchTerm
+//           ? {
+//               OR: [
+//                 { propertyName: { contains: searchTerm, mode: "insensitive" } },
+//                 { city: { contains: searchTerm, mode: "insensitive" } },
+//                 { address: { contains: searchTerm, mode: "insensitive" } },
+//               ],
+//             }
+//           : null,
+
+//         // Only add listingType condition if it's valid
+//         { listingType: { in: listingType } },
+
+//         // Only add propertyType condition if it's valid
+//         propertyType ? { propertyType } : null,
+
+//         // Only add buildingType condition if it's valid
+//         buildingType ? { buildingType } : null,
+
+//         // Only add city condition if it's valid
+//         city ? { city } : null,
+
+//         // Add price range condition
+//         { price: { gte: minPrice, lte: maxPrice } },
+
+//         // Only add trending condition if needed
+//         req.query.sort === "trending"
+//           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+//           : null,
+//       ].filter(Boolean), // Removes any null values
+//     };
+
+//     console.log("Query:", JSON.stringify(whereClause, null, 2)); // Debugging
+
+//     // Prisma query to fetch listings with pagination and sorting
+//     const listings = await prisma.post.findMany({
+//       where: whereClause,
+//       orderBy: sortObj,
+//       take: limit,
+//       skip: startIndex,
+//     });
+
+//     return res.status(200).json(listings); // Return the listings
+//   } catch (error) {
+//     console.error("Error fetching listings:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+// Key Changes:
+// Conditionally Add Filters:
+
+// I updated the way the filters are conditionally added to the AND array. Now, filters like searchTerm, propertyType, buildingType, etc., are only added if they are truthy.
+
+// The conditions that can be null (e.g., propertyType, buildingType) are added only if they are non-null values.
+
+// Filter Empty Objects:
+
+// The filter(Boolean) method now ensures that only non-null conditions are added to the query, eliminating empty objects {} from the query.
+
+// Example Queries and Results:
+// Search Listings with Specific Listing Type and Price Range:
+
+// bash
+// Copy
+// GET /listings?listingType=rent/lease&minPrice=1000&maxPrice=500000&limit=10&startIndex=0
+// The whereClause would look like:
+
+// json
+// Copy
+// {
+//   "AND": [
+//     { "listingType": { "in": ["rent/lease"] } },
+//     { "price": { "gte": 1000, "lte": 500000 } }
+//   ]
+// }
+// Search Listings with Search Term:
+
+// bash
+// Copy
+// GET /listings?searchTerm=apartment&limit=10&startIndex=0
+// The whereClause would look like:
+
+// json
+// Copy
+// {
+//   "AND": [
+//     {
+//       "OR": [
+//         { "propertyName": { "contains": "apartment", "mode": "insensitive" } },
+//         { "city": { "contains": "apartment", "mode": "insensitive" } },
+//         { "address": { "contains": "apartment", "mode": "insensitive" } }
+//       ]
+//     }
+//   ]
+// }
+// Final Notes:
+// Ensure Filters are Passed Correctly: Make sure that your front-end is sending the correct query parameters (e.g., minPrice, maxPrice, listingType, etc.). If they are missing, they won’t be included in the query.
+
+// Logging: The console.log statement will print out the final query that Prisma is generating, which can help debug any issues if they arise.
+
+// With these changes, your Prisma query should now be generated properly without any redundant empty objects. Let me know if you need further assistance!

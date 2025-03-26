@@ -50,6 +50,7 @@ function NewPostPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [customAmenity, setCustomAmenity] = useState("");
+  console.log(images)
 
   const {
     values,
@@ -86,6 +87,7 @@ function NewPostPage() {
       nearbyPlaces: [],
       nearbyDistances: {},
       amenities: [],
+      images: [],
     },
     validationSchema: addListingSchema,
     onSubmit: async (values) => {
@@ -93,7 +95,7 @@ function NewPostPage() {
         console.log(values)
         const res = await axios.post(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
-         {postData:values},
+          { postData: values, images },
           { withCredentials: true }
         );
         console.log(res)
@@ -548,9 +550,9 @@ function NewPostPage() {
                     type="checkbox"
                     name="offer"
                     id="offer"
-                    checked={values.offer} 
-                    onChange={handleChange} 
-                    onBlur={handleBlur} 
+                    checked={values.offer}
+                    onChange={handleChange}
+                    onBlur={handleBlur}
                     className={errors.offer && touched.offer ? "input-error form-check-input ms-0 mt-2" : "form-check-input ms-0 mt-2"}
                   />
                   {errors.offer && touched.offer && (
@@ -641,9 +643,9 @@ function NewPostPage() {
                   type="checkbox"
                   name="tac"
                   id="tac"
-                  checked={values.tac} 
-                  onChange={handleChange} 
-                  onBlur={handleBlur} 
+                  checked={values.tac}
+                  onChange={handleChange}
+                  onBlur={handleBlur}
                   className={errors.tac && touched.tac ? "input-error form-check-input ms-0" : "form-check-input ms-0"}
                 />
                 {errors.tac && touched.tac && <p className="error">{errors.tac}</p>}
