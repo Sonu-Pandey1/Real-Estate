@@ -1,64 +1,3 @@
-// import { createContext, useEffect, useState } from "react";
-
-// export const AuthContext = createContext();
-
-// export const AuthContextProvider = ({children})=>{
-
-//     const [currentUser,setCurrentUser] = useState(
-//         JSON.parse(localStorage.getItem("user"))||null);
-
-//     const updateUser = (data)=>{
-//         setCurrentUser(data);
-//     }
-
-//     useEffect(()=>{
-//         localStorage.setItem("user",JSON.stringify(currentUser));
-
-//     },[currentUser])
-    
-//     return <AuthContext.Provider value={{currentUser,updateUser}}>
-//         {children}
-//     </AuthContext.Provider>
-// }
-
-// import { createContext, useEffect, useState } from "react";
-// import axios from "axios"
-// export const AuthContext = createContext();
-
-// export const AuthContextProvider = ({ children }) => {
-//   const [currentUser, setCurrentUser] = useState(
-//     JSON.parse(localStorage.getItem("user")) || null
-//   );
-//   const [listings,setListings] = useState("")
-
-//   const updateUser = (data) => {
-//     setCurrentUser(data);
-//   };
-
-//   const getSpotlightListings = async ()=>{
-//     try {
-//       const res = await axios.get("http://localhost:3000/api/posts",{
-//         withCredentials:true
-//       })
-//       setListings(res)
-// console.log(res)
-//     } catch (error) {
-//       console.log(error)
-//     }
-
-//   }
-
-//   useEffect(() => {
-//     localStorage.setItem("user", JSON.stringify(currentUser));
-//   }, [currentUser]);
-
-//   return (
-//     <AuthContext.Provider value={{ currentUser, updateUser, listings }}>
-//       {children}
-//     </AuthContext.Provider>
-//   );
-// };
-
 
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
@@ -75,12 +14,23 @@ export const AuthContextProvider = ({ children }) => {
     setCurrentUser(data);
   };
 
+  const formatPrice = (price) => {
+    if (price >= 10000000) {
+      return `₹ ${(price / 10000000).toFixed(2)} Cr`;
+    } else if (price >= 100000) {
+      return `₹ ${(price / 100000).toFixed(2)} Lakh`;
+    } else {
+      return `₹ ${price.toLocaleString("en-IN")}`;
+    }
+  };
+  
+
   const getSpotlightListings = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`, {
         withCredentials: true,
       });
-      setListings(res.data); // Assuming res.data contains the listing data
+      setListings(res.data);
       console.log(res.data);
     } catch (error) {
       console.error("Error fetching spotlight listings:", error);
@@ -103,6 +53,7 @@ export const AuthContextProvider = ({ children }) => {
         currentUser,
         updateUser,
         listings,
+        formatPrice,
       }}
     >
       {children}
