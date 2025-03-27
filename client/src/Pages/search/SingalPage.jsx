@@ -158,45 +158,67 @@ function SinglePage() {
     nearbyPlaces = [],
     nearbyDistances = {},
 
-    latitude,
-    longitude,
-    agentPhone,
-    agentEmail,
+    agentPhone = "4545454",
+    agentEmail = "@gmail.com",
+    school,
+    bus,
+    restaurant,
+    utilities,
+    pet,
+    income
   } = propertyData;
-
-  const { username, avatar } = user || {};
 
   return (
     <div className="singlePageContainer pt-5">
       <div className="singlePage pt-4 container pb-4">
         <div className="details">
           <div className="wrapper">
-            {/* <Slider images={images || []} /> */}
             <Slider images={images.length ? images : ["/placeholder.jpg"]} />
             <div className="info">
               <div className="top">
                 <div className="post">
                   <h1>{propertyName}</h1>
-                  <div className="address">
-                    <IoLocationOutline />
-                    <span>{address}, {city}, {state}</span>
+
+                  <div className="address d-flex justify-content-between justify-content-center align-items-center">
+                    <span><IoLocationOutline className="" />
+                      <span className="ps-1">{address}, {city}, {state}</span>
+                    </span>
+                    <span className="views">Views: {views}</span>
                   </div>
                   <div className="price">{formatPrice(price)}</div>
-                  {/* <div className="views">Views: {views}</div> */}
                 </div>
-                {/* <div className="user">
-                  <img src={avatar} alt="User Avatar" />
-                  <span>{username}</span>
-                </div> */}
+
                 <div className="user">
                   <img src={user.avatar || "/default-avatar.jpg"} alt="User Avatar" />
                   <span>{user.username || "Unknown"}</span>
                   <div className="contact">
-                    <button className="contactBtn" onClick={openContactModal}>
+                    <button className="contactBtn btn btn-outline-primary" onClick={openContactModal}>
                       Contact Owner
                     </button>
-                    {agentPhone && <p>Phone: {agentPhone}</p>}
-                    {agentEmail && <p>Email: {agentEmail}</p>}
+                  </div>
+                </div>
+                <div className="propertyDetails">
+                  <div className="propertyType">
+                    <strong>Property Type:</strong> {propertyType || "N/A"}
+                  </div>
+                  <div className="buildingType">
+                    <strong>Building Type:</strong> {buildingType || "N/A"}
+                  </div>
+                  <div className="listingType">
+                    <strong>Listing Type:</strong> {listingType || "N/A"}
+                  </div>
+                  <div className="size">
+                    <strong>Size:</strong> {size} sqft
+                  </div>
+                  <div className="rooms">
+                    <span>{bedroom} Bedroom</span>
+                    <span>{bathroom} Bathroom</span>
+                  </div>
+                  <div className="parking">
+                    <strong>Parking:</strong> {parking || "Not specified"}
+                  </div>
+                  <div className="balcony">
+                    <strong>Balcony:</strong> {balcony ? "Yes" : "No"}
                   </div>
                 </div>
               </div>
@@ -210,150 +232,97 @@ function SinglePage() {
 
         <div className="features">
           <div className="wrapper">
-            <div className="propertyDetails">
-              <div className="propertyType">
-                <strong>Property Type:</strong> {propertyType || "N/A"}
-              </div>
-              <div className="buildingType">
-                <strong>Building Type:</strong> {buildingType || "N/A"}
-              </div>
-              <div className="listingType">
-                <strong>Listing Type:</strong> {listingType || "N/A"}
-              </div>
-              <div className="size">
-                <strong>Size:</strong> {size} sqft
-              </div>
-              <div className="rooms">
-                <span>{bedroom} Bedroom</span>
-                <span>{bathroom} Bathroom</span>
-              </div>
-              <div className="parking">
-                <strong>Parking:</strong> {parking || "Not specified"}
-              </div>
-              <div className="balcony">
-                <strong>Balcony:</strong> {balcony ? "Yes" : "No"}
-              </div>
+
+
+            {/* Dynamic Amenities with Icons */}
+            <p className="title">Property Amenities</p>
+            <div className="listVertical flex flex-wrap flex-row gap-4">
+              {amenities.length > 0 ? (
+                amenities.map((item, index) => {
+                  // Map amenity to icon
+                  const amenityIcons = {
+                    "gym": "https://cdn-icons-png.flaticon.com/128/16496/16496284.png"
+                  };
+
+                  // Use mapped icon or default one
+                  const icon = amenityIcons[item] || "https://cdn-icons-png.flaticon.com/128/16496/16496284.png";
+
+                  return (
+                    <div key={index} className="feature">
+                      <img src={icon} alt={`${item} Icon`} />
+                      <div className="featureText">
+                        <span>{item}</span>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No amenities listed.</p>
+              )}
             </div>
 
-            <p className="title">Property Details</p>
-             {/* <div className="listVertical">
-//               <div className="feature">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/11670/11670393.png"
-//                   alt="Utilities Icon"
-//                 />
-//                 <div className="featureText">
-//                   <span>{utilities}</span>
-//                   <p>Renter is responsible</p>
-//                 </div>
-//               </div>
-//               <div className="feature">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/16757/16757980.png"
-//                   alt="Pet Policy Icon"
-//                 />
-//                 <div className="featureText">
-//                   <span>Pet Policy</span>
-//                   <p>{pet}</p>
-//                 </div>
-//               </div>
-//               <div className="feature">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/1611/1611179.png"
-//                   alt="Property Fees Icon"
-//                 />
-//                 <div className="featureText">
-//                   <span>Property Fees</span>
-//                   <p>{income}</p>
-//                 </div>
-//               </div>
-             </div> */}
-            <div className="listVertical">
-              {amenities.length > 0 ? amenities.map((item, index) => (
-                <div key={index} className="feature">
-                  <span>{item}</span>
-                </div>
-              )) : <p>No amenities listed.</p>}
-            </div>
+            {/* Sizes & Rooms */}
 
             <p className="title">Sizes & Rooms</p>
-{/* //             <div className="sizes">
-//               <div className="size">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png"
-//                   alt="Size Icon"
-//                 />
-//                 <span>{size} sqft</span>
-//               </div>
-//               <div className="size">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/864/864595.png"
-//                   alt="Bedroom Icon"
-//                 />
-//                 <span>{bedroom} bedroom</span>
-//               </div>
-//               <div className="size">
-//                 <img
-//                   src="https://cdn-icons-png.flaticon.com/128/259/259973.png"
-//                   alt="Bathroom Icon"
-//                 />
-//                 <span>{bathroom} bathroom</span>
-//               </div>
-//             </div> */}
-            <div className="sizes">
-              <span>{size} sqft</span>
-              <span>{bedroom} Bedroom</span>
-              <span>{bathroom} Bathroom</span>
+            <div className="sizes d-flex flex-wrap ">
+              <div className="size d-flex align-items-center gap-2">
+                <img src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png" alt="Size Icon" />
+                <span>{size} sqft</span>
+              </div>
+
+              <div className="size d-flex align-items-center gap-2">
+                <img src="https://cdn-icons-png.flaticon.com/128/864/864595.png" alt="Bedroom Icon" />
+                <span>{bedroom} bedroom</span>
+              </div>
+
+              <div className="size d-flex align-items-center gap-2">
+                <img src="https://cdn-icons-png.flaticon.com/128/259/259973.png" alt="Bathroom Icon" />
+                <span>{bathroom} bathroom</span>
+              </div>
+
+              <div className="size d-flex align-items-center gap-2">
+                <img src="https://cdn-icons-png.flaticon.com/128/14431/14431419.png" alt="Balcony Icon" />
+                <span>{balcony} balcony</span>
+              </div>
             </div>
 
-            <p className="title mt-3">Nearby Places</p>
-            {/* <div className="listHorizontal">
-              <div className="feature">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/158/158234.png"
-                  alt="School Icon"
-                />
-                <div className="featureText">
-                  <span>School</span>
-                  <p>
-                    {school > 999 ? school / 1000 + " km" : school + " m"} away
-                  </p>
-                </div>
-              </div>
 
-              <div className="feature">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/9830/9830523.png"
-                  alt="Bus Stop Icon"
-                />
-                <div className="featureText">
-                  <span>Bus Stop</span>
-                  <p>{bus > 999 ? bus / 1000 + " km" : bus + " m"} away</p>
-                </div>
-              </div>
-              <div className="feature">
-                <img
-                  src="https://cdn-icons-png.flaticon.com/128/562/562678.png"
-                  alt="Restaurant Icon"
-                />
-                <div className="featureText">
-                  <span>Restaurant</span>
-                  <p>
-                    {restaurant > 999
-                      ? restaurant / 1000 + " km"
-                      : restaurant + " m"}{" "}
-                    away
-                  </p>
-                </div>
-              </div>
-            </div> */}
-            <div className="listHorizontal">
-              {nearbyPlaces.length > 0 ? nearbyPlaces.map((place, index) => (
-                <div key={index} className="feature">
-                  <span>{place}</span>
-                  <p>{nearbyDistances[place] || "Unknown distance"} away</p>
-                </div>
-              )) : <p>No nearby places listed.</p>}
+            {/* Nearby Places */}
+
+            <p className="title mt-3">Nearby Places</p>
+            {/* Dynamically Rendered Nearby Places (Column Layout) */}
+            <div className="listVertical d-flex flex-column gap-3">
+              {nearbyPlaces.length > 0 ? (
+                nearbyPlaces.map((place, index) => {
+                  const placeIcons = {
+                    "school": "https://cdn-icons-png.flaticon.com/128/158/158234.png",
+                    "bus Stop": "https://cdn-icons-png.flaticon.com/128/9830/9830523.png",
+                    "restaurant": "https://cdn-icons-png.flaticon.com/128/562/562678.png",
+                    "hospital": "https://cdn-icons-png.flaticon.com/128/10480/10480839.png",
+                    "mall": "https://cdn-icons-png.flaticon.com/128/2334/2334514.png",
+                    "park": "https://cdn-icons-png.flaticon.com/128/854/854878.png",
+                  };
+
+                  const icon = placeIcons[place] || "https://cdn-icons-png.flaticon.com/128/3061/3061732.png"; // Default icon
+                  const distance = nearbyDistances[place] || "Unknown";
+
+                  return (
+                    <div key={index} className="feature d-flex align-items-center ">
+                      <img src={icon} alt={`${place} Icon`} className="img-fluid" />
+                      <div className="featureText">
+                        <span>{place}</span>
+                        <p>
+                          {distance !== "Unknown"
+                            ? (distance < 1 ? Math.round(distance * 1000) + " m" : distance + " km")
+                            : "Unknown distance"} away
+                        </p>
+                      </div>
+                    </div>
+                  );
+                })
+              ) : (
+                <p>No nearby places listed.</p>
+              )}
             </div>
 
             <p className="title mt-3 pb-3">Location</p>
@@ -430,10 +399,15 @@ function SinglePage() {
       <Modal show={isContactModalOpen} onHide={() => setIsContactModalOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Contact Owner</Modal.Title>
+
+
+
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleContactOwner}>
             <div className="mb-3">
+              <h6>{agentPhone && <p>Phone: {agentPhone}</p>}</h6>
+              <h6>{agentEmail && <p>Email: {agentEmail}</p>}</h6>
               <label htmlFor="contactMessage" className="form-label">Message</label>
               <textarea
                 className="form-control"
