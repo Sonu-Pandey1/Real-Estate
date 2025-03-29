@@ -5,6 +5,7 @@ import authRoute from "./routers/auth.route.js";
 // import testRoute from "./routers/test.route.js";
 import testRoute from "./routers/test.route.js"
 import userRoute from "./routers/user.route.js"
+import contactRoute from "./routers/contact.route.js"
 import cors from "cors"
 import dotenv from "dotenv";
 // const express = require("express")
@@ -25,6 +26,7 @@ app.use(cookieParser());
 app.use("/api/auth",authRoute);
 app.use("/api/users",userRoute);
 app.use("/api/posts",postRoute);
+app.use("/api/contact",contactRoute)
 app.use("/api/test",testRoute)
 
 app.get("/",(req,res)=>{
