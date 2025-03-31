@@ -23,7 +23,7 @@ function SinglePage() {
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
   console.log(propertyData)
-  const { currentUser, formatPrice } = useContext(AuthContext);
+  const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
 
@@ -67,8 +67,6 @@ function SinglePage() {
     }
   }
 
-  // Functions to handle opening modals
-
   const openScheduleModal = () => {
     setIsModalOpen(true);
   };
@@ -99,7 +97,6 @@ function SinglePage() {
     setIsContactModalOpen(false);
   };
 
-
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -120,7 +117,6 @@ function SinglePage() {
 
     fetchData();
   }, [id]);
-
 
   if (loading) {
     return (
@@ -177,11 +173,11 @@ function SinglePage() {
             <div className="info">
               <div className="top">
                 <div className="post">
-                  <h1>{propertyName}</h1>
+                  <h1>{capitalize(propertyName)}</h1>
 
                   <div className="address d-flex justify-content-between justify-content-center align-items-center">
                     <span><IoLocationOutline className="" />
-                      <span className="ps-1">{address}, {city}, {state}</span>
+                      <span className="ps-1">{capitalize(address)}, {capitalize(city)}, {capitalize(state)}</span>
                     </span>
                     <span className="views">Views: {views}</span>
                   </div>
@@ -197,53 +193,51 @@ function SinglePage() {
                     </button>
                   </div>
                 </div>
+
                 <div className="features">
                   <div className="wrapper">
-                    <p className="title">Property Details</p>
-                    <div className="propertyDetails">
-                      <div className="propertyType">
-                        <strong>Property Type:</strong> {propertyType || "N/A"}
+                    <p className="title pt-3">Property Details</p>
+                    <div className="row propertyDetails pb-4">
+                      <div className="col-md-6 py-1">
+                        <strong>Property Type:</strong> {capitalize(propertyType) || "N/A"}
                       </div>
-                      <div className="buildingType">
-                        <strong>Building Type:</strong> {buildingType || "N/A"}
+                      <div className="col-md-6 py-1">
+                        <strong>Building Type:</strong> {capitalize(buildingType) || "N/A"}
                       </div>
-                      <div className="listingType">
-                        <strong>Listing Type:</strong> {listingType || "N/A"}
+                      <div className="col-md-6 py-1">
+                        <strong>Listing Type:</strong> {capitalize(listingType) || "N/A"}
                       </div>
-                      <div className="size">
-                        <strong>Size:</strong> {size} sqft
+                      <div className="col-md-6 py-1">
+                        <strong>Size:</strong> {size || "N/A"} Sqft
                       </div>
-                      <div className="rooms">
-                        <span>{bedroom} Bedroom</span>
-                        <span>{bathroom} Bathroom</span>
+                      <div className="col-md-6 py-1">
+                        <strong>Rooms:</strong> {bedroom || "N/A"} Bedroom, {bathroom || "N/A"} Bathroom
                       </div>
-                      <div className="parking">
-                        <strong>Parking:</strong> {parking || "Not specified"}
+                      <div className="col-md-6 py-1">
+                        <strong>Parking:</strong> {capitalize(parking) || "N/A"}
                       </div>
-                      <div className="balcony">
-                        <strong>Balcony:</strong> {balcony ? "Yes" : "No"}
+                      <div className="col-md-6 py-1">
+                        <strong>Balcony:</strong> {balcony || "N/A"}
                       </div>
                     </div>
 
+
                     {/* Dynamic Amenities with Icons */}
                     <p className="title">Property Amenities</p>
-                    <div className="listVertical flex flex-wrap flex-row gap-4">
+
+                    <div className="row pb-4">
                       {amenities.length > 0 ? (
                         amenities.map((item, index) => {
-                          // Map amenity to icon
                           const amenityIcons = {
-                            "gym": "https://cdn-icons-png.flaticon.com/128/16496/16496284.png"
+                            "gym": "https://cdn-icons-png.flaticon.com/128/5582/5582932.png"
                           };
 
-                          // Use mapped icon or default one
-                          const icon = amenityIcons[item] || "https://cdn-icons-png.flaticon.com/128/16496/16496284.png";
+                          const icon = amenityIcons[item] || "https://cdn-icons-png.flaticon.com/128/5582/5582932.png";
 
                           return (
-                            <div key={index} className="feature">
-                              <img src={icon} alt={`${item} Icon`} />
-                              <div className="featureText">
-                                <span>{item}</span>
-                              </div>
+                            <div key={index} className="col-md-4 d-flex align-items-center mb-3">
+                              <img src={icon} alt={`${item} Icon`} className="me-2 " width="10" />
+                              <span>{capitalize(item)}</span>
                             </div>
                           );
                         })
@@ -252,28 +246,29 @@ function SinglePage() {
                       )}
                     </div>
 
+
                     {/* Sizes & Rooms */}
 
                     <p className="title">Sizes & Rooms</p>
-                    <div className="sizes d-flex flex-wrap ">
+                    <div className="sizes d-flex flex-wrap pb-4">
                       <div className="size d-flex align-items-center gap-2">
                         <img src="https://cdn-icons-png.flaticon.com/128/3413/3413667.png" alt="Size Icon" />
-                        <span>{size} sqft</span>
+                        <span>{size} Sqft</span>
                       </div>
 
                       <div className="size d-flex align-items-center gap-2">
                         <img src="https://cdn-icons-png.flaticon.com/128/864/864595.png" alt="Bedroom Icon" />
-                        <span>{bedroom} bedroom</span>
+                        <span>{bedroom} Bedroom</span>
                       </div>
 
                       <div className="size d-flex align-items-center gap-2">
                         <img src="https://cdn-icons-png.flaticon.com/128/259/259973.png" alt="Bathroom Icon" />
-                        <span>{bathroom} bathroom</span>
+                        <span>{bathroom} Bathroom</span>
                       </div>
 
                       <div className="size d-flex align-items-center gap-2">
                         <img src="https://cdn-icons-png.flaticon.com/128/14431/14431419.png" alt="Balcony Icon" />
-                        <span>{balcony} balcony</span>
+                        <span>{balcony} Balcony</span>
                       </div>
                     </div>
 
@@ -301,7 +296,7 @@ function SinglePage() {
                             <div key={index} className="feature d-flex align-items-center ">
                               <img src={icon} alt={`${place} Icon`} className="img-fluid" />
                               <div className="featureText">
-                                <span>{place}</span>
+                                <span>{capitalize(place)}</span>
                                 <p>
                                   {distance !== "Unknown"
                                     ? (distance < 1 ? Math.round(distance * 1000) + " m" : distance + " km")
@@ -319,10 +314,12 @@ function SinglePage() {
                 </div>
 
               </div>
+
               <div
-                className="bottom description"
+                className="bottom description mt-4"
                 dangerouslySetInnerHTML={{ __html: DOMPurify.sanitize(description || "No description available.") }}
               ></div>
+
             </div>
           </div>
         </div>
@@ -330,27 +327,15 @@ function SinglePage() {
         <div className="features">
           <div className="wrapper">
             <p className="title ">Location</p>
+
             <div className="mapContainer">
               <Map className="map" items={[propertyData]} smallMap={smallMap} />
             </div>
 
-            <div className="buttons pb-5">
-              <button onClick={openScheduleModal}>
-                {/* <img src= alt="Schedule Visit" /> */}
-                <span className="img">{<FaRegCalendarAlt />}</span>
-                Schedule a Visit
-              </button>
-              <button
-                onClick={handleSave}
-                style={{ backgroundColor: saved ? "#fece51" : "white", }}>
-                <span className="img"><MdAddTask /></span>
-                {saved ? "Place Saved" : "Save the Place"}
-              </button>
-            </div>
-
             {/* contact form  */}
 
-            <form className="contact-form bg-white p-4 rounded shadow mt-4 border border-light mx-auto" style={{ maxWidth: '500px' }}>
+            <form className="contact-form stickyForm bg-white p-4 rounded shadow mt-5 mb-2 border border-light mx-auto" style={{ maxWidth: '500px' }}>
+
               <h4 className="text-center mb-3 fw-lighter">Contact the Owner</h4>
 
 
@@ -400,6 +385,21 @@ function SinglePage() {
 
               <button type="submit" className="btn btn-primary w-100">Send Message</button>
             </form>
+
+            <div className="buttons pb-5">
+              <button onClick={openScheduleModal}>
+                {/* <img src= alt="Schedule Visit" /> */}
+                <span className="img">{<FaRegCalendarAlt />}</span>
+                Schedule a Visit
+              </button>
+
+              <button
+                onClick={handleSave}
+                style={{ backgroundColor: saved ? "#fece51" : "white", }}>
+                <span className="img"><MdAddTask /></span>
+                {saved ? "Place Saved" : "Save the Place"}
+              </button>
+            </div>
 
           </div>
         </div>
@@ -482,4 +482,3 @@ function SinglePage() {
 }
 
 export default SinglePage;
-

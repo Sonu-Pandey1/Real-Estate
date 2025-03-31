@@ -187,7 +187,7 @@
           justify-items: center;
 
           button {
-            padding: 12px;
+            padding: 8px;
             display: flex;
             align-items: center;
             gap: 5px;
@@ -202,23 +202,7 @@
             }
           }
         }
-
-        .contact-form {
-          transition: all 0.3s ease-in-out;
-
-          &.sticky {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 350px; // Adjust as per design
-            z-index: 1000;
-            background: white;
-            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
-            border-radius: 8px;
-            padding: 15px;
-          }
-        }
-
+        
       }
     }
   }
@@ -246,3 +230,13 @@
     }
   }
 }
+// sticky form example
+// .stickyForm {
+//   background-color: red !important;
+//   position: sticky;
+//   top: 20px; /* Adjust this value based on how much spacing you want at the top */
+//   z-index: 10;
+//   padding: 20px;
+//   background-color: white; /* Optional: to ensure background doesn't overlap */
+//   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for a more distinct separation */
+// }

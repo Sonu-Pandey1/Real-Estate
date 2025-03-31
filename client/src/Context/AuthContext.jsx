@@ -23,6 +23,21 @@ export const AuthContextProvider = ({ children }) => {
       return `₹ ${price.toLocaleString("en-IN")}`;
     }
   };
+
+  // const capitalize = (str) => {
+  //   return str ? str.charAt(0).toUpperCase() + str.slice(1) : "N/A";
+  // };
+
+  const capitalize = (str) => {
+    if (!str) return "N/A";
+    
+    return str
+      .split(" ") // Split into words
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) // Capitalize each word
+      .join(" "); // Join back into a sentence
+  };
+  
+  
   
 
   const getSpotlightListings = async () => {
@@ -54,6 +69,7 @@ export const AuthContextProvider = ({ children }) => {
         updateUser,
         listings,
         formatPrice,
+        capitalize,
       }}
     >
       {children}
