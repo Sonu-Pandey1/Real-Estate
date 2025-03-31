@@ -78,7 +78,7 @@ const customIcon = new L.Icon({
 export default function Pin({ item }) {
   if (!item || !item.lat || !item.long) return null; // Handle missing data
 
-  console.log("Pin loaded:", item);
+  console.log("Pin loaded:", item.lat, item.long); // Debugging log
 
   return (
     <Marker position={[item.lat, item.long]} icon={customIcon}>
