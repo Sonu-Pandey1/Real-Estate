@@ -46,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
         withCredentials: true,
       });
       setListings(res.data);
-      console.log(res.data);
+      // console.log(res.data);
     } catch (error) {
       console.error("Error fetching spotlight listings:", error);
     }

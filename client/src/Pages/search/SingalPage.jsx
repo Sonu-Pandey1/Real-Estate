@@ -22,15 +22,16 @@ function SinglePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
-  console.log(propertyData)
+  // console.log(propertyData)
   const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
-
+console.log(saved)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [visitDetails, setVisitDetails] = useState({ name: "", email: "", date: "" });
   const [messageDetails, setMessageDetails] = useState({ message: "" });
+  
 
   const handleSave = async () => {
     if (!currentUser) {
@@ -40,7 +41,7 @@ function SinglePage() {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`, { postId: id }, {
         withCredentials: true,
       });
-      // console.log(response.data.message)
+      console.log(response)
       toast.success("" + (response.data.message || "Property saved!"), {
         position: "bottom-right",
         autoClose: 5000,
@@ -103,7 +104,7 @@ function SinglePage() {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
           withCredentials: true,
         });
-        console.log(response.data)
+        // console.log(response.data)
         if (response.data) {
           setPropertyData(response.data);
           setSaved(response.data.isSaved || false);
@@ -324,7 +325,7 @@ function SinglePage() {
           </div>
         </div>
 
-        <div className="features">
+        <div className="features position-sticky top-0 ">
           <div className="wrapper">
             <p className="title ">Location</p>
 
@@ -334,7 +335,7 @@ function SinglePage() {
 
             {/* contact form  */}
 
-            <form className="contact-form stickyForm bg-white p-4 rounded shadow mt-5 mb-2 border border-light mx-auto" style={{ maxWidth: '500px' }}>
+            <form className="contact-form  bg-white p-4 rounded shadow mt-5 mb-2 border border-light mx-auto" style={{ maxWidth: '500px' }}>
 
               <h4 className="text-center mb-3 fw-lighter">Contact the Owner</h4>
 
@@ -348,7 +349,7 @@ function SinglePage() {
                 <label htmlFor="name" className="form-label">Full Name</label>
                 <div className="input-group">
                   <span className="input-group-text"><FaRegCircleUser /></span>
-                  <input type="text" id="name" className="form-control" placeholder="John Doe" required />
+                  <input type="text" id="name" className="form-control ps-2" placeholder="John Doe" required />
                 </div>
               </div>
 
@@ -356,7 +357,7 @@ function SinglePage() {
                 <label htmlFor="phone" className="form-label">Phone Number</label>
                 <div className="input-group">
                   <span className="input-group-text"><MdOutlineWifiCalling3 /></span>
-                  <input type="text" id="phone" className="form-control" placeholder="(123) 456-7890" required />
+                  <input type="text" id="phone" className="form-control ps-2" placeholder="(123) 456-7890" required />
                 </div>
               </div>
 
@@ -364,7 +365,7 @@ function SinglePage() {
                 <label htmlFor="email" className="form-label">Email Address</label>
                 <div className="input-group">
                   <span className="input-group-text"><BsEnvelopeArrowUp /></span>
-                  <input type="email" id="email" className="form-control" placeholder="example@mail.com" required />
+                  <input type="email" id="email" className="form-control ps-2" placeholder="example@mail.com" required />
                 </div>
               </div>
 
@@ -482,3 +483,4 @@ function SinglePage() {
 }
 
 export default SinglePage;
+
