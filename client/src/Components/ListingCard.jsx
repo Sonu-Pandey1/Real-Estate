@@ -1,12 +1,14 @@
 /* eslint-disable react/prop-types */
 import "./ListingCard.scss";
 import { IoLocationOutline } from "react-icons/io5";
+import { MdBalcony } from "react-icons/md";
 import {
   FaBed,
   FaBath,
   FaRulerCombined,
-  FaCar,
-  FaSwimmingPool,
+  // FaCar,
+  // FaSwimmingPool,
+  // FaWindowMaximize,
 } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -16,8 +18,8 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 export default function PropertyCard({ item, type }) {
- 
-  const { currentUser } = useContext(AuthContext);
+
+  const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
 
@@ -65,7 +67,7 @@ export default function PropertyCard({ item, type }) {
     const shareData = {
       title: item.title,
       text: `${item.title} - ${item.address}\nCheck out this amazing property listed for ${item.price}!`,
-      url: `${window.location.origin}/${item.id}`,
+      url: `${window.location.origin}/profile/${item.id}`,
     };
 
     if (navigator.share) {
@@ -83,7 +85,6 @@ export default function PropertyCard({ item, type }) {
 
   const handleEdit = (e) => {
     e.preventDefault();
-    // navigate(`ram`);
     navigate(`edit-post/${item.id}`);
   };
 
@@ -145,6 +146,8 @@ export default function PropertyCard({ item, type }) {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
           { withCredentials: true }
         );
+        console.log(response.data);
+        console.log(response.data.isSaved);
         if (response.data) {
           setSaved(response.data.isSaved || false);
         }
@@ -160,25 +163,31 @@ export default function PropertyCard({ item, type }) {
     <NavLink to={`${item.id}`} className={"text-decoration-none"}>
       <div className="listingCardContainer">
         <div
-          className={`card custom-card ${
-            type === "myListings" || type === "savedListings"
-              ? "ProfileCard"
-              : ""
-          }`}
+          className={`card custom-card ${type === "myListings" || type === "savedListings"
+            ? "ProfileCard"
+            : ""
+            }`}
         >
           <div className="card-img-container ">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
           <div className="card-body ">
-            <h5 className="card-title">{item.title} / views {item.views}</h5>
+            <div className="d-flex justify-content-between align-items-center">
+              <h5 className="card-title">{item.propertyName}</h5>
+              <p>views {item.views}</p>
+            </div>
             <p className="card-location">
               <IoLocationOutline className="icon" />
               {item.address}
             </p>
-            <p className="card-price">{item.price}</p>
+            <p className="card-price">{formatPrice(item.price)} </p>
             <div className="card-amenitiesContainer ">
               <div className="card-details">
                 <div className="d-flex justify-content-between gap-4">
+                  <div className="detail">
+                    <FaRulerCombined className="icon" />
+                    <span>{item.size}</span>
+                  </div>
                   <div className="detail">
                     <FaBed className="icon" />
                     <span>{item.bedroom}</span>
@@ -188,16 +197,17 @@ export default function PropertyCard({ item, type }) {
                     <span>{item.bathroom}</span>
                   </div>
                   <div className="detail">
-                    <FaRulerCombined className="icon" />
-                    <span>{item.size}</span>
+                    <MdBalcony className="icon" />
+                    <span>{item.balcony}</span>
                   </div>
+
                 </div>
               </div>
               <div className="card-amenities">
                 <p>
                   <strong>Amenities:</strong>
                 </p>
-                <div className="d-flex flex-wrap gap-3">
+                {/* <div className="d-flex flex-wrap gap-3">
                   <div className="amenity">
                     <FaCar className="icon" />
                     <span>Parking</span>
@@ -231,7 +241,48 @@ export default function PropertyCard({ item, type }) {
                       </button>
                     </div>
                   </div>
+                </div> */}
+                <div className="d-flex flex-wrap gap-3 align-items-center">
+                  {item.amenities.length > 0 ? (
+                    item.amenities.slice(0, 5).map((item, index) => {
+                      const amenityIcons = {
+                        "gym": "https://cdn-icons-png.flaticon.com/128/5582/5582932.png"
+                      };
+
+                      const icon = amenityIcons[item] || "https://cdn-icons-png.flaticon.com/128/5582/5582932.png";
+
+                      return (
+                        <div key={index} className=" ">
+                          <img src={icon} alt={`${item} Icon`} className="me-1" width="20" />
+                          <span>{capitalize(item)}</span>
+                        </div>
+
+                      );
+                    })
+                  ) : (
+                    <p>No amenities listed.</p>
+                  )}
+                  <div className="card-actions ms-auto">
+                    <button
+                      onClick={handleSave}
+                      className={`heart-button ${saved ? "liked" : ""}`}
+                    >
+                      {saved ? (
+                        <AiFillHeart className="heart-filled" />
+                      ) : (
+                        <AiOutlineHeart className="heart-outline" />
+                      )}
+                    </button>
+                    <button
+                      onClick={handleShare}
+                      className="share-button"
+                      title="Share"
+                    >
+                      <AiOutlineShareAlt className="icon share action-icon" />
+                    </button>
+                  </div>
                 </div>
+
                 {currentUser &&
                   (type === "myListings" || type === "savedListings") && (
                     <div className="card-buttons mt-3">

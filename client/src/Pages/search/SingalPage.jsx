@@ -26,12 +26,12 @@ function SinglePage() {
   const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
-console.log(saved)
+  // console.log(saved)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [visitDetails, setVisitDetails] = useState({ name: "", email: "", date: "" });
   const [messageDetails, setMessageDetails] = useState({ message: "" });
-  
+
 
   const handleSave = async () => {
     if (!currentUser) {
