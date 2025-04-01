@@ -6,8 +6,13 @@ import MediumCard from "../../Components/MediumCard";
 import { NavLink } from "react-router-dom";
 import BlogCard from "../../Components/BlogCard";
 import RegisterToPost from "../../Components/RegisterToPost";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Rent() {
+  const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
+
+
   const settings = {
     dots: false,
     infinite: true,
@@ -17,7 +22,7 @@ export default function Rent() {
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
+    focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -57,7 +62,7 @@ focusOnSelect: true,
       },
     ],
   };
-  
+
   const settings2 = {
     dots: false,
     infinite: true,
@@ -67,7 +72,7 @@ focusOnSelect: true,
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
+    focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -107,130 +112,17 @@ focusOnSelect: true,
       },
     ],
   };
-  
 
- 
-
-  const RentData = [
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
-      title: "1 BHK Apartment",
-      description: "Fully Furnished",
-      location: "Amarpali Silicon City, Sector 76, Noida",
-      size: "750 sq.ft",
-      price: "₹8,000",
-
-      name: "Sonu Pandey",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "PRO",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/57e28fa977efaac7339a543873d6f682/v0/medium/1_rk_apartment-for-rent-sector_40_noida-Noida-hall.jpg",
-      title: "2 BHK Apartment",
-      description: "Semi Furnished",
-      location: "Palm Springs, Sector 54, Gurgaon",
-      size: "1,200 sq.ft",
-      price: "₹12,000",
-
-      name: "khushboo Pandey",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "PRO",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/34f4598ff0d4eaf24aeffcfd3ae742dd/v0/medium/1_bhk_apartment-for-rent-sector_40_noida-Noida-bedroom.jpg",
-      title: "Studio Apartment",
-      description: "Fully Furnished",
-      location: "DLF Cyber City, Sector 24, Gurgaon",
-      size: "500 sq.ft",
-      price: "₹10,000",
-
-      name: "khushi",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "PRO",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/e9eb718d5ee742a2c15e1f1ce80cddfd/v0/medium/1_rk_independent_house-for-rent-sector_135-Noida-bedroom.jpg",
-
-      title: "3 BHK Villa",
-      description: "Luxury Villa",
-      location: "Sushant Lok, Sector 43, Gurgaon",
-      size: "2,500 sq.ft",
-      price: "₹45,000",
-
-      name: "nothing",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "PRO",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/04933f0c62684fc71d951813d09e8874/v0/medium/1_rk_apartment-for-rent-sector_116-Noida-bedroom.jpg",
-      title: "2 BHK Flat",
-      description: "Newly Renovated",
-      location: "Noida Extension, Sector 16, Noida",
-      size: "1,000 sq.ft",
-      price: "₹15,000",
-
-      name: "Pandey",
-      address: ["sector-62", "sector-34", "noida", "delhi"],
-      experience: "5 Years",
-      properties: "89",
-      pro: "PRO",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/85865526aea61cfc32e724010063c497/v0/medium/1_rk_apartment-for-rent-sector_52_noida-Noida-bedroom.jpg",
-      title: "1 RK Apartment",
-      description: "Compact Studio",
-      location: "Galleria Market, Sector 28, Gurgaon",
-      size: "350 sq.ft",
-      price: "₹5,000",
-    },
-    {
-      image:
-        "https://housing-images.n7net.in/01c16c28/7cc8a608462db672fa66482dd086cf78/v0/medium/1_bhk_independent_house-for-rent-sector_49-Noida-bedroom.jpg",
-      title: "3 BHK Penthouse",
-      description: "Fully Furnished",
-      location: "DLF Phase 5, Sector 53, Gurgaon",
-      size: "2,200 sq.ft",
-      price: "₹60,000",
-    },
-    {
-      image: "https://via.placeholder.com/300x200",
-      title: "1 BHK Flat",
-      description: "Affordable Housing",
-      location: "Sector 70, Faridabad",
-      size: "600 sq.ft",
-      price: "₹7,000",
-    },
-    {
-      image: "https://via.placeholder.com/300x200",
-      title: "2 BHK Duplex",
-      description: "Spacious Layout",
-      location: "South City 1, Gurgaon",
-      size: "1,500 sq.ft",
-      price: "₹25,000",
-    },
-    {
-      image: "https://via.placeholder.com/300x200",
-      title: "4 BHK Villa",
-      description: "Ultra-Luxury Villa",
-      location: "Golf Course Road, Gurgaon",
-      size: "3,000 sq.ft",
-      price: "₹1,00,000",
-    },
-  ];
+  const recentlyAdded = listings?.map((listing) => ({
+    id: listing.id,
+    image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
+    title: capitalize(listing.propertyName) || "No Title",
+    company: listing.company || "by ESCON INFRA REALTORS",
+    description: capitalize(listing.propertyCondition) || "Row",
+    location: capitalize(listing.address) + ", " + capitalize(listing.city) + ", " + capitalize(listing.state) || "Unknown Location",
+    size: formatSize(listing.size) || "N/A",
+    price: formatPrice(listing.price) || "Price on Request",
+  })) || [];
 
   const expertDealersData = [
     {
@@ -434,19 +326,16 @@ focusOnSelect: true,
               </div>
               <div className="row">
                 <div className="col p-0">
-                  <PopularLocalitiesSlider settings={settings}>
-                    {RentData.map((rentData, index) => (
-                      <div
-                        key={index}
-                        className="" // Added padding for spacing
-                      >
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {recentlyAdded.map((recentlyAdded, index) => (
+                      <div key={index} className="" >
                         <BasicCard
-                          title={rentData.title}
-                          image={rentData.image}
-                          description={rentData.description}
-                          location={rentData.location}
-                          size={rentData.size}
-                          price={rentData.price}
+                          title={recentlyAdded.title}
+                          image={recentlyAdded.image}
+                          description={recentlyAdded.description}
+                          location={recentlyAdded.location}
+                          size={recentlyAdded.size}
+                          price={recentlyAdded.price}
                         />
                       </div>
                     ))}
@@ -455,33 +344,36 @@ focusOnSelect: true,
               </div>
             </section>
 
+            <section className="rentbottom">
+              <RegisterToPost />
+            </section>
+
             <section className="featuredCollections mt-5">
               <div className="row">
                 <div className="col">
                   <h2>
                     <span className="opacity-75 fs-3">Featured</span>{" "}
-                    Collections
+                    Propertys
                   </h2>
-                  <p className="m-0">Handpicked projects for you</p>
-                  <img
-                    className="imgg"
-                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                    alt="line"
-                  />
+                  <p className="m-0">Handpicked Propertys for you</p>
+                  <img className="imgg"
+                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg" alt="line" />
                 </div>
               </div>
+
               <div className="row">
-                <div className="col p-0  ">
-                  <PopularLocalitiesSlider settings={settings2}>
-                    {RentData.map((rentData, index) => (
-                      <div key={index} className="">
-                        <NavLink to={"/featuredCollection"}>
-                          <IntermedidateCard
-                            title={rentData.title}
-                            image={rentData.image}
-                            description={rentData.description}
-                          />
-                        </NavLink>
+                <div className="col p-0">
+                  <PopularLocalitiesSlider settings={settings}>
+                    {recentlyAdded.map((recentlyAdded, index) => (
+                      <div key={index} className="" >
+                        <BasicCard
+                          title={recentlyAdded.title}
+                          image={recentlyAdded.image}
+                          description={recentlyAdded.description}
+                          location={recentlyAdded.location}
+                          size={recentlyAdded.size}
+                          price={recentlyAdded.price}
+                        />
                       </div>
                     ))}
                   </PopularLocalitiesSlider>
@@ -591,10 +483,6 @@ focusOnSelect: true,
               </div>
             </section>
           </article>
-
-          <section className="rentbottom">
-            <RegisterToPost />
-          </section>
         </div>
       </div>
     </>
