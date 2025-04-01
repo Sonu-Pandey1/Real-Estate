@@ -23,7 +23,7 @@ function SinglePage() {
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
   // console.log(propertyData)
-  const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
+  const { currentUser, formatPrice,formatSize, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
   // console.log(saved)
@@ -209,7 +209,7 @@ function SinglePage() {
                         <strong>Listing Type:</strong> {capitalize(listingType) || "N/A"}
                       </div>
                       <div className="col-md-6 py-1">
-                        <strong>Size:</strong> {size || "N/A"} Sqft
+                        <strong>Size:</strong> {formatSize(size) || "N/A"}
                       </div>
                       <div className="col-md-6 py-1">
                         <strong>Rooms:</strong> {bedroom || "N/A"} Bedroom, {bathroom || "N/A"} Bathroom

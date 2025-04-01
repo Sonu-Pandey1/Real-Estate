@@ -144,20 +144,20 @@ function Profile() {
                 Email: <b>{currentUser.email}</b>
               </span>
               <div className="d-flex flex-column flex-sm-row justify-content-between gap-3 gap-sm-5">
-  <button
-    className="btn btn-outline-warning w-100 w-sm-25 mt-2 mt-sm-4"
-    onClick={handleLogout}
-  >
-    Logout
-  </button>
+                <button
+                  className="btn btn-outline-warning w-100 w-sm-25 mt-2 mt-sm-4"
+                  onClick={handleLogout}
+                >
+                  Logout
+                </button>
 
-  <button
-    className="btn btn-outline-danger w-100 w-sm-25 mt-0 mt-sm-4"
-    onClick={handleDelete}
-  >
-    Delete Account
-  </button>
-</div>
+                <button
+                  className="btn btn-outline-danger w-100 w-sm-25 mt-0 mt-sm-4"
+                  onClick={handleDelete}
+                >
+                  Delete Account
+                </button>
+              </div>
 
             </div>
             <div className="title">
@@ -172,21 +172,19 @@ function Profile() {
             {/* Buttons to switch between tabs */}
             <div className="list-tabs">
               <button
-                className={`btn ${
-                  activeTab === "myListings"
+                className={`btn ${activeTab === "myListings"
                     ? "btn-primary"
                     : "btn-outline-primary"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("myListings")}
               >
                 My Listings
               </button>
               <button
-                className={`btn  ms-2 ${
-                  activeTab === "savedListings"
+                className={`btn  ms-2 ${activeTab === "savedListings"
                     ? "btn-primary"
                     : "btn-outline-primary"
-                }`}
+                  }`}
                 onClick={() => setActiveTab("savedListings")}
               >
                 Saved Listings

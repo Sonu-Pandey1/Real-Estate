@@ -1,6 +1,9 @@
 .IntermedidateCardWrapper {
   width: 100%;
   .card {
+    .badge{
+      background-color: sandybrown;
+    }
     background-color: transparent;
     &:hover img {
       transform: scale(1.1);

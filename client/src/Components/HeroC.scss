@@ -1,9 +1,6 @@
 @import "../scss/variables";
 
-
-
 .hero-section {
-  
   font-family: Arial, sans-serif;
   background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
   background-size: cover;
@@ -15,6 +12,7 @@
   overflow: hidden;
   width: 100%;
   position: relative;
+
   &::before {
     content: "";
     position: absolute;
@@ -22,23 +20,19 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.1); // Adjust the opacity and color for the overlay effect
+    background: rgba(0, 0, 0, 0.1);
     z-index: 0;
   }
- 
+
   .title {
     padding-top: 195px;
     padding-bottom: 0px;
     width: 60%;
     text-align: center;
-    p{
+
+    p {
       color: rgb(27, 23, 23);
-      
     }
-    // background-image: linear-gradient(90deg, #ffe25f, #feb47b);
-    // -webkit-background-clip: text;
-    // background-clip: text;
-    // -webkit-text-fill-color: transparent;
     font-size: 2rem;
     font-weight: bold;
   }
@@ -67,9 +61,11 @@
 
   .tbasSearchForm {
     max-width: 800px;
+
     .searchIcon {
       .bi-search {
         top: 100px !important;
+
         .bi-search-icon {
           margin: 29px;
         }
@@ -95,7 +91,7 @@
   display: flex;
   justify-content: center;
   height: 100% !important;
-  margin-top: 77px;
+  margin-top: 142px;
   overflow: visible;
 
   .paraRounded {
@@ -104,18 +100,22 @@
     border-top-right-radius: 20px;
     border-top-left-radius: 20px;
     background-color: rgba(255, 255, 255, 0.16);
+
     .star1 {
       opacity: 0.7;
       width: 15px;
     }
+
     .star2 {
       opacity: 0.5;
       width: 10px;
     }
+
     .star3 {
       opacity: 0.5;
       width: 10px;
     }
+
     p {
       font-size: 14px;
       color: $lightwhite !important;
@@ -129,14 +129,15 @@
 }
 
 @media (max-width:1000px) {
-  .hero-section{
-    p{
-      span{
+  .hero-section {
+    p {
+      span {
         color: rgb(255, 255, 255);
         // font-weight: 600;
         text-shadow: 1.5px -1.5px 5px rgba(0, 0, 0, 0.9);
       }
     }
+
     &::before {
       content: "";
       position: absolute;
@@ -144,22 +145,22 @@
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.1) !important; 
+      background: rgba(0, 0, 0, 0.1) !important;
       z-index: 0;
     }
   }
-  
+
 }
 
 @media (max-width: 510px) {
-  .hero-section{
+  .hero-section {
     height: 400px;
-    
-    .pps{
+
+    .pps {
       display: none;
     }
+
     .title {
-      // background-color: rgb(0, 0, 0) !important;
       padding-top: 180px;
       padding-bottom: 0px;
       width: 60%;
@@ -171,68 +172,73 @@
       font-size: 1.7rem !important;
       font-weight: bold;
     }
+
     .downPara {
       margin-top: 3.1rem;
-  
+
       p {
         font-size: 12px !important;
       }
     }
-    .tbasSearchForm{
-      input{
+
+    .tbasSearchForm {
+      input {
         padding: 1px auto;
         height: 40px;
-        &::placeholder{
+
+        &::placeholder {
           font-size: 10px;
         }
 
       }
     }
+
     .tabsWrapper {
       .navlink {
         font-size: 13px !important;
         padding: 8px 10px !important;
-        // background-color: red !important;
       }
     }
   }
 }
+
 @media (max-width: 400px) {
- .hero-section{
+  .hero-section {
 
-  .title {
-    padding-top: 190px;
+    .title {
+      padding-top: 190px;
 
-    font-size: 1.4rem !important;
-    // background-color: red !important;
-  }
-  .downPara {
-    margin-top: 3rem;
-
-    p {
-      font-size: 11px !important;
+      font-size: 1.4rem !important;
     }
+
+    .downPara {
+      margin-top: 3rem;
+
+      p {
+        font-size: 11px !important;
+      }
+    }
+
   }
-  
- }
 }
 
-.hero-section{
+.hero-section {
   @media (max-width: 340px) {
-  .title {
-    padding-top: 190px !important;
-    
+    .title {
+      padding-top: 190px !important;
 
-    font-size: 1.3rem !important;
-  }
-  .downPara {
-    margin-top: 3.3rem;
 
-    p {
-      font-size: 11px !important;
+      font-size: 1.3rem !important;
+    }
+
+    .downPara {
+      margin-top: 3.3rem;
+
+      p {
+        font-size: 11px !important;
+      }
     }
   }
-}
 }
 
 
@@ -257,12 +263,11 @@
         width: 10rem;
 
         .form-select {
-          
+
           height: 45px;
           border: none;
           font-size: 0.9rem;
           padding: 0 1rem;
-          // background-color: #d41b1b;
           color: #495057;
           border-radius: 30px 0 0 30px;
           box-shadow: none;
@@ -300,7 +305,7 @@
         .btn {
           height: 45px;
           font-size: 0.9rem;
-          background-color: #00c853; 
+          background-color: #00c853;
           color: white;
           border: none;
           border-radius: 0 30px 30px 0;
@@ -316,53 +321,16 @@
 
 
 @media (max-width:575px) {
-  .search-button{
+  .search-button {
     width: auto !important;
-    img{
+
+    img {
       padding: 5px;
       background-color: white;
     }
   }
-  
+
 }
-
-// .tabsWrapper {
-//   .nav {
-//     position: relative;
-
-//     .navlink {
-//       position: relative; 
-//       display: inline-block; 
-//       transition: all 0.3s ease-in-out;
-
-//       &::before {
-//         content: ""; 
-//         position: absolute;
-//         z-index: -1;
-//         bottom: 0%; 
-//         left: 0%; 
-//         width: 0; 
-//         height: 3px; 
-//         background-color: rgb(199, 49, 49); 
-//         transform: translateY(-50%); 
-//         transition: width 4.3s ease-in-out;
-//       }
-
-      
-//       &.active::before {
-//         width: 100%; 
-//       }
-//     }
-
-//     .navlink:hover {
-//       color: rgba(18, 111, 233, 0.548);
-//     }
-
-//     .navlink.active {
-//       color: rgb(255, 255, 255); 
-//     }
-//   }
-// }
 
 .tabsWrapper {
   .nav {
@@ -370,25 +338,25 @@
 
     .navlink {
       position: relative;
-      display: inline-block; 
+      display: inline-block;
       transition: all 0.3s ease-in-out;
 
       &::before {
-        content: ""; 
+        content: "";
         position: absolute;
-        bottom: 0; 
+        bottom: 0;
         left: 50%;
-        width: 0; 
-        height: 3px; 
-        background-color: #413488; 
+        width: 0;
+        height: 3px;
+        background-color: #413488;
         transform: translateX(-50%);
         transition: width 0.6s ease-in-out;
       }
 
       &.active::before {
         width: 100%;
-        left: 50%; 
-        transform: translateX(-50%); 
+        left: 50%;
+        transform: translateX(-50%);
       }
 
       &:hover {
@@ -397,9 +365,8 @@
       }
 
       &.active {
-        color: rgb(255, 255, 255); 
+        color: rgb(255, 255, 255);
       }
     }
   }
 }
-

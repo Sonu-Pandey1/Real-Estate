@@ -24,6 +24,11 @@ export const AuthContextProvider = ({ children }) => {
     }
   };
 
+  const formatSize = (size) => {
+    if (!size || isNaN(size)) return "N/A";
+    return Number(Math.floor(size / 10) * 10).toLocaleString() + " Sqft";
+  };
+
   // const capitalize = (str) => {
   //   return str ? str.charAt(0).toUpperCase() + str.slice(1) : "N/A";
   // };
@@ -69,6 +74,7 @@ export const AuthContextProvider = ({ children }) => {
         updateUser,
         listings,
         formatPrice,
+        formatSize,
         capitalize,
       }}
     >

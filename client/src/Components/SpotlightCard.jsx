@@ -1,9 +1,8 @@
 import "./SpotlightCard.scss";
-import { LiaRupeeSignSolid } from "react-icons/lia";
 import { TbLocationCheck } from "react-icons/tb";
 import { NavLink } from "react-router-dom";
 
-export default function SpotlightCard({title,image,description,location,price}) {
+export default function SpotlightCard({ title, image, description, location, price, id }) {
   return (
     <>
       <div className="sliderWrapper d-flex row  pe-sm-1  pe-3">
@@ -17,8 +16,8 @@ export default function SpotlightCard({title,image,description,location,price}) 
               />
             </div>
             <div className="col-8 text-center pt-2">
-              <h6 className="m-0">{title}</h6>
-              <NavLink to="/">View Projects</NavLink>
+              <h4 className="m-0">{title}</h4>
+              <NavLink to={`/profile/${id}`}>View Projects</NavLink>
             </div>
           </div>
           <div className="row flex-column px-0 row-bottom px-4 py-3">
@@ -30,29 +29,26 @@ export default function SpotlightCard({title,image,description,location,price}) 
               </div>
             </div>
             <div className="col py-2 d-flex">
-              <LiaRupeeSignSolid className="fs-4 me-2" />
               <div>
                 <h5 className="m-0">{price}</h5>
                 <p>{description}</p>
               </div>
             </div>
             <div className="col py-1">
-              <button className="btn btn-outline-primary w-100 ">
-                Contact
-              </button>
+              <NavLink className=" text-decoration-none btn btn-outline-primary w-100" to={`/profile/${id}`}>Contact</NavLink>
             </div>
           </div>
         </div>
 
         <div className="col-lg-9 col-md-8 col-sm-12 pb-md-0 pb-2 pe-0 ">
-         <div className="imgw">
-         <img
-            // width={"10%"}
-            src={image}
-            alt="Ashiyana Villas"
-            className="rounded-4 p-0"
-          />
-         </div>
+          <div className="imgw">
+            <img
+              // width={"10%"}
+              src={image}
+              alt="Ashiyana Villas"
+              className="rounded-4 p-0"
+            />
+          </div>
         </div>
       </div>
     </>

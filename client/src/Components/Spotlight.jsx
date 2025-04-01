@@ -5,7 +5,7 @@ import { AuthContext } from "../Context/AuthContext";
 import { useContext } from "react";
 
 export default function Spotlight() {
-  const { listings } = useContext(AuthContext);
+  const { listings, formatPrice } = useContext(AuthContext);
   console.log(listings)
 
   const settings = {
@@ -60,11 +60,12 @@ export default function Spotlight() {
                 listings.map((listing, index) => (
                   <div key={index} className="">
                     <SpotlightCard
-                      title={listing.title}
+                      title={listing.propertyName}
                       image={listing.images[0]}
-                      description={listing.property}
-                      location={listing.address}
-                      price={listing.price}
+                      // description={listing.description}
+                      id={listing.id}
+                      location={listing.city + "," + listing.state}
+                      price={formatPrice(listing.price)}
                     />
                   </div>
                 ))
