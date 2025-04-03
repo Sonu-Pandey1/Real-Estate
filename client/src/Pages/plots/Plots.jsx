@@ -3,8 +3,13 @@ import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider"
 import "./Plots.scss"
 import MediumCard from "../../Components/MediumCard"
 import BlogCard from "../../Components/BlogCard";
+import PlotsCard from "../../Components/PlotsCard";
+import { useContext } from "react";
+import { AuthContext } from "../../Context/AuthContext";
 
 export default function Plots() {
+  const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
+
 
   const settings2 = {
     dots: false,
@@ -15,7 +20,7 @@ export default function Plots() {
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
+    focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -55,6 +60,17 @@ focusOnSelect: true,
       },
     ],
   };
+
+  const recentlyAdded = listings?.map((listing) => ({
+    id: listing.id,
+    image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
+    title: capitalize(listing.propertyName) || "No Title",
+    company: listing.company || "by ESCON INFRA REALTORS",
+    description: capitalize(listing.propertyCondition) || "Row",
+    location: capitalize(listing.address) + ", " + capitalize(listing.city) + ", " + capitalize(listing.state) || "Unknown Location",
+    size: formatSize(listing.size) || "N/A",
+    price: formatPrice(listing.price) || "Price on Request",
+  })) || [];
 
   const expertDealersData = [
     {
@@ -240,164 +256,197 @@ focusOnSelect: true,
   return (
     <div className="plotContainer">
 
+<section className="recentlyAdded container pt-4 mt-2">
+        <div className="row pb-4">
+          <div className="col">
+            <h2>
+              <span className="opacity-75 fs-3">Recently  </span> Added
+            </h2>
+            <p className="m-0">Based on preferences of users like you</p>
+            <img
+              className="imgg"
+              src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+              alt="line"
+            />
+          </div>
+        </div>
+        <div className="row">
+          <div className="col p-0">
+            <PopularLocalitiesSlider settings={settings2}>
+              {recentlyAdded.map((recentlyAdded, index) => (
+                <div key={index} className="" >
+                  <PlotsCard
+                    title={recentlyAdded.title}
+                    image={recentlyAdded.image}
+                    location={recentlyAdded.location}
+                    size={recentlyAdded.size}
+                    price={recentlyAdded.price}
+                  />
+                </div>
+              ))}
+            </PopularLocalitiesSlider>
+          </div>
+        </div>
+      </section>
+
       <section>
-          <div className="container pt-5">
-            <div className="row">
-              <div className="col pgsOptions overflow-hidden">
-                <h2 className=" fw-normal">
-                  Plot <span className=" fw-medium">Collections</span>
-                </h2>
-                <p className=" text-muted">Exclusive showcase of categorized plots</p>
-                <div className="row g-3 py-4 text-light">
-                  {/* For Guys */}
-                  <div className="col-6 col-md-3">
-                    <div className="imgWrapper text-center">
-                      <img
-                        src="https://c.housingcdn.com/demand/s/client/common/assets/cornerPlots.24f32642.jpg"
-                        alt=" Corner Plots"
-                        className="img-fluid rounded w-100"
-                      />
-                    </div>
+        <div className="container pt-5">
+          <div className="row">
+            <div className="col pgsOptions overflow-hidden">
+              <h2 className=" fw-normal">
+                Plot <span className=" fw-medium">Collections</span>
+              </h2>
+              <p className=" text-muted">Exclusive showcase of categorized plots</p>
+              <div className="row g-3 py-4 text-light">
+                {/* For Guys */}
+                <div className="col-6 col-md-3">
+                  <div className="imgWrapper text-center">
+                    <img
+                      src="https://c.housingcdn.com/demand/s/client/common/assets/cornerPlots.24f32642.jpg"
+                      alt=" Corner Plots"
+                      className="img-fluid rounded w-100"
+                    />
                   </div>
+                </div>
 
-                  {/* For Girls */}
-                  <div className="col-6 col-md-3">
-                    <div className="imgWrapper text-center">
-                      <img
-                        src="https://c.housingcdn.com/demand/s/client/common/assets/withBoundaryWalls.2a5d1a61.jpg"
-                        alt="Boundary Wall Plots"
-                        className="img-fluid rounded w-100"
-                      />
-                    </div>
+                {/* For Girls */}
+                <div className="col-6 col-md-3">
+                  <div className="imgWrapper text-center">
+                    <img
+                      src="https://c.housingcdn.com/demand/s/client/common/assets/withBoundaryWalls.2a5d1a61.jpg"
+                      alt="Boundary Wall Plots"
+                      className="img-fluid rounded w-100"
+                    />
                   </div>
+                </div>
 
-                  {/* Food Available */}
-                  <div className="col-6 col-md-3">
-                    <div className="imgWrapper text-center">
-                      <img
-                        src="https://c.housingcdn.com/demand/s/client/common/assets/below30Lacs.e683ac99.jpg"
-                        alt="Below 30 Lakhs Plots"
-                        className="img-fluid rounded w-100"
-                      />
-                    </div>
+                {/* Food Available */}
+                <div className="col-6 col-md-3">
+                  <div className="imgWrapper text-center">
+                    <img
+                      src="https://c.housingcdn.com/demand/s/client/common/assets/below30Lacs.e683ac99.jpg"
+                      alt="Below 30 Lakhs Plots"
+                      className="img-fluid rounded w-100"
+                    />
                   </div>
+                </div>
 
-                  {/* Private Room */}
-                  <div className="col-6 col-md-3">
-                    <div className="imgWrapper text-center ">
-                      <img
-                        src="https://c.housingcdn.com/demand/s/client/common/assets/eastFacing.68e4fcb9.jpg"
-                        alt="East Facing Plots"
-                        className="img-fluid rounded w-100"
-                      />
-                    </div>
+                {/* Private Room */}
+                <div className="col-6 col-md-3">
+                  <div className="imgWrapper text-center ">
+                    <img
+                      src="https://c.housingcdn.com/demand/s/client/common/assets/eastFacing.68e4fcb9.jpg"
+                      alt="East Facing Plots"
+                      className="img-fluid rounded w-100"
+                    />
                   </div>
                 </div>
               </div>
             </div>
           </div>
+        </div>
+      </section>
+
+      <section className="recommendedSellers  my-4 ">
+        <div className="container">
+          <div className="row pb-4">
+            <div className="col p-0 mx-2">
+              <h2>
+                <span className="opacity-75 fs-3">Recommended</span>{" "}
+                Sellers
+              </h2>
+              <p className="m-0 text-muted">
+                Sellers with complete knowledge about locality and
+                verified listings
+              </p>
+              <img
+                className="imgg"
+                src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                alt="line"
+              />
+            </div>
+          </div>
+          <div className="row">
+            <div className="col p-0 ">
+              {/* <div className="IntermedidateCardContainer"> */}
+
+              <PopularLocalitiesSlider settings={settings2}>
+                {expertDealersProData.map((rentData, index) => (
+                  <div key={index} className="mediumCardWrapper">
+                    <NavLink className={" text-decoration-none text-dark"} to={"/agents"}>
+                      <MediumCard
+                        image={rentData.image}
+                        name={rentData.name}
+                        address={[rentData.address]}
+                        experience={rentData.experience}
+                        properties={rentData.properties}
+                        pro={rentData.pro}
+                      />
+                    </NavLink>
+                  </div>
+                ))}
+              </PopularLocalitiesSlider>
+
+              <PopularLocalitiesSlider settings={settings2}>
+                {expertDealersData.map((rentData, index) => (
+                  <div key={index} className="">
+                    <NavLink className={"text-decoration-none text-dark"} to={"/agents"}>
+                      <MediumCard
+                        image={rentData.image}
+                        name={rentData.name}
+                        address={[rentData.address]}
+                        experience={rentData.experience}
+                        properties={rentData.properties}
+                        pro={rentData.pro}
+                      />
+                    </NavLink>
+                  </div>
+                ))}
+              </PopularLocalitiesSlider>
+              {/* {/* </div> */}
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <article>
+        <section className="NewsArticles mt-3 mb-4">
+          <div className="container">
+            <div className="row">
+              <div className="col pb-4">
+                <h2>
+                  <span className="opacity-75 fs-3">News &</span> Articles
+                </h2>
+                <p className="m-0">Know what`s happening in Real Estate.</p>
+                <img
+                  className="imgg"
+                  src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                  alt="line"
+                />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col mb-3">
+                <PopularLocalitiesSlider settings={settings2}>
+                  {blogData.map((blogData, index) => (
+                    <div key={index} className="">
+                      <NavLink className={"text-decoration-none text-dark"} to={"/news-articles"}>
+                        <BlogCard
+                          image={blogData.image}
+                          title={blogData.title}
+                          description={[blogData.description]}
+                          writerName={blogData.writerName}
+                          publishTime={blogData.publishTime}
+                        />
+                      </NavLink>
+                    </div>
+                  ))}
+                </PopularLocalitiesSlider>
+              </div>
+            </div>
+          </div>
         </section>
-
-        <section className="recommendedSellers  my-4 ">
-              <div className="container">
-                <div className="row pb-4">
-                  <div className="col p-0 mx-2">
-                    <h2>
-                      <span className="opacity-75 fs-3">Recommended</span>{" "}
-                      Sellers
-                    </h2>
-                    <p className="m-0 text-muted">
-                      Sellers with complete knowledge about locality and
-                      verified listings
-                    </p>
-                    <img
-                      className="imgg"
-                      src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                      alt="line"
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col p-0 ">
-                    {/* <div className="IntermedidateCardContainer"> */}
-
-                    <PopularLocalitiesSlider settings={settings2}>
-                      {expertDealersProData.map((rentData, index) => (
-                        <div key={index} className="mediumCardWrapper">
-                          <NavLink className={" text-decoration-none text-dark"} to={"/agents"}>
-                            <MediumCard
-                              image={rentData.image}
-                              name={rentData.name}
-                              address={[rentData.address]}
-                              experience={rentData.experience}
-                              properties={rentData.properties}
-                              pro={rentData.pro}
-                            />
-                          </NavLink>
-                        </div>
-                      ))}
-                    </PopularLocalitiesSlider>
-
-                    <PopularLocalitiesSlider settings={settings2}>
-                      {expertDealersData.map((rentData, index) => (
-                        <div key={index} className="">
-                          <NavLink className={"text-decoration-none text-dark"} to={"/agents"}>
-                            <MediumCard
-                              image={rentData.image}
-                              name={rentData.name}
-                              address={[rentData.address]}
-                              experience={rentData.experience}
-                              properties={rentData.properties}
-                              pro={rentData.pro}
-                            />
-                          </NavLink>
-                        </div>
-                      ))}
-                    </PopularLocalitiesSlider>
-                    {/* {/* </div> */}
-                  </div>
-                </div>
-              </div>
-            </section>
-
-            <article>
-            <section className="NewsArticles mt-3 mb-4">
-              <div className="container">
-                <div className="row">
-                  <div className="col pb-4">
-                    <h2>
-                      <span className="opacity-75 fs-3">News &</span> Articles
-                    </h2>
-                    <p className="m-0">Know what`s happening in Real Estate.</p>
-                    <img
-                      className="imgg"
-                      src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                      alt="line"
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col mb-3">
-                    <PopularLocalitiesSlider settings={settings2}>
-                      {blogData.map((blogData, index) => (
-                        <div key={index} className="">
-                          <NavLink className={"text-decoration-none text-dark"} to={"/news-articles"}>
-                            <BlogCard
-                              image={blogData.image}
-                              title={blogData.title}
-                              description={[blogData.description]}
-                              writerName={blogData.writerName}
-                              publishTime={blogData.publishTime}
-                            />
-                          </NavLink>
-                        </div>
-                      ))}
-                    </PopularLocalitiesSlider>
-                  </div>
-                </div>
-              </div>
-            </section>
-          </article>
+      </article>
 
     </div>
   )

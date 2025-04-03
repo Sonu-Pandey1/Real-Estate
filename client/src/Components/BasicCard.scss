@@ -48,3 +48,16 @@
     }
   }
 }
+
+.img-wrapper {
+  width: 100%;
+  height: 160px; /* Set a fixed height */
+  overflow: hidden;
+}
+
+.img-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures images do not overflow */
+  border-radius: 8px; /* Optional: adds rounded corners */
+}

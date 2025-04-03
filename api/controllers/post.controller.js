@@ -2,16 +2,116 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 
-export const getListings = async (req, res) => {
+// export const getListings = async (req, res) => {
+//   try {
+//     // Pagination parameters
+//     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+//     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+//     // Filters
+//     const listingType =
+//       req.query.listingType === "all" || !req.query.listingType
+//         ? ["sell", "rent/lease"]
+//         : [req.query.listingType];
+
+//     const propertyType = req.query.propertyType || undefined;
+//     const buildingType = req.query.buildingType || undefined;
+//     const city = req.query.city || undefined;
+//     const minPrice = Number(req.query.minPrice) || 0;
+//     const maxPrice = Number(req.query.maxPrice) || 10000000;
+//     const searchTerm = req.query.searchTerm?.trim() || "";
+
+//     // Sorting options
+//     let sortObj = { createdAt: "desc" };
+
+//     if (req.query.sort === "oldest") {
+//       sortObj = { createdAt: "asc" };
+//     } else if (req.query.sort === "popular") {
+//       sortObj = { views: "desc" };
+//     }
+
+//     // Build the WHERE clause for Prisma query
+//     const whereClause = {
+//       AND: [
+//         searchTerm
+//           ? {
+//               OR: [
+//                 { propertyName: { contains: searchTerm, mode: "insensitive" } },
+//                 { state: { contains: searchTerm, mode: "insensitive" } },
+//                 { city: { contains: searchTerm, mode: "insensitive" } },
+//                 { address: { contains: searchTerm, mode: "insensitive" } },
+//               ],
+//             }
+//           : null,
+
+//         // { listingType: { in: listingType } },
+
+//         // propertyType ? { propertyType } : null,
+
+//         // buildingType ? { buildingType } : null,
+
+//         // city ? { city } : null,
+
+//         // { price: { gte: minPrice, lte: maxPrice } },
+//         //todo ---- need to resolve this issue issues is while appling filters this is not working !
+
+//         req.query.sort === "trending"
+//           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+//           : null,
+//       ].filter(Boolean),
+//     };
+
+//     console.log("Query:", JSON.stringify(whereClause, null, 2)); // Debugging
+
+//     // Prisma query to fetch listings with pagination and sorting
+//     const listings = await prisma.post.findMany({
+//       where: whereClause,
+//       orderBy: sortObj,
+//       take: limit,
+//       skip: startIndex,
+//     });
+
+//     return res.status(200).json(listings);
+//   } catch (error) {
+//     console.error("Error fetching listings:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
+
+
+// Fetch All Listings Without Filters (For Testing)
+export const getAllListings = async (req, res) => {
+  // const { category } = req.query;
+  // console.log(req.query)
+  const category = "rent"
   try {
-    // Pagination parameters
+  // console.log(req.query +"refgrngnerngngerjngbjngbv")
+
+    // const listings = await prisma.post.findMany();
+    const listings = await prisma.post.findMany({
+      where: { listingType: category },
+    });
+    console.log(listings)
+    return res.status(200).json(listings);
+  } catch (error) {
+    console.error("Error fetching all listings:", error);
+    return res.status(500).json({ message: "Internal server error" });
+  }
+};
+
+export const getListings = async (req, res) => {
+  console.log(req.body)
+  console.log(req.query)
+  try {
+    // ✅ Pagination parameters
     const limit = Math.max(1, parseInt(req.query.limit) || 9);
     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
 
-    // Filters
+    // ✅ Filters
     const listingType =
       req.query.listingType === "all" || !req.query.listingType
-        ? ["sell", "rent/lease"]
+        ? ["sell", "rent", "plots"]
         : [req.query.listingType];
 
     const propertyType = req.query.propertyType || undefined;
@@ -21,8 +121,8 @@ export const getListings = async (req, res) => {
     const maxPrice = Number(req.query.maxPrice) || 10000000;
     const searchTerm = req.query.searchTerm?.trim() || "";
 
-    // Sorting options
-    let sortObj = { createdAt: "desc" };
+    // ✅ Sorting options
+    let sortObj = { createdAt: "desc" }; // Default: Newest First
 
     if (req.query.sort === "oldest") {
       sortObj = { createdAt: "asc" };
@@ -30,7 +130,7 @@ export const getListings = async (req, res) => {
       sortObj = { views: "desc" };
     }
 
-    // Build the WHERE clause for Prisma query
+    // ✅ Prisma WHERE clause
     const whereClause = {
       AND: [
         searchTerm
@@ -44,26 +144,25 @@ export const getListings = async (req, res) => {
             }
           : null,
 
-        // { listingType: { in: listingType } },
+        { listingType: { in: listingType } }, // ✅ Filter by listingType
 
-        // propertyType ? { propertyType } : null,
+        propertyType ? { propertyType } : null, // ✅ Filter by propertyType
 
-        // buildingType ? { buildingType } : null,
+        buildingType ? { buildingType } : null, // ✅ Filter by buildingType
 
-        // city ? { city } : null,
+        city ? { city } : null, // ✅ Filter by city
 
-        // { price: { gte: minPrice, lte: maxPrice } },
-        //todo ---- need to resolve this issue issues is while appling filters this is not working !
+        { price: { gte: minPrice, lte: maxPrice } }, // ✅ Price range filter
 
         req.query.sort === "trending"
-          ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+          ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } } // ✅ Trending (last 7 days)
           : null,
-      ].filter(Boolean),
+      ].filter(Boolean), // Removes null values
     };
 
-    console.log("Query:", JSON.stringify(whereClause, null, 2)); // Debugging
+    // console.log("Query:", JSON.stringify(whereClause, null, 2)); // ✅ Debugging
 
-    // Prisma query to fetch listings with pagination and sorting
+    // ✅ Prisma query to fetch listings
     const listings = await prisma.post.findMany({
       where: whereClause,
       orderBy: sortObj,
@@ -77,18 +176,6 @@ export const getListings = async (req, res) => {
     return res.status(500).json({ message: "Internal server error" });
   }
 };
-
-// Fetch All Listings Without Filters (For Testing)
-export const getAllListings = async (req, res) => {
-  try {
-    const listings = await prisma.post.findMany();
-    return res.status(200).json(listings);
-  } catch (error) {
-    console.error("Error fetching all listings:", error);
-    return res.status(500).json({ message: "Internal server error" });
-  }
-};
-
 
 export const Deletelisting = async (req, res) => {
   try {

@@ -4,9 +4,27 @@ import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import "./Commercial.scss";
 import MediumCard from "../../Components/MediumCard";
 import BlogCard from "../../Components/BlogCard";
+import { AuthContext } from "../../Context/AuthContext";
+import { useContext } from "react";
 
 
 export default function Commercial() {
+
+  const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
+
+  const recentlyAddedPropertiesForSale = listings?.map((listing) => ({
+    id: listing.id,
+    image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
+    title: capitalize(listing.propertyName) || "No Title",
+    company: listing.company,
+    description: capitalize(listing.propertyCondition) || "Row",
+    location: capitalize(listing.address) + ", " + capitalize(listing.city) + ", " + capitalize(listing.state) || "Unknown Location",
+    size: formatSize(listing.size) || "N/A",
+    price: formatPrice(listing.price) || "Price on Request",
+    owner: "by Sonu Pandey",
+  })) || [];
+
+
   var settings = {
     dots: false,
     infinite: true,
@@ -16,8 +34,8 @@ export default function Commercial() {
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
-   responsive: [
+    focusOnSelect: true,
+    responsive: [
       {
         breakpoint: 1200,
         settings: {
@@ -66,8 +84,8 @@ focusOnSelect: true,
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
-rtl: true,
+    focusOnSelect: true,
+    rtl: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -165,71 +183,7 @@ rtl: true,
     },
   ];
 
-  const CommercialPropertyData = [
-    {
-      image:
-        "https://housing.com/news/wp-content/uploads/2024/07/Top-areas-in-Noida-Extension-for-investment-f.jpg",
-      title: "Shop",
-      owner: "by Sonu Pandey",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://housing.com/news/wp-content/uploads/2018/04/Buying-in-a-project-on-a-leasehold-plot-f.jpg",
-      title: "Shop",
-      owner: "by Sonu",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://assets-news.housing.com/news/wp-content/uploads/2020/02/29105827/Jewar-Airport-No-significant-gains-for-the-property-market-FB-1200x700-compressed.jpg",
-      title: "Shop",
-      owner: "by Khushboo",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://housing.com/news/wp-content/uploads/2024/05/Noida-metro-aqua-line-extension-F.jpg",
-      title: "Shop",
-      owner: "by rahul sen",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://assets-news.housing.com/news/wp-content/uploads/2020/07/22174727/Everything-home-buyers-need-to-know-about-the-repo-rate-and-how-it-affects-them-FB-1200x700-compressed.jpg",
-      title: "Shop",
-      owner: "by Sonu Pandey",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://housing.com/news/wp-content/uploads/2024/02/Mahindra-Lifespaces-launches-plotted-development-project-in-Chennai-f.jpg",
-      title: "Shop",
-      owner: "by Sonu Pandey",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-    {
-      image:
-        "https://housing.com/news/wp-content/uploads/2024/05/Godrej-Properties-achieves-over-Rs-2000-cr-through-launch-of-Godrej-Jardinia-in-Noida-f.jpg",
-      title: "Shop",
-      owner: "by Sonu Pandey",
-      area: "220 sq.ft / 4.8 p.a.",
-      address: "Phase 2, Noida",
-      price: "2.0 Cr",
-    },
-  ];
+
 
   const blogData = [
     {
@@ -302,6 +256,7 @@ rtl: true,
     <>
       <div className="commercialPropertyContainer">
         <main className="main">
+
           <section>
             <div className="container">
               <div className="row">
@@ -311,15 +266,16 @@ rtl: true,
                     <span className=" fw-medium">for Sale</span>
                   </p>
                   <PopularLocalitiesSlider settings={settings}>
-                    {CommercialPropertyData.map(
+                    {recentlyAddedPropertiesForSale.map(
                       (CommercialPropertyData, index) => (
                         <div key={index} className="">
                           <BasicCard
                             title={CommercialPropertyData.title}
                             image={CommercialPropertyData.image}
                             owner={CommercialPropertyData.owner}
-                            address={CommercialPropertyData.address}
-                            area={CommercialPropertyData.area}
+                            company={CommercialPropertyData.company}
+                            address={CommercialPropertyData.location}
+                            area={CommercialPropertyData.size}
                             price={CommercialPropertyData.price}
                           />
                         </div>
@@ -329,9 +285,9 @@ rtl: true,
                 </div>
               </div>
             </div>
-            
+
           </section>
-          
+
           <section>
             <div className="container">
               <div className="row">
@@ -340,16 +296,17 @@ rtl: true,
                     Recently Added Properties{" "}
                     <span className=" fw-medium">for Rent</span>
                   </p>
-                  <PopularLocalitiesSlider settings={settings}>
-                    {CommercialPropertyData.map(
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {recentlyAddedPropertiesForSale.map(
                       (CommercialPropertyData, index) => (
                         <div key={index} className="">
                           <BasicCard
                             title={CommercialPropertyData.title}
                             image={CommercialPropertyData.image}
                             owner={CommercialPropertyData.owner}
-                            address={CommercialPropertyData.address}
-                            area={CommercialPropertyData.area}
+                            company={CommercialPropertyData.company}
+                            address={CommercialPropertyData.location}
+                            area={CommercialPropertyData.size}
                             price={CommercialPropertyData.price}
                           />
                         </div>
