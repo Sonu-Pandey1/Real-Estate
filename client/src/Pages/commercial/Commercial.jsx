@@ -270,6 +270,7 @@ export default function Commercial() {
                       (CommercialPropertyData, index) => (
                         <div key={index} className="">
                           <BasicCard
+                            id={CommercialPropertyData.id}
                             title={CommercialPropertyData.title}
                             image={CommercialPropertyData.image}
                             owner={CommercialPropertyData.owner}
@@ -301,6 +302,7 @@ export default function Commercial() {
                       (CommercialPropertyData, index) => (
                         <div key={index} className="">
                           <BasicCard
+                            id={CommercialPropertyData.id}
                             title={CommercialPropertyData.title}
                             image={CommercialPropertyData.image}
                             owner={CommercialPropertyData.owner}

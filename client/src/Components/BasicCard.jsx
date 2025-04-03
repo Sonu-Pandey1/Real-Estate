@@ -106,13 +106,16 @@ export default function BasicCard({
   address,
   company,
   id
+  
 }) {
+  console.log(id,title)
   return (
+    
     <>
       {owner ? (
         <div className="basicCardForCommercial m-2">
           <NavLink
-            to="/commercialPropertys"
+            to={`/search/${id}`}
             className="card border-1 w-100 text-decoration-none flex-row"
           >
             <div className="row g-0">

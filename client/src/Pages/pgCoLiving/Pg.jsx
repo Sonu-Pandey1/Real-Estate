@@ -2,8 +2,25 @@ import { NavLink } from "react-router-dom";
 import BlogCard from "../../Components/BlogCard";
 import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
 import "./Pg.scss";
+import BasicCard from "../../Components/BasicCard";
+import { AuthContext } from "../../Context/AuthContext";
+import { useContext } from "react";
 
 export default function Pg() {
+
+  const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext);
+
+  const recentlyAddedPropertiesForPg = listings?.map((listing) => ({
+    id: listing.id,
+    image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
+    title: capitalize(listing.propertyName) || "No Title",
+    company: listing.company,
+    description: capitalize(listing.propertyCondition) || "Row",
+    location: capitalize(listing.address) + ", " + capitalize(listing.city) + ", " + capitalize(listing.state) || "Unknown Location",
+    size: formatSize(listing.size) || "N/A",
+    price: formatPrice(listing.price) || "Price on Request",
+    owner: "by Sonu Pandey",
+  })) || [];
 
   const settings2 = {
     dots: false,
@@ -14,7 +31,7 @@ export default function Pg() {
     slidesToScroll: 1,
     initialSlide: 0,
     swipeToSlide: true,
-focusOnSelect: true,
+    focusOnSelect: true,
     responsive: [
       {
         breakpoint: 1200,
@@ -54,7 +71,7 @@ focusOnSelect: true,
       },
     ],
   };
-  
+
   const blogData = [
     {
       image:
@@ -121,6 +138,7 @@ focusOnSelect: true,
       publishTime: "Aug 2024",
     },
   ];
+
   return (
     <>
       <div className="pgContainer">
@@ -177,7 +195,7 @@ focusOnSelect: true,
                 <h2 className=" fw-normal">
                   Benefits of our <span className=" fw-medium">PG/Co-Living</span>
                 </h2>
-                
+
                 <div className=" imagesWrapper d-flex justify-content-between flex-wrap flex-sm-nowrap text-center pt-5">
                   <div className=" text-center mx-auto">
                     <img
@@ -250,6 +268,38 @@ focusOnSelect: true,
         <section>
           <div className="container">
             <div className="row">
+              <div className="col recentlyAddedForSale mt-5 py-3">
+                <p className=" fs-2">
+                  Recently Added Properties{" "}
+                  <span className=" fw-medium">for Pg-Coliving</span>
+                </p>
+                <PopularLocalitiesSlider settings={settings2}>
+                  {recentlyAddedPropertiesForPg.map(
+                    (CommercialPropertyData, index) => (
+                      <div key={index} className="">
+                        <BasicCard
+                          id={CommercialPropertyData.id}
+                          title={CommercialPropertyData.title}
+                          image={CommercialPropertyData.image}
+                          owner={CommercialPropertyData.owner}
+                          company={CommercialPropertyData.company}
+                          address={CommercialPropertyData.location}
+                          area={CommercialPropertyData.size}
+                          price={CommercialPropertyData.price}
+                        />
+                      </div>
+                    )
+                  )}
+                </PopularLocalitiesSlider>
+              </div>
+            </div>
+          </div>
+
+        </section>
+
+        <section>
+          <div className="container">
+            <div className="row">
               <div className="col pgsOptions overflow-hidden">
                 <h2 className=" fw-normal">
                   Our handpicked <span className=" fw-medium">Collections</span>
@@ -317,43 +367,43 @@ focusOnSelect: true,
         </section>
 
         <article>
-            <section className="NewsArticles mt-3 mb-4">
-              <div className="container">
-                <div className="row">
-                  <div className="col pb-4">
-                    <h2>
-                      <span className="opacity-75 fs-3">News &</span> Articles
-                    </h2>
-                    <p className="m-0">Know what`s happening in Real Estate.</p>
-                    <img
-                      className="imgg"
-                      src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
-                      alt="line"
-                    />
-                  </div>
-                </div>
-                <div className="row">
-                  <div className="col mb-3">
-                    <PopularLocalitiesSlider settings={settings2}>
-                      {blogData.map((blogData, index) => (
-                        <div key={index} className="">
-                          <NavLink className={"text-decoration-none text-dark"} to={"/news-articles"}>
-                            <BlogCard
-                              image={blogData.image}
-                              title={blogData.title}
-                              description={[blogData.description]}
-                              writerName={blogData.writerName}
-                              publishTime={blogData.publishTime}
-                            />
-                          </NavLink>
-                        </div>
-                      ))}
-                    </PopularLocalitiesSlider>
-                  </div>
+          <section className="NewsArticles mt-3 mb-4">
+            <div className="container">
+              <div className="row">
+                <div className="col pb-4">
+                  <h2>
+                    <span className="opacity-75 fs-3">News &</span> Articles
+                  </h2>
+                  <p className="m-0">Know what`s happening in Real Estate.</p>
+                  <img
+                    className="imgg"
+                    src="https://masaischool.com/images/new-homepage/yellow-vector.svg"
+                    alt="line"
+                  />
                 </div>
               </div>
-            </section>
-          </article>
+              <div className="row">
+                <div className="col mb-3">
+                  <PopularLocalitiesSlider settings={settings2}>
+                    {blogData.map((blogData, index) => (
+                      <div key={index} className="">
+                        <NavLink className={"text-decoration-none text-dark"} to={"/news-articles"}>
+                          <BlogCard
+                            image={blogData.image}
+                            title={blogData.title}
+                            description={[blogData.description]}
+                            writerName={blogData.writerName}
+                            publishTime={blogData.publishTime}
+                          />
+                        </NavLink>
+                      </div>
+                    ))}
+                  </PopularLocalitiesSlider>
+                </div>
+              </div>
+            </div>
+          </section>
+        </article>
       </div>
     </>
   );
