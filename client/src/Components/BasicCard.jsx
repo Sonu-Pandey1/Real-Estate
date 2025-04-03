@@ -108,7 +108,7 @@ export default function BasicCard({
   id
   
 }) {
-  console.log(id,title)
+  // console.log(id,title)
   return (
     
     <>

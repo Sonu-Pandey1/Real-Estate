@@ -86,7 +86,6 @@ function EditListing() {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`
         );
         const post = response.data;
-        // console.log(post)
         setFormData({
           propertyName: post.propertyName || "",
           price: post.price || "",
@@ -242,6 +241,9 @@ function EditListing() {
                     <option value="">Select</option>
                     <option value="sell">Sell</option>
                     <option value="rent">Rent/Lease</option>
+                    <option value="commercial">Commercial</option>
+                    <option value="pg">Pg / Co-living</option>
+                    <option value="plots">Plots</option>
                   </select>
                   {errors.listingType && touched.listingType && (
                     <p className="error">{errors.listingType}</p>

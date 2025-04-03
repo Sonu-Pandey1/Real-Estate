@@ -276,6 +276,7 @@ export default function Plots() {
               {recentlyAdded.map((recentlyAdded, index) => (
                 <div key={index} className="" >
                   <PlotsCard
+                    id={recentlyAdded.id}
                     title={recentlyAdded.title}
                     image={recentlyAdded.image}
                     location={recentlyAdded.location}

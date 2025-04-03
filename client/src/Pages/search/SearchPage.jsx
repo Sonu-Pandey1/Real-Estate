@@ -1,103 +1,4 @@
-// import { NavLink, useLocation } from "react-router-dom";
-// import "./SearchPage.scss";
-// import Filter from "../../Components/Filter.jsx";
-// import Map from "./Map.jsx";
-// import ListingCard from "../../Components/ListingCard.jsx";
-// import { useEffect, useState } from "react";
 
-// export default function SearchPage() {
-//   const { search } = useLocation();
-//   const URL = search.split("?")[1];
-//   console.log(URL);
-//   const [propertyData, setPropertyData] = useState();
-//   const [error, setError] = useState(null);
-//   const [loading, setLoading] = useState(true);
-
-//   console.log(import.meta.env.VITE_BACKEND_BASEURL);
-//   useEffect(() => {
-//     const fetchData = async () => {
-//       try {
-//         const response = await fetch(
-//           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts?` + URL
-//         );
-//         const res = await response.json();
-//         setPropertyData(res);
-//         // console.log(propertyData)
-//         if (!response.ok) {
-//           throw new Error("Failed to fetch property data.");
-//         }
-//       } catch (err) {
-//         setError(err.message);
-//       } finally {
-//         setLoading(false);
-//       }
-//     };
-
-//     fetchData();
-//   }, [search]);
-
-//   if (loading) {
-//     return (
-//       <div className="loading-container">
-//         <div className="loader">
-//           <div className="spinner"></div>
-//           <p>Loading...</p>
-//         </div>
-//       </div>
-//     );
-//   }
-
-//   if (error) {
-//     return (
-//       <div className="error-message mt-5 pt-5 text-danger text-center fs-2 vh-100">
-//         {error}
-//       </div>
-//     );
-//   }
-
-//   if (!propertyData) {
-//     return <div className="error-message mt-5 pt-5">Property not found!</div>;
-//   }
-
-//   return (
-//     <>
-//       <div className="searchPageContainer">
-//         <div className="container-fluid">
-//           <div className="filterHeader pt-2">
-//             {/* <h1>
-//               Search Results for <b>{propertyData.city}</b>
-//             </h1> */}
-//           </div>
-//           <div className="sticky-filter p-0 pt-1">
-//             <div>
-//               <Filter />
-//             </div>
-//           </div>
-//           <div className="row">
-//             <div className="col-12 col-md-8 ">
-//               <div className="listContainer h-100 ">
-//                 {propertyData.map((item) => (
-//                   <NavLink
-//                     className={" text-decoration-none"}
-//                     to={`/search/${item.id}`}
-//                     key={item.id}
-//                   >
-//                     <ListingCard item={item} />
-//                   </NavLink>
-//                 ))}
-//               </div>
-//             </div>
-//             <div className="col-12 col-md-4">
-//               <div className="mapContainer mt-3 bg-secondary-subtle  pt-sm-0">
-//                 <Map items={propertyData} />
-//               </div>
-//             </div>
-//           </div>
-//         </div>
-//       </div>
-//     </>
-//   );
-// }
 
 import { NavLink, useLocation } from "react-router-dom";
 import "./SearchPage.scss";
@@ -108,7 +9,7 @@ import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const { search } = useLocation();
-  const queryParams = search.split("?")[1]; // Extract query params
+  const queryParams = search.split("?")[1]; 
   //  console.log(queryParams);
   const [propertyData, setPropertyData] = useState([]);
   // console.log(propertyData)

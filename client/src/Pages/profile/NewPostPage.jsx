@@ -50,7 +50,6 @@ function NewPostPage() {
   const navigate = useNavigate();
   const [error, setError] = useState("");
   const [customAmenity, setCustomAmenity] = useState("");
-  // console.log(images)
 
   const {
     values,
@@ -92,14 +91,11 @@ function NewPostPage() {
     validationSchema: addListingSchema,
     onSubmit: async (values) => {
       try {
-        // console.log(values)
         const res = await axios.post(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`,
           { postData: values, images },
           { withCredentials: true }
         );
-        // console.log(res)
-        // console.log(res.data)
         toast.success("" + (res.data.message || ""), {
           position: "bottom-right",
           autoClose: 5000,
@@ -112,7 +108,7 @@ function NewPostPage() {
         });
         navigate(`/profile/${res.data.post.id}`);
       } catch (err) {
-        // console.log(err)
+        console.log(err)
         toast.error("❌ " + (err.response.data.error || ""), {
           position: "bottom-right",
           autoClose: 5000,
@@ -132,6 +128,7 @@ function NewPostPage() {
     <div className="newPostPage">
       <div className="container">
         <div className="row">
+
           <div className="sideContainer col-lg-4 text-center">
             <h3>Upload Images</h3>
             <div className="imagesPreview">
@@ -170,11 +167,14 @@ function NewPostPage() {
               />
             </div>
           </div>
+
           <div className="formContainer col-lg-8">
             <h1>Create a Listing</h1>
+
             <form onSubmit={handleSubmit} className="form">
               <div className="formGrid">
                 {/* Listing Type */}
+
                 <div className="item">
                   <label>Listing Type</label>
                   <select
@@ -195,7 +195,7 @@ function NewPostPage() {
                     <option value="sell">Sell</option>
                     <option value="rent">Rent/Lease</option>
                     <option value="commercial">Commercial</option>
-                    <option value="pg-coliving">Pg / Co-living</option>
+                    <option value="pg">Pg / Co-living</option>
                     <option value="plots">Plots</option>
 
 
@@ -319,6 +319,7 @@ function NewPostPage() {
                     <p className="error">{errors.state}</p>
                   )}
                 </div>
+
                 {values.state && (
                   <div className="item">
                     <label>City</label>
@@ -336,6 +337,7 @@ function NewPostPage() {
                     )}
                   </div>
                 )}
+
                 {values.city && (
                   <div className="item">
                     <label>Address</label>
@@ -548,6 +550,7 @@ function NewPostPage() {
                 </div>
 
                 {/* offer avialabe or not  */}
+
                 <div className="item">
                   <label htmlFor="offer" className="form-check-label">Offer Available
                   </label>
@@ -667,6 +670,7 @@ function NewPostPage() {
                 </button>
               </div>
             </form>
+
           </div>
         </div>
       </div>

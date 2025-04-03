@@ -146,8 +146,8 @@ export default function PropertyCard({ item, type }) {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
           { withCredentials: true }
         );
-        console.log(response.data);
-        console.log(response.data.isSaved);
+        // console.log(response.data);
+        // console.log(response.data.isSaved);
         if (response.data) {
           setSaved(response.data.isSaved || false);
         }
@@ -207,41 +207,6 @@ export default function PropertyCard({ item, type }) {
                 <p>
                   <strong>Amenities:</strong>
                 </p>
-                {/* <div className="d-flex flex-wrap gap-3">
-                  <div className="amenity">
-                    <FaCar className="icon" />
-                    <span>Parking</span>
-                  </div>
-                  <div className="amenity">
-                    <FaSwimmingPool className="icon" />
-                    <span>Swimming Pool</span>
-                  </div>
-                  <div className="amenity">
-                    <IoLocationOutline className="icon" />
-                    <span>Prime Location</span>
-                  </div>
-                  <div className="ms-auto">
-                    <div className="card-actions">
-                      <button
-                        onClick={handleSave}
-                        className={`heart-button ${saved ? "liked" : ""}`}
-                      >
-                        {saved ? (
-                          <AiFillHeart className="heart-filled" />
-                        ) : (
-                          <AiOutlineHeart className="heart-outline" />
-                        )}
-                      </button>
-                      <button
-                        onClick={handleShare}
-                        className="share-button"
-                        title="Share"
-                      >
-                        <AiOutlineShareAlt className="icon share action-icon" />
-                      </button>
-                    </div>
-                  </div>
-                </div> */}
                 <div className="d-flex flex-wrap gap-3 align-items-center">
                   {item.amenities.length > 0 ? (
                     item.amenities.slice(0, 5).map((item, index) => {

@@ -22,11 +22,9 @@ function SinglePage() {
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
   const [propertyData, setPropertyData] = useState(null);
-  // console.log(propertyData)
-  const { currentUser, formatPrice,formatSize, capitalize } = useContext(AuthContext);
+  const { currentUser, formatPrice, formatSize, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
-  // console.log(saved)
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isContactModalOpen, setIsContactModalOpen] = useState(false);
   const [visitDetails, setVisitDetails] = useState({ name: "", email: "", date: "" });
@@ -37,6 +35,7 @@ function SinglePage() {
     if (!currentUser) {
       navigate("/")
     }
+
     try {
       const response = await axios.post(`${import.meta.env.VITE_BACKEND_BASEURL}/api/users/save`, { postId: id }, {
         withCredentials: true,
@@ -54,7 +53,7 @@ function SinglePage() {
       });
       setSaved(!saved)
     } catch (err) {
-      // console.log(error)
+      console.log(error)
       toast.error("❌ " + (err.response.data.error || "Something went wrong"), {
         position: "bottom-right",
         autoClose: 5000,
@@ -182,6 +181,7 @@ function SinglePage() {
                     </span>
                     <span className="views">Views: {views}</span>
                   </div>
+
                   <div className="price">{formatPrice(price)}</div>
                 </div>
 
@@ -198,6 +198,7 @@ function SinglePage() {
                 <div className="features">
                   <div className="wrapper">
                     <p className="title pt-3">Property Details</p>
+
                     <div className="row propertyDetails pb-4">
                       <div className="col-md-6 py-1">
                         <strong>Property Type:</strong> {capitalize(propertyType) || "N/A"}
@@ -277,7 +278,6 @@ function SinglePage() {
                     {/* Nearby Places */}
 
                     <p className="title mt-3">Nearby Places</p>
-                    {/* Dynamically Rendered Nearby Places (Column Layout) */}
                     <div className="listVertical d-flex flex-column gap-3">
                       {nearbyPlaces.length > 0 ? (
                         nearbyPlaces.map((place, index) => {
@@ -290,7 +290,7 @@ function SinglePage() {
                             "park": "https://cdn-icons-png.flaticon.com/128/854/854878.png",
                           };
 
-                          const icon = placeIcons[place] || "https://cdn-icons-png.flaticon.com/128/3061/3061732.png"; // Default icon
+                          const icon = placeIcons[place] || "https://cdn-icons-png.flaticon.com/128/3061/3061732.png";
                           const distance = nearbyDistances[place] || "Unknown";
 
                           return (
@@ -389,7 +389,6 @@ function SinglePage() {
 
             <div className="buttons pb-5">
               <button onClick={openScheduleModal}>
-                {/* <img src= alt="Schedule Visit" /> */}
                 <span className="img">{<FaRegCalendarAlt />}</span>
                 Schedule a Visit
               </button>

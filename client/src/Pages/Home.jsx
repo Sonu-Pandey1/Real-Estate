@@ -704,6 +704,7 @@ function Home() {
               {recentlyAdded.map((recentlyAdded, index) => (
                 <div key={index} className="" >
                   <BasicCard
+                    id={recentlyAdded.id}
                     title={recentlyAdded.title}
                     image={recentlyAdded.image}
                     description={recentlyAdded.description}
