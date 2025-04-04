@@ -145,7 +145,7 @@ export const addlisting = async (req, res) => {
     }
 
     const { postData, images } = req.body;
-    console.log("Parsed Data:", postData);
+    // console.log("Parsed Data:", postData);
 
     const formattedData = {
       user: { connect: { id: userId } },
@@ -194,7 +194,7 @@ export const Updatelisting = async (req, res) => {
     const { id } = req.params;
     const { postData, images } = req.body;
 
-    console.log("Received data to update:", postData);
+    // console.log("Received data to update:", postData);
 
     // Handle optional fields like lat/long to set null if empty strings are passed
     if (postData.lat === '') postData.lat = null;
