@@ -1,27 +1,23 @@
-
 .searchPageContainer {
   padding-top: 43px;
 
   .container-fluid {
-    
     .row {
-      
-      .sticky-filterr{
+      .sticky-filterr {
         position: sticky;
         top: 9.9vh;
         z-index: 100;
-        // padding: 2px !important;
-
       }
+
       .listContainer {
         height: 100%;
-        overflow-y: auto; 
+        overflow-y: auto;
       }
 
       .mapContainer {
         position: sticky !important;
-        top: 21vh;  
-        border: 1px solid rgb(128, 128, 128,0.4);
+        top: 21vh;
+        border: 1px solid rgb(128, 128, 128, 0.4);
         border-radius: 20px;
       }
     }
@@ -43,25 +39,25 @@
 
 .sticky-filter-container {
   height: 100%;
-  overflow-y: auto; // Ensure scrollability if needed
+  overflow-y: auto;
   position: relative;
 }
 
 .sticky-filter {
-  position: -webkit-sticky; /* Safari support */
+  position: -webkit-sticky;
   position: sticky;
-  top: 50px; /* Adjust for space from top */
+  top: 50px;
   z-index: 2;
-  background-color: #fff; /* Ensure proper background */
-  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Optional shadow for visibility */
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
   padding: 10px;
   border-radius: 8px;
 }
 
 .sticky-filterr {
-  position: -webkit-sticky; /* Safari support */
+  position: -webkit-sticky;
   position: sticky;
-  top: 50px; /* Adjust for space from top */
+  top: 50px;
   z-index: 2;
 }
 

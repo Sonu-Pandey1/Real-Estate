@@ -1,21 +1,18 @@
-
 .profileUpdatePage {
   height: 100%;
   display: flex;
   padding: 80px;
   gap: 20px;
-  flex-direction: row; 
-  // background-color: #0056b3;
+  flex-direction: row;
 
   @media (max-width: 768px) {
-    flex-direction: column; 
+    flex-direction: column;
     gap: 10px;
     padding: 20px !important;
     margin-top: 50px;
   }
 
   .formContainer {
-    
     border-top: 2px solid orange;
     flex: 3;
     background: #ffffff;
@@ -26,7 +23,7 @@
     align-items: center;
 
     @media (max-width: 768px) {
-      padding: 20px; 
+      padding: 20px;
       margin-top: 20px;
     }
 
@@ -37,7 +34,7 @@
       color: #333;
 
       @media (max-width: 768px) {
-        font-size: 1.5rem; 
+        font-size: 1.5rem;
       }
     }
 
@@ -109,10 +106,10 @@
     padding: 20px;
 
     @media (max-width: 768px) {
-      padding: 15px; 
+      padding: 15px;
     }
 
-    .clearAvatarButton{
+    .clearAvatarButton {
       padding: 10px;
       border-radius: 8px;
       border: none;
@@ -142,10 +139,8 @@
 
       @media (max-width: 768px) {
         width: 150px;
-        height: 150px; 
+        height: 150px;
       }
     }
   }
 }
-
-

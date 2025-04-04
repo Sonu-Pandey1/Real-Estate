@@ -3,8 +3,8 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
-  console.log(req.body)
-  const { username, password, email,avatar } = req.body;
+  // console.log(req.body)
+  const { username, password, email, avatar } = req.body;
 
   try {
     // Check if a user with the given email already exists
@@ -70,7 +70,7 @@ export const login = async (req, res) => {
         maxAge: age,
       })
       .status(200)
-      .json(userInfo );
+      .json(userInfo);
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "something went wrong" });
@@ -78,7 +78,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  console.log("logout");
+  // console.log("logout");
 
   res.clearCookie("token", {
     httpOnly: true,
@@ -88,7 +88,6 @@ export const logout = (req, res) => {
 
   res.status(200).json({ message: "Logout Successfully" });
 };
-
 
 export const google = async (req, res) => {
   try {
@@ -115,10 +114,10 @@ export const google = async (req, res) => {
           maxAge: 1000 * 60 * 60 * 24 * 7,
         })
         .status(200)
-      .json({
-        user:userInfo,
-        message:"Login successfully!"
-      });
+        .json({
+          user: userInfo,
+          message: "Login successfully!"
+        });
     }
     // console.log(userInfo)
 
@@ -132,10 +131,10 @@ export const google = async (req, res) => {
         username,
         email,
         password: hashedPassword,
-        avatar: photo || "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png", 
+        avatar: photo || "https://cdn.pixabay.com/photo/2021/07/02/04/48/user-6380868_1280.png",
       },
     });
- 
+
     const { password, ...userInfo } = user;
     res
       .cookie("token", token, {
@@ -146,10 +145,10 @@ export const google = async (req, res) => {
       })
       .status(200)
       .json({
-        user:userInfo,
-        message:"SignUp&Login successfully!"
+        user: userInfo,
+        message: "SignUp&Login successfully!"
       });
-      console.log(userInfo)
+    console.log(userInfo)
   } catch (error) {
     console.error("Error during Google authentication", error);
     res.status(500).json({ error: "Something went wrong." });

@@ -9,10 +9,8 @@ import { useEffect, useState } from "react";
 
 export default function SearchPage() {
   const { search } = useLocation();
-  const queryParams = search.split("?")[1]; 
-  //  console.log(queryParams);
+  const queryParams = search.split("?")[1];
   const [propertyData, setPropertyData] = useState([]);
-  // console.log(propertyData)
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(true);
 
@@ -27,7 +25,6 @@ export default function SearchPage() {
           throw new Error("Failed to fetch property data.");
         }
         const data = await response.json();
-        console.log(data);
         setPropertyData(data);
       } catch (err) {
         setError(err.message);
@@ -69,6 +66,7 @@ export default function SearchPage() {
           </div>
         ) : (
           <div className="row">
+
             {/* Property Listing Section */}
             <div className="col-12 col-md-8">
               <div className="listContainer h-100">

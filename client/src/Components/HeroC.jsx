@@ -1,10 +1,8 @@
 
 import "./HeroC.scss";
-// import PopularLocalitiesSlider from "../Components/PopularLocalitiesSlider";
 import { NavLink, useLocation, useNavigate } from "react-router-dom";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
-// import { GrOptimize } from "react-icons/gr";
 import { useState } from "react";
 
 export default function HeroC() {
@@ -20,11 +18,12 @@ export default function HeroC() {
   const [selectedLocality, setSelectedLocality] = useState("");
   const navigate = useNavigate();
   const location = useLocation();
-  // console.log(localitySuggestions);
   const localities = {
-    noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
-    delhi: ["CP", "Chandni C", "Saket", "Dwarka"],
-    gurgaon: ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
+    Noida: ["Sector 84", "Sector 48", "Sector 34", "Sector 24"],
+    Delhi: ["CP", "Chandni C", "Saket", "Dwarka"],
+    Gurugram : ["Cyber City", "DLF Phase 3", "Sector 29", "Sector 45"],
+    Bangalore : ["Koramangala", "Indiranagar", "Whitefield", "MG Road"],
+    Mumbai : ["Bandra", "Andheri", "Juhu", "Lower Parel"],
   };
 
   const cities = Object.keys(localities);
@@ -34,6 +33,7 @@ export default function HeroC() {
     setSelectedCity(city);
     setLocalitySuggestions(localities[city] || []);
   };
+  // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page !
 
   const handleSearch = (e) => {
     e.preventDefault();
@@ -41,12 +41,11 @@ export default function HeroC() {
       city: selectedCity,
       type: propertyType,
       searchTerm: selectedLocality,
-
-      // todo add min and max and fix loding loder it only show on listing loading component not whole page . mins this only indicate list is load not page
     }).toString();
 
     navigate(`/search?${params}`);
   };
+
 
   const getHeroConfig = (city) => ({
     "/": {
@@ -83,41 +82,14 @@ export default function HeroC() {
 
   const city = selectedCity;
   const heroConfig = getHeroConfig(city);
-
   const currentConfig = heroConfig[location.pathname] || heroConfig["/"];
-
-  // const settings = {
-  //   dots: false,
-  //   infinite: true,
-  //   speed: 600,
-  //   autoplay: true,
-  //   slidesToShow: 4,
-  //   slidesToScroll: 1,
-  //   initialSlide: 0,
-  //   responsive: [
-  //     {
-  //       breakpoint: 1024,
-  //       settings: { slidesToShow: 4 },
-  //     },
-  //     {
-  //       breakpoint: 600,
-  //       settings: { slidesToShow: 3 },
-  //     },
-  //     {
-  //       breakpoint: 480,
-  //       settings: { slidesToShow: 1 },
-  //     },
-  //   ],
-  // };
 
   return (
     <div>
       <div
         className="hero-section"
-        style={{
-          backgroundImage: currentConfig.background,
-        }}
-      >
+        style={{ backgroundImage: currentConfig.background }}>
+
         <div className="title mx-auto text-white w-100">
           <p className="px-2 px-sm-0">
             <span>{currentConfig.title}</span>
@@ -128,6 +100,7 @@ export default function HeroC() {
         <form onSubmit={handleSearch} className="px-4">
           <div className="formContainer mx-auto mx-5">
             <div className="tabsWrapper overflow-hidden">
+
               <nav className="d-flex nav">
                 <NavLink
                   onClick={() => setPropertyType("buy")}
@@ -182,6 +155,7 @@ export default function HeroC() {
 
             <div className="property-search-form mx-auto">
               <div className="form-container d-flex justify-content-center align-items-center rounded-pill shadow-lg p-0 p-sm-2">
+
                 <div className="form-group city-dropdown">
                   <select
                     className="form-select rounded-start-pill p-0 px-3"
@@ -195,6 +169,7 @@ export default function HeroC() {
                     ))}
                   </select>
                 </div>
+
                 <div className="form-group locality-search flex-grow-1 w-100">
                   <input
                     type="text"
@@ -210,6 +185,7 @@ export default function HeroC() {
                     ))}
                   </datalist>
                 </div>
+
                 <div className="form-group search-button">
                   <button type="submit" className="btn w-100 rounded-pill p-0">
                     <p className="m-0 d-none d-sm-block">Search</p>
@@ -220,12 +196,14 @@ export default function HeroC() {
                     />
                   </button>
                 </div>
+
               </div>
             </div>
           </div>
         </form>
 
         {/* Popular Localities */}
+
         {/* <div className="pps row align-items-center justify-content-center text-center mx-auto">
           <div className="col-12 text-center col-md-4 col-lg-2 mt-2 mt-md-4">
             <GrOptimize className="localIcon fs-6" />
@@ -274,6 +252,7 @@ export default function HeroC() {
             />
           </div>
         </div>
+        
       </div>
     </div>
   );

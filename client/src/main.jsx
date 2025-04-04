@@ -10,8 +10,8 @@ ReactDOM.createRoot(document.getElementById("root")).render(
     <AuthContextProvider>
       <BrowserRouter
         future={{
-          v7_startTransition: true, // Enable startTransition for smoother updates
-          v7_relativeSplatPath: true, // Enable updated splat path resolution
+          v7_startTransition: true,
+          v7_relativeSplatPath: true,
         }}
       >
         <App />

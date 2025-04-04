@@ -25,11 +25,10 @@ const customIcon = new L.Icon({
 export default function Pin({ item }) {
   if (!item || !item.lat || !item.long) return null;
 
-  // console.log("Pin loaded:", item);
-
   return (
     <Marker position={[item.lat, item.long]} icon={customIcon}>
       <Popup>
+
         <div className="popupContainer">
           {item.image && <img className="img" src={item.image} alt={item.propertyName || "Property"} />}
           <div className="textContainer">
@@ -44,6 +43,7 @@ export default function Pin({ item }) {
             <b>₹ {item.price}</b>
           </div>
         </div>
+
       </Popup>
     </Marker>
   );

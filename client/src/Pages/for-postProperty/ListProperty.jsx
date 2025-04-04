@@ -5,9 +5,9 @@ export default function ListProperty() {
     <div className="listPropertyContainer">
       <div
         className="container-fluid vh-100 d-flex align-items-center pt-5"
-        style={{ backgroundColor: " #3c2d91" }}
-      >
+        style={{ backgroundColor: " #3c2d91" }}>
         <div className="row w-100 text-light">
+
           {/* Left Section */}
           <div className="col-md-8 d-flex flex-column justify-content-center align-items-start p-5">
             <h2 className="fw-bold">Upload your property in 3 simple steps</h2>
@@ -24,6 +24,7 @@ export default function ListProperty() {
                 <span className="text-warning fw-bold">✔</span> Add Photos
               </li>
             </ul>
+
             <div className="mt-4 ps-5">
               <img
                 src="https://encrypted-tbn2.gstatic.com/images?q=tbn:ANd9GcQ9XsoE-PAdMXezNH3WpauSX5DI-gQrG-FwGdMFtjLOswxfiTNR"
@@ -38,7 +39,7 @@ export default function ListProperty() {
           <div className="col-md-4 d-flex justify-content-center align-items-center bg-white rounded-3">
             <div className="p-4" style={{ width: "100%", maxWidth: "400px" }}>
               <h4 className="text-dark fw-bold">
-                New to <span className="text-primary">Housing</span>? Let's get
+                New to <span className="text-primary">Housing</span>? let&apos; get
                 you started
               </h4>
               <form className="mt-4">
@@ -46,6 +47,7 @@ export default function ListProperty() {
                   <label htmlFor="phone" className="form-label">
                     Enter Phone Number
                   </label>
+
                   <div className="input-group">
                     <span className="input-group-text">+91</span>
                     <input
@@ -56,6 +58,7 @@ export default function ListProperty() {
                     />
                   </div>
                 </div>
+
                 <button
                   type="button"
                   className="btn btn-secondary w-100 mt-2"
@@ -64,6 +67,7 @@ export default function ListProperty() {
                   Continue
                 </button>
               </form>
+
               <div className="text-center my-3">Or Connect with</div>
               <button type="button" className="btn btn-outline-dark w-100">
                 <i className="fab fa-google me-2"></i> Google
@@ -72,6 +76,7 @@ export default function ListProperty() {
           </div>
         </div>
       </div>
+
       <div className="container">
         <div className="row">
           <div className="col ">
@@ -80,6 +85,7 @@ export default function ListProperty() {
               <div>
                 <img className=" img-fluid w-75" src="https://cdn-icons-png.flaticon.com/128/18486/18486650.png" alt="icon" />
               </div>
+
               <div>
                 <h2>Upload your property in 3 quick steps</h2>
                 <p>
@@ -88,6 +94,7 @@ export default function ListProperty() {
                 </p>
               </div>
             </div>
+
             <div className="d-flex gap-4 w-50 py-3">
               <div>
                 <img className=" img-fluid" src="https://cdn-icons-png.flaticon.com/128/6497/6497375.png" alt="icon" />
@@ -100,6 +107,7 @@ export default function ListProperty() {
                 </p>
               </div>
             </div>
+
             <div className="d-flex gap-4 w-50 py-3">
               <div>
                 <img className=" img-fluid" src="https://cdn-icons-png.flaticon.com/128/10365/10365179.png" alt="icon" />
@@ -119,10 +127,12 @@ export default function ListProperty() {
 
       <div className="container py-4 w-75">
         <div className="row">
+
           <div className="col ">
             <h1 className="text-center py-4 py-3 ">
               Frequently asked questions
             </h1>
+
             <div className="accordion" id="accordionExample">
               <div className="accordion-item">
                 <h2 className="accordion-header">
@@ -137,6 +147,7 @@ export default function ListProperty() {
                     How to post a property on Prasidhi.com?
                   </button>
                 </h2>
+
                 <div
                   id="collapseOne"
                   className="accordion-collapse collapse show"
@@ -147,6 +158,7 @@ export default function ListProperty() {
                   </div>
                 </div>
               </div>
+
               <div className="accordion-item">
                 <h2 className="accordion-header">
                   <button
@@ -160,6 +172,7 @@ export default function ListProperty() {
                     Can I post a property for free?
                   </button>
                 </h2>
+
                 <div
                   id="collapseTwo"
                   className="accordion-collapse collapse"
@@ -170,6 +183,7 @@ export default function ListProperty() {
                   </div>
                 </div>
               </div>
+
               <div className="accordion-item">
                 <h2 className="accordion-header">
                   <button
@@ -183,6 +197,7 @@ export default function ListProperty() {
                     What type of property can I post for selling/renting?
                   </button>
                 </h2>
+
                 <div
                   id="collapseThree"
                   className="accordion-collapse collapse"
@@ -193,6 +208,7 @@ export default function ListProperty() {
                   </div>
                 </div>
               </div>
+
               <div className="accordion-item">
                 <h2 className="accordion-header">
                   <button
@@ -206,6 +222,7 @@ export default function ListProperty() {
                     What are the benefits of posting a property on Housing.com?
                   </button>
                 </h2>
+
                 <div
                   id="collapseFour"
                   className="accordion-collapse collapse"
@@ -216,6 +233,7 @@ export default function ListProperty() {
                   </div>
                 </div>
               </div>
+
               <div className="accordion-item">
                 <h2 className="accordion-header">
                   <button
@@ -229,6 +247,7 @@ export default function ListProperty() {
                     When do I start getting enquiries on my property?
                   </button>
                 </h2>
+
                 <div
                   id="collapseFive"
                   className="accordion-collapse collapse"

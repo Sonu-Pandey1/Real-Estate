@@ -1,14 +1,11 @@
 @import "../scss/variables";
 
-
 .hero-section {
   font-family: Arial, sans-serif;
   background: url("https://c.housingcdn.com/demand/s/client/common/assets/buyCover.36ede2d6.jpg");
   background-size: cover;
-  // object-fit:cover;
   background-image: black;
   background-position: center right;
-  // height: 90vh;
   height: 550px;
   overflow: hidden;
   width: 100%;
@@ -34,6 +31,7 @@
     p {
       color: rgb(27, 23, 23);
     }
+
     font-size: 2rem;
     font-weight: bold;
   }
@@ -134,7 +132,6 @@
     p {
       span {
         color: rgb(255, 255, 255);
-        // font-weight: 600;
         text-shadow: 1.5px -1.5px 5px rgba(0, 0, 0, 0.9);
       }
     }
@@ -150,7 +147,6 @@
       z-index: 0;
     }
   }
-
 }
 
 @media (max-width: 510px) {
@@ -166,10 +162,6 @@
       padding-bottom: 0px;
       width: 60%;
       text-align: center;
-      // background-image: linear-gradient(90deg, #ffe25f, #feb47b);
-      // -webkit-background-clip: text;
-      // background-clip: text;
-      // -webkit-text-fill-color: transparent;
       font-size: 1.7rem !important;
       font-weight: bold;
     }
@@ -190,7 +182,6 @@
         &::placeholder {
           font-size: 10px;
         }
-
       }
     }
 
@@ -205,10 +196,8 @@
 
 @media (max-width: 400px) {
   .hero-section {
-
     .title {
       padding-top: 190px;
-
       font-size: 1.4rem !important;
     }
 
@@ -219,7 +208,6 @@
         font-size: 11px !important;
       }
     }
-
   }
 }
 
@@ -227,8 +215,6 @@
   @media (max-width: 340px) {
     .title {
       padding-top: 190px !important;
-
-
       font-size: 1.3rem !important;
     }
 

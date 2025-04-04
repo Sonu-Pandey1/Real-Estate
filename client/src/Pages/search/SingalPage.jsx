@@ -103,7 +103,6 @@ function SinglePage() {
         const response = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${id}`, {
           withCredentials: true,
         });
-        // console.log(response.data)
         if (response.data) {
           setPropertyData(response.data);
           setSaved(response.data.isSaved || false);
@@ -223,7 +222,6 @@ function SinglePage() {
                       </div>
                     </div>
 
-
                     {/* Dynamic Amenities with Icons */}
                     <p className="title">Property Amenities</p>
 
@@ -247,7 +245,6 @@ function SinglePage() {
                         <p>No amenities listed.</p>
                       )}
                     </div>
-
 
                     {/* Sizes & Rooms */}
 
@@ -273,7 +270,6 @@ function SinglePage() {
                         <span>{balcony} Balcony</span>
                       </div>
                     </div>
-
 
                     {/* Nearby Places */}
 
@@ -313,7 +309,6 @@ function SinglePage() {
                     </div>
                   </div>
                 </div>
-
               </div>
 
               <div
@@ -336,9 +331,7 @@ function SinglePage() {
             {/* contact form  */}
 
             <form className="contact-form  bg-white p-4 rounded shadow mt-5 mb-2 border border-light mx-auto" style={{ maxWidth: '500px' }}>
-
               <h4 className="text-center mb-3 fw-lighter">Contact the Owner</h4>
-
 
               <div className="User d-flex justify-content-center align-items-center gap-3">
                 <img className="" src={user.avatar || "/default-avatar.jpg"} alt="User Avatar" style={{ width: '50px', height: '50px', borderRadius: `100%` }} />
@@ -383,7 +376,6 @@ function SinglePage() {
                   <option value="offer">Make an Offer</option>
                 </select>
               </div>
-
               <button type="submit" className="btn btn-primary w-100">Send Message</button>
             </form>
 
@@ -400,7 +392,6 @@ function SinglePage() {
                 {saved ? "Place Saved" : "Save the Place"}
               </button>
             </div>
-
           </div>
         </div>
       </div>
@@ -423,6 +414,7 @@ function SinglePage() {
                 required
               />
             </div>
+
             <div className="mb-3">
               <label htmlFor="visitEmail" className="form-label">Email</label>
               <input
@@ -434,6 +426,7 @@ function SinglePage() {
                 required
               />
             </div>
+
             <div className="mb-3">
               <label htmlFor="visitDate" className="form-label">Preferred Visit Date</label>
               <input
@@ -454,9 +447,6 @@ function SinglePage() {
       <Modal show={isContactModalOpen} onHide={() => setIsContactModalOpen(false)}>
         <Modal.Header closeButton>
           <Modal.Title>Contact Owner</Modal.Title>
-
-
-
         </Modal.Header>
         <Modal.Body>
           <form onSubmit={handleContactOwner}>
@@ -482,4 +472,3 @@ function SinglePage() {
 }
 
 export default SinglePage;
-

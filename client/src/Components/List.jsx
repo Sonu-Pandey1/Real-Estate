@@ -17,10 +17,10 @@ function List({ type }) {
         const response = await axios.get(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/profilePosts`,
           {
-            withCredentials: true, // Include cookies if needed
+            withCredentials: true,
           }
         );
-        // console.log(response.data)
+
         const { userPosts, savedPost } = response.data;
         setUserPosts(userPosts || []);
         setSavedPosts(savedPost || []);
@@ -30,7 +30,6 @@ function List({ type }) {
         setLoading(false);
       }
     };
-
     fetchData();
   }, []);
 

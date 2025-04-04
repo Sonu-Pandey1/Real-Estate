@@ -1,3 +1,4 @@
+
 .listingCardContainer {
   display: flex;
   justify-content: center;
@@ -5,22 +6,22 @@
   background-color: #f9f9f9;
 
   .ProfileCard {
-    height: 300px !important; //thereislititleissuein responvness a point
+    height: 300px !important;
+
     &::-webkit-scrollbar-thumb {
       display: none;
     }
   }
+
   .custom-card {
     display: flex;
     flex-direction: row;
     background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-    // overflow: hidden;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
     width: 100%;
     height: 250px;
-    // overflow-y: scroll;
 
     &:hover {
       transform: translateY(-5px);
@@ -180,9 +181,11 @@
           0% {
             transform: scale(0.8);
           }
+
           50% {
             transform: scale(1.2);
           }
+
           100% {
             transform: scale(1);
           }
@@ -199,6 +202,7 @@
           cursor: pointer;
           transition: transform 0.2s ease, color 0.2s ease;
         }
+
         .share-button:hover {
           color: #007bff;
           transform: scale(1.1);
@@ -212,7 +216,6 @@
   .listingCardContainer {
     .custom-card {
       display: flex;
-      // flex-direction: column;
 
       .card-img-container {
         width: 230px;
@@ -232,8 +235,8 @@
   .ProfileCard {
     height: 500px !important;
     overflow-y: scroll;
-    // background-color: red !important;
   }
+
   .custom-card {
     height: 280px !important;
   }
@@ -241,14 +244,12 @@
 
 @media (max-width: 500px) {
   .listingCardContainer {
-    .ProfileCard {
-      // height: 100% ;
-    }
 
     .custom-card {
       height: 100% !important;
 
       flex-direction: column;
+
       .card-img-container {
         width: 100%;
         height: 100%;
@@ -256,7 +257,7 @@
 
         img {
           width: 100%;
-          height: 180px !important ;
+          height: 180px !important;
         }
       }
     }

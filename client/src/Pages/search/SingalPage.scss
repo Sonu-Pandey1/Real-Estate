@@ -1,3 +1,4 @@
+
 .singlePageContainer {
   .singlePage {
     display: flex;
@@ -29,7 +30,6 @@
               display: flex;
               flex-direction: column;
               gap: 15px;
-              // padding: 5px;
 
               h1 {
                 font-weight: 400;
@@ -202,7 +202,6 @@
             }
           }
         }
-        
       }
     }
   }
@@ -230,15 +229,3 @@
     }
   }
 }
-// sticky form example
-// .stickyForm {
-//   background-color: red !important;
-//   position: sticky;
-//   top: 20px; /* Adjust this value based on how much spacing you want at the top */
-//   z-index: 10;
-//   padding: 20px;
-//   background-color: white; /* Optional: to ensure background doesn't overlap */
-//   box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1); /* Optional: add a shadow for a more distinct separation */
-// }
-
-

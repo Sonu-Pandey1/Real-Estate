@@ -15,18 +15,17 @@ function ProfileUpdatePage() {
   const [avatar, setAvatar] = useState([]);
   const navigate = useNavigate();
 
-  // Formik hook for handling form state
-  const { values, errors, touched, handleBlur, handleChange, handleSubmit,  isSubmitting } = useFormik({
+
+  const { values, errors, touched, handleBlur, handleChange, handleSubmit, isSubmitting } = useFormik({
     initialValues: {
       username: currentUser.username,
       email: currentUser.email,
       password: "",
-      confirmPassword: "", // Added for confirm password
+      confirmPassword: "",
     },
     validationSchema: profileUpdateSchema,
     onSubmit: async (values) => {
       try {
-        // Ensure avatar is sent correctly
         const res = await axios.put(
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/users/${currentUser.id}`,
           {
@@ -39,8 +38,6 @@ function ProfileUpdatePage() {
             withCredentials: true,
           }
         );
-        // console.log(res.data.user)
-        // console.log(res.data.message)
         updateUser(res.data.user);
         toast.success("" + (res.data.message || ""), {
           position: "bottom-right",
@@ -50,14 +47,13 @@ function ProfileUpdatePage() {
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
-        // resetForm(); // Reset the form after successful submission
         navigate("/profile");
       } catch (err) {
         console.log(err);
         setError(err.response?.data?.error || "An error occurred.");
-        toast.error("❌ "+ (err.response.data.error || ""), {
+        toast.error("❌ " + (err.response.data.error || ""), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -65,7 +61,7 @@ function ProfileUpdatePage() {
           pauseOnHover: true,
           draggable: true,
           theme: "dark",
-          transition:Bounce,
+          transition: Bounce,
         });
       }
     },
@@ -75,14 +71,10 @@ function ProfileUpdatePage() {
     <div className="profileUpdatePage">
       <div className="sideContainer">
         <img
-          src={
-            avatar[0] ||
-            currentUser.avatar ||
+          src={avatar[0] || currentUser.avatar ||
             "https://cdn-icons-gif.flaticon.com/17626/17626903.gif"
-          }
-          alt="avatar"
-          className="avatar"
-        />
+          } alt="avatar" className="avatar" />
+
         <UploadWidget
           uwConfig={{
             cloudName: `${import.meta.env.VITE_CLOUDINARY_CLOUD_NAME}`,
@@ -93,9 +85,9 @@ function ProfileUpdatePage() {
             clientAllowedFormats: ["image"],
             styles: {
               palette: {
-                windowBorder: "#0018ff", // Border color of the popup
-                inactiveTabIcon: "#C4C5CC", // Color for inactive tabs
-                link: "#0078FF", // Hyperlink color
+                windowBorder: "#0018ff",
+                inactiveTabIcon: "#C4C5CC",
+                link: "#0078FF",
               },
             },
           }}
@@ -107,6 +99,7 @@ function ProfileUpdatePage() {
           </button>
         )}
       </div>
+
       <div className="formContainer shadow-lg">
         <form onSubmit={handleSubmit}>
           <h1 className="formTitle">Update Profile</h1>
@@ -126,6 +119,7 @@ function ProfileUpdatePage() {
               <p className="error">{errors.username}</p>
             )}
           </div>
+
           <div className="item">
             <label htmlFor="email">Email</label>
             <input
@@ -140,6 +134,7 @@ function ProfileUpdatePage() {
             />
             {errors.email && touched.email && <p className="error">{errors.email}</p>}
           </div>
+
           <div className="item">
             <label htmlFor="password">Password</label>
             <input
@@ -154,6 +149,7 @@ function ProfileUpdatePage() {
             />
             {errors.password && touched.password && <p className="error  ">{errors.password}</p>}
           </div>
+
           <div className="item">
             <label htmlFor="confirmPassword">Confirm Password</label>
             <input
@@ -170,9 +166,11 @@ function ProfileUpdatePage() {
               <p className="error">{errors.confirmPassword}</p>
             )}
           </div>
+
           <button className="submitButton" type="submit" disabled={isSubmitting}>
             {isSubmitting ? "Updating..." : "Update"}
           </button>
+
           {error && <span className="errorMessage">{error}</span>}
         </form>
       </div>

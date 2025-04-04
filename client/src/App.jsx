@@ -12,7 +12,6 @@ import Owners from "./Pages/for-owners/Owners.jsx";
 import DealersBuilders from "./Pages/for-dealers-builders/DealersBuilders.jsx";
 import Insights from "./Pages/insights/Insights.jsx";
 import ListProperty from "./Pages/for-postProperty/ListProperty.jsx";
-import LoginRegister from "./Pages/for-login-register/LoginRegister.jsx";
 import Rent from "./Pages/rent/Rent.jsx";
 import Pg from "./Pages/pgCoLiving/Pg.jsx";
 import Plots from "./Pages/plots/Plots.jsx";
@@ -28,7 +27,6 @@ import Page404 from "./Components/Page404.jsx";
 import EditListing from "./Pages/profile/EditListing.jsx";
 import MyPlan from "./Pages/profile/MyPlan.jsx";
 import MyResponses from "./Pages/profile/MyResponses.jsx";
-// import { singlePageLoader } from "../lib/Loaders.js";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -37,8 +35,8 @@ function App() {
     <>
       <Navbar />
 
-       {/* ToastContainer for global toast notifications */}
-       <ToastContainer
+      {/* ToastContainer for global toast notifications */}
+      <ToastContainer
         position="bottom-right"
         autoClose={5000}
         hideProgressBar={false}
@@ -64,7 +62,6 @@ function App() {
       <Routes>
         {/* Home Page */}
         <Route index element={<Home />} />
-
         {/* Static Pages */}
         <Route path="/for-buyers" element={<Buyers />} />
         <Route path="/for-tenants" element={<Tenants />} />
@@ -72,7 +69,6 @@ function App() {
         <Route path="/for-dealers-builders" element={<DealersBuilders />} />
         <Route path="/insights" element={<Insights />} />
         <Route path="/list-property" element={<ListProperty />} />
-        <Route path="/login-register" element={<LoginRegister />} />
         <Route path="/search" element={<SearchPage />} />
         <Route path="/search/:id" element={<SingalPage />} />
 

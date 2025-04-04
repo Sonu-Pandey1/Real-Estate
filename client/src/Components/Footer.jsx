@@ -10,6 +10,7 @@ const Footer = () => {
     <footer className="footerContainer  text-white py-4">
       <div className=" container-fluid">
         <div className="row">
+
           {/* Branding and Awards */}
           <div className="col-lg-3 col-md-6 col-sm-5 mb-4 px-5">
             <h5 className="mb-5">
@@ -32,7 +33,7 @@ const Footer = () => {
                 className="img-fluid "
               />
             </div>
-            <p className="mb-2 mt-2">Follow</p>
+            <p className="mb-2 mt-2">Follow Us</p>
             <div className="socicalIcons d-flex justify-content-between  mb-4 mt-4 ">
               <FaFacebookSquare />
               <IoLogoInstagram />
@@ -64,8 +65,6 @@ const Footer = () => {
               <li>Proptiger</li>
               <li>Makaan</li>
               <li>realtor.com</li>
-              <li>99.co</li>
-              {/* <li>collinsdictionary.com</li> */}
             </ul>
           </div>
 
@@ -82,6 +81,7 @@ const Footer = () => {
 
           {/* QR Code and Apps */}
           <div className="col-lg-3 col-md-4 mb-4 col-sm-4  text-center app">
+
             <div className="coming-soon">
               <h6 className="text-uppercase text-warning fw-bold mb-3">
                 Coming Soon
@@ -90,6 +90,7 @@ const Footer = () => {
                 Exciting updates are on the way. Stay tuned!
               </p>
             </div>
+
             <p className="text-uppercase mb-3 list">Experience Housing App</p>
             <div className="d-flex justify-content-center mb-2">
               <img
@@ -103,6 +104,7 @@ const Footer = () => {
                 className="img-fluid w-50 "
               />
             </div>
+
             <div className="d-flex p-2 justify-content-between mt-4">
               <img
                 src="https://c.housingcdn.com/demand/s/client/common/assets/qr-code.f143ed3a.png"
@@ -113,6 +115,7 @@ const Footer = () => {
                 Open camera & scan the QR code to Download the App
               </p>
             </div>
+
           </div>
         </div>
 

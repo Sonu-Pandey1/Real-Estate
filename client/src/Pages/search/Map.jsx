@@ -9,20 +9,15 @@ export default function Map({ items, smallMap }) {
     return <p>No locations available.</p>;
   }
 
-  // console.log("Map loaded:", items); 
-
-
   const mapData = items.map((property) => ({
     id: property.id || "N/A",
     propertyName: property.propertyName || "No Title",
     image: property.images?.[0] || "default-image.jpg",
     price: property.price || "Price not available",
-    bedrooms: property.bedroom || 0, 
+    bedrooms: property.bedroom || 0,
     lat: property.lat || 0,
     long: property.long || 0,
   }));
-
-  // console.log("Map data:", mapData); 
 
   return (
     <MapContainer

@@ -6,7 +6,6 @@ import { useContext } from "react";
 
 export default function Spotlight() {
   const { listings, formatPrice } = useContext(AuthContext);
-  console.log(listings)
 
   const settings = {
     fade: true,
@@ -38,6 +37,7 @@ export default function Spotlight() {
   return (
     <div className="spotlightSectionWrapper">
       <section className="spotLight-section container py-3">
+
         {/* Section Title */}
         <div className="spotLightTitle mb-4">
           <h2>
@@ -55,6 +55,7 @@ export default function Spotlight() {
         <div className="spotlightSlider-Wrapper h-100">
           <div className="slider-container m-auto">
             <Slider {...settings} className="slider rounded-4">
+
               {/* Map over API data */}
               {listings && listings.length > 0 ? (
                 listings.map((listing, index) => (
@@ -62,7 +63,6 @@ export default function Spotlight() {
                     <SpotlightCard
                       title={listing.propertyName}
                       image={listing.images[0]}
-                      // description={listing.description}
                       id={listing.id}
                       location={listing.city + "," + listing.state}
                       price={formatPrice(listing.price)}
@@ -75,6 +75,7 @@ export default function Spotlight() {
             </Slider>
           </div>
         </div>
+
       </section>
     </div>
   );

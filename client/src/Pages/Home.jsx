@@ -13,7 +13,6 @@ import { AuthContext } from "../Context/AuthContext";
 
 function Home() {
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
-  // console.log(listings)
 
   const ProjectsInFocus = listings?.map((listing) => ({
     id: listing.id,
@@ -47,17 +46,6 @@ function Home() {
     size: formatSize(listing.size) || "N/A",
     price: formatPrice(listing.price) || "Price on Request",
   })) || [];
-
-  // const featuredCollections = listings?.map((listing) => ({
-  //   id: listing.id,
-  //   image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
-  //   title: capitalize(listing.propertyName) || "No Title",
-  //   company: listing.company || "by ESCON INFRA REALTORS",
-  //   description: capitalize(listing.propertyCondition) || "Row",
-  //   location: capitalize(listing.address) + ", " + capitalize(listing.city) + ", " + capitalize(listing.state) || "Unknown Location",
-  //   size: formatSize(listing.size) || "N/A",
-  //   price: formatPrice(listing.price) || "Price on Request",
-  // })) || [];
 
   const blogData = [
     {
@@ -643,6 +631,7 @@ function Home() {
 
       {/* featured Developers     */}
       {/*  //todo---- for this we neeed to develop post a project for us or developers then fetch details there only we and devvloper handle posting and calling othere propertys there is indivisaul and dealrs also if delear post proprty ther is name and compnay name if indivisual post then only name */}
+
       <section className="py-5 featuredDevelopersSection">
         <div className="container">
           <div className="row">

@@ -2,27 +2,24 @@
   .sliderWrapper {
     .col-lg-9 {
       text-align: center;
-      // height: 25rem !important;
-      // width: 100%;
-      .imgw{
+
+      .imgw {
         display: flex;
         align-items: center;
         justify-content: center;
         width: 100%;
         height: 25rem;
         padding: 20px 0px;
-        // border-radius: 100%;
+
         img {
-          // padding-top: 30px;
           width: 97% !important;
-          // height: 280px !important;
-          
           height: 100%;
           object-fit: cover;
         }
       }
     }
   }
+
   .spotlightCard {
     .row-bottom {
       p {
@@ -33,6 +30,7 @@
     }
   }
   height: 100%;
+
   .col-3 {
     img {
       width: 100%;
@@ -45,22 +43,18 @@
 }
 
 @media (max-width:510px) {
-  .imgw{
+  .imgw {
     display: flex;
     align-items: center;
     justify-content: center;
     width: 100%;
     height: 15rem !important;
     padding: 0px 0px !important;
-    // border-radius: 100%;
+
     img {
-      // padding-top: 30px;
       width: 97% !important;
-      // height: 280px !important;
-      
       height: 100%;
       object-fit: cover;
     }
   }
-  
 }

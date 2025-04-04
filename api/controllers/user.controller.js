@@ -3,7 +3,7 @@ import bcrypt from "bcrypt";
 
 export const getUsers = async (req, res) => {
   const getUsers = await prisma.user.findMany();
-  console.log(getUsers);
+  // console.log(getUsers);
   res.status(200).json({ getUsers });
   try {
   } catch (error) {
@@ -35,6 +35,7 @@ export const updateUser = async (req, res) => {
   }
   let updatedPassword = null;
   try {
+
     if (password) {
       updatedPassword = await bcrypt.hash(password, 10);
     }
@@ -47,21 +48,13 @@ export const updateUser = async (req, res) => {
       },
     });
     const { password: userPassword, ...rest } = updatedUser;
-    // res.status(200).json({message:"User Details Updated!"})
-    // res.status(200).json(rest);
-    res.status(200).json({
-      user: rest,
-      message: "User Details Updated Successfully!",
-    });
-    
-    // res.status(200).json({ user: rest, message: "User Updated" });
+    res.status(200).json({ user: rest, message: "User Details Updated Successfully!", });
 
   } catch (err) {
     console.log(err);
     res.status(500).json({ error: "Failed to update users!" });
   }
 };
-// paaas singal response for tost message
 
 export const deleteUser = async (req, res) => {
   const id = req.params.id;
@@ -71,12 +64,12 @@ export const deleteUser = async (req, res) => {
     return res.status(403).json({ message: "Not Authorized!" });
   }
   try {
-     // Archive or delete user's saved posts
-     await prisma.savePost.deleteMany({
+    // Archive or delete user's saved posts
+    await prisma.savePost.deleteMany({
       where: { id: id },
     });
 
-     //todo --  Archive or transfer ownership of listings handle this archive listings idf user deleted your account 
+    //todo --  Archive or transfer ownership of listings handle this archive listings idf user deleted your account 
     // await prisma.listing.updateMany({
     //   where: { userId: parseInt(userId) },
     //   data: { userId: null }, // Set userId to null for orphaning
@@ -90,19 +83,16 @@ export const deleteUser = async (req, res) => {
     res.clearCookie("token")
     res.status(200).json({ message: "Account Deleted!" })
 
-    
+
   } catch (error) {
     console.log(error);
     res.status(500).json({ error: "faild to delete Account!" });
   }
 };
 
-
 export const savePost = async (req, res) => {
   const postId = req.body.postId;
   const tokenUserId = req.userId;
-  console.log(tokenUserId)
-  console.log(postId)
 
 
   if (!postId) {
@@ -110,32 +100,32 @@ export const savePost = async (req, res) => {
   }
 
   try {
-   const savedPost = await prisma.savePost.findUnique({
-    where:{
-      userId_postId:{
-        userId:tokenUserId,
-        postId,
+    const savedPost = await prisma.savePost.findUnique({
+      where: {
+        userId_postId: {
+          userId: tokenUserId,
+          postId,
+        }
       }
-    }
-   }) ;
+    });
 
-   if(savedPost){
+    if (savedPost) {
       const response = await prisma.savePost.delete({
-        where:{
-          id:savedPost.id,
+        where: {
+          id: savedPost.id,
         }
       });
-      res.status(200).json({message:"Post Unsaved Successfully!"})
-   }
-   else{
+      res.status(200).json({ message: "Post Unsaved Successfully!" })
+    }
+    else {
       await prisma.savePost.create({
-        data:{
-          userId:tokenUserId,
+        data: {
+          userId: tokenUserId,
           postId,
         }
       });
-      res.status(200).json({message:"Post Saved Successfully!"})
-   }
+      res.status(200).json({ message: "Post Saved Successfully!" })
+    }
 
   } catch (error) {
     console.log(error);
@@ -143,32 +133,30 @@ export const savePost = async (req, res) => {
   }
 };
 
-export const ProfilePosts = async (req,res) =>{
+export const ProfilePosts = async (req, res) => {
   const tokenUserId = req.userId
-  // console.log(tokenUserId,"not found")
+
   try {
     const userPosts = await prisma.post.findMany({
-      where:{
-        userId:tokenUserId,
+      where: {
+        userId: tokenUserId,
       }
     });
 
     const saved = await prisma.savePost.findMany({
-      // savePost
-      where:{
-        userId:tokenUserId,
+
+      where: {
+        userId: tokenUserId,
       },
-      include:{
-        post:true
+      include: {
+        post: true
       }
     });
-    const savedPost = saved.map(item=>item.post);
-    res.status(200).json({userPosts,savedPost});
+    const savedPost = saved.map(item => item.post);
+    res.status(200).json({ userPosts, savedPost });
   } catch (error) {
     console.log(error);
     res.status(500).json({ message: "Faild to Get ProfilePosts!" });
 
   }
 }
-
-

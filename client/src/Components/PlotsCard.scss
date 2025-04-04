@@ -1,51 +1,52 @@
 .basicCardWrapper {
-    .card {
-      width: 17rem;
-  
-      .imgWrapper {
-        height: 10rem;
+  .card {
+    width: 17rem;
+
+    .imgWrapper {
+      height: 10rem;
+      width: 100%;
+      overflow: hidden;
+      border-radius: 0.5rem;
+      position: relative;
+
+      .card-img-top {
+        height: 100%;
         width: 100%;
-        overflow: hidden;
-        border-radius: 0.5rem;
-        position: relative;
-  
+        object-fit: cover;
+        transition: transform 0.6s ease;
+        transform: scale(1);
+      }
+
+      &:hover {
         .card-img-top {
-          height: 100%;
-          width: 100%;
-          object-fit: cover;
-          transition: transform 0.6s ease;
-          transform: scale(1);
-        }
-  
-        &:hover {
-          .card-img-top {
-            transform: scale(1.1);
-          }
+          transform: scale(1.1);
         }
       }
-  
-      .card-body {
-        p:nth-child(2) {
-          font-size: small;
-          font-weight: 500 !important;
-        }
-        p:nth-child(3) {
-          font-size: small;
+    }
+
+    .card-body {
+      p:nth-child(2) {
+        font-size: small;
+        font-weight: 500 !important;
+      }
+
+      p:nth-child(3) {
+        font-size: small;
+      }
+    }
+  }
+}
+
+.basicCardForCommercial {
+  .card {
+    width: 22rem;
+
+    .row {
+      .col-7 {
+        .sm {
+          font-size: 12px;
         }
       }
     }
   }
-  
-  .basicCardForCommercial {
-    .card {
-      width: 22rem;
-      .row {
-        .col-7 {
-          .sm {
-            font-size: 12px;
-          }
-        }
-      }
-    }
-  }
-  
+}

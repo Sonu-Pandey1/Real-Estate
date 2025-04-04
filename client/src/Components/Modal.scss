@@ -1,29 +1,12 @@
-.modalContainer{
-    .form-control{
+.modalContainer {
+    .form-control {
         padding: 5px 12px;
-        &:focus{
+
+        &:focus {
             outline: 0px;
         }
-    
     }
     ::-webkit-scrollbar {
-       display: none;
-      }
-    
+        display: none;
+    }
 }
-
-
-
-// #loginEmail,#loginPassword {
-//     outline: none;
-//     border: 1px solid #ccc; /* Add a custom border */
-//     padding: 8px;
-//     border-radius: 4px;
-//     font-size: 14px;
-//   }
-
-//   /* Add focus styling */
-//   #loginEmail,#loginPassword:focus {
-//     border-color: #007bff; /* Highlight border */
-//     box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* Add shadow */
-//   }

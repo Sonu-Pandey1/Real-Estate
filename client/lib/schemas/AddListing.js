@@ -85,7 +85,7 @@ const addListingSchema = yup.object().shape({
     .string()
     .min(3, "description must be at least 6 characters")
     .max(6000, "description cannot be longer than 6000 characters"),
-    // .required("Description is required"),
+  // .required("Description is required"),
 
   offer: yup
     .boolean(),

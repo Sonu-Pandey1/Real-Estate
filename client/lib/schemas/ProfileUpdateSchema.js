@@ -1,6 +1,5 @@
 import * as yup from "yup";
 
-// Use a regular expression object for password rules
 const passwordRules = new RegExp("^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{6,}$");
 
 const profileUpdateSchema = yup.object().shape({

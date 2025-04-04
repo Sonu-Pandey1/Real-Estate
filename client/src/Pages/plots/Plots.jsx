@@ -10,7 +10,6 @@ import { AuthContext } from "../../Context/AuthContext";
 export default function Plots() {
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
 
-
   const settings2 = {
     dots: false,
     infinite: true,
@@ -255,12 +254,11 @@ export default function Plots() {
 
   return (
     <div className="plotContainer">
-
-<section className="recentlyAdded container pt-4 mt-2">
+      <section className="recentlyAdded container pt-4 mt-2">
         <div className="row pb-4">
           <div className="col">
             <h2>
-              <span className="opacity-75 fs-3">Recently  </span> Added
+              <span className="opacity-75 fs-3">Recently </span> Added
             </h2>
             <p className="m-0">Based on preferences of users like you</p>
             <img
@@ -270,6 +268,7 @@ export default function Plots() {
             />
           </div>
         </div>
+
         <div className="row">
           <div className="col p-0">
             <PopularLocalitiesSlider settings={settings2}>
@@ -299,6 +298,7 @@ export default function Plots() {
               </h2>
               <p className=" text-muted">Exclusive showcase of categorized plots</p>
               <div className="row g-3 py-4 text-light">
+
                 {/* For Guys */}
                 <div className="col-6 col-md-3">
                   <div className="imgWrapper text-center">
@@ -367,10 +367,9 @@ export default function Plots() {
               />
             </div>
           </div>
+
           <div className="row">
             <div className="col p-0 ">
-              {/* <div className="IntermedidateCardContainer"> */}
-
               <PopularLocalitiesSlider settings={settings2}>
                 {expertDealersProData.map((rentData, index) => (
                   <div key={index} className="mediumCardWrapper">
@@ -404,8 +403,8 @@ export default function Plots() {
                   </div>
                 ))}
               </PopularLocalitiesSlider>
-              {/* {/* </div> */}
             </div>
+
           </div>
         </div>
       </section>
@@ -426,6 +425,7 @@ export default function Plots() {
                 />
               </div>
             </div>
+
             <div className="row">
               <div className="col mb-3">
                 <PopularLocalitiesSlider settings={settings2}>
@@ -445,10 +445,10 @@ export default function Plots() {
                 </PopularLocalitiesSlider>
               </div>
             </div>
+
           </div>
         </section>
       </article>
-
     </div>
   )
 }

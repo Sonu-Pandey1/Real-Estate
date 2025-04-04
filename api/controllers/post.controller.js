@@ -54,68 +54,140 @@ export const listings = async (req, res) => {
   }
 };
 
+// export const getListings = async (req, res) => {
+//   try {
+
+//     //  Pagination parameters
+//     const limit = Math.max(1, parseInt(req.query.limit) || 9);
+//     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
+
+//     const listingType = req.query.type
+//       ? req.query.type.toLowerCase() === "all"
+//         ? ["sell", "rent", "plots", "pg", "commercial"]
+//         : [req.query.type.toLowerCase()]
+//       : ["sell", "rent", "plots", "pg", "commercial"];
+
+//     const propertyType = req.query.propertyType || undefined;
+//     const buildingType = req.query.buildingType || undefined;
+//     const city = req.query.city ? req.query.city.toLowerCase() : undefined;
+//     const propertyCondition = req.query.condition || undefined;
+//     const minPrice = Number(req.query.minPrice) || 0;
+//     const maxPrice = req.query.maxPrice ? Number(req.query.maxPrice) : undefined;
+
+//     const searchTerm = req.query.searchTerm?.trim() || "";
+
+//     //  Sorting options
+//     let sortObj = { createdAt: "desc" };
+
+//     if (req.query.sort === "oldest") {
+//       sortObj = { createdAt: "asc" };
+//     } else if (req.query.sort === "popular") {
+//       sortObj = { views: "desc" };
+//     } else if (req.query.sort === "trending") {
+//       sortObj = [
+//         { createdAt: "desc" },
+//         { views: "desc" }, // Trending: Newest first, then highest views
+//       ];
+//     }
+
+//     const whereClause = {
+//       AND: [
+//         searchTerm
+//           ? {
+//             OR: [
+//               { propertyName: { contains: searchTerm, mode: "insensitive" } },
+//               { state: { contains: searchTerm, mode: "insensitive" } },
+//               { city: { contains: searchTerm, mode: "insensitive" } },
+//               { address: { contains: searchTerm, mode: "insensitive" } },
+//             ],
+//           }
+//           : null,
+
+//         { listingType: { in: listingType } },
+//         propertyType ? { propertyType } : null,
+//         buildingType ? { buildingType } : null,
+//         city ? { city: { equals: city, mode: "insensitive" } } : null,
+//         propertyCondition ? { propertyCondition } : null,
+//         maxPrice !== undefined ? { price: { gte: minPrice, lte: maxPrice } } : { price: { gte: minPrice } },
+//         req.query.sort === "trending"
+//           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
+//           : null,
+//       ].filter(Boolean),
+//     };
+
+//     // fetch listings .....
+//     const listings = await prisma.post.findMany({
+//       where: whereClause,
+//       orderBy: sortObj,
+//       take: limit,
+//       skip: startIndex,
+//     });
+
+//     // console.log(`Fetched ${listings.length} listings`);
+//     return res.status(200).json(listings);
+//   } catch (error) {
+//     console.error("Error fetching listings:", error);
+//     return res.status(500).json({ message: "Internal server error" });
+//   }
+// };
+
 export const getListings = async (req, res) => {
   try {
-
-    //  Pagination parameters
+    // Pagination parameters
     const limit = Math.max(1, parseInt(req.query.limit) || 9);
     const startIndex = Math.max(0, parseInt(req.query.startIndex) || 0);
 
-    const listingType = req.query.type
-      ? req.query.type.toLowerCase() === "all"
+    const listingType = req.query.listingType
+      ? req.query.listingType.toLowerCase() === "all"
         ? ["sell", "rent", "plots", "pg", "commercial"]
-        : [req.query.type.toLowerCase()]
+        : [req.query.listingType.toLowerCase()]
       : ["sell", "rent", "plots", "pg", "commercial"];
 
-    const propertyType = req.query.propertyType || undefined;
-    const buildingType = req.query.buildingType || undefined;
+    const propertyType = req.query.propertyType ? req.query.propertyType.toLowerCase() : undefined;
+    const buildingType = req.query.buildingType ? req.query.buildingType.toLowerCase() : undefined;
     const city = req.query.city ? req.query.city.toLowerCase() : undefined;
-    const propertyCondition = req.query.condition || undefined;
+    const propertyCondition = req.query.condition ? req.query.condition.toLowerCase() : undefined;
     const minPrice = Number(req.query.minPrice) || 0;
     const maxPrice = req.query.maxPrice ? Number(req.query.maxPrice) : undefined;
-
     const searchTerm = req.query.searchTerm?.trim() || "";
 
-    //  Sorting options
-    let sortObj = { createdAt: "desc" };
+    // Sorting options
+    let sortObj = [{ createdAt: "desc" }]; // Default: Newest first
 
     if (req.query.sort === "oldest") {
-      sortObj = { createdAt: "asc" };
+      sortObj = [{ createdAt: "asc" }];
     } else if (req.query.sort === "popular") {
-      sortObj = { views: "desc" };
+      sortObj = [{ views: "desc" }];
     } else if (req.query.sort === "trending") {
-      sortObj = [
-        { createdAt: "desc" },
-        { views: "desc" }, // Trending: Newest first, then highest views
-      ];
+      sortObj = [{ createdAt: "desc" }, { views: "desc" }]; // Trending: Newest first, then most views
     }
 
     const whereClause = {
       AND: [
         searchTerm
           ? {
-            OR: [
-              { propertyName: { contains: searchTerm, mode: "insensitive" } },
-              { state: { contains: searchTerm, mode: "insensitive" } },
-              { city: { contains: searchTerm, mode: "insensitive" } },
-              { address: { contains: searchTerm, mode: "insensitive" } },
-            ],
-          }
+              OR: [
+                { propertyName: { contains: searchTerm, mode: "insensitive" } },
+                { state: { contains: searchTerm, mode: "insensitive" } },
+                { city: { contains: searchTerm, mode: "insensitive" } },
+                { address: { contains: searchTerm, mode: "insensitive" } },
+              ],
+            }
           : null,
 
         { listingType: { in: listingType } },
-        propertyType ? { propertyType } : null,
-        buildingType ? { buildingType } : null,
+        propertyType ? { propertyType: { equals: propertyType, mode: "insensitive" } } : null,
+        buildingType ? { buildingType: { equals: buildingType, mode: "insensitive" } } : null,
         city ? { city: { equals: city, mode: "insensitive" } } : null,
-        propertyCondition ? { propertyCondition } : null,
-        maxPrice !== undefined ? { price: { gte: minPrice, lte: maxPrice } } : { price: { gte: minPrice } },
+        propertyCondition ? { propertyCondition: { equals: propertyCondition, mode: "insensitive" } } : null,
+        { price: { gte: minPrice, lte: maxPrice ?? undefined } },
         req.query.sort === "trending"
           ? { createdAt: { gte: new Date(Date.now() - 1000 * 60 * 60 * 24 * 7) } }
           : null,
       ].filter(Boolean),
     };
 
-    // fetch listings .....
+    // Fetch listings
     const listings = await prisma.post.findMany({
       where: whereClause,
       orderBy: sortObj,
@@ -123,7 +195,6 @@ export const getListings = async (req, res) => {
       skip: startIndex,
     });
 
-    // console.log(`Fetched ${listings.length} listings`);
     return res.status(200).json(listings);
   } catch (error) {
     console.error("Error fetching listings:", error);
@@ -131,8 +202,8 @@ export const getListings = async (req, res) => {
   }
 };
 
+
 export const addlisting = async (req, res) => {
-  console.log("Received body:", req.body);
 
   const userId = req.userId;
   if (!userId) {
@@ -145,7 +216,6 @@ export const addlisting = async (req, res) => {
     }
 
     const { postData, images } = req.body;
-    // console.log("Parsed Data:", postData);
 
     const formattedData = {
       user: { connect: { id: userId } },
@@ -175,7 +245,6 @@ export const addlisting = async (req, res) => {
       parking: postData.parking?.trim() || null,
       images: Array.isArray(images) ? images : [],
     };
-    // console.log("Formatted Data:", formattedData);
 
     const newPost = await prisma.post.create({
       data: formattedData,
@@ -193,8 +262,6 @@ export const Updatelisting = async (req, res) => {
   try {
     const { id } = req.params;
     const { postData, images } = req.body;
-
-    // console.log("Received data to update:", postData);
 
     // Handle optional fields like lat/long to set null if empty strings are passed
     if (postData.lat === '') postData.lat = null;
@@ -245,7 +312,7 @@ export const Updatelisting = async (req, res) => {
         images: updatedImages,
       },
     });
-    // console.log("updatedListing", updatedListing)
+
     return res.status(200).json(updatedListing);
   } catch (error) {
     console.error("Error updating listing:", error);

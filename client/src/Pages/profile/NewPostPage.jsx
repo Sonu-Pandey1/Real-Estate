@@ -29,6 +29,10 @@ const amenityOptions = [
 const buildingTypes = [
   { value: "residential", label: "Residential" },
   { value: "commercial", label: "Commercial" },
+  { value: "plots", label: "Plots & Land" },
+  { value: "industrial", label: "Industrial" },
+  { value: "pg_coliving", label: "PG & Co-Living" },
+  { value: "other", label: "Other" },
 ];
 
 const propertyTypes = {
@@ -36,11 +40,40 @@ const propertyTypes = {
     { value: "apartment", label: "Apartment" },
     { value: "villa", label: "Villa" },
     { value: "independent", label: "Independent House" },
+    { value: "builder_floor", label: "Builder Floor" },
+    { value: "penthouse", label: "Penthouse" },
+    { value: "bungalow", label: "Bungalow" },
+    { value: "studio_apartment", label: "Studio Apartment" },
+    { value: "duplex", label: "Duplex" },
+    { value: "row_house", label: "Row House" },
   ],
   commercial: [
-    { value: "office", label: "Office" },
+    { value: "office", label: "Office Space" },
     { value: "shop", label: "Shop" },
     { value: "warehouse", label: "Warehouse" },
+    { value: "commercial_building", label: "Commercial Building" },
+    { value: "showroom", label: "Showroom" },
+    { value: "coworking_space", label: "Co-Working Space" },
+    { value: "business_center", label: "Business Center" },
+    { value: "mall_space", label: "Mall Space" },
+  ],
+  plots: [
+    { value: "residential_plot", label: "Residential Plot" },
+    { value: "commercial_plot", label: "Commercial Plot" },
+    { value: "agricultural_land", label: "Agricultural Land" },
+    { value: "industrial_plot", label: "Industrial Plot" },
+    { value: "farmhouse_plot", label: "Farmhouse Plot" },
+  ],
+  pg_coliving: [
+    { value: "pg", label: "Paying Guest (PG)" },
+    { value: "hostel", label: "Hostel" },
+    { value: "coliving", label: "Co-Living Space" },
+  ],
+  industrial: [
+    { value: "factory", label: "Factory" },
+    { value: "manufacturing_unit", label: "Manufacturing Unit" },
+    { value: "industrial_shed", label: "Industrial Shed" },
+    { value: "industrial_warehouse", label: "Industrial Warehouse" },
   ],
 };
 
@@ -146,6 +179,7 @@ function NewPostPage() {
                 </div>
               )}
             </div>
+
             <div className="mt-4">
               <UploadWidget
                 uwConfig={{
@@ -173,8 +207,8 @@ function NewPostPage() {
 
             <form onSubmit={handleSubmit} className="form">
               <div className="formGrid">
-                {/* Listing Type */}
 
+                {/* Listing Type */}
                 <div className="item">
                   <label>Listing Type</label>
                   <select
@@ -198,13 +232,11 @@ function NewPostPage() {
                     <option value="pg">Pg / Co-living</option>
                     <option value="plots">Plots</option>
 
-
                   </select>
                   {errors.listingType && touched.listingType && (
                     <p className="error">{errors.listingType}</p>
                   )}
                 </div>
-
                 {values.listingType && (
                   <div className="item">
                     <label>Building Type</label>
@@ -226,7 +258,6 @@ function NewPostPage() {
                     )}
                   </div>
                 )}
-
                 {values.buildingType && (
                   <div className="item">
                     <label>Property Type</label>
@@ -355,7 +386,6 @@ function NewPostPage() {
                     )}
                   </div>
                 )}
-
 
                 {/*  Title */}
 
@@ -670,7 +700,6 @@ function NewPostPage() {
                 </button>
               </div>
             </form>
-
           </div>
         </div>
       </div>
@@ -679,4 +708,3 @@ function NewPostPage() {
 }
 
 export default NewPostPage;
-

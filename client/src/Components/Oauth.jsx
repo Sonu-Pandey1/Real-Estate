@@ -5,22 +5,19 @@ import { useContext, } from "react";
 import { AuthContext } from "../Context/AuthContext";
 import { Bounce, toast } from "react-toastify";
 
-export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
-  // console.log(isPopupOpen)
+export default function Oauth({ active, isPopupOpen, setIsPopupOpen }) {
+
   const navigate = useNavigate();
   const { updateUser } = useContext(AuthContext);
 
   const handleGoogleClick = async () => {
     try {
-      
-
       const provider = new GoogleAuthProvider();
       const auth = getAuth(app);
 
       // Sign in with Google
       const result = await signInWithPopup(auth, provider);
 
-      // Communicate with the backend
       const res = await fetch(
         `${import.meta.env.VITE_BACKEND_BASEURL}/api/auth/google`,
         {
@@ -28,7 +25,7 @@ export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
           headers: {
             "Content-Type": "application/json",
           },
-          credentials: "include", // Ensure cookies are included
+          credentials: "include",
           body: JSON.stringify({
             name: result.user.displayName,
             email: result.user.email,
@@ -36,34 +33,17 @@ export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
           }),
         }
       );
-      // console.log(res)
 
       if (!res.ok) {
         throw new Error("Failed to communicate with the backend.");
       }
-
       const data = await res.json();
-      // console.log(data.message)
-      
-
       // Update user context
-      
+
       updateUser(data.user);
       setIsPopupOpen(false);
       navigate("/profile");
-      toast.success("🎉🎉" + (data.message || ""), {
-        position: "bottom-right",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true, 
-        pauseOnHover: true,
-        draggable: true,
-        theme: "dark",
-        transition:Bounce,
-      });
-    } catch (err) {
-      console.error("Could not sign in with Google", err);
-      toast.error("❌ "+ (err.data.error || ""), {
+      toast.success("🎉" + (data.message || ""), {
         position: "bottom-right",
         autoClose: 5000,
         hideProgressBar: false,
@@ -71,7 +51,19 @@ export default function Oauth({active,isPopupOpen, setIsPopupOpen}) {
         pauseOnHover: true,
         draggable: true,
         theme: "dark",
-        transition:Bounce,
+        transition: Bounce,
+      });
+    } catch (err) {
+      console.error("Could not sign in with Google", err);
+      toast.error("❌ " + (err.data.error || ""), {
+        position: "bottom-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "dark",
+        transition: Bounce,
       });
     }
   };

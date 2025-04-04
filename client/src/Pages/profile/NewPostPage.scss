@@ -1,12 +1,9 @@
-
-
 .newPostPage {
   padding: 2rem;
- 
   background-color: #f8f9fa;
 
   .container {
-    margin-top:3rem;
+    margin-top: 3rem;
     max-width: 1200px;
     background: #ffffff;
     border-radius: 8px;
@@ -28,7 +25,6 @@
 
     h1 {
       font-size: 1.5rem;
-      // text-align: center;
       margin-bottom: 1.5rem;
       color: #343a40;
     }
@@ -63,7 +59,7 @@
           border-radius: 4px;
           font-size: 1rem;
 
-          &::placeholder{
+          &::placeholder {
             font-size: 0.9rem;
           }
         }
@@ -76,17 +72,14 @@
         }
 
         .custom-select {
-          font-size: 0.9rem; 
+          font-size: 0.9rem;
         }
-       
-        
       }
 
       .description {
         grid-column: span 2;
         display: flex;
         flex-direction: column;
-       
 
         label {
           margin-bottom: 0.5rem;
@@ -95,14 +88,14 @@
         }
 
         .ql-container {
-            border-radius: 8px;
-            border: 1px solid #ced4da;
-            min-height: 150px;
+          border-radius: 8px;
+          border: 1px solid #ced4da;
+          min-height: 150px;
         }
       }
 
       .submitSection {
-       text-align: center;
+        text-align: center;
 
         .errorMessage {
           color: #dc3545;
@@ -125,13 +118,14 @@
       margin-bottom: 1.6rem;
       color: #343a40;
     }
+
     .imagesPreview {
       display: flex;
       flex-wrap: wrap;
       gap: 0.5rem;
       justify-content: center;
       margin-bottom: 1rem;
-    
+
       img {
         width: 100px;
         height: 100px;
@@ -139,18 +133,19 @@
         border-radius: 4px;
         border: 1px solid #ced4da;
       }
-    
+
       .defaultIcon {
         display: flex;
         flex-direction: column;
         align-items: center;
         color: #6c757d;
-        img{
+
+        img {
           width: 100px;
           height: 100px;
           border-radius: 100%;
         }
-    
+
         p {
           font-size: 0.9rem;
         }

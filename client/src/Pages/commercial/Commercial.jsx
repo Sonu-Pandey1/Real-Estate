@@ -9,7 +9,6 @@ import { useContext } from "react";
 
 
 export default function Commercial() {
-
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
 
   const recentlyAddedPropertiesForSale = listings?.map((listing) => ({
@@ -23,7 +22,6 @@ export default function Commercial() {
     price: formatPrice(listing.price) || "Price on Request",
     owner: "by Sonu Pandey",
   })) || [];
-
 
   var settings = {
     dots: false,
@@ -182,8 +180,6 @@ export default function Commercial() {
       pro: "PRO",
     },
   ];
-
-
 
   const blogData = [
     {

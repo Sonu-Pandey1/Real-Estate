@@ -6,9 +6,6 @@ import {
   FaBed,
   FaBath,
   FaRulerCombined,
-  // FaCar,
-  // FaSwimmingPool,
-  // FaWindowMaximize,
 } from "react-icons/fa";
 import { AiFillHeart, AiOutlineHeart, AiOutlineShareAlt } from "react-icons/ai";
 import { NavLink, useNavigate } from "react-router-dom";
@@ -18,7 +15,6 @@ import axios from "axios";
 import { Bounce, toast } from "react-toastify";
 
 export default function PropertyCard({ item, type }) {
-
   const { currentUser, formatPrice, capitalize } = useContext(AuthContext);
   const navigate = useNavigate();
   const [saved, setSaved] = useState(false);
@@ -35,7 +31,7 @@ export default function PropertyCard({ item, type }) {
         { postId: item.id },
         { withCredentials: true }
       );
-      // console.log(response.data.message);
+
       setSaved(!saved);
       toast.success("" + (response.data.message || ""), {
         position: "bottom-right",
@@ -48,7 +44,6 @@ export default function PropertyCard({ item, type }) {
         transition: Bounce,
       });
     } catch (err) {
-      // console.log(error);
       toast.error("❌ " + (err.response.data.error || ""), {
         position: "bottom-right",
         autoClose: 5000,
@@ -100,7 +95,6 @@ export default function PropertyCard({ item, type }) {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
           { withCredentials: true }
         );
-        // console.log(response.data.message);
         toast.success("" + (response.data.message || ""), {
           position: "bottom-right",
           autoClose: 5000,
@@ -146,8 +140,6 @@ export default function PropertyCard({ item, type }) {
           `${import.meta.env.VITE_BACKEND_BASEURL}/api/posts/${item.id}`,
           { withCredentials: true }
         );
-        // console.log(response.data);
-        // console.log(response.data.isSaved);
         if (response.data) {
           setSaved(response.data.isSaved || false);
         }
@@ -163,39 +155,45 @@ export default function PropertyCard({ item, type }) {
     <NavLink to={`${item.id}`} className={"text-decoration-none"}>
       <div className="listingCardContainer">
         <div
-          className={`card custom-card ${type === "myListings" || type === "savedListings"
-            ? "ProfileCard"
-            : ""
-            }`}
-        >
+          className={`card custom-card ${type === "myListings" || type === "savedListings" ? "ProfileCard" : ""}`}>
+
           <div className="card-img-container ">
             <img src={item.images[0]} className="card-img-top" alt="Property" />
           </div>
+
           <div className="card-body ">
+
             <div className="d-flex justify-content-between align-items-center">
               <h5 className="card-title">{item.propertyName}</h5>
               <p>views {item.views}</p>
             </div>
+
             <p className="card-location">
               <IoLocationOutline className="icon" />
               {item.address}
             </p>
+
             <p className="card-price">{formatPrice(item.price)} </p>
             <div className="card-amenitiesContainer ">
+
               <div className="card-details">
                 <div className="d-flex justify-content-between gap-4">
+
                   <div className="detail">
                     <FaRulerCombined className="icon" />
                     <span>{item.size}</span>
                   </div>
+
                   <div className="detail">
                     <FaBed className="icon" />
                     <span>{item.bedroom}</span>
                   </div>
+
                   <div className="detail">
                     <FaBath className="icon" />
                     <span>{item.bathroom}</span>
                   </div>
+
                   <div className="detail">
                     <MdBalcony className="icon" />
                     <span>{item.balcony}</span>
@@ -203,6 +201,7 @@ export default function PropertyCard({ item, type }) {
 
                 </div>
               </div>
+
               <div className="card-amenities">
                 <p>
                   <strong>Amenities:</strong>
@@ -268,6 +267,7 @@ export default function PropertyCard({ item, type }) {
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </NavLink>

@@ -1,7 +1,6 @@
 import "./Rent.scss";
 import BasicCard from "../../Components/BasicCard";
 import PopularLocalitiesSlider from "../../Components/PopularLocalitiesSlider";
-import IntermedidateCard from "../../Components/IntermedidateCard";
 import MediumCard from "../../Components/MediumCard";
 import { NavLink } from "react-router-dom";
 import BlogCard from "../../Components/BlogCard";
@@ -11,7 +10,6 @@ import { AuthContext } from "../../Context/AuthContext";
 
 export default function Rent() {
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
-
 
   const settings = {
     dots: false,
@@ -311,6 +309,7 @@ export default function Rent() {
         <div className="container">
           <main>
             <section className="recentlyAdded">
+
               <div className="row pb-4">
                 <div className="col">
                   <h2>
@@ -324,6 +323,7 @@ export default function Rent() {
                   />
                 </div>
               </div>
+
               <div className="row">
                 <div className="col p-0">
                   <PopularLocalitiesSlider settings={settings2}>
@@ -351,6 +351,7 @@ export default function Rent() {
 
             <section className="featuredCollections mt-5">
               <div className="row">
+
                 <div className="col">
                   <h2>
                     <span className="opacity-75 fs-3">Featured</span>{" "}
@@ -386,6 +387,7 @@ export default function Rent() {
             <section className="recommendedSellers   mt-3">
               <div className="container">
                 <div className="row pb-4">
+
                   <div className="col p-0">
                     <h2>
                       <span className="opacity-75 fs-3">Recommended</span>{" "}
@@ -401,6 +403,7 @@ export default function Rent() {
                       alt="line"
                     />
                   </div>
+
                 </div>
                 <div className="row">
                   <div className="col p-0 ">
@@ -439,8 +442,8 @@ export default function Rent() {
                         </div>
                       ))}
                     </PopularLocalitiesSlider>
-                    {/* {/* </div> */}
                   </div>
+
                 </div>
               </div>
             </section>
@@ -485,6 +488,7 @@ export default function Rent() {
               </div>
             </section>
           </article>
+
         </div>
       </div>
     </>

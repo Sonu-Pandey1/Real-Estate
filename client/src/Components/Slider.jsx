@@ -5,7 +5,6 @@ import "./Slider.scss";
 
 function Slider({ images }) {
   const [imageIndex, setImageIndex] = useState(null);
-  // console.log(images)
 
   const changeSlide = (direction) => {
     if (direction === "left") {
@@ -42,6 +41,7 @@ function Slider({ images }) {
             onClick={() => setImageIndex(0)}
           />
         </div>
+
         <div className="smallImages">
           {images.map((image, index) => (
             <img
@@ -52,6 +52,7 @@ function Slider({ images }) {
             />
           ))}
         </div>
+
       </div>
     </div>
   );

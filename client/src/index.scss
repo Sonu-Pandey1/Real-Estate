@@ -1,39 +1,44 @@
-*{
-    margin: 0px;
-    padding: 0px;
-    box-sizing: border-box;
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
 
-    
-::-webkit-scrollbar {
-    width: 7px; /* Width of the scrollbar */
+
+  ::-webkit-scrollbar {
+    width: 7px;
+    /* Width of the scrollbar */
   }
-  
+
   ::-webkit-scrollbar-track {
-    background: #ffffff; /* Track color */
-    border-radius: 5px; /* Optional: Rounded corners */
+    background: #ffffff;
+    /* Track color */
+    border-radius: 5px;
   }
-  
+
   ::-webkit-scrollbar-thumb {
-    background: #afb6c2; /* Scrollbar color */
-    border-radius: 5px; /* Optional: Rounded corners */
+    background: #afb6c2;
+    /* Scrollbar color */
+    border-radius: 5px;
   }
-  
+
   ::-webkit-scrollbar-thumb:hover {
-    background: #7c77a5; /* Darker color when hovering over the scrollbar */
+    background: #7c77a5;
+    /* Darker color when hovering over the scrollbar */
   }
 
   html {
-    scrollbar-width: thin; /* "auto" or "thin" */
-    scrollbar-color: #888 #f1f1f1; /* Thumb color and track color */
+    scrollbar-width: thin;
+    scrollbar-color: #888 #f1f1f1;
+    /* Thumb color and track color */
   }
 }
 
-/* Style for input fields with errors */
 .input-error {
-  border: 1px solid red !important;  
+  border: 1px solid red !important;
 }
+
 .error {
-  color: red; 
+  color: red;
   font-size: 13px;
   margin: 0px;
 }

@@ -1,7 +1,7 @@
 import "./IntermedidateCard.scss";
 
 export default function IntermedidateCard({ image, title, condition, company, size, location, price }) {
-  // console.log(condition)
+
   return (
     <div className="IntermedidateCardWrapper px-3 px-md-2 my-4">
       <div className="card position-relative overflow-hidden">
@@ -18,11 +18,12 @@ export default function IntermedidateCard({ image, title, condition, company, si
         </div>
 
         <div className={`cardContain changeBgC ${company ? "" : "text-center"} position-absolute px-4`}>
+
           <div className={`${company ? "d-none" : "d-block"}`}>
             <h6 className="m-0 mb-1 text-truncate ">{title}</h6>
           </div>
-          <div className={`${company ? "d-block" : "d-none"}`}>
 
+          <div className={`${company ? "d-block" : "d-none"}`}>
             <h6 className="m-0 mb-1 text-truncate ">{title}</h6>
             {/* <p className=" bg-transarent text-muted">{company}</p> */}
             <p className=" bg-transparent opacity-75 ">{company}</p>
@@ -33,6 +34,7 @@ export default function IntermedidateCard({ image, title, condition, company, si
             </span>
             <p className=" bg-transparent opacity-75  ">{location}</p>
           </div>
+
         </div>
       </div>
     </div>

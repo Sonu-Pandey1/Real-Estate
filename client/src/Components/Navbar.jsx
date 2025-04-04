@@ -76,11 +76,8 @@ function Navbar() {
 
   return (
     <>
-      <nav
-        className={`navbar fixed-top w-100  px-md-5  ${
-          isSticky ? "sticky-topp" : ""
-        } `}
-      >
+      <nav className={`navbar fixed-top w-100  px-md-5  ${isSticky ? "sticky-topp" : ""} `}>
+
         <div className="container ms p-0 align-items-center ">
           <button className=" btn p-0 m-0" onClick={handleNavigate2} >
             <img
@@ -92,6 +89,7 @@ function Navbar() {
 
           <div className="d-none d-md-block ms-auto pe-5 align-items-center">
             <ul className="navbar-nav me-auto mb-lg-0 flex-row gap-4 align-items-center ">
+
               <li className="nav-item">
                 <div className="navlinkWrapper">
                   <NavLink className="navlink" to={"/"}>
@@ -111,9 +109,11 @@ function Navbar() {
                   value={searchTerm}
                   onChange={(e) => setSearchTerm(e.target.value)}
                 />
+
                 <button type="submit" className="btn  ">
                   <FaSearch />
                 </button>
+
               </form>
 
               <li className="nav-item mega-dropdown">
@@ -128,19 +128,19 @@ function Navbar() {
               <li>
                 <div className="postPropertyWrapper d-none d-sm-block">
                   <button
-                    className="btn btn-light px-1 py-1 "
-                    onClick={handleNavigate}
-                  >
+                    className="btn btn-light px-1 py-1 " onClick={handleNavigate}>
+
                     <a
                       className="postProperty text-dark fw-medium"
-                      to={"/post-property"}
-                    >
+                      to={"/post-property"}>
                       Post Property{" "}
                     </a>
+
                     <span className="postPropertyBadge">FREE</span>
                   </button>
                 </div>
               </li>
+
               <li className=" list-unstyled">
                 {currentUser ? (
                   <div className="user">

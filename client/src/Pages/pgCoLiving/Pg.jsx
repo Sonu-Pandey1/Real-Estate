@@ -7,7 +7,6 @@ import { AuthContext } from "../../Context/AuthContext";
 import { useContext } from "react";
 
 export default function Pg() {
-
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext);
 
   const recentlyAddedPropertiesForPg = listings?.map((listing) => ({
@@ -166,6 +165,7 @@ export default function Pg() {
                     />
                     <span>Verified & Onboarded by our experts</span>
                   </p>
+                  
                   <p>
                     <img
                       className="pe-3"
@@ -174,6 +174,7 @@ export default function Pg() {
                     />
                     <span>Every property detail on just a click</span>
                   </p>
+
                   <p>
                     <img
                       className="pe-2"
@@ -207,6 +208,7 @@ export default function Pg() {
                       Real property photos and Transparent pricing
                     </p>
                   </div>
+
                   <div className="mx-auto">
                     <img
                       src="	https://c.housingcdn.com/demand/s/client/common/assets/findYourMatch.8b4c0fa5.png"
@@ -218,6 +220,7 @@ export default function Pg() {
                       multi-sharing)
                     </p>
                   </div>
+
                   <div className="mx-auto">
                     <img
                       src="https://c.housingcdn.com/demand/s/client/common/assets/bonAppetite.c1028fc9.png"
@@ -228,6 +231,7 @@ export default function Pg() {
                       Info on meal type and offerings to know what’s cooking
                     </p>
                   </div>
+
                   <div className="mx-auto">
                     <img
                       src="https://c.housingcdn.com/demand/s/client/common/assets/yourLife.d015d745.png"
@@ -252,10 +256,12 @@ export default function Pg() {
                   <h1>30k+</h1>
                   <p>Properties</p>
                 </div>
+
                 <div>
                   <h1>40+</h1>
                   <p>Cities</p>
                 </div>
+
                 <div>
                   <h1>3.5 lakh+</h1>
                   <p>Monthly users</p>
@@ -305,6 +311,7 @@ export default function Pg() {
                   Our handpicked <span className=" fw-medium">Collections</span>
                 </h2>
                 <div className="row g-3 py-4 text-light">
+
                   {/* For Guys */}
                   <div className="col-6 col-md-3">
                     <div className="imgWrapper text-center">
@@ -382,6 +389,7 @@ export default function Pg() {
                   />
                 </div>
               </div>
+
               <div className="row">
                 <div className="col mb-3">
                   <PopularLocalitiesSlider settings={settings2}>

@@ -32,18 +32,17 @@ export const AuthContextProvider = ({ children }) => {
   const capitalize = (str) => {
     if (!str) return "N/A";
     return str
-      .split(" ") 
-      .map(word => word.charAt(0).toUpperCase() + word.slice(1)) 
+      .split(" ")
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
       .join(" ");
   };
-  
+
   const getSpotlightListings = async () => {
     try {
       const res = await axios.get(`${import.meta.env.VITE_BACKEND_BASEURL}/api/posts`, {
         withCredentials: true,
       });
       setListings(res.data);
-      // console.log(res.data);
     } catch (error) {
       console.error("Error fetching spotlight listings:", error);
     }

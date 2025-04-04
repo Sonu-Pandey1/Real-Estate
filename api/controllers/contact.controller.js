@@ -1,7 +1,10 @@
 import prisma from "../lib/prisma.js";
 import nodemailer from "nodemailer";
+
+
+
 export const sendEmail = async (req, res) => {
-    
+
     const { name, email, phone, message, inquiryType } = req.body;
 
     if (!email || !message) {

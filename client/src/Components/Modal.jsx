@@ -34,7 +34,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         updateUser(response.data);
         setIsPopupOpen(false);
         navigate("/");
-        toast.success("🎉 Login successful!"+ (response.data.message || ""), {
+        toast.success("Login successful!" + (response.data.message || ""), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -51,7 +51,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         } else {
           setErrorMessage("An unexpected error occurred");
         }
-        toast.error("❌ "  + (error.response.data.error || ""), {
+        toast.error("❌ " + (error.response.data.error || ""), {
           position: "bottom-right",
           autoClose: 5000,
           hideProgressBar: false,
@@ -89,16 +89,20 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
         // setIsPopupOpen(false);
         // navigate("/");
         setActiveTab("login");
-        toast.success("🎉 Signup successful! You can now log in."+ (response.data.message || ""), {
-          position: "bottom-right",
-          autoClose: 5000,
-          hideProgressBar: false,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "dark",
-          transition: Bounce,
-        });
+        toast.success(
+          " Signup successful! You can now log in." +
+            (response.data.message || ""),
+          {
+            position: "bottom-right",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            theme: "dark",
+            transition: Bounce,
+          }
+        );
       } catch (error) {
         // console.error(error);
         toast.error("❌ " + (error.response.data.error || ""), {
@@ -187,6 +191,7 @@ export default function Modal({ isPopupOpen, setIsPopupOpen }) {
                     Login
                   </button>
                 </li>
+
                 <li className="nav-item">
                   <button
                     className={`nav-link ${

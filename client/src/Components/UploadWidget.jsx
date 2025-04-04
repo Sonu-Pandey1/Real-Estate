@@ -14,13 +14,11 @@ function UploadWidget({ uwConfig, setState }) {
         script.id = "cloudinary-upload-widget-script";
         script.src = "https://upload-widget.cloudinary.com/global/all.js";
         script.async = true;
-
         script.onload = () => setLoaded(true);
         script.onerror = () => {
           console.error("Failed to load Cloudinary upload widget script.");
           setLoaded(false);
         };
-
         document.body.appendChild(script);
       } else if (window.cloudinary) {
         setLoaded(true);
@@ -39,7 +37,6 @@ function UploadWidget({ uwConfig, setState }) {
           if (error) {
             console.error("Cloudinary Widget Error:", error);
           } else if (result.event === "success") {
-            // console.log("Uploaded image info:", result.info);
             setState((prev) => [...prev, result.info.secure_url]);
           }
         }
@@ -61,7 +58,7 @@ function UploadWidget({ uwConfig, setState }) {
       id="upload_widget"
       className="btn btn-outline-primary"
       onClick={handleUploadClick}
-      disabled={!loaded || !widget} // Disable until widget is initialized
+      disabled={!loaded || !widget}
     >
       {loaded ? "Upload Image" : "Loading..."}
     </button>
@@ -69,8 +66,8 @@ function UploadWidget({ uwConfig, setState }) {
 }
 
 UploadWidget.propTypes = {
-  uwConfig: PropTypes.object.isRequired, 
-  setState: PropTypes.func.isRequired, 
+  uwConfig: PropTypes.object.isRequired,
+  setState: PropTypes.func.isRequired,
 };
 
 export default UploadWidget;

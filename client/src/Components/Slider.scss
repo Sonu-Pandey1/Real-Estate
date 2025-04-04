@@ -96,19 +96,18 @@
       height: auto;
 
       .fullSlider {
-        // flex-direction: column;
         justify-content: center;
 
         .imgContainer {
-          height: 60vh; // Adjust the height for smaller screens
+          height: 60vh;
         }
 
         .arrow img {
-          width: 20px; // Reduce arrow size
+          width: 20px;
         }
 
         .close {
-          font-size: 25px; // Adjust close button size
+          font-size: 25px;
         }
       }
 
@@ -117,7 +116,7 @@
         justify-content: space-between;
 
         img {
-          height: 80px; // Smaller thumbnail images
+          height: 80px;
         }
       }
     }
@@ -126,7 +125,7 @@
   @media (max-width: 480px) {
     .slider {
       .bigImage img {
-        object-fit: contain; // Adjust large image for smaller screens
+        object-fit: contain;
       }
 
       .smallImages {
@@ -134,7 +133,7 @@
         justify-content: space-evenly;
 
         img {
-          height: 70px; // Smaller thumbnails
+          height: 70px;
         }
       }
     }
