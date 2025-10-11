@@ -9,6 +9,8 @@ import addListingSchema from "../../../lib/schemas/AddListing";
 import { useFormik } from "formik";
 import { Bounce, toast } from "react-toastify";
 import Select from "react-select";
+// console.log(import.meta.env.VITE_CLOUDINARY_CLOUD_NAME)
+// console.log(import.meta.env.VITE_CLOUDINARY_UPLOAD_PRESET)
 
 const nearbyOptions = [
   { value: "school", label: "School" },

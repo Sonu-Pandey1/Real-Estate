@@ -1,10 +1,12 @@
+
 {
   "name": "prs-backend",
   "version": "1.0.0",
-  "description": "backend for the prs real estate website ",
+  "description": "backend for the prs real estate website",
   "type": "module",
   "main": "app.js",
   "scripts": {
+    "start": "node app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Sonu PandeyPRS",

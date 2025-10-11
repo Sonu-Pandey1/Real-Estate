@@ -9,6 +9,7 @@ export const AuthContextProvider = ({ children }) => {
     JSON.parse(localStorage.getItem("user")) || null
   );
   const [listings, setListings] = useState([]);
+  // console.log(listings)
 
   const updateUser = (data) => {
     setCurrentUser(data);
@@ -43,6 +44,7 @@ export const AuthContextProvider = ({ children }) => {
         withCredentials: true,
       });
       setListings(res.data);
+      // console.log(res)
     } catch (error) {
       console.error("Error fetching spotlight listings:", error);
     }

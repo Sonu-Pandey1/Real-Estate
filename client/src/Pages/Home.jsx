@@ -14,6 +14,8 @@ import { AuthContext } from "../Context/AuthContext";
 function Home() {
   const { listings, formatPrice, formatSize, capitalize } = useContext(AuthContext)
 
+
+
   const ProjectsInFocus = listings?.map((listing) => ({
     id: listing.id,
     image: listing.images[0] || "https://housing-images.n7net.in/01c16c28/e266a84192b405017eed4d26c83a7bf1/v0/medium/1_bhk_apartment-for-rent-sector_76-Noida-bedroom.jpg",
