@@ -3,7 +3,7 @@ import prisma from "../lib/prisma.js";
 import jwt from "jsonwebtoken";
 
 export const register = async (req, res) => {
-  // console.log(req.body)
+  console.log(req.body)
   const { username, password, email, avatar } = req.body;
 
   try {
@@ -35,7 +35,7 @@ export const register = async (req, res) => {
 
 export const login = async (req, res) => {
   const { email, password } = req.body;
-  // console.log(email, password);
+  console.log(email, password);
 
   try {
     // check if the user exists or not
@@ -78,7 +78,7 @@ export const login = async (req, res) => {
 };
 
 export const logout = (req, res) => {
-  // console.log("logout");
+  console.log("logout");
 
   res.clearCookie("token", {
     httpOnly: true,
@@ -119,7 +119,7 @@ export const google = async (req, res) => {
           message: "Login successfully!"
         });
     }
-    // console.log(userInfo)
+    console.log(userInfo)
 
     const generatedPassword = Math.random().toString(36).slice(-8);
     const hashedPassword = await bcrypt.hash(generatedPassword, 10);
